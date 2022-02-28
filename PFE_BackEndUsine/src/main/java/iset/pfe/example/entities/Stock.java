@@ -2,10 +2,18 @@ package iset.pfe.example.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Stock  implements Serializable{
@@ -19,17 +27,41 @@ public class Stock  implements Serializable{
 	private Date Date_Production;
 	private double Quantite;
 	
+	@OneToMany(mappedBy="stock",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonIgnore
+	private Set<Plateau> plateaux;
+	
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "stocks")
+	@JsonIgnore
+    private Set<Tank> tanks= new HashSet<>();
+	
 	//constructors 
 	
-	public Stock(Integer idStock, double poid, double volume, String intitule, Date date_Production, double quantite) {
+	public Stock( double poid, double volume, String intitule, Date date_Production, double quantite) {
 		super();
-		this.idStock = idStock;
+		
 		Poid = poid;
 		Volume = volume;
 		Intitule = intitule;
 		Date_Production = date_Production;
 		Quantite = quantite;
 	}
+	
+
+	public Stock(double poid, double volume, String intitule, Date date_Production, double quantite,
+			Set<Plateau> plateaux, Set<Tank> tanks) {
+		super();
+		Poid = poid;
+		Volume = volume;
+		Intitule = intitule;
+		Date_Production = date_Production;
+		Quantite = quantite;
+		this.plateaux = plateaux;
+		this.tanks = tanks;
+	}
+
+
 
 	public Stock() {
 		super();
@@ -84,7 +116,25 @@ public class Stock  implements Serializable{
 	public void setQuantite(double quantite) {
 		Quantite = quantite;
 	}
-	
 
+
+	public Set<Plateau> getPlateaux() {
+		return plateaux;
+	}
+
+
+	public void setPlateaux(Set<Plateau> plateaux) {
+		this.plateaux = plateaux;
+	}
+
+
+	public Set<Tank> getTanks() {
+		return tanks;
+	}
+
+
+	public void setTanks(Set<Tank> tanks) {
+		this.tanks = tanks;
+	}
 	
 }
