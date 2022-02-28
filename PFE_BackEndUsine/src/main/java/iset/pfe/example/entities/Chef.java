@@ -1,10 +1,16 @@
 package iset.pfe.example.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Chef implements Serializable{
@@ -20,6 +26,10 @@ public class Chef implements Serializable{
 	private int tel;
 	private String username;
 	private String password;
+	
+	@OneToMany(mappedBy="chef",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonIgnore
+	private Set<Tank> tanks;
 	
 	
 	public Chef() {
@@ -40,6 +50,22 @@ public class Chef implements Serializable{
 		this.username = username;
 		this.password = password;
 	}
+	
+	public Chef(String nom, String prenom, String email, String adress, int cin, int tel, String username,
+			String password, Set<Tank> tanks) {
+		super();
+		Nom = nom;
+		Prenom = prenom;
+		Email = email;
+		Adress = adress;
+		Cin = cin;
+		this.tel = tel;
+		this.username = username;
+		this.password = password;
+		this.tanks = tanks;
+	}
+
+
 	public Integer getIdChef() {
 		return idChef;
 	}
@@ -93,6 +119,16 @@ public class Chef implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public Set<Tank> getTanks() {
+		return tanks;
+	}
+
+
+	public void setTanks(Set<Tank> tanks) {
+		this.tanks = tanks;
 	}
 	
 }
