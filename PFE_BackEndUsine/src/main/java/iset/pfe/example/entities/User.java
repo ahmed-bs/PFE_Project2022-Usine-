@@ -13,88 +13,68 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Chef implements Serializable{
+public class User implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	private Integer idChef;
-	private String Nom;
-	private String Prenom;
-	private String Email;
-	private String Adress;
+	private Integer idU;
+	private String nom;
+	private String prenom;
 	private int Cin;
 	private int tel;
 	private String username;
 	private String password;
 	
-	@OneToMany(mappedBy="chef",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
-	private Set<Tank> tanks;
+	private Set<Operation> operations;
 	
+	public User(String nom, String prenom, int cin, int tel, String username, String password) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		Cin = cin;
+		this.tel = tel;
+		this.username = username;
+		this.password = password;
+	}
 	
-	public Chef() {
+	public User(String nom, String prenom, int cin, int tel, String username, String password,
+			Set<Operation> operations) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		Cin = cin;
+		this.tel = tel;
+		this.username = username;
+		this.password = password;
+		this.operations = operations;
+	}
+
+
+
+	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	public Chef(String nom, String prenom, String email, String adress, int cin, int tel, String username,
-			String password) {
-		super();
-		Nom = nom;
-		Prenom = prenom;
-		Email = email;
-		Adress = adress;
-		Cin = cin;
-		this.tel = tel;
-		this.username = username;
-		this.password = password;
+	public Integer getIdRV() {
+		return idU;
 	}
-	
-	public Chef(String nom, String prenom, String email, String adress, int cin, int tel, String username,
-			String password, Set<Tank> tanks) {
-		super();
-		Nom = nom;
-		Prenom = prenom;
-		Email = email;
-		Adress = adress;
-		Cin = cin;
-		this.tel = tel;
-		this.username = username;
-		this.password = password;
-		this.tanks = tanks;
-	}
-
-
-	public Integer getIdChef() {
-		return idChef;
-	}
-	public void setIdChef(Integer idChef) {
-		this.idChef = idChef;
+	public void setIdRV(Integer idU) {
+		this.idU = idU;
 	}
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
 	public String getPrenom() {
-		return Prenom;
+		return prenom;
 	}
 	public void setPrenom(String prenom) {
-		Prenom = prenom;
-	}
-	public String getEmail() {
-		return Email;
-	}
-	public void setEmail(String email) {
-		Email = email;
-	}
-	public String getAdress() {
-		return Adress;
-	}
-	public void setAdress(String adress) {
-		Adress = adress;
+		this.prenom = prenom;
 	}
 	public int getCin() {
 		return Cin;
@@ -121,14 +101,21 @@ public class Chef implements Serializable{
 		this.password = password;
 	}
 
-
-	public Set<Tank> getTanks() {
-		return tanks;
+	public Integer getIdU() {
+		return idU;
 	}
 
-
-	public void setTanks(Set<Tank> tanks) {
-		this.tanks = tanks;
+	public void setIdU(Integer idU) {
+		this.idU = idU;
 	}
+
+	public Set<Operation> getOperations() {
+		return operations;
+	}
+
+	public void setOperations(Set<Operation> operations) {
+		this.operations = operations;
+	}
+	
 	
 }
