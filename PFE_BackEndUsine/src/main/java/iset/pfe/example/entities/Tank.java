@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,87 +24,105 @@ public class Tank implements Serializable{
 	@Id
 	@GeneratedValue
 	private Integer idTank;
-	private double Poid;
-	private double Volume;
-	private Date Date_Arrivee;
+	private String matricule;
+	private double poidVide;
+	private double poidActuel;
+	private String etat;
+	private String DateIns;
 	
-	@ManyToOne
-	@JoinColumn(name="idChef")
-	private Chef chef;
-	
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name="stock_tank" , joinColumns = @JoinColumn(name="idTank") , inverseJoinColumns=@JoinColumn(name="idStock"))
+	@OneToMany(mappedBy="tank",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
-	private Set<Stock> stocks= new HashSet<>();
+	private Set<OperationTank> operationstank;
 	
-	
+	//constructors
 	public Tank() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	public Tank(double poid, double volume, Date date_Arrivee) {
-		super();
-		Poid = poid;
-		Volume = volume;
-		Date_Arrivee = date_Arrivee;
-	}
-	
-	
-	public Tank(double poid, double volume, Date date_Arrivee, Chef chef, Set<Stock> stocks) {
-		super();
-		Poid = poid;
-		Volume = volume;
-		Date_Arrivee = date_Arrivee;
-		this.chef = chef;
-		this.stocks = stocks;
 	}
 
+	public Tank(String matricule, double poidVide, double poidActuel, String etat) {
+		super();
+		this.matricule = matricule;
+		this.poidVide = poidVide;
+		this.poidActuel = poidActuel;
+		this.etat = etat;
+	}
+
+	public Tank(String matricule, double poidVide, double poidActuel, String etat, Set<OperationTank> operationstank) {
+		super();
+		this.matricule = matricule;
+		this.poidVide = poidVide;
+		this.poidActuel = poidActuel;
+		this.etat = etat;
+		this.operationstank = operationstank;
+	}
+
+	
+	public Tank(String matricule, double poidVide, double poidActuel, String etat, String dateIns,
+			Set<OperationTank> operationstank) {
+		super();
+		this.matricule = matricule;
+		this.poidVide = poidVide;
+		this.poidActuel = poidActuel;
+		this.etat = etat;
+		DateIns = dateIns;
+		this.operationstank = operationstank;
+	}
 
 	public Integer getIdTank() {
 		return idTank;
 	}
+
 	public void setIdTank(Integer idTank) {
 		this.idTank = idTank;
 	}
-	public double getPoid() {
-		return Poid;
-	}
-	public void setPoid(double poid) {
-		Poid = poid;
-	}
-	public double getVolume() {
-		return Volume;
-	}
-	public void setVolume(double volume) {
-		Volume = volume;
-	}
-	public Date getDate_Arrivee() {
-		return Date_Arrivee;
-	}
-	public void setDate_Arrivee(Date date_Arrivee) {
-		Date_Arrivee = date_Arrivee;
+
+	public String getMatricule() {
+		return matricule;
 	}
 
-
-	public Chef getChef() {
-		return chef;
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
 	}
 
-
-	public void setChef(Chef chef) {
-		this.chef = chef;
+	public double getPoidVide() {
+		return poidVide;
 	}
 
-
-	public Set<Stock> getStocks() {
-		return stocks;
+	public void setPoidVide(double poidVide) {
+		this.poidVide = poidVide;
 	}
 
-
-	public void setStocks(Set<Stock> stocks) {
-		this.stocks = stocks;
+	public double getPoidActuel() {
+		return poidActuel;
 	}
+
+	public void setPoidActuel(double poidActuel) {
+		this.poidActuel = poidActuel;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
+	public Set<OperationTank> getOperationstank() {
+		return operationstank;
+	}
+
+	public void setOperationstank(Set<OperationTank> operationstank) {
+		this.operationstank = operationstank;
+	}
+
+	public String getDateIns() {
+		return DateIns;
+	}
+
+	public void setDateIns(String dateIns) {
+		DateIns = dateIns;
+	}
+	
 	
 }
