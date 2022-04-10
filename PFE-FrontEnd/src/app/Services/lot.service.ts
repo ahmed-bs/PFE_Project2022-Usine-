@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class Lotervice {
+export class LotService {
 
   baseUrl : string = 'http://localhost:3802/lot';
   baseUrl1 : string = 'http://localhost:3802/nbreM';

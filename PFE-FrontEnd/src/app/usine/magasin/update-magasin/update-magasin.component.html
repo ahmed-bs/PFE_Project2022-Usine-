@@ -1,1 +1,81 @@
-<p>update-magasin works!</p>
+<div class="ContenuCard" >
+    <div class="modal-header">
+      <h2 id="modal-title"><b>Modifier le magasin numero : {{magasin.idMag}}</b></h2>
+      <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div><br>
+    <form [formGroup]="myForm" class="needs-validation" novalidate>
+
+      <div class="form-group">
+        <div class="col-md-12 mb-3">
+        <label>nom de l'magasin :</label>
+        <input type="text"
+               class="form-control"
+               formControlName="nomMag"
+               name="nomMag"
+               [(ngModel)]="magasin.nomMag"
+               placeholder="Post Name here ..">
+          <div
+               *ngIf="nomMag?.invalid && nomMag?.touched"
+                class="text-danger">
+                nomMag invalide !
+         </div>
+         <div
+              *ngIf="nomMag?.valid && nomMag?.touched"
+              class="text-success">
+               nomMag valide !
+         </div>
+        </div>
+
+
+          <div class="col-md-12 mb-3">
+            <label>Adresse :</label>
+            <input type="text"
+                   class="form-control"
+                   formControlName="adresse"
+                   name="adresse"
+                   [(ngModel)]="magasin.adresse"
+                   placeholder="Post Name here ..">
+              <div
+                   *ngIf="adresse?.invalid && adresse?.touched"
+                    class="text-danger">
+                    adresse invalide !
+             </div>
+             <div
+                  *ngIf="adresse?.valid && adresse?.touched"
+                  class="text-success">
+                  adresse valide !
+             </div>
+            </div>
+
+    </div>
+
+
+    <div class="col-md-12 mb-3">
+      <label>Ville :</label>
+      <input type="text"
+             class="form-control"
+             formControlName="ville"
+             name="ville"
+             [(ngModel)]="magasin.ville"
+             placeholder="Post Name here ..">
+        <div
+             *ngIf="ville?.invalid && ville?.touched"
+              class="text-danger">
+              ville invalide !
+       </div>
+       <div
+            *ngIf="ville?.valid && ville?.touched"
+            class="text-success">
+            ville valide !
+       </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" (click)="updateMagasin()" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer </button>
+      </div>
+    </form>
+
+  </div>

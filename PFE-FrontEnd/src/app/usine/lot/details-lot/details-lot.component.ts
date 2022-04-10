@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Lot } from 'src/app/Models/lot';
+import { LotService } from 'src/app/Services/lot.service';
 
 @Component({
   selector: 'app-details-lot',
@@ -7,9 +12,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsLotComponent implements OnInit {
 
-  constructor() { }
+  id!: number;
+  idC!: any;
+  lot?:Lot = new Lot();
 
-  ngOnInit(): void {
+  constructor(
+    private dialogClose: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private lotService: LotService) { }
+
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+  
+    this.lotService.getLot(JSON.parse(localStorage.getItem('IdLot') || '[]') || []).subscribe(o =>{
+      this.lot = o;
+      this.idC=this.lot?.idL;
+      //console.log(typeof this.OneOffer);
+      console.log(this.lot);
+  });
+}
+
+  closeDetails(){
+    this.dialogClose.closeAll();
   }
 
 }

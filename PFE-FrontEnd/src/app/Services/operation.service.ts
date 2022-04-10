@@ -8,15 +8,15 @@ import { Operation } from '../Models/operation';
   providedIn: 'root'
 })
 export class OperationService {
-  baseUrl : string = 'http://localhost:3801/operations';
-  baseUrl1 : string = 'http://localhost:3801/retrait';
-  baseUrl2 : string = 'http://localhost:3801/remplissage';
-  baseUrl3 : string = 'http://localhost:3801/operationsRetrait';
-  baseUrl4 : string = 'http://localhost:3801/operationsRemplissages';
-  baseUrl5 : string = 'http://localhost:3801/operationsTank';
-  baseUrl6 : string = 'http://localhost:3801/nbreOp';
-  baseUrl7 : string = 'http://localhost:3801/operationsR';
-  baseUrl8 : string = 'http://localhost:3801/getOpTank';
+  baseUrl : string = 'http://localhost:3802/operations';
+  baseUrl1 : string = 'http://localhost:3802/retrait';
+  baseUrl2 : string = 'http://localhost:3802/remplissage';
+  baseUrl3 : string = 'http://localhost:3802/operationsRetrait';
+  baseUrl4 : string = 'http://localhost:3802/operationsRemplissages';
+  baseUrl5 : string = 'http://localhost:3802/operationsTank';
+  baseUrl6 : string = 'http://localhost:3802/nbreOp';
+  baseUrl7 : string = 'http://localhost:3802/operationsR';
+  baseUrl8 : string = 'http://localhost:3802/getOpTank';
   // ,private authService :AuthService
   constructor(private http: HttpClient) { }
 

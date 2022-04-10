@@ -1,1 +1,59 @@
-<p>update-lot works!</p>
+<div class="ContenuCard" >
+  <div class="modal-header">
+    <h2 id="modal-title"><b>Modifier le lot numero : {{lot.idL}}</b></h2>
+    <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div><br>
+  <form [formGroup]="myForm" class="needs-validation" novalidate>
+
+    <div class="form-group">
+      <div class="col-md-12 mb-3">
+      <label>Type du lot:</label>
+      <input type="text"
+             class="form-control"
+             formControlName="type"
+             name="type"
+             [(ngModel)]="lot.type"
+             placeholder="Post Name here ..">
+        <div
+             *ngIf="type?.invalid && type?.touched"
+              class="text-danger">
+              type invalide !
+       </div>
+       <div
+            *ngIf="type?.valid && type?.touched"
+            class="text-success">
+             type valide !
+       </div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label>description :</label>
+        <input type="text"
+               class="form-control"
+               formControlName="description"
+               name="description"
+               [(ngModel)]="lot.description"
+               placeholder="Post Name here ..">
+          <div
+               *ngIf="description?.invalid && description?.touched"
+                class="text-danger">
+                description invalide !
+         </div>
+         <div
+              *ngIf="description?.valid && description?.touched"
+              class="text-success">
+               description valide !
+         </div>
+        </div>
+
+  </div>
+
+    <div class="modal-footer">
+      <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      <button type="submit" (click)="updateLot()" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer </button>
+    </div>
+  </form>
+
+</div>

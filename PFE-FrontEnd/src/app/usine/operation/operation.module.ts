@@ -28,13 +28,17 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ListeOperationRetraitComponent } from './liste-operation-retrait/liste-operation-retrait.component';
+import { CreateOperationRetraitComponent } from './create-operation-retrait/create-operation-retrait.component';
 
 @NgModule({
   declarations: [
     DetailsOperationComponent,
     ListeOperationComponent,
     CreateOperationComponent,
-    UpdateOperationComponent
+    UpdateOperationComponent,
+    ListeOperationRetraitComponent,
+    CreateOperationRetraitComponent
   ],
   imports: [
     CommonModule,

@@ -1,1 +1,69 @@
-<p>create-lot works!</p>
+<div class="ContenuCard" >
+  <div class="modal-header">
+    <h2 id="modal-title"><b>Ajouter un nouveau centre :</b></h2>
+    <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
+        <form [formGroup]="myForm"  novalidate >
+          <div class="form-row">
+            <div class="form-group col-md-6 mb-3">
+              <label>Type: <span style="color:red;">*</span></label>
+              <input type="text"
+               formControlName="type"
+               class="form-control"
+               id="type"
+               name="type">
+
+              <div *ngIf="type?.invalid && type?.touched" class="text-danger">
+                type invalide !
+              </div>
+              <div *ngIf="type?.valid && type?.touched " class="text-success">
+                type valide!
+              </div>
+              <!-- <div *ngIf="msgErreur==1" class="text-danger">
+                Vous ne pouvez pas prendre cette quantité!! car la quantité disponible dans le stock est: {{qteAct}} !
+                <br> Vous devez introduire une quantite moins ou egale a {{qteAct}} .
+              </div> -->
+
+            </div>
+
+
+          <!-- <div class="form-row"> -->
+
+            <div class="col-md-6 mb-3">
+                <label for="prix">Description du lot: <span style="color:red;">*</span></label>
+                <input type="text"
+                class="form-control"
+                  id="description"
+                  formControlName="description"
+                  name="description">
+
+                  <div *ngIf="description?.invalid && description?.touched" class="text-danger">
+                    description invalide !
+                  </div>
+                  <div *ngIf="description?.valid && description?.touched" class="text-success">
+                    description Valide
+                  </div>
+
+            </div>
+            
+          </div>
+
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="cgu" required>
+              <label class="form-check-label" for="cgu">J'accepte les conditions générales d'utilisation</label>
+              <br>
+              <span style="color:red;margin-bottom:45px;">{{msg}}</span>
+              <div class="invalid-feedback">Vous devez accepter les CGU pour continuer</div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin:11px" (click)=" onSubmit()"  type="submit">Envoyer</button>
+          <!-- close popup -->
+          <button (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+        </form>
+      </div>
+

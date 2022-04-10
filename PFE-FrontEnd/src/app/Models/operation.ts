@@ -1,3 +1,8 @@
+import { Centre } from "./centre";
+import { Magasin } from "./magasin";
+
+import { Lot } from "./lot";
+
 
 export class Operation{
 
@@ -6,8 +11,8 @@ export class Operation{
     dateOperation!: string;
     typeOp!: string;
     code!:number;
-    // chef!:Chef;
-    // usine!:Usine;
-    // agriculteur!:Agriculteur;
+    mgasin!:Magasin;
+    // lot!:Lot;
+    centreCollecte!:Centre;
     
   }

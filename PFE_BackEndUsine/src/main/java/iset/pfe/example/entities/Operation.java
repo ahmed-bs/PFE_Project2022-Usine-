@@ -37,22 +37,23 @@ public class Operation implements Serializable{
 	@JoinColumn(name="idCentre")
 	private CentreCollecte centreCollecte;
 	
+	@ManyToOne
+	@JoinColumn(name="idL")
+	private Lot lot;
+	
 	@OneToMany(mappedBy="operation",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
 	private Set<OperationTank> operationstank;
 	
-	@OneToMany(mappedBy="operation",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	@JsonIgnore
-	private Set<Lot> lots;
+	
 	
 	public Operation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Operation(double poidsLait, String dateOperation, String typeOp, Integer code, User user, Magasin magasin,
-			CentreCollecte centreCollecte, Set<OperationTank> operationstank, Set<Lot> lots) {
+			CentreCollecte centreCollecte, Lot lot, Set<OperationTank> operationstank) {
 		super();
 		this.poidsLait = poidsLait;
 		this.dateOperation = dateOperation;
@@ -61,8 +62,8 @@ public class Operation implements Serializable{
 		this.user = user;
 		this.magasin = magasin;
 		this.centreCollecte = centreCollecte;
+		this.lot = lot;
 		this.operationstank = operationstank;
-		this.lots = lots;
 	}
 
 
@@ -147,13 +148,13 @@ public class Operation implements Serializable{
 	}
 
 
-	public Set<Lot> getLots() {
-		return lots;
+	public Lot getLot() {
+		return lot;
 	}
 
 
-	public void setLots(Set<Lot> lots) {
-		this.lots = lots;
+	public void setLot(Lot lot) {
+		this.lot = lot;
 	}
 
 }
