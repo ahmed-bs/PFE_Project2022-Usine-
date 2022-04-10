@@ -1,1 +1,89 @@
-<p>create-magasin works!</p>
+<div class="ContenuCard" >
+  <div class="modal-header">
+    <h2 id="modal-title"><b>Ajouter une nouvelle usine :</b></h2>
+    <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
+        <form [formGroup]="myForm"  novalidate >
+          <div class="form-row">
+            <div class="form-group col-md-6 mb-3">
+              <label>Nom du magasin : <span style="color:red;">*</span></label>
+              <input type="text"
+               formControlName="nomMag"
+               class="form-control"
+               id="nomMag"
+               name="nomMag">
+
+              <div *ngIf="nomMag?.invalid && nomMag?.touched" class="text-danger">
+                Nom du magasin invalide !
+              </div>
+              <div *ngIf="nomMag?.valid && nomMag?.touched " class="text-success">
+                Nom du magasin valide!
+              </div>
+
+            </div>
+
+
+          <!-- <div class="form-row"> -->
+
+
+            <div class="col-md-6 mb-3">
+              <label for="prix">adresse : <span style="color:red;">*</span></label>
+              <input type="text"
+              class="form-control"
+                id="adresse"
+                formControlName="adresse"
+                name="adresse">
+
+                <div *ngIf="adresse?.invalid && adresse?.touched" class="text-danger">
+                  adresse invalide !
+                </div>
+                <div *ngIf="adresse?.valid && adresse?.touched" class="text-success">
+                  adresse Valide
+                </div>
+
+          </div>
+
+        </div>
+
+
+          <div class="col-md-12 mb-3">
+            <label for="prix">Ville : <span style="color:red;">*</span></label>
+            <input type="text"
+            class="form-control"
+              id="ville"
+              formControlName="ville"
+              name="ville">
+
+              <div *ngIf="ville?.invalid && ville?.touched" class="text-danger">
+                ville invalide !
+              </div>
+              <div *ngIf="ville?.valid && ville?.touched" class="text-success">
+                ville Valide
+              </div>
+
+      
+
+
+          </div>
+
+
+
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="cgu" required>
+              <label class="form-check-label" for="cgu">J'accepte les conditions générales d'utilisation</label>
+              <br>
+              <span style="color:red;margin-bottom:45px;">{{msg}}</span>
+              <div class="invalid-feedback">Vous devez accepter les CGU pour continuer</div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin:11px" (click)=" onSubmit()"  type="submit">Envoyer</button>
+          <!-- close popup -->
+          <button (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+        </form>
+      </div>
+

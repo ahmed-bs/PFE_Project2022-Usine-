@@ -1,5 +1,8 @@
 package iset.pfe.example.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,14 +57,17 @@ public class LotRestController {
 	
 	
 	@RequestMapping(value="/lot",method = RequestMethod.POST)
-		public Lot Addlot(@RequestBody Lot centre){
-		return lotRepository.save(centre);
+		public Lot Addlot(@RequestBody Lot lot){
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	     String currentDateTime = dateFormatter.format(new Date());
+		lot.setDate(currentDateTime);
+		return lotRepository.save(lot);
 	}
 	
 	@RequestMapping(value="/lot/{idCentre}",method = RequestMethod.PUT)
 	public Lot Editlot(@PathVariable Integer idCentre, @RequestBody Lot lots){
 		Lot u= lotRepository.findById(idCentre).orElseThrow(()->new ResourceNotFoundException("Cet centre n'existe pas"));
-    	u.setDate(lots.getDate());
+//    	u.setDate(lots.getDate());
     	u.setDescription(lots.getDescription());
     	u.setType(lots.getType());
 		lotRepository.save(u);

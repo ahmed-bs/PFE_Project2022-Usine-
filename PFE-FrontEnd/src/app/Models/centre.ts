@@ -1,7 +1,7 @@
 export class Centre{
     idCentre!: number;
     nomCentre!: string
-    adress!: string;
+    adresse!: string;
     ville!:string;
    
   }

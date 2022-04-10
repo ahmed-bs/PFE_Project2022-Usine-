@@ -20,12 +20,15 @@ public class Lot implements Serializable{
 	@GeneratedValue
 	private Integer idL;
 	private String type;
+	private int qte;
 	private String description;
 	private String date;
 	
-	@ManyToOne
-	@JoinColumn(name="idOperation")
-	private Operation operation;
+
+	@OneToMany(mappedBy="lot",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonIgnore
+	private Set<Operation> operations;
+	
 	
 	public Lot() {
 		super();
@@ -38,13 +41,14 @@ public class Lot implements Serializable{
 		this.date = date;
 	}
 	
-
-	public Lot(String type, String description, String date, Operation operation) {
+	
+	public Lot(String type, int qte, String description, String date, Set<Operation> operations) {
 		super();
 		this.type = type;
+		this.qte = qte;
 		this.description = description;
 		this.date = date;
-		this.operation = operation;
+		this.operations = operations;
 	}
 	public Integer getIdL() {
 		return idL;
@@ -70,11 +74,18 @@ public class Lot implements Serializable{
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public Operation getOperation() {
-		return operation;
+
+	public int getQte() {
+		return qte;
 	}
-	public void setOperation(Operation operation) {
-		this.operation = operation;
+	public void setQte(int qte) {
+		this.qte = qte;
+	}
+	public Set<Operation> getOperations() {
+		return operations;
+	}
+	public void setOperations(Set<Operation> operations) {
+		this.operations = operations;
 	}
 
 	

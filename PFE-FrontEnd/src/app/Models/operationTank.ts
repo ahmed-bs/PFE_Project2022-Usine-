@@ -1,3 +1,6 @@
+import { Operation } from "./operation";
+import { Tank } from "./tank";
+
 export class OperationTank{
 
   idOpTank!: number;

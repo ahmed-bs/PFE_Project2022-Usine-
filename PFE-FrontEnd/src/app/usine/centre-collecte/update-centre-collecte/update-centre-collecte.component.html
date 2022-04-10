@@ -1,1 +1,102 @@
-<p>update-centre-collecte works!</p>
+<div class="ContenuCard" >
+    <div class="modal-header">
+      <h2 id="modal-title"><b>Modifier le centre numero : {{centre.idCentre}}</b></h2>
+      <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div><br>
+    <form [formGroup]="myForm" class="needs-validation" novalidate>
+
+      <div class="form-group">
+        <div class="col-md-12 mb-3">
+        <label>Nom du centre:</label>
+        <input type="text"
+               class="form-control"
+               formControlName="nomCentre"
+               name="nomCentre"
+               [(ngModel)]="centre.nomCentre"
+               placeholder="Post Name here ..">
+          <div
+               *ngIf="nomCentre?.invalid && nomCentre?.touched"
+                class="text-danger">
+                nomCentre invalide !
+         </div>
+         <div
+              *ngIf="nomCentre?.valid && nomCentre?.touched"
+              class="text-success">
+               nomCentre valide !
+         </div>
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <label>Adresse du centre :</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="adresse"
+                 name="adresse"
+                 [(ngModel)]="centre.adresse"
+                 placeholder="Post Name here ..">
+            <div
+                 *ngIf="adresse?.invalid && adresse?.touched"
+                  class="text-danger">
+                  Adresse invalide !
+           </div>
+           <div
+                *ngIf="adresse?.valid && adresse?.touched"
+                class="text-success">
+                 Adresse valide !
+           </div>
+          </div>
+
+
+          <div class="col-md-12 mb-3">
+            <label>Ville :</label>
+            <input type="text"
+                   class="form-control"
+                   formControlName="ville"
+                   name="ville"
+                   [(ngModel)]="centre.ville"
+                   placeholder="Post Name here ..">
+              <div
+                   *ngIf="ville?.invalid && ville?.touched"
+                    class="text-danger">
+                    Adresse Actuel invalide !
+             </div>
+             <div
+                  *ngIf="ville?.valid && ville?.touched"
+                  class="text-success">
+                  Adresse Actuel valide !
+             </div>
+            </div>
+
+
+<!-- 
+          <div class="col-md-12 mb-3">
+            <label>Etat :</label>
+            <input type="text"
+                   class="form-control"
+                   formControlName="etat"
+                   name="etat"
+                   [(ngModel)]="Centre.etat"
+                   placeholder="Post Name here ..">
+              <div
+                   *ngIf="etat?.invalid && etat?.touched"
+                    class="text-danger">
+                    etat invalide !
+             </div>
+             <div
+                  *ngIf="etat?.valid && etat?.touched"
+                  class="text-success">
+                  etat valide !
+             </div>
+            </div> -->
+
+    </div>
+
+      <div class="modal-footer">
+        <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" (click)="updateCentre()" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer </button>
+      </div>
+    </form>
+
+  </div>

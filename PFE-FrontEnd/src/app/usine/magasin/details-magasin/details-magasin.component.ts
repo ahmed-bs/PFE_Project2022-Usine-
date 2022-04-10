@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Magasin } from 'src/app/Models/magasin';
+import { MagasinService } from 'src/app/Services/magasin.service';
 
 @Component({
   selector: 'app-details-magasin',
@@ -7,9 +12,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsMagasinComponent implements OnInit {
 
-  constructor() { }
+  id!: number;
+  idM!: any;
+  magasin?:Magasin = new Magasin();
 
-  ngOnInit(): void {
+  constructor(
+    private dialogClose: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private magasinService: MagasinService) { }
+
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+  
+    this.magasinService.getMagasin(JSON.parse(localStorage.getItem('IdMag') || '[]') || []).subscribe(o =>{
+      this.magasin = o;
+      this.idM=this.magasin?.idMag;
+      //console.log(typeof this.OneOffer);
+      console.log(this.magasin);
+      console.log(this.idM);
+  });
+}
+
+  closeDetails(){
+    this.dialogClose.closeAll();
   }
 
 }

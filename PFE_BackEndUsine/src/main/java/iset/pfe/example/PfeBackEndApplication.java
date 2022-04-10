@@ -10,10 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import iset.pfe.example.entities.User;
 import iset.pfe.example.entities.CentreCollecte;
 import iset.pfe.example.entities.Lot;
+import iset.pfe.example.entities.Magasin;
+import iset.pfe.example.entities.Operation;
 import iset.pfe.example.entities.Tank;
 import iset.pfe.example.repositories.UserRepository;
 import iset.pfe.example.repositories.CentreCollecteRepository;
 import iset.pfe.example.repositories.LotRepository;
+import iset.pfe.example.repositories.MagasinRepository;
 import iset.pfe.example.repositories.OperationRepository;
 import iset.pfe.example.repositories.OperationTankRepository;
 import iset.pfe.example.repositories.TankRepository;
@@ -36,6 +39,9 @@ public class PfeBackEndApplication implements CommandLineRunner {
 	@Autowired
 	private CentreCollecteRepository centreCollecteRepository;
 	
+	@Autowired
+	private MagasinRepository magasinRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(PfeBackEndApplication.class, args);
 	}
@@ -50,16 +56,27 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		userRepository.save(u1);
 		
 		User u2=new User("ahmed", "ben saber", 11221122, 54685999, "ahmed", "ahmed");
-		userRepository.save(u1);
+		userRepository.save(u2);
 		
-		Tank t1=new Tank("1252sdsg58", 120, 0, "Vide");
+		Tank t1=new Tank("tank numero 1", 120, 0, "Vide");
 		tankRepository.save(t1);
 		
+		Tank t2=new Tank("tank numero 2", 120, 0, "Vide");
+		tankRepository.save(t2);
+		
 		Lot l1=new Lot("Yaourt", "Yaourttttt ", dateA.toString());
+		l1.setQte(1755);
 		lotRepository.save(l1);
+		
+		Magasin m1=new Magasin("magasin numero 1", "manzel abderahmen", "Bizerte");
+		magasinRepository.save(m1);
 		
 		CentreCollecte c1=new CentreCollecte("centre 1", "Bizerte", "Bizerte");
 		centreCollecteRepository.save(c1);
+		
+		Operation o1=new Operation(120, dateA.toLocaleString(), "Remplissage", 112200);
+		o1.setCentreCollecte(c1);
+		operationRepository.save(o1);
 		
 		
 	}
