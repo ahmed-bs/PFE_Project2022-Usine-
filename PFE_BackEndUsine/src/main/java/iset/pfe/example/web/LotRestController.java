@@ -33,6 +33,11 @@ public class LotRestController {
 		return lotRepository.findAll();
 	}
 	
+	@RequestMapping(value="/lotDispo",method = RequestMethod.GET)
+	public List<Lot> getlotsDispo(){
+	return lotRepository.getLotDispo();
+	}
+	
 	@RequestMapping(value="/nbreL",method = RequestMethod.GET)
 	public int getNblot(){
 		return lotRepository.findAll().size();

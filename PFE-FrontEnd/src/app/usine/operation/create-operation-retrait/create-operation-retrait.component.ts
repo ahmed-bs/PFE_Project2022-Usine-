@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Operation } from 'src/app/Models/operation';
 import { Tank } from 'src/app/Models/tank';
+import { Lot } from 'src/app/Models/lot';
 import { Magasin } from 'src/app/Models/magasin';
 import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { MagasinService } from 'src/app/Services/magasin.service';
+import { LotService } from 'src/app/Services/lot.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -26,15 +28,17 @@ export class CreateOperationRetraitComponent implements OnInit {
   msgErreur=0;
   qteActLaitTank=0;
   qteMax=0;
+  q=0;
   som=0;
   myForm=new  FormGroup({
-      poidsLait : new FormControl(null,[Validators.required]),
-     // dateOperation : new FormControl(null,[Validators.required ]),
-       magasin : new FormControl(null,[Validators.required ]),
+      qtePrise : new FormControl(null,[Validators.required]),
+      lot : new FormControl(null,[Validators.required ]),
+      magasin : new FormControl(null,[Validators.required ]),
     
   })
   tanks!:Observable<Tank[]>;
   magasins!:Observable<Magasin[]>;
+  lots!:Observable<Lot[]>;
 
   maDate = new Date();
 
@@ -42,6 +46,7 @@ export class CreateOperationRetraitComponent implements OnInit {
   constructor(
     private operationService: OperationService,
     private tankService:TankService,
+    private lotService:LotService,
     private router: Router,
     private magasinService:MagasinService, 
     private dialogClose: MatDialog) { }
@@ -50,6 +55,7 @@ export class CreateOperationRetraitComponent implements OnInit {
     //this.ValidatedForm();
     this.tanks=this.tankService.getTanksFiltres();
     this.magasins=this.magasinService.getMagasins();
+    this.lots=this.lotService.getLotsDispo();
     this.operationService.getNbOp().subscribe(o=>{
     console.log(o);
     this.som=10000+o+1;  
@@ -67,7 +73,7 @@ export class CreateOperationRetraitComponent implements OnInit {
 
   save() {
 
-    if(this.myForm.get('poidsLait')?.value==null){
+    if(this.myForm.get('qtePrise')?.value==null){
       this.msg="vous devez remplir le formulaire !!";
     }
     else{
@@ -81,44 +87,43 @@ export class CreateOperationRetraitComponent implements OnInit {
       this.msg="";
      }
 
+     if(this.myForm.get('lot')?.value==null){
+      this.msg="vous devez remplir le formulaire !!";
+    }
+    else{
+      this.msg="";
+     }
 
-     if(this.myForm.get('poidsLait')?.value!=null && this.myForm.get('magasin')?.value!=null ){
+
+     if(this.myForm.get('qtePrise')?.value!=null && this.myForm.get('magasin')?.value!=null && this.myForm.get('lot')?.value!=null ){
 
     this.operationService
     .createOperation(
       {
-        "poidsLait":this.myForm.get('poidsLait')?.value,
+        "qtePrise":this.myForm.get('qtePrise')?.value,
         "magasin":{
           "idMag":this.myForm.get('magasin')?.value,
        },
+       "lot":{
+        "idL":this.myForm.get('lot')?.value,
+     },
        "code":this.som,
         },
       
     )
-    .subscribe(o=>{
+    .subscribe(o =>{
       window.location.reload();
-      console.log(this.operation);     
+      console.log(this.operation);   
+      console.log("nourrrrrrrr");
+      console.log(this.operation);
+      console.log("nourrrrrrrr");  
       localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
-      window.location.reload();      
+     window.location.reload();      
     },
     (error) => {
       console.log("Failed")
     }
   );
-    //  ****************   Tank    ******************
-//     let bb=this.tankService.getTank(this.myForm.get('tank')?.value).subscribe(o=>{
-//       this.t=o;
-//       console.log(o);
-//       console.log(this.t);
-//       console.log(o.poidActuel);
-// if(o.poidActuel<this.myForm.get('poidsLait')?.value){
-// this.msgErreur=1;
-// this.qteActLaitTank=o.poidActuel;
-//     }
-// else
-// this.msgErreur=0;
-//     });
-// if(this.qteActLaitTank>=this.myForm.get('poidsLait')?.value){
 
      }
     
@@ -126,22 +131,21 @@ export class CreateOperationRetraitComponent implements OnInit {
 
 
   onSubmit() {
-    this.tankService.getQteTanks().subscribe(
-      a=>{
-    this.tankService.getQteG().subscribe(
-      o=>{
-      console.log(o);
-      if(this.myForm.get('poidsLait')?.value<=o  ){
+    this.lotService.getLot(this.myForm.get('lot')?.value).subscribe(a=>{
+      this.q=a.qte;
+      console.log(this.q);
+ 
+      if(this.myForm.get('qtePrise')?.value<=this.q  ){
       this.save();
       this.msgErreur=0;
     }
       else{
       this.msgErreur=1;
-      this.qteActLaitTank=o;
-      this.qteMax=a;
+      // this.qteActLaitTank=o;
+       this.qteMax=this.q;
           }
-  });
-});
+        }); 
+
 }
 
   gotoList() {
@@ -154,13 +158,17 @@ export class CreateOperationRetraitComponent implements OnInit {
     this.gotoList();
   }
 
- get poidsLait(){
-  return this.myForm.get('poidsLait') ;
+ get qtePrise(){
+  return this.myForm.get('qtePrise') ;
 }
 
 
 get magasin(){
   return this.myForm.get('magasin') ;
+}
+
+get lot(){
+  return this.myForm.get('lot') ;
 }
 
 }

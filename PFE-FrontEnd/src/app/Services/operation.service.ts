@@ -17,6 +17,7 @@ export class OperationService {
   baseUrl6 : string = 'http://localhost:3802/nbreOp';
   baseUrl7 : string = 'http://localhost:3802/operationsR';
   baseUrl8 : string = 'http://localhost:3802/getOpTank';
+  baseUrl9 : string = 'http://localhost:3802/retrait1';
   // ,private authService :AuthService
   constructor(private http: HttpClient) { }
 
@@ -97,7 +98,7 @@ export class OperationService {
     // jwt = "Bearer "+jwt;
     // let httpHeaders = new HttpHeaders({"Authorization":jwt})
     // return this.http.post(this.baseUrl1,f,{headers:httpHeaders});
-    return this.http.post(this.baseUrl1,f);
+    return this.http.post(this.baseUrl9,f);
   }
 
   createOperationRemplissage(f:any){

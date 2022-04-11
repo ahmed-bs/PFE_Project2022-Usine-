@@ -23,6 +23,7 @@ public class Operation implements Serializable{
 	private String dateOperation;
 	private String typeOp;
 	private Integer code;
+	private int qtePrise;	
 	
 	
 	@ManyToOne
@@ -66,6 +67,20 @@ public class Operation implements Serializable{
 		this.operationstank = operationstank;
 	}
 
+	public Operation(double poidsLait, String dateOperation, String typeOp, Integer code, int qtePrise, User user,
+			Magasin magasin, CentreCollecte centreCollecte, Lot lot, Set<OperationTank> operationstank) {
+		super();
+		this.poidsLait = poidsLait;
+		this.dateOperation = dateOperation;
+		this.typeOp = typeOp;
+		this.code = code;
+		this.qtePrise = qtePrise;
+		this.user = user;
+		this.magasin = magasin;
+		this.centreCollecte = centreCollecte;
+		this.lot = lot;
+		this.operationstank = operationstank;
+	}
 
 	public Operation(double poidsLait, String dateOperation, String typeOp, Integer code) {
 		super();
@@ -157,4 +172,12 @@ public class Operation implements Serializable{
 		this.lot = lot;
 	}
 
+	public int getQtePrise() {
+		return qtePrise;
+	}
+
+	public void setQtePrise(int qtePrise) {
+		this.qtePrise = qtePrise;
+	}
+	
 }

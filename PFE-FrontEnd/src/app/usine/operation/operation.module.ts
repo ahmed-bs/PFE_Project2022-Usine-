@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListeOperationRetraitComponent } from './liste-operation-retrait/liste-operation-retrait.component';
 import { CreateOperationRetraitComponent } from './create-operation-retrait/create-operation-retrait.component';
+import { DetailsOperationRetraitComponent } from './details-operation-retrait/details-operation-retrait.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CreateOperationRetraitComponent } from './create-operation-retrait/crea
     CreateOperationComponent,
     UpdateOperationComponent,
     ListeOperationRetraitComponent,
-    CreateOperationRetraitComponent
+    CreateOperationRetraitComponent,
+    DetailsOperationRetraitComponent
   ],
   imports: [
     CommonModule,
