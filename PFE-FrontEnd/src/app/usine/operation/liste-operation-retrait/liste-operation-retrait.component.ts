@@ -10,7 +10,7 @@ import { TankService } from 'src/app/Services/tank.service';
 import { CreateOperationRetraitComponent } from '../create-operation-retrait/create-operation-retrait.component';
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 // import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
-import { DetailsOperationComponent } from '../details-operation/details-operation.component';
+import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
 // import { UpdateOperationRetraitComponent } from '../update-operation-retrait/update-operation-retrait.component';
 
 @Component({
@@ -38,7 +38,7 @@ export class ListeOperationRetraitComponent implements OnInit {
   v=0;
   q=0;
   p=0;
-  displayedColumns: string[] = ['idOperation','poidsLait','code', 'dateOperation','magasin', 'typeOp','action'];
+  displayedColumns: string[] = ['idOperation','qtePrise','code', 'dateOperation','magasin','lot', 'typeOp','action'];
   constructor(private operationService: OperationService,
     private tankService:TankService,
     private router: Router, private dialog:MatDialog) { }
@@ -127,7 +127,7 @@ export class ListeOperationRetraitComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       localStorage.setItem('IdOperation', JSON.stringify(operation.idOperation));
-      this.dialog.open(DetailsOperationComponent, dialogConfig);
+      this.dialog.open(DetailsOperationRetraitComponent, dialogConfig);
       //this.router.navigate(['employees/admin/detailemployee', id]);
     }
   

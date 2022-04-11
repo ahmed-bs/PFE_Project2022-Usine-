@@ -1,6 +1,5 @@
 import { Centre } from "./centre";
 import { Magasin } from "./magasin";
-
 import { Lot } from "./lot";
 
 
@@ -11,8 +10,9 @@ export class Operation{
     dateOperation!: string;
     typeOp!: string;
     code!:number;
-    mgasin!:Magasin;
-    // lot!:Lot;
+    qtePrise!:number;
+    magasin!:Magasin;
+    lot!:Lot;
     centreCollecte!:Centre;
     
   }

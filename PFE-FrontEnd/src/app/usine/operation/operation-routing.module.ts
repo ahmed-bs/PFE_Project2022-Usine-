@@ -6,6 +6,7 @@ import { ListeOperationComponent } from './liste-operation/liste-operation.compo
 import { OperationComponent } from './operation.component';
 import { UpdateOperationComponent } from './update-operation/update-operation.component';
 import { ListeOperationRetraitComponent } from './liste-operation-retrait/liste-operation-retrait.component';
+import { DetailsOperationRetraitComponent } from './details-operation-retrait/details-operation-retrait.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'addOperation', component: CreateOperationComponent  },
   { path: 'addOperationR', component: CreateOperationComponent  },
   { path: 'detailsOperation/:id', component: DetailsOperationComponent   },
+  { path: 'detailsOperationRetrait/:id', component: DetailsOperationRetraitComponent   },
   { path: 'updateOperation/:id', component: UpdateOperationComponent  },
 
   { path: 'listeOperationRetrait', component:     ListeOperationRetraitComponent  },

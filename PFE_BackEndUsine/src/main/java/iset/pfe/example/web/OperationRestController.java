@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import iset.pfe.example.entities.Lot;
+import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.entities.Operation;
 import iset.pfe.example.entities.OperationTank;
 
@@ -128,6 +130,22 @@ public class OperationRestController {
 	
 	@RequestMapping(value="/operations",method = RequestMethod.POST)
 	public Operation AddOperation(@RequestBody Operation operation){
+		
+	return operationRepository.save(operation);
+}
+	
+	@RequestMapping(value="/retrait1",method = RequestMethod.POST)
+	public Operation AddOperationRetrait1(@RequestBody Operation operation){
+		 DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	     String currentDateTime = dateFormatter.format(new Date());
+	     int qte=0;
+	     
+		Lot l1=lotRepository.findById(operation.getLot().getIdL()).get();
+		qte=l1.getQte()-operation.getQtePrise();
+		l1.setQte(qte);
+		lotRepository.save(l1);
+		operation.setDateOperation(currentDateTime);
+		operation.setTypeOp("Retrait");			
 		
 	return operationRepository.save(operation);
 }

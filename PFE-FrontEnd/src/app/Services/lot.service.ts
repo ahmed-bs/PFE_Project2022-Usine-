@@ -10,6 +10,7 @@ export class LotService {
 
   baseUrl : string = 'http://localhost:3802/lot';
   baseUrl1 : string = 'http://localhost:3802/nbreM';
+  baseUrl2 : string = 'http://localhost:3802/lotDispo';  
 
   // ,private authService :AuthService
   constructor(private http: HttpClient) { }
@@ -20,6 +21,15 @@ export class LotService {
     // let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
     // return this.http.get(`${this.baseUrl}`,{headers:httpHeaders});
     return this.http.get(`${this.baseUrl}`);
+  }
+
+// les lots superieur a 0
+  getLotsDispo(): Observable<any> {
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    // return this.http.get(`${this.baseUrl}`,{headers:httpHeaders});
+    return this.http.get(`${this.baseUrl2}`);
   }
 
   getNbLots(): Observable<any> {
