@@ -12,6 +12,7 @@ import iset.pfe.example.entities.CentreCollecte;
 import iset.pfe.example.entities.Lot;
 import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.entities.Operation;
+import iset.pfe.example.entities.Produit;
 import iset.pfe.example.entities.Tank;
 import iset.pfe.example.repositories.UserRepository;
 import iset.pfe.example.repositories.CentreCollecteRepository;
@@ -19,6 +20,7 @@ import iset.pfe.example.repositories.LotRepository;
 import iset.pfe.example.repositories.MagasinRepository;
 import iset.pfe.example.repositories.OperationRepository;
 import iset.pfe.example.repositories.OperationTankRepository;
+import iset.pfe.example.repositories.ProduitRepository;
 import iset.pfe.example.repositories.TankRepository;
 
 @SpringBootApplication
@@ -38,6 +40,9 @@ public class PfeBackEndApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CentreCollecteRepository centreCollecteRepository;
+	
+	@Autowired
+	private ProduitRepository produitRepository;
 	
 	@Autowired
 	private MagasinRepository magasinRepository;
@@ -64,9 +69,6 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		Tank t2=new Tank("tank numero 2", 120, 0, "Vide");
 		tankRepository.save(t2);
 		
-		Lot l1=new Lot("Yaourt", "Yaourttttt ", dateA.toString());
-		l1.setQte(1755);
-		lotRepository.save(l1);
 		
 		Magasin m1=new Magasin("magasin numero 1", "manzel abderahmen", "Bizerte");
 		magasinRepository.save(m1);
@@ -77,8 +79,17 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		Operation o1=new Operation(120, dateA.toLocaleString(), "Remplissage", 112200);
 		o1.setCentreCollecte(c1);
 		operationRepository.save(o1);
+
+
+		Produit p1=new Produit("yaourt - fraise", "akf5rfvn54");
+		produitRepository.save(p1);
 		
-		
+
+		Lot l1=new Lot(dateA.toString());
+		l1.setQte(1755);
+		l1.setProduit(p1);
+		l1.setTank(t2);
+		lotRepository.save(l1);
 	}
 
 }

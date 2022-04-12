@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import iset.pfe.example.entities.CentreCollecte;
 import iset.pfe.example.entities.Lot;
+import iset.pfe.example.entities.Produit;
 import iset.pfe.example.repositories.CentreCollecteRepository;
 import iset.pfe.example.repositories.LotRepository;
+import iset.pfe.example.repositories.ProduitRepository;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -27,6 +29,9 @@ public class LotRestController {
 
 	@Autowired
 	private LotRepository lotRepository;
+	
+	@Autowired
+	private ProduitRepository produitRepository;
 	
 	@RequestMapping(value="/lot",method = RequestMethod.GET)
 	public List<Lot> getlots(){
@@ -43,7 +48,7 @@ public class LotRestController {
 		return lotRepository.findAll().size();
 	}
 	
-	@RequestMapping(value="/lot/{idCentre}",method = RequestMethod.GET)
+	@RequestMapping(value="/lot/{idL}",method = RequestMethod.GET)
     public Lot getlot(@PathVariable Integer idCentre) {
 		Optional<Lot> lot= lotRepository.findById(idCentre);
 		if (lot.isPresent()) { 
@@ -51,12 +56,12 @@ public class LotRestController {
 		}else throw new RuntimeException("lot introuvable !!");
 	}
 	
-	@RequestMapping(value="/lot/{idCentre}",method = RequestMethod.DELETE)
+	@RequestMapping(value="/lot/{idL}",method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deletelot(@PathVariable Integer idCentre) {
-		Optional<Lot> u= lotRepository.findById(idCentre);
+	public void deletelot(@PathVariable Integer idL) {
+		Optional<Lot> u= lotRepository.findById(idL);
 				if (u.isPresent()) { 
-					lotRepository.deleteById(idCentre);
+					lotRepository.deleteLot(idL);
 		    }else throw new RuntimeException("lot introuvable ! vous ne pouvez pas le supprimer !!");
 	}
 	
@@ -66,15 +71,17 @@ public class LotRestController {
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	     String currentDateTime = dateFormatter.format(new Date());
 		lot.setDate(currentDateTime);
+		Produit p=produitRepository.findById(lot.getProduit().getIdProduit()).get();
+		int qte=lot.getQte()+p.getQte();
+		p.setQte(qte);
+		produitRepository.save(p);
 		return lotRepository.save(lot);
 	}
 	
-	@RequestMapping(value="/lot/{idCentre}",method = RequestMethod.PUT)
+	@RequestMapping(value="/lot/{idL}",method = RequestMethod.PUT)
 	public Lot Editlot(@PathVariable Integer idCentre, @RequestBody Lot lots){
 		Lot u= lotRepository.findById(idCentre).orElseThrow(()->new ResourceNotFoundException("Cet centre n'existe pas"));
 //    	u.setDate(lots.getDate());
-    	u.setDescription(lots.getDescription());
-    	u.setType(lots.getType());
 		lotRepository.save(u);
 			
 	  	return u;

@@ -19,9 +19,9 @@ public class Lot implements Serializable{
 	@Id
 	@GeneratedValue
 	private Integer idL;
-	private String type;
+//	private String type;
 	private int qte;
-	private String description;
+//	private String description;
 	private String date;
 	
 
@@ -29,26 +29,31 @@ public class Lot implements Serializable{
 	@JsonIgnore
 	private Set<Operation> operations;
 	
+	@ManyToOne
+	@JoinColumn(name="idTank")
+	private Tank tank;
+	
+	@ManyToOne
+	@JoinColumn(name="idProduit")
+	private Produit produit;
 	
 	public Lot() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Lot(String type, String description, String date) {
+	public Lot( String date) {
 		super();
-		this.type = type;
-		this.description = description;
 		this.date = date;
 	}
 	
 	
-	public Lot(String type, int qte, String description, String date, Set<Operation> operations) {
+	public Lot(int qte, String date, Set<Operation> operations, Tank tank, Produit produit) {
 		super();
-		this.type = type;
 		this.qte = qte;
-		this.description = description;
 		this.date = date;
 		this.operations = operations;
+		this.tank = tank;
+		this.produit = produit;
 	}
 	public Integer getIdL() {
 		return idL;
@@ -56,18 +61,7 @@ public class Lot implements Serializable{
 	public void setIdL(Integer idL) {
 		this.idL = idL;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 	public String getDate() {
 		return date;
 	}
@@ -86,6 +80,18 @@ public class Lot implements Serializable{
 	}
 	public void setOperations(Set<Operation> operations) {
 		this.operations = operations;
+	}
+	public Tank getTank() {
+		return tank;
+	}
+	public void setTank(Tank tank) {
+		this.tank = tank;
+	}
+	public Produit getProduit() {
+		return produit;
+	}
+	public void setProduit(Produit produit) {
+		this.produit = produit;
 	}
 
 	
