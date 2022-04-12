@@ -14,6 +14,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ScaleLinear, ScalePoint, ScaleTime,ScaleBand } from 'd3-scale';
 import { UsineComponent } from './usine.component';
+import { ProduitComponent } from './produit/produit.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UsineComponent } from './usine.component';
     LotComponent,
     DashboardComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    ProduitComponent
   ],
   imports: [
     CommonModule,

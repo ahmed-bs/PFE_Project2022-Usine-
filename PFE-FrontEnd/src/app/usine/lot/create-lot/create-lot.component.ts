@@ -3,7 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Lot } from 'src/app/Models/lot';
+import { Produit } from 'src/app/Models/produit';
 import { LotService } from 'src/app/Services/lot.service';
+import { ProduitService } from 'src/app/Services/produit.service';
+import { Observable } from 'rxjs';
+import { TankService } from 'src/app/Services/tank.service';
+import { Tank } from 'src/app/Models/tank';
 
 
 @Component({
@@ -18,32 +23,38 @@ export class CreateLotComponent implements OnInit {
   msg="";
   msgErreur=0;
   qteAct=0;
+  produits!:Observable<Produit[]>;
+  tanks!:Observable<Tank[]>;
 
   myForm=new  FormGroup({
-      type : new FormControl(null,[Validators.required]),
-      description : new FormControl(null,[Validators.required ]),
+      qte : new FormControl(null,[Validators.required]),
+      produit : new FormControl(null,[Validators.required ]),
+      tank : new FormControl(null,[Validators.required ]),
   })
   // produits!:Observable<Produit[]>;
-  // Tanks!:Observable<Tank[]>;
+  // produits!:Observable<produit[]>;
   // fournisseurs!:Observable<Fournisseur[]>;
 
   constructor(
      private lotService: LotService,
+     private produitService:ProduitService,
+     private tankService:TankService,
      private router: Router,
      private dialogClose: MatDialog,) { }
 
   ngOnInit() {
-
+    this.produits=this.produitService.getProduits();
+    this.tanks=this.tankService.getTanks();
   }
 
-  newTank(): void {
+  newproduit(): void {
     this.submitted = false;
     this.lot = new Lot();
   }
 
   save() {
 
-   if(this.myForm.get('type')?.value==null){
+   if(this.myForm.get('produit')?.value==null){
     this.msg="vous devez remplir le formulaire !!";
    }
    else{
@@ -57,12 +68,33 @@ export class CreateLotComponent implements OnInit {
     this.msg="";
    }
 
+   if(this.myForm.get('qte')?.value==null){
+    this.msg="vous devez remplir le formulaire !!";
+  }
+  else{
+    this.msg="";
+   }
 
-  if(this.myForm.get('type')?.value!=null && this.myForm.get('description')?.value!=null ){
+   
+   if(this.myForm.get('tank')?.value==null){
+    this.msg="vous devez remplir le formulaire !!";
+  }
+  else{
+    this.msg="";
+   }
+
+
+  if(this.myForm.get('produit')?.value!=null 
+   && this.myForm.get('qte')?.value!=null && this.myForm.get('tank')?.value!=null ){
     this.lotService
         .createLot({
-          "type":this.myForm.get('type')?.value,
-          "description":this.myForm.get('description')?.value,
+          "produit":{
+            "idProduit":this.myForm.get('produit')?.value,
+         },
+         "tank":{
+          "idTank":this.myForm.get('tank')?.value,
+       },
+           "qte":this.myForm.get('qte')?.value,
          
           // "poidActuel":this.myForm.get('poidActuel')?.value,
           // "etat":this.myForm.get('etat')?.value,
@@ -91,17 +123,20 @@ export class CreateLotComponent implements OnInit {
     this.gotoList();
   }
 
- get type(){
-  return this.myForm.get('type') ;
+ get produit(){
+  return this.myForm.get('produit') ;
 }
 
 get description(){
   return this.myForm.get('description') ;
 }
 
-get date(){
-  return this.myForm.get('date') ;
+get qte(){
+  return this.myForm.get('qte') ;
 }
 
+get tank(){
+  return this.myForm.get('tank') ;
+}
 
 }

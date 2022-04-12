@@ -13,6 +13,7 @@ const routes: Routes = [
        { path: 'magasin', loadChildren: () => import('./magasin/magasin.module').then(m => m.MagasinModule) },
        { path: 'tank', loadChildren: () => import('./tank/tank.module').then(m => m.TankModule) },
        { path: 'lot', loadChildren: () => import('./lot/lot.module').then(m => m.LotModule) },
+       { path: 'produit', loadChildren: () => import('./produit/produit.module').then(m => m.ProduitModule) },
        { path: 'dashboard', component: DashboardComponent },
       // { path: '**', component: NotFoundComponent},
     ]

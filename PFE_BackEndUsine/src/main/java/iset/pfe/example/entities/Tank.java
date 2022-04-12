@@ -34,6 +34,10 @@ public class Tank implements Serializable{
 	@JsonIgnore
 	private Set<OperationTank> operationstank;
 	
+	@OneToMany(mappedBy="tank",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonIgnore
+	private Set<Lot> lots;
+	
 	//constructors
 	public Tank() {
 		super();
@@ -56,7 +60,18 @@ public class Tank implements Serializable{
 		this.operationstank = operationstank;
 	}
 
-	
+	public Tank(String matricule, double poidVide, double poidActuel, String etat, String dateIns,
+			Set<OperationTank> operationstank, Set<Lot> lots) {
+		super();
+		this.matricule = matricule;
+		this.poidVide = poidVide;
+		this.poidActuel = poidActuel;
+		this.etat = etat;
+		DateIns = dateIns;
+		this.operationstank = operationstank;
+		this.lots = lots;
+	}
+
 	public Tank(String matricule, double poidVide, double poidActuel, String etat, String dateIns,
 			Set<OperationTank> operationstank) {
 		super();
@@ -123,6 +138,13 @@ public class Tank implements Serializable{
 	public void setDateIns(String dateIns) {
 		DateIns = dateIns;
 	}
-	
+
+	public Set<Lot> getLots() {
+		return lots;
+	}
+
+	public void setLots(Set<Lot> lots) {
+		this.lots = lots;
+	}
 	
 }

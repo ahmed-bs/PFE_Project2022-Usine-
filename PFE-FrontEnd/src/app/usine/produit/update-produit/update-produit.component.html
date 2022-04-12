@@ -1,0 +1,56 @@
+<div class="ContenuCard" >
+    <div class="modal-header">
+      <h3 id="modal-title"><b>Modifier le produit numero :{{produit.idProduit}}</b></h3>
+      <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div><br>
+    <form [formGroup]="myForm" class="needs-validation" novalidate>
+      <div class="form-group">
+        <label>Intitulé :</label>
+        <input type="text"
+               class="form-control"
+               formControlName="intitule"
+               name="intitule"
+               [(ngModel)]="produit.intitule"
+               placeholder="Post Name here ..">
+          <div
+               *ngIf="intitule?.invalid && intitule?.touched"
+                class="text-danger">
+                Intitulé invalide !
+         </div>
+         <div
+              *ngIf="intitule?.valid && intitule?.touched"
+              class="text-success">
+               Intitulé valide !
+         </div>
+      </div>
+  
+      <div class="lg mb-3">
+        <label>Libellé :</label>
+        <input class="form-control"
+                  placeholder="Description Post here ...."
+                  name="libelle"
+                  formControlName="libelle"
+                  [(ngModel)]="produit.libelle"
+                  >
+            <div
+                  *ngIf="libelle?.invalid && libelle?.touched"
+                   class="text-danger">
+                   Libellé invalide !
+            </div>
+            <div
+                 *ngIf="libelle?.valid && libelle?.touched"
+                 class="text-success">
+                 Libellé valide !
+            </div>
+      </div>
+  
+      <div class="modal-footer">
+        <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" (click)="updateProduit()" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer </button>
+      </div>
+    </form>
+  
+  </div>
+  
