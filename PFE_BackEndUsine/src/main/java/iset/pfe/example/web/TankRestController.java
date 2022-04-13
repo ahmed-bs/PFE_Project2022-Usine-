@@ -41,6 +41,10 @@ public class TankRestController {
 			return tankRepository.findAll().size();
 		}
 		
+		@RequestMapping(value="/tanksDispo",method = RequestMethod.GET)
+		public List<Tank> getTanksDispo(){
+			return tankRepository.findTanksDispo();
+		}
 		
 		@RequestMapping(value="/tanksFilres",method = RequestMethod.GET)
 		public List<Tank> getAllTanks(){

@@ -86,7 +86,8 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		
 
 		Lot l1=new Lot(dateA.toString());
-		l1.setQte(1755);
+		l1.setQteLot(1755);
+		l1.setQtePriseTank(1000);
 		l1.setProduit(p1);
 		l1.setTank(t2);
 		lotRepository.save(l1);

@@ -17,17 +17,30 @@
                 <div class=" pb-5 pt-3">
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre"> type du lot : </span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.type}}</span>
+                    <span id="titre"> Intitulé du tank : </span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.tank.matricule}}</span>
                   </div>
+
+                  <div class="text-uppercase fs-08">
+                    <span id="titre"> Quantité prise Tank : </span>
+                    <span>&nbsp;&nbsp;{{lot.qtePriseTank}}</span>
+                  </div>
+
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre"> description : </span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.description}}</span>
+                    <span id="titre"> Produit Concerné : </span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.produit.intitule}}</span>
                   </div>
+
+                  <div class="text-uppercase fs-08">
+                    <span id="titre"> Quantité (Lots)  : </span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.qteLot}}</span>
+                  </div>
+
                     <div class="text-uppercase fs-08">
-                      <span id="titre"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date :</span>
-                      <span id="titre">{{lot.date}}</span>
+                      <span id="titre"> date :</span>
+                      <span id="titre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.date}}</span>
                     </div>                 
                     
                 </div>

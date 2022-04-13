@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import iset.pfe.example.entities.CentreCollecte;
 import iset.pfe.example.entities.Lot;
 import iset.pfe.example.entities.Produit;
+import iset.pfe.example.entities.Tank;
 import iset.pfe.example.repositories.CentreCollecteRepository;
 import iset.pfe.example.repositories.LotRepository;
 import iset.pfe.example.repositories.ProduitRepository;
+import iset.pfe.example.repositories.TankRepository;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -32,6 +34,9 @@ public class LotRestController {
 	
 	@Autowired
 	private ProduitRepository produitRepository;
+	
+	@Autowired
+	private TankRepository tankRepository;
 	
 	@RequestMapping(value="/lot",method = RequestMethod.GET)
 	public List<Lot> getlots(){
@@ -49,8 +54,8 @@ public class LotRestController {
 	}
 	
 	@RequestMapping(value="/lot/{idL}",method = RequestMethod.GET)
-    public Lot getlot(@PathVariable Integer idCentre) {
-		Optional<Lot> lot= lotRepository.findById(idCentre);
+    public Lot getlot(@PathVariable Integer idL) {
+		Optional<Lot> lot= lotRepository.findById(idL);
 		if (lot.isPresent()) { 
 			return lot.get();
 		}else throw new RuntimeException("lot introuvable !!");
@@ -72,15 +77,20 @@ public class LotRestController {
 	     String currentDateTime = dateFormatter.format(new Date());
 		lot.setDate(currentDateTime);
 		Produit p=produitRepository.findById(lot.getProduit().getIdProduit()).get();
-		int qte=lot.getQte()+p.getQte();
+		Tank t=tankRepository.findById(lot.getTank().getIdTank()).get();
+		int qte=lot.getQteLot()+p.getQte();
+		int qtePT=(int) (t.getPoidActuel()-lot.getQtePriseTank());
+		t.setPoidActuel(qtePT);
 		p.setQte(qte);
+		tankRepository.save(t);
 		produitRepository.save(p);
 		return lotRepository.save(lot);
+		
 	}
 	
 	@RequestMapping(value="/lot/{idL}",method = RequestMethod.PUT)
-	public Lot Editlot(@PathVariable Integer idCentre, @RequestBody Lot lots){
-		Lot u= lotRepository.findById(idCentre).orElseThrow(()->new ResourceNotFoundException("Cet centre n'existe pas"));
+	public Lot Editlot(@PathVariable Integer idL, @RequestBody Lot lots){
+		Lot u= lotRepository.findById(idL).orElseThrow(()->new ResourceNotFoundException("Cet centre n'existe pas"));
 //    	u.setDate(lots.getDate());
 		lotRepository.save(u);
 			
