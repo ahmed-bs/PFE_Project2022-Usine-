@@ -10,6 +10,7 @@ import { DetailsLotComponent } from '../details-lot/details-lot.component';
 import { UpdateLotComponent } from '../update-lot/update-lot.component';
 import { CreateLotComponent } from '../create-lot/create-lot.component';
 import { LotService } from 'src/app/Services/lot.service';
+import { TankService } from 'src/app/Services/tank.service';
 
 @Component({
   selector: 'app-liste-lot',
@@ -33,10 +34,11 @@ export class ListeLotComponent implements OnInit {
   ELEMENT_DATA?:Lot[];
   // Lot?:Lot;
   dataSource!:MatTableDataSource<any>;
-  displayedColumns: string[] = ['idL','produit','tank','qte','date','action'];
+  displayedColumns: string[] = ['idL','produit','qteLot','tank','qtePriseTank','date','action'];
 
   constructor(
     private lotService: LotService,
+    private tankService:TankService,
     private router: Router,
     private dialog:MatDialog) { }
 
@@ -111,10 +113,22 @@ export class ListeLotComponent implements OnInit {
     }
   
     onOpenDialogCreate():void{
+      this.tankService.getQteG().subscribe(i =>{
+
+    if(i>0){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       this.dialog.open(CreateLotComponent, dialogConfig);
+    }
+    else{
+      this.idContenu = 'TostDangerContenu';
+      this.idTitle = 'TostDangerTile';
+      this.Toast[0] = 'Failed';
+      this.Toast[1] ='Vous ne pouvez pas effectuer cette operation car la qte dans les tanks est zero !!';
+      this.showToast();
+    }
+    });
     }
   
   

@@ -21,12 +21,13 @@ import iset.pfe.example.entities.Lot;
 import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.entities.Operation;
 import iset.pfe.example.entities.OperationTank;
-
+import iset.pfe.example.entities.Produit;
 import iset.pfe.example.entities.Tank;
 import iset.pfe.example.repositories.LotRepository;
 import iset.pfe.example.repositories.MagasinRepository;
 import iset.pfe.example.repositories.OperationRepository;
 import iset.pfe.example.repositories.OperationTankRepository;
+import iset.pfe.example.repositories.ProduitRepository;
 import iset.pfe.example.repositories.TankRepository;
 import iset.pfe.example.repositories.UserRepository;
 
@@ -46,6 +47,9 @@ public class OperationRestController {
 	private UserRepository userRepository;
 	@Autowired
 	private LotRepository lotRepository;
+	
+	@Autowired
+	private ProduitRepository produitRepository;
 	
 	@RequestMapping(value="/operations",method = RequestMethod.GET)
 	public List<Operation> getOperations(){
@@ -140,13 +144,13 @@ public class OperationRestController {
 	     String currentDateTime = dateFormatter.format(new Date());
 	     int qte=0;
 	     
-		Lot l1=lotRepository.findById(operation.getLot().getIdL()).get();
-		qte=l1.getQte()-operation.getQtePrise();
-		l1.setQte(qte);
-		lotRepository.save(l1);
+		//Lot p1=lotRepository.findById(operation.getLot().getIdL()).get();
+		//qte=p1.getQteLot()-operation.getQtePrise();
+		//p1.setQteLot(qte);
+		//lotRepository.save(p1);
 		operation.setDateOperation(currentDateTime);
 		operation.setTypeOp("Retrait");			
-		
+//		operation.setQtePrise(qtePrise);
 	return operationRepository.save(operation);
 }
 	

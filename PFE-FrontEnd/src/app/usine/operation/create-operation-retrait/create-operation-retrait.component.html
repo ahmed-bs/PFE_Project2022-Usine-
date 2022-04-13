@@ -22,10 +22,10 @@
               <div *ngIf="qtePrise?.valid && qtePrise?.touched && msgErreur==0"  class="text-success">
                 Poids valide!
               </div>
-                <div *ngIf="msgErreur==1" class="text-danger">
+                <!-- <div *ngIf="msgErreur==1" class="text-danger">
                   Vous ne pouvez pas prendre cette quantité !! car la quantité de lait disponible est: {{qteMax}} !
                   <br> Vous devez introduire une quantite moins ou egale a {{qteMax}} .
-                </div>
+                </div> -->
     
               </div>
 
@@ -51,10 +51,10 @@
 
               <div class="form-row">
               <div class="form-group col-md-12 mb-3">
-                <label class="mr-sm-5" for="inlineFormCustomSelect">    Lot : <span style="color:red;">*</span></label>
+                <label class="mr-sm-5" for="inlineFormCustomSelect">   lots : <span style="color:red;">*</span></label>
                 <select formControlName="lot" name="lot"  class="custom-select mr-sm-2" id="lot" >
                   <option disabled selected value [ngValue]="null">Choisir un lot...</option>
-                  <option *ngFor="let lot of lots | async" [value]="lot.idL">{{lot.type}}</option>
+                  <option *ngFor="let lot of lots | async" [value]="lot.idL">{{lot.idL}}</option>
                 </select>
                 <div
                 *ngIf="lot?.invalid && lot?.touched"
@@ -68,7 +68,6 @@
              </div>
               </div>
       
-
 
               &nbsp;&nbsp;  <h5 style="color:blue">Voici le code de la livraison  :<strong><i> {{som}} </i> </strong> </h5><br><br>
 

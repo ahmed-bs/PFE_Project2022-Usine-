@@ -23,11 +23,13 @@ export class CreateLotComponent implements OnInit {
   msg="";
   msgErreur=0;
   qteAct=0;
+  qteMax=0;
   produits!:Observable<Produit[]>;
   tanks!:Observable<Tank[]>;
 
   myForm=new  FormGroup({
-      qte : new FormControl(null,[Validators.required]),
+      qteLot : new FormControl(null,[Validators.required]),
+      qtePriseTank : new FormControl(null,[Validators.required]),
       produit : new FormControl(null,[Validators.required ]),
       tank : new FormControl(null,[Validators.required ]),
   })
@@ -44,7 +46,7 @@ export class CreateLotComponent implements OnInit {
 
   ngOnInit() {
     this.produits=this.produitService.getProduits();
-    this.tanks=this.tankService.getTanks();
+    this.tanks=this.tankService.getTanksDispo();
   }
 
   newproduit(): void {
@@ -61,14 +63,14 @@ export class CreateLotComponent implements OnInit {
     this.msg="";
    }
 
-   if(this.myForm.get('description')?.value==null){
+   if(this.myForm.get('qteLot')?.value==null){
     this.msg="vous devez remplir le formulaire !!";
   }
   else{
     this.msg="";
    }
 
-   if(this.myForm.get('qte')?.value==null){
+   if(this.myForm.get('qtePriseTank')?.value==null){
     this.msg="vous devez remplir le formulaire !!";
   }
   else{
@@ -84,8 +86,8 @@ export class CreateLotComponent implements OnInit {
    }
 
 
-  if(this.myForm.get('produit')?.value!=null 
-   && this.myForm.get('qte')?.value!=null && this.myForm.get('tank')?.value!=null ){
+  if(this.myForm.get('produit')?.value!=null && this.myForm.get('qtePriseTank')?.value!=null
+   && this.myForm.get('qteLot')?.value!=null && this.myForm.get('tank')?.value!=null ){
     this.lotService
         .createLot({
           "produit":{
@@ -94,23 +96,35 @@ export class CreateLotComponent implements OnInit {
          "tank":{
           "idTank":this.myForm.get('tank')?.value,
        },
-           "qte":this.myForm.get('qte')?.value,
+           "qteLot":this.myForm.get('qteLot')?.value,
+           "qtePriseTank":this.myForm.get('qtePriseTank')?.value,
          
           // "poidActuel":this.myForm.get('poidActuel')?.value,
           // "etat":this.myForm.get('etat')?.value,
         })
         .subscribe(o=>{
           window.location.reload();
+          console.log(this.myForm.get('tank')?.value)
           console.log(this.lot);
           localStorage.setItem('Toast', JSON.stringify(["Success","Un lot a été ajouté avec succès"]));
-          window.location.reload();
+           window.location.reload();
         });
       }
     }
 
 
   onSubmit() {
+    this.tankService.getTank(this.myForm.get('tank')?.value).subscribe( i=>{
+      console.log(i.poidActuel);
+  
+      console.log(this.myForm.get('qtePriseTank')?.value);
+      if(this.myForm.get('qtePriseTank')?.value <=i.poidActuel){
         this.save();
+      }else{
+        this.msgErreur=1;
+        this.qteMax=i.poidActuel;
+      }
+      });
   }
 
   gotoList() {
@@ -131,8 +145,12 @@ get description(){
   return this.myForm.get('description') ;
 }
 
-get qte(){
-  return this.myForm.get('qte') ;
+get qteLot(){
+  return this.myForm.get('qteLot') ;
+}
+
+get qtePriseTank(){
+  return this.myForm.get('qtePriseTank') ;
 }
 
 get tank(){

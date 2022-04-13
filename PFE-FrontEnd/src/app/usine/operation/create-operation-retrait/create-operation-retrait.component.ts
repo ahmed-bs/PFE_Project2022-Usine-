@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Operation } from 'src/app/Models/operation';
 import { Tank } from 'src/app/Models/tank';
 import { Lot } from 'src/app/Models/lot';
+import { Produit } from 'src/app/Models/produit';
 import { Magasin } from 'src/app/Models/magasin';
 import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
@@ -39,6 +40,8 @@ export class CreateOperationRetraitComponent implements OnInit {
   tanks!:Observable<Tank[]>;
   magasins!:Observable<Magasin[]>;
   lots!:Observable<Lot[]>;
+  produits!:Observable<Produit[]>;
+
 
   maDate = new Date();
 
@@ -47,6 +50,7 @@ export class CreateOperationRetraitComponent implements OnInit {
     private operationService: OperationService,
     private tankService:TankService,
     private lotService:LotService,
+    // private produitService:ProduitService,
     private router: Router,
     private magasinService:MagasinService, 
     private dialogClose: MatDialog) { }
@@ -56,6 +60,7 @@ export class CreateOperationRetraitComponent implements OnInit {
     this.tanks=this.tankService.getTanksFiltres();
     this.magasins=this.magasinService.getMagasins();
     this.lots=this.lotService.getLotsDispo();
+
     this.operationService.getNbOp().subscribe(o=>{
     console.log(o);
     this.som=10000+o+1;  

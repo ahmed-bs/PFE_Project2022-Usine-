@@ -56,7 +56,7 @@ public class UserRestController {
 	public User EditChef(@PathVariable Integer idU, @RequestBody User user){
       User ag = userRepository.findById(idU).orElseThrow(()->new ResourceNotFoundException("Cet user n'existe pas"));
     	
-    	ag.setCin(ag.getCin());
+    	ag.setCin(user.getCin());
     	ag.setNom(user.getNom());
     	ag.setPrenom(user.getPrenom());
     	ag.setUsername(user.getUsername());

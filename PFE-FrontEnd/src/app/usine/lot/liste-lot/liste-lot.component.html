@@ -54,9 +54,15 @@
               <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;{{element.tank.matricule}}</td>
             </ng-container>
 
-            <ng-container matColumnDef="qte">
-              <th mat-sort-header mat-header-cell *matHeaderCellDef>Quantite</th>
-              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.qte}}</td>
+            <ng-container matColumnDef="qteLot">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef>Quantite (lots) </th>
+              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.qteLot}}</td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="qtePriseTank">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef>Quantite prise tank</th>
+              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.qtePriseTank}}</td>
             </ng-container>
 
             <ng-container matColumnDef="date">

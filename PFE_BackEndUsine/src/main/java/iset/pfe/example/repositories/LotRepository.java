@@ -12,7 +12,7 @@ import iset.pfe.example.entities.Lot;
 import iset.pfe.example.entities.OperationTank;
 
 public interface LotRepository extends JpaRepository<Lot,Integer>{
-	@Query("select o from Lot  o where o.qte>0")
+	@Query("select o from Lot  o where o.qteLot>0")
 	public List<Lot> getLotDispo();
 	
 	@Transactional 

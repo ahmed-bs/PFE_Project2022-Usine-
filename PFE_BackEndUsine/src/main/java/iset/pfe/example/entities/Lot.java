@@ -20,7 +20,8 @@ public class Lot implements Serializable{
 	@GeneratedValue
 	private Integer idL;
 //	private String type;
-	private int qte;
+	private int qteLot;
+	private int qtePriseTank;
 //	private String description;
 	private String date;
 	
@@ -45,11 +46,11 @@ public class Lot implements Serializable{
 		super();
 		this.date = date;
 	}
-	
-	
-	public Lot(int qte, String date, Set<Operation> operations, Tank tank, Produit produit) {
+
+	public Lot(int qteLot, int qtePriseTank, String date, Set<Operation> operations, Tank tank, Produit produit) {
 		super();
-		this.qte = qte;
+		this.qteLot = qteLot;
+		this.qtePriseTank = qtePriseTank;
 		this.date = date;
 		this.operations = operations;
 		this.tank = tank;
@@ -69,12 +70,7 @@ public class Lot implements Serializable{
 		this.date = date;
 	}
 
-	public int getQte() {
-		return qte;
-	}
-	public void setQte(int qte) {
-		this.qte = qte;
-	}
+
 	public Set<Operation> getOperations() {
 		return operations;
 	}
@@ -92,6 +88,18 @@ public class Lot implements Serializable{
 	}
 	public void setProduit(Produit produit) {
 		this.produit = produit;
+	}
+	public int getQteLot() {
+		return qteLot;
+	}
+	public void setQteLot(int qteLot) {
+		this.qteLot = qteLot;
+	}
+	public int getQtePriseTank() {
+		return qtePriseTank;
+	}
+	public void setQtePriseTank(int qtePriseTank) {
+		this.qtePriseTank = qtePriseTank;
 	}
 
 	

@@ -22,4 +22,9 @@ public interface TankRepository extends JpaRepository<Tank,Integer>{
 	 	//liste des tanks libres
 		@Query("select o from Tank o where o.poidActuel=0 ")
 		public List<Tank> findTanksNonRemplis();
+		
+		//les tanks ou la qte est > 0
+		@Query("select o from Tank o where o.poidActuel>0")
+		public List<Tank> findTanksDispo();
+		
 }
