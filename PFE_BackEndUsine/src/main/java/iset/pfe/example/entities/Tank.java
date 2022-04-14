@@ -28,7 +28,7 @@ public class Tank implements Serializable{
 	private double poidVide;
 	private double poidActuel;
 	private String etat;
-	private String DateIns;
+	private String dateIns;
 	
 	@OneToMany(mappedBy="tank",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
@@ -36,7 +36,7 @@ public class Tank implements Serializable{
 	
 	@OneToMany(mappedBy="tank",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
-	private Set<Lot> lots;
+	private Set<Operation> operations;
 	
 	//constructors
 	public Tank() {
@@ -61,26 +61,15 @@ public class Tank implements Serializable{
 	}
 
 	public Tank(String matricule, double poidVide, double poidActuel, String etat, String dateIns,
-			Set<OperationTank> operationstank, Set<Lot> lots) {
+			Set<OperationTank> operationstank, Set<Operation> operations) {
 		super();
 		this.matricule = matricule;
 		this.poidVide = poidVide;
 		this.poidActuel = poidActuel;
 		this.etat = etat;
-		DateIns = dateIns;
+		this.dateIns = dateIns;
 		this.operationstank = operationstank;
-		this.lots = lots;
-	}
-
-	public Tank(String matricule, double poidVide, double poidActuel, String etat, String dateIns,
-			Set<OperationTank> operationstank) {
-		super();
-		this.matricule = matricule;
-		this.poidVide = poidVide;
-		this.poidActuel = poidActuel;
-		this.etat = etat;
-		DateIns = dateIns;
-		this.operationstank = operationstank;
+		this.operations = operations;
 	}
 
 	public Integer getIdTank() {
@@ -131,20 +120,21 @@ public class Tank implements Serializable{
 		this.operationstank = operationstank;
 	}
 
+	public Set<Operation> getOperations() {
+		return operations;
+	}
+
+	public void setOperations(Set<Operation> operations) {
+		this.operations = operations;
+	}
+
 	public String getDateIns() {
-		return DateIns;
+		return dateIns;
 	}
 
 	public void setDateIns(String dateIns) {
-		DateIns = dateIns;
+		this.dateIns = dateIns;
 	}
 
-	public Set<Lot> getLots() {
-		return lots;
-	}
 
-	public void setLots(Set<Lot> lots) {
-		this.lots = lots;
-	}
-	
 }

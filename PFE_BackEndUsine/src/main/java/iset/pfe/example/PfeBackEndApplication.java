@@ -1,22 +1,18 @@
 package iset.pfe.example;
 
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import iset.pfe.example.entities.User;
 import iset.pfe.example.entities.CentreCollecte;
-import iset.pfe.example.entities.Lot;
 import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.entities.Operation;
 import iset.pfe.example.entities.Produit;
 import iset.pfe.example.entities.Tank;
 import iset.pfe.example.repositories.UserRepository;
 import iset.pfe.example.repositories.CentreCollecteRepository;
-import iset.pfe.example.repositories.LotRepository;
 import iset.pfe.example.repositories.MagasinRepository;
 import iset.pfe.example.repositories.OperationRepository;
 import iset.pfe.example.repositories.OperationTankRepository;
@@ -35,8 +31,7 @@ public class PfeBackEndApplication implements CommandLineRunner {
 	@Autowired
 	private OperationRepository operationRepository;
 	
-	@Autowired
-	private LotRepository lotRepository;
+	
 	
 	@Autowired
 	private CentreCollecteRepository centreCollecteRepository;
@@ -85,12 +80,12 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		produitRepository.save(p1);
 		
 
-		Lot l1=new Lot(dateA.toString());
-		l1.setQteLot(1755);
-		l1.setQtePriseTank(1000);
-		l1.setProduit(p1);
-		l1.setTank(t2);
-		lotRepository.save(l1);
+//		Lot l1=new Lot(dateA.toString());
+//		l1.setQteLot(1755);
+//		l1.setQtePriseTank(1000);
+//		l1.setProduit(p1);
+//		l1.setTank(t2);
+//		lotRepository.save(l1);
 	}
 
 }

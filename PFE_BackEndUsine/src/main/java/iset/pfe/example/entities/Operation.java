@@ -35,12 +35,16 @@ public class Operation implements Serializable{
 	private Magasin magasin;
 	
 	@ManyToOne
+	@JoinColumn(name="idTank")
+	private Tank tank;
+	
+	@ManyToOne
 	@JoinColumn(name="idCentre")
 	private CentreCollecte centreCollecte;
 	
 	@ManyToOne
-	@JoinColumn(name="idL")
-	private Lot lot;
+	@JoinColumn(name="idP")
+	private Produit produit;
 	
 	@OneToMany(mappedBy="operation",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
@@ -53,22 +57,10 @@ public class Operation implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Operation(double poidsLait, String dateOperation, String typeOp, Integer code, User user, Magasin magasin,
-			CentreCollecte centreCollecte, Lot lot, Set<OperationTank> operationstank) {
-		super();
-		this.poidsLait = poidsLait;
-		this.dateOperation = dateOperation;
-		this.typeOp = typeOp;
-		this.code = code;
-		this.user = user;
-		this.magasin = magasin;
-		this.centreCollecte = centreCollecte;
-		this.lot = lot;
-		this.operationstank = operationstank;
-	}
 
 	public Operation(double poidsLait, String dateOperation, String typeOp, Integer code, int qtePrise, User user,
-			Magasin magasin, CentreCollecte centreCollecte, Lot lot, Set<OperationTank> operationstank) {
+			Magasin magasin, Tank tank, CentreCollecte centreCollecte, Produit produit,
+			Set<OperationTank> operationstank) {
 		super();
 		this.poidsLait = poidsLait;
 		this.dateOperation = dateOperation;
@@ -77,10 +69,12 @@ public class Operation implements Serializable{
 		this.qtePrise = qtePrise;
 		this.user = user;
 		this.magasin = magasin;
+		this.tank = tank;
 		this.centreCollecte = centreCollecte;
-		this.lot = lot;
+		this.produit = produit;
 		this.operationstank = operationstank;
 	}
+
 
 	public Operation(double poidsLait, String dateOperation, String typeOp, Integer code) {
 		super();
@@ -163,21 +157,32 @@ public class Operation implements Serializable{
 	}
 
 
-	public Lot getLot() {
-		return lot;
-	}
-
-
-	public void setLot(Lot lot) {
-		this.lot = lot;
-	}
-
 	public int getQtePrise() {
 		return qtePrise;
 	}
 
 	public void setQtePrise(int qtePrise) {
 		this.qtePrise = qtePrise;
+	}
+
+
+	public Tank getTank() {
+		return tank;
+	}
+
+
+	public void setTank(Tank tank) {
+		this.tank = tank;
+	}
+
+
+	public Produit getProduit() {
+		return produit;
+	}
+
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
 	}
 	
 }

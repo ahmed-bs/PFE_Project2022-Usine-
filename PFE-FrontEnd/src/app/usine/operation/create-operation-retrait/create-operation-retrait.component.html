@@ -4,12 +4,14 @@
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div><br>
+    </div>
+    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
           <form [formGroup]="myForm"  novalidate >
             <div class="form-row">
               <div class="form-group col-md-6 mb-3">
 
-                <label>Poids Lait : <span style="color:red;">*</span> </label>
+                <label>Quantité : <span style="color:red;">*</span> </label>
+                
                 <input type="number"
                  formControlName="qtePrise"
                  class="form-control"
@@ -17,15 +19,15 @@
                  name="qtePrise">
     
                  <div *ngIf="qtePrise?.invalid && qtePrise?.touched && msgErreur==1" class="text-danger">
-                Poids invalide !
+                  Quantité  invalide !
               </div>
               <div *ngIf="qtePrise?.valid && qtePrise?.touched && msgErreur==0"  class="text-success">
-                Poids valide!
+                Quantité  valide!
               </div>
-                <!-- <div *ngIf="msgErreur==1" class="text-danger">
+                <div *ngIf="msgErreur==1" class="text-danger">
                   Vous ne pouvez pas prendre cette quantité !! car la quantité de lait disponible est: {{qteMax}} !
                   <br> Vous devez introduire une quantite moins ou egale a {{qteMax}} .
-                </div> -->
+                </div>
     
               </div>
 
@@ -51,20 +53,20 @@
 
               <div class="form-row">
               <div class="form-group col-md-12 mb-3">
-                <label class="mr-sm-5" for="inlineFormCustomSelect">   lots : <span style="color:red;">*</span></label>
-                <select formControlName="lot" name="lot"  class="custom-select mr-sm-2" id="lot" >
-                  <option disabled selected value [ngValue]="null">Choisir un lot...</option>
-                  <option *ngFor="let lot of lots | async" [value]="lot.idL">{{lot.idL}}</option>
+                <label class="mr-sm-5" for="inlineFormCustomSelect">   produits : <span style="color:red;">*</span></label>
+                <select formControlName="produit" name="produit"  class="custom-select mr-sm-2" id="produit" >
+                  <option disabled selected value [ngValue]="null">Choisir un produit...</option>
+                  <option *ngFor="let produit of produits | async" [value]="produit.idProduit">{{produit.intitule}}</option>
                 </select>
                 <div
-                *ngIf="lot?.invalid && lot?.touched"
+                *ngIf="produit?.invalid && produit?.touched"
                  class="text-danger">
-                    invalide lot!
+                    invalide produit!
              </div>
                <div
-               *ngIf="lot?.valid && lot?.touched"
+               *ngIf="produit?.valid && produit?.touched"
                class="text-success">
-               lot valide!
+               produit valide!
              </div>
               </div>
       
