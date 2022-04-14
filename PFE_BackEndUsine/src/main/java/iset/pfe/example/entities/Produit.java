@@ -24,7 +24,11 @@ public class Produit implements Serializable{
 		
 		@OneToMany(mappedBy="produit",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 		@JsonIgnore
-		private Set<Lot> lots;
+		private Set<Operation> operations;
+		
+//		@OneToMany(mappedBy="produit",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+//		@JsonIgnore
+//		private Set<Lot> lots;
 		
 		
 		public Produit() {
@@ -38,21 +42,21 @@ public class Produit implements Serializable{
 			this.libelle = libelle;
 		}
 		
-		
-		
-		public Produit(String intitule, String libelle, int qte, Set<Lot> lots) {
+		public Produit(String intitule, String libelle, int qte) {
 			super();
 			this.intitule = intitule;
 			this.libelle = libelle;
 			this.qte = qte;
-			this.lots = lots;
 		}
 
-		public Produit(String intitule, String libelle, Set<Lot> lots) {
+
+
+		public Produit(String intitule, String libelle, int qte, Set<Operation> operations) {
 			super();
 			this.intitule = intitule;
 			this.libelle = libelle;
-			this.lots = lots;
+			this.qte = qte;
+			this.operations = operations;
 		}
 
 		public Integer getIdProduit() {
@@ -74,20 +78,20 @@ public class Produit implements Serializable{
 			this.libelle = libelle;
 		}
 
-		public Set<Lot> getLots() {
-			return lots;
-		}
-
-		public void setLots(Set<Lot> lots) {
-			this.lots = lots;
-		}
-
 		public int getQte() {
 			return qte;
 		}
 
 		public void setQte(int qte) {
 			this.qte = qte;
+		}
+
+		public Set<Operation> getOperations() {
+			return operations;
+		}
+
+		public void setOperations(Set<Operation> operations) {
+			this.operations = operations;
 		}
 		
 }

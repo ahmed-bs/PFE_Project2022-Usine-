@@ -31,6 +31,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListeOperationRetraitComponent } from './liste-operation-retrait/liste-operation-retrait.component';
 import { CreateOperationRetraitComponent } from './create-operation-retrait/create-operation-retrait.component';
 import { DetailsOperationRetraitComponent } from './details-operation-retrait/details-operation-retrait.component';
+import { ListeOperationTransformationComponent } from './liste-operation-transformation/liste-operation-transformation.component';
+import { CreateOperationTransformationComponent } from './create-operation-transformation/create-operation-transformation.component';
+import { DetailsOperationTransformationComponent } from './details-operation-transformation/details-operation-transformation.component';
+import { ListeOperationTankComponent } from './liste-operation-tank/liste-operation-tank.component';
+import { DetailsOperationTankComponent } from './details-operation-tank/details-operation-tank.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,12 @@ import { DetailsOperationRetraitComponent } from './details-operation-retrait/de
     UpdateOperationComponent,
     ListeOperationRetraitComponent,
     CreateOperationRetraitComponent,
-    DetailsOperationRetraitComponent
+    DetailsOperationRetraitComponent,
+    ListeOperationTransformationComponent,
+    CreateOperationTransformationComponent,
+    DetailsOperationTransformationComponent,
+    ListeOperationTankComponent,
+    DetailsOperationTankComponent
   ],
   imports: [
     CommonModule,

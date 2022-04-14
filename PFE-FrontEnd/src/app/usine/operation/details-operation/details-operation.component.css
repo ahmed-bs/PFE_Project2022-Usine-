@@ -29,11 +29,11 @@ body {
 .wrapper .card .bg-pink {
     width: 100%;
     height: 100px;
-    background-color: #FFC300;
+    background-color: #9DE22D;
     animation: img-top 0.8s linear
 }
 .bg-pink{
-  background-color: #FFC300 !important;
+  background-color: #9DE22D !important;
 
 }
 
@@ -84,7 +84,7 @@ body {
 
 .wrapper .card .btn:hover,
 .wrapper .card .btn.following {
-    background-color: #FFC300
+    background-color: #9DE22D
 }
 
 .wrapper .card .btn.following:hover {
@@ -93,7 +93,7 @@ body {
 
 .wrapper .card .head {
     font-size: 0.8rem;
-    color: #FFC300;
+    color: #9DE22D;
     font-weight: 600
 }
 

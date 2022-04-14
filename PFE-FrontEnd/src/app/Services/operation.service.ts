@@ -18,6 +18,15 @@ export class OperationService {
   baseUrl7 : string = 'http://localhost:3802/operationsR';
   baseUrl8 : string = 'http://localhost:3802/getOpTank';
   baseUrl9 : string = 'http://localhost:3802/retrait1';
+  baseUrl10 : string = 'http://localhost:3802/transf';
+  baseUrl11 : string = 'http://localhost:3802/operationsTransf';
+  baseUrl12 : string = 'http://localhost:3802/operationsRet';
+  baseUrl13 : string = 'http://localhost:3802/operationsTransf';
+
+
+
+
+
   // ,private authService :AuthService
   constructor(private http: HttpClient) { }
 
@@ -46,6 +55,15 @@ export class OperationService {
     // let httpHeaders = new HttpHeaders({"Authorization":jwt})
     // return this.http.get(`${this.baseUrl4}`,{headers:httpHeaders});
     return this.http.get(`${this.baseUrl4}`);
+  }
+
+  
+  getOperationsTransfs(): Observable<any> {
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    // return this.http.get(`${this.baseUrl4}`,{headers:httpHeaders});
+    return this.http.get(`${this.baseUrl11}`);
   }
 
   getOperationsRetraits(): Observable<any> {
@@ -101,6 +119,14 @@ export class OperationService {
     return this.http.post(this.baseUrl9,f);
   }
 
+  createOperationTransf(f:any){
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    // return this.http.post(this.baseUrl1,f,{headers:httpHeaders});
+    return this.http.post(this.baseUrl10,f);
+  }
+
   createOperationRemplissage(f:any){
     // let jwt = this.authService.getToken();
     // jwt = "Bearer "+jwt;
@@ -138,6 +164,31 @@ export class OperationService {
     // return this.http.delete(url,{headers:httpHeaders});
     return this.http.delete(url);
   }
+
+
+  deleteOperationR(id: number): Observable<any> {
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+
+    const url = `${this.baseUrl12}/${id}`
+    // return this.http.delete(url,{headers:httpHeaders});
+    return this.http.delete(url);
+  }
+
+
+  
+  deleteOperationT(id: number): Observable<any> {
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+
+    const url = `${this.baseUrl13}/${id}`
+    // return this.http.delete(url,{headers:httpHeaders});
+    return this.http.delete(url);
+  }
+
+
 
   getOperationList(): Observable<Operation[]> {
     // let jwt = this.authService.getToken();

@@ -11,7 +11,7 @@ import { Magasin } from 'src/app/Models/magasin';
 import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { MagasinService } from 'src/app/Services/magasin.service';
-import { LotService } from 'src/app/Services/lot.service';
+import { ProduitService } from 'src/app/Services/produit.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -33,7 +33,7 @@ export class CreateOperationRetraitComponent implements OnInit {
   som=0;
   myForm=new  FormGroup({
       qtePrise : new FormControl(null,[Validators.required]),
-      lot : new FormControl(null,[Validators.required ]),
+      produit : new FormControl(null,[Validators.required ]),
       magasin : new FormControl(null,[Validators.required ]),
     
   })
@@ -49,8 +49,7 @@ export class CreateOperationRetraitComponent implements OnInit {
   constructor(
     private operationService: OperationService,
     private tankService:TankService,
-    private lotService:LotService,
-    // private produitService:ProduitService,
+    private produitService:ProduitService,
     private router: Router,
     private magasinService:MagasinService, 
     private dialogClose: MatDialog) { }
@@ -59,7 +58,7 @@ export class CreateOperationRetraitComponent implements OnInit {
     //this.ValidatedForm();
     this.tanks=this.tankService.getTanksFiltres();
     this.magasins=this.magasinService.getMagasins();
-    this.lots=this.lotService.getLotsDispo();
+    this.produits=this.produitService.getProduits();
 
     this.operationService.getNbOp().subscribe(o=>{
     console.log(o);
@@ -92,7 +91,7 @@ export class CreateOperationRetraitComponent implements OnInit {
       this.msg="";
      }
 
-     if(this.myForm.get('lot')?.value==null){
+     if(this.myForm.get('produit')?.value==null){
       this.msg="vous devez remplir le formulaire !!";
     }
     else{
@@ -100,7 +99,7 @@ export class CreateOperationRetraitComponent implements OnInit {
      }
 
 
-     if(this.myForm.get('qtePrise')?.value!=null && this.myForm.get('magasin')?.value!=null && this.myForm.get('lot')?.value!=null ){
+     if(this.myForm.get('qtePrise')?.value!=null && this.myForm.get('magasin')?.value!=null && this.myForm.get('produit')?.value!=null ){
 
     this.operationService
     .createOperation(
@@ -109,8 +108,8 @@ export class CreateOperationRetraitComponent implements OnInit {
         "magasin":{
           "idMag":this.myForm.get('magasin')?.value,
        },
-       "lot":{
-        "idL":this.myForm.get('lot')?.value,
+       "produit":{
+        "idProduit":this.myForm.get('produit')?.value,
      },
        "code":this.som,
         },
@@ -136,7 +135,7 @@ export class CreateOperationRetraitComponent implements OnInit {
 
 
   onSubmit() {
-    this.lotService.getLot(this.myForm.get('lot')?.value).subscribe(a=>{
+    this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(a=>{
       this.q=a.qte;
       console.log(this.q);
  
@@ -172,8 +171,8 @@ get magasin(){
   return this.myForm.get('magasin') ;
 }
 
-get lot(){
-  return this.myForm.get('lot') ;
+get produit(){
+  return this.myForm.get('produit') ;
 }
 
 }

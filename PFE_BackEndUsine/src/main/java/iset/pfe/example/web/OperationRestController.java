@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import iset.pfe.example.entities.Lot;
 import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.entities.Operation;
 import iset.pfe.example.entities.OperationTank;
 import iset.pfe.example.entities.Produit;
 import iset.pfe.example.entities.Tank;
-import iset.pfe.example.repositories.LotRepository;
 import iset.pfe.example.repositories.MagasinRepository;
 import iset.pfe.example.repositories.OperationRepository;
 import iset.pfe.example.repositories.OperationTankRepository;
@@ -45,8 +42,6 @@ public class OperationRestController {
 	private MagasinRepository magasinRepository;
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private LotRepository lotRepository;
 	
 	@Autowired
 	private ProduitRepository produitRepository;
@@ -131,6 +126,63 @@ public class OperationRestController {
 		}
 		
 	
+	@RequestMapping(value="/operationsRet/{idOperation}",method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteOperationRetrait(@PathVariable Integer idOperation) {
+		Optional<Operation> op= operationRepository.findById(idOperation);
+		Operation o=operationRepository.findById(idOperation).get();
+			
+			operationRepository.save(o);
+    		Produit p=produitRepository.findById(o.getProduit().getIdProduit()).get();
+    		System.out.println("azettyyyy "+o.getQtePrise());
+    		
+    		int qte=p.getQte()+o.getQtePrise();
+    		System.out.println("aaaa aaa aa"+qte);
+    		p.setQte(qte);
+    		produitRepository.save(p);
+			o.setIdOperation(idOperation);
+			operationRepository.save(o);
+				
+		if (op.isPresent()) { 
+				operationRepository.deleteOp(idOperation);
+			}else throw new RuntimeException("Operation introuvable ! vous ne pouvez pas le supprimer !!");
+		}
+	
+	
+	
+
+	@RequestMapping(value="/operationsTransf/{idOperation}",method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteOperationTransf(@PathVariable Integer idOperation) {
+		Optional<Operation> op= operationRepository.findById(idOperation);
+		Operation o=operationRepository.findById(idOperation).get();
+			
+//			operationRepository.save(o);
+    		Produit p=produitRepository.findById(o.getProduit().getIdProduit()).get();
+    		Tank t=tankRepository.findById(o.getTank().getIdTank()).get();
+    		
+    		System.out.println("transfffffff "+o.getQtePrise());
+    		System.out.println("transfffffff "+p.getQte());
+    		System.out.println("transfffffff "+o.getPoidsLait());
+    		System.out.println("transfffffff "+t.getPoidActuel());
+    		
+    		int qte=p.getQte()-o.getQtePrise();
+    		System.out.println("aaaa aaa aa"+qte);
+    		p.setQte(qte);
+    		produitRepository.save(p);
+    		int qte1=(int) (t.getPoidActuel()+o.getPoidsLait());
+    		t.setPoidActuel(qte1);
+    		tankRepository.save(t);
+			o.setIdOperation(idOperation);
+			operationRepository.save(o);
+				
+		if (op.isPresent()) { 
+		operationRepository.deleteOp(idOperation);
+			}else throw new RuntimeException("Operation introuvable ! vous ne pouvez pas le supprimer !!");
+		}
+		
+		
+	
 	
 	@RequestMapping(value="/operations",method = RequestMethod.POST)
 	public Operation AddOperation(@RequestBody Operation operation){
@@ -138,22 +190,42 @@ public class OperationRestController {
 	return operationRepository.save(operation);
 }
 	
+	@RequestMapping(value="/transf",method = RequestMethod.POST)
+	public Operation AddOperationTransf(@RequestBody Operation operation){
+		 DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	     String currentDateTime = dateFormatter.format(new Date());
+	     int qte=0;
+	     Tank t=tankRepository.findById(operation.getTank().getIdTank()).get();
+	     qte=(int) (t.getPoidActuel()-operation.getPoidsLait());
+	     t.setPoidActuel(qte);
+	     tankRepository.save(t);
+	     Produit p=produitRepository.findById(operation.getProduit().getIdProduit()).get();
+	     int qte1=p.getQte()+operation.getQtePrise();
+	     p.setQte(qte1);
+	     produitRepository.save(p);
+
+		operation.setDateOperation(currentDateTime);
+		operation.setTypeOp("Transformation");			
+
+	return operationRepository.save(operation);
+}
+	
+	
 	@RequestMapping(value="/retrait1",method = RequestMethod.POST)
 	public Operation AddOperationRetrait1(@RequestBody Operation operation){
 		 DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	     String currentDateTime = dateFormatter.format(new Date());
 	     int qte=0;
-	     
-		//Lot p1=lotRepository.findById(operation.getLot().getIdL()).get();
-		//qte=p1.getQteLot()-operation.getQtePrise();
-		//p1.setQteLot(qte);
-		//lotRepository.save(p1);
+	     Produit p=produitRepository.findById(operation.getProduit().getIdProduit()).get();
+	     int qte1=p.getQte()-operation.getQtePrise();
+	     p.setQte(qte1);
+	     produitRepository.save(p);
+
 		operation.setDateOperation(currentDateTime);
 		operation.setTypeOp("Retrait");			
-//		operation.setQtePrise(qtePrise);
+
 	return operationRepository.save(operation);
 }
-	
 
 
 	
@@ -965,6 +1037,12 @@ public class OperationRestController {
 	public List<Operation> getOperationsRetraits(){
 		return operationRepository.findAllOperationsRemplissages("Retrait");
 	}
+	
+	@RequestMapping(value="/operationsTransf",method = RequestMethod.GET)
+	public List<Operation> getOperationsTransfs(){
+		return operationRepository.findAllOperationsRemplissages("Transformation");
+	}
+
 
 	@RequestMapping(value="/nbreOp",method = RequestMethod.GET)
 	public int getNbreOperations(){

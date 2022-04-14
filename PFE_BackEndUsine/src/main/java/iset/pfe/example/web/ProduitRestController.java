@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import iset.pfe.example.entities.Lot;
 import iset.pfe.example.entities.Produit;
-import iset.pfe.example.repositories.LotRepository;
 import iset.pfe.example.repositories.ProduitRepository;
 
 @RestController
@@ -32,6 +29,16 @@ public class ProduitRestController {
 	@RequestMapping(value="/produits",method = RequestMethod.GET)
 	public List<Produit> getNourritures(){
 		return produitRepository.findAll();
+	}
+	
+	@RequestMapping(value="/qteProduitG",method = RequestMethod.GET)
+	public int geQteproduitsG(){
+		int som=0;
+		for(int i=0;i<produitRepository.findAll().size();i++) {
+			Produit p=produitRepository.findAll().get(i);
+			som=som+p.getQte();
+		}
+		return som;
 	}
 	
 	@RequestMapping(value="/nbreP",method = RequestMethod.GET)

@@ -1,6 +1,8 @@
 import { Centre } from "./centre";
 import { Magasin } from "./magasin";
 import { Lot } from "./lot";
+import { Tank } from "./tank";
+import { Produit } from "./produit";
 
 
 export class Operation{
@@ -14,5 +16,7 @@ export class Operation{
     magasin!:Magasin;
     lot!:Lot;
     centreCollecte!:Centre;
+    tank!:Tank;
+    produit!:Produit;
     
   }

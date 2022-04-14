@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Operation } from 'src/app/Models/operation';
 import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
+import { ProduitService } from 'src/app/Services/produit.service';
 import { CreateOperationRetraitComponent } from '../create-operation-retrait/create-operation-retrait.component';
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 // import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
@@ -38,9 +39,10 @@ export class ListeOperationRetraitComponent implements OnInit {
   v=0;
   q=0;
   p=0;
-  displayedColumns: string[] = ['idOperation','qtePrise','code', 'dateOperation','magasin','lot', 'typeOp','action'];
+  displayedColumns: string[] = ['idOperation','qtePrise','code', 'dateOperation','magasin','produit', 'action'];
   constructor(private operationService: OperationService,
     private tankService:TankService,
+    private produitService:ProduitService,
     private router: Router, private dialog:MatDialog) { }
 
 
@@ -79,7 +81,7 @@ export class ListeOperationRetraitComponent implements OnInit {
         //console.log(this.id);
       let confirmation =confirm("Êtes-vous sûr de supprimer le Operation où son id est egale à : "+id+" ??")
       if(confirmation)
-      this.operationService.deleteOperation(id).subscribe(data => {
+      this.operationService.deleteOperationR(id).subscribe(data => {
         this.Toast[0] = 'Success';
         this.Toast[1] ='Operation a été supprimé avec succès';
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
@@ -141,25 +143,23 @@ export class ListeOperationRetraitComponent implements OnInit {
     // }
   
     onOpenDialogCreate():void{
-      // this.tankService.getQteG().subscribe(
-
-      //   o=>{
-      //   console.log(o);
-      //   if(o>0){
+      this.produitService.getQteProduitsG().subscribe(o=>{
+        console.log(o);
+        if(o>0){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       this.dialog.open(CreateOperationRetraitComponent, dialogConfig);
-    // }
-    // else{
-    //     this.erreur=1;
-    //     this.idContenu = 'TostDangerContenu';
-    //     this.idTitle = 'TostDangerTile';
-    //     this.Toast[0] = 'Erreur';
-    //     this.Toast[1] ='Les tanks sont vides !! \n \n Vous ne pouvez pas faire loperation de retarit !!';
-    //     this.showToast();
-    // }
-    // });
+    }
+    else{
+        this.erreur=1;
+        this.idContenu = 'TostDangerContenu';
+        this.idTitle = 'TostDangerTile';
+        this.Toast[0] = 'Erreur';
+        this.Toast[1] ='Le stock est vide !! \n Vous ne pouvez pas effectuer l\'operation de retrait !!';
+        this.showToast();
+    }
+    });
 }
   
     onOpenDialogCreate2():void{
