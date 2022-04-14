@@ -26,7 +26,6 @@ public class UserRestController {
 	public List<User> getidUs(){
 		return userRepository.findAll();
 	}
-	
 		
 	@RequestMapping(value="/users/{idChef}",method = RequestMethod.GET)
     public User getidU(@PathVariable Integer idChef) {

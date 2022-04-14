@@ -58,6 +58,22 @@ public class OperationRestController {
 		return operationRepository.findAll();
 	}
 	
+	
+	@RequestMapping(value="/nbOpRetrait",method = RequestMethod.GET)
+	public int getnbOpRetrait(){
+		return operationRepository.findAllOperationsRemplissages("Retrait").size();
+	}
+	
+	@RequestMapping(value="/nbOpRemplissage",method = RequestMethod.GET)
+	public int getnbOpRemplissage(){
+		return operationRepository.findAllOperationsRemplissages("Remplissage").size();
+	}
+	
+	@RequestMapping(value="/nbOpTransformation",method = RequestMethod.GET)
+	public int getnbOpTransformation(){
+		return operationRepository.findAllOperationsRemplissages("Transformation").size();
+	}
+	
 		
 	@RequestMapping(value="/operations/{idOperation}",method = RequestMethod.GET)
 	public Operation getOperation(@PathVariable Integer idOperation) {
@@ -485,7 +501,7 @@ public class OperationRestController {
 								tankRepository.save(tank2);
 								
 								}
-							else if(tank2.getPoidActuel()<tank2.getPoidVide()) {
+							else if(tank2.getPoidActuel()>0 && tank2.getPoidActuel()<tank2.getPoidVide()) {
 								tank2.setEtat("En cours");
 								tankRepository.save(tank2);
 								}

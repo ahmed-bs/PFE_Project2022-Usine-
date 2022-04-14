@@ -32,6 +32,18 @@ public class TankRestController {
 	
 		@RequestMapping(value="/tanks",method = RequestMethod.GET)
 		public List<Tank> getTanks(){
+			for(int i=0;i<tankRepository.findAll().size();i++) {
+				Tank t=tankRepository.findAll().get(i);
+				if(t.getPoidActuel()==0) {
+					t.setEtat("Vide");
+				}
+				else if(t.getPoidActuel()>0 && t.getPoidActuel()<t.getPoidVide()) {
+					t.setEtat("En cours");
+				}
+				else if(t.getPoidActuel()==t.getPoidVide()) {
+					t.setEtat("Remplis");
+				}
+			}
 			
 			return tankRepository.findAll();
 		}
