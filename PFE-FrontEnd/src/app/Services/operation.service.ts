@@ -23,6 +23,10 @@ export class OperationService {
   baseUrl12 : string = 'http://localhost:3802/operationsRet';
   baseUrl13 : string = 'http://localhost:3802/operationsTransf';
 
+  baseUrl14 : string = 'http://localhost:3802/nbOpRetrait';
+  baseUrl15 : string = 'http://localhost:3802/nbOpRemplissage';
+  baseUrl16 : string = 'http://localhost:3802/nbOpTransformation';
+
 
 
 
@@ -37,6 +41,32 @@ export class OperationService {
     // let httpHeaders = new HttpHeaders({"Authorization":jwt})
     // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
     return this.http.get(`${this.baseUrl6}`);
+  }
+
+  getNbOpRetrait(): Observable<any> {
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
+    return this.http.get(`${this.baseUrl14}`);
+  }
+
+
+  getNbOpRemplissage(): Observable<any> {
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
+    return this.http.get(`${this.baseUrl15}`);
+  }
+
+
+  getNbOpTransformation(): Observable<any> {
+    // let jwt = this.authService.getToken();
+    // jwt = "Bearer "+jwt;
+    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
+    return this.http.get(`${this.baseUrl16}`);
   }
 
 
