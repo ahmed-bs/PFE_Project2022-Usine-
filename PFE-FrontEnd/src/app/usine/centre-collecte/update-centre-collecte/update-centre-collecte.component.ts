@@ -27,6 +27,7 @@ export class UpdateCentreCollecteComponent implements OnInit {
 
 
    constructor(
+    private router: Router,
      private dialogClose: MatDialog,
      private centreService:CentreCollecteService,
 
@@ -55,7 +56,8 @@ export class UpdateCentreCollecteComponent implements OnInit {
          })
          .subscribe(o=>{
            localStorage.setItem('Toast', JSON.stringify(["Success","Un centre a été modifié avec succes"]));
-           window.location.reload();
+          //  window.location.reload();
+          this.onClose();
            console.log(this.centre);
          },
          (error) => {
@@ -77,9 +79,16 @@ export class UpdateCentreCollecteComponent implements OnInit {
   return this.myForm.get('ville') ;
 }
 
-   onClose() {
-     this.dialogClose.closeAll();
-   }
+onReload(){
+  this.router.navigate([this.router.url]);
+}
+
+
+onClose() {
+  this.dialogClose.closeAll();
+  // this.gotoList();
+  this.onReload();
+}
 
  }
 

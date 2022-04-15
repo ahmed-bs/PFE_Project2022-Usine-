@@ -81,10 +81,11 @@ export class CreateTankComponent implements OnInit {
           // "etat":this.myForm.get('etat')?.value,
         })
         .subscribe(o=>{
-          window.location.reload();
+          // window.location.reload();
           console.log(this.tank);
           localStorage.setItem('Toast', JSON.stringify(["Success","Un Tank a été ajouté avec succès"]));
-          window.location.reload();
+          // window.location.reload();
+          this.onClose();
         });
       }
     }
@@ -99,10 +100,17 @@ export class CreateTankComponent implements OnInit {
   }
 
 
+  onReload(){
+    this.router.navigate([this.router.url]);
+  }
+  
+  
   onClose() {
     this.dialogClose.closeAll();
-    this.gotoList();
+    // this.gotoList();
+    this.onReload();
   }
+
 
  get matricule(){
   return this.myForm.get('matricule') ;

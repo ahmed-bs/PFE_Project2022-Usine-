@@ -116,13 +116,14 @@ export class CreateOperationTransformationComponent implements OnInit {
       
     )
     .subscribe(o =>{
-      window.location.reload();
+      // window.location.reload();
       console.log(this.operation);   
       console.log("nourrrrrrrr");
       console.log(this.operation);
       console.log("nourrrrrrrr");  
       localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
-     window.location.reload();      
+    //  window.location.reload(); 
+    this.onClose();     
     },
     (error) => {
       console.log("Failed")
@@ -153,10 +154,17 @@ export class CreateOperationTransformationComponent implements OnInit {
   }
 
 
+  onReload(){
+    this.router.navigate([this.router.url]);
+  }
+  
+  
   onClose() {
     this.dialogClose.closeAll();
-    this.gotoList();
+    // this.gotoList();
+    this.onReload();
   }
+
   get produit(){
     return this.myForm.get('produit') ;
   }

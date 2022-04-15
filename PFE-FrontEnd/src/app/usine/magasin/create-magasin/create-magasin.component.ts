@@ -72,10 +72,10 @@ export class CreateMagasinComponent implements OnInit {
           "ville":this.myForm.get('ville')?.value,
         })
         .subscribe(o=>{
-          window.location.reload();
+        //  window.location.reload();
           console.log(this.magasin);
           localStorage.setItem('Toast', JSON.stringify(["Success","Un magasin a été ajouté avec succès"]));
-          window.location.reload();      
+         this.onClose();    
         });
     }
   }
@@ -90,9 +90,15 @@ export class CreateMagasinComponent implements OnInit {
   }
 
 
+  onReload(){
+    this.router.navigate([this.router.url]);
+  }
+  
+  
   onClose() {
     this.dialogClose.closeAll();
-    this.gotoList();
+    // this.gotoList();
+    this.onReload();
   }
 
  get nomMag(){

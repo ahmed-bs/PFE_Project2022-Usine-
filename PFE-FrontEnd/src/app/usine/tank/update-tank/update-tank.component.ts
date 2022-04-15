@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Tank } from 'src/app/Models/tank';
+import { Router } from '@angular/router';
 import { TankService } from 'src/app/Services/tank.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class UpdateTankComponent implements OnInit {
 
 
    constructor(
+     private router:Router,
      private dialogClose: MatDialog,
      private tankService:TankService,
 
@@ -51,7 +53,8 @@ export class UpdateTankComponent implements OnInit {
          })
          .subscribe(o=>{
            localStorage.setItem('Toast', JSON.stringify(["Success","Un tank a été modifié avec succes"]));
-           window.location.reload();
+          //  window.location.reload();
+          this.onClose();
            console.log(this.tank);
          },
          (error) => {
@@ -78,9 +81,16 @@ export class UpdateTankComponent implements OnInit {
 //   return this.myForm.get('etat') ;
 // }
 
-   onClose() {
-     this.dialogClose.closeAll();
-   }
+onReload(){
+  this.router.navigate([this.router.url]);
+}
+
+
+onClose() {
+  this.dialogClose.closeAll();
+  // this.gotoList();
+  this.onReload();
+}
 
  }
 
