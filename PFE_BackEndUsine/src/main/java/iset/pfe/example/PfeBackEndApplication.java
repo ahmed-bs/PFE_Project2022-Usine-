@@ -5,11 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import iset.pfe.example.entities.User;
 import iset.pfe.example.entities.CentreCollecte;
 import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.entities.Operation;
 import iset.pfe.example.entities.Produit;
+import iset.pfe.example.entities.Role;
 import iset.pfe.example.entities.Tank;
 import iset.pfe.example.repositories.UserRepository;
 import iset.pfe.example.repositories.CentreCollecteRepository;
@@ -17,6 +20,7 @@ import iset.pfe.example.repositories.MagasinRepository;
 import iset.pfe.example.repositories.OperationRepository;
 import iset.pfe.example.repositories.OperationTankRepository;
 import iset.pfe.example.repositories.ProduitRepository;
+import iset.pfe.example.repositories.RoleRepository;
 import iset.pfe.example.repositories.TankRepository;
 
 @SpringBootApplication
@@ -30,7 +34,8 @@ public class PfeBackEndApplication implements CommandLineRunner {
 	private OperationTankRepository operationTankRepository;
 	@Autowired
 	private OperationRepository operationRepository;
-	
+	@Autowired
+	private RoleRepository roleRepository;
 	
 	
 	@Autowired
@@ -52,8 +57,7 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		Date dateA=new Date("22/03/2021");
 		Date dateE=new Date("22/04/2021");
 		
-		User u1=new User("nour", "guerfali", 11331133, 54546450, "nour", "nour");
-		userRepository.save(u1);
+	
 		
 		User u2=new User("ahmed", "ben saber", 11221122, 54685999, "ahmed", "ahmed");
 		userRepository.save(u2);
@@ -79,6 +83,21 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		Produit p1=new Produit("yaourt - fraise", "akf5rfvn54");
 		produitRepository.save(p1);
 		
+		
+		Role role1=new Role("USER");
+		roleRepository.save(role1);
+		
+		
+		BCryptPasswordEncoder encoder; 
+		encoder = new BCryptPasswordEncoder();
+		
+		User ch1=new User();
+		ch1.setUsername("nour");
+		ch1.setPassword(encoder.encode("nour"));
+		ch1.setNom("nour");
+		ch1.setCin(11431134);
+		ch1.getRoles().add(role1);
+		userRepository.save(ch1);
 
 //		Lot l1=new Lot(dateA.toString());
 //		l1.setQteLot(1755);
