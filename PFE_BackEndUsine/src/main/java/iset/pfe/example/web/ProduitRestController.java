@@ -2,6 +2,7 @@ package iset.pfe.example.web;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,18 @@ public class ProduitRestController {
 	@RequestMapping(value="/produits",method = RequestMethod.GET)
 	public List<Produit> getNourritures(){
 		return produitRepository.findAll();
+	}
+	
+	@RequestMapping(value="/produitsDispo",method = RequestMethod.GET)
+	public List<Produit> getProduitsQteSupAZero(){
+		List<Produit> l = new ArrayList<Produit>();
+		for(int i=0;i<produitRepository.findAll().size();i++) {
+			Produit p=produitRepository.findAll().get(i);
+			if(p.getQte()>0) {
+				l.add(p);
+			}
+		}
+		return l;
 	}
 	
 	@RequestMapping(value="/qteProduitG",method = RequestMethod.GET)

@@ -113,8 +113,8 @@
                       <a href="usine/centreCollecte/listeCentreCollecte" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
-                  
-               
+
+
 
                    <!-- ./col -->
                  </div>
@@ -168,23 +168,23 @@
                              </ngx-charts-bar-vertical>
 
                              <br><br><br><br><br><br><br>
-                           
+
                              <div  style="margin-top:25px;margin-left:-100px;margin-right:70px">
-                             <ngx-charts-pie-chart 
+                             <ngx-charts-pie-chart
                              [results]="data"
                              [legend]="true"
-                             [legendTitle]="'Product Sale Report'" 
+                             [legendTitle]="'Product Sale Report'"
                              [view]="[1000,400]"
-                             [scheme]="colorScheme" 
+                             [scheme]="colorScheme"
                              [labels]="true" >
                              </ngx-charts-pie-chart>
                             </div>
 
                             <br><br>
-                             <ngx-charts-advanced-pie-chart  style="margin-top:-1020px;margin-bottom:-550px;" 
+                             <ngx-charts-advanced-pie-chart  style="margin-top:-1020px;margin-bottom:-550px;"
                              [results]="data"
                              [view]="[800,300]"
-                             [scheme]="colorScheme" 
+                             [scheme]="colorScheme"
                              [gradient]="true" >
                             </ngx-charts-advanced-pie-chart>
 
@@ -192,7 +192,7 @@
                              </div>
                              <!-- /.chart-responsive -->
                            </div>
-                           
+
                            <!-- /.col -->
                            <div class="col-md-4">
 
@@ -202,7 +202,7 @@
                                <br>
                                <strong style="margin-right:95px;">Time</strong>
                              </p>
-                        
+
 
                              <div  style="margin-top:40px;margin-left:-20px;margin-right:70px">
                                <!-- Info Boxes Style 2 -->
@@ -243,7 +243,7 @@
                                    <span class="info-box-text">Nombre des operations</span>
                                    <span class="info-box-number">{{somOperation}}</span>
                                  </div>
-                               
+
                                </div> -->
 
 
@@ -267,7 +267,7 @@
                                 <!-- /.info-box-content -->
                               </div>
 
-                               <div class="info-box mb-3 bg-secondary">
+                              <div class="info-box mb-3 bg-secondary">
                                 <span class="info-box-icon"> <i class="ion ion-ios-home-outline"></i></span>
 
                                 <div class="info-box-content">
@@ -276,7 +276,19 @@
                                 </div>
                                 <!-- /.info-box-content -->
                               </div>
-  
+
+                               <div class="info-box mb-3 bg-dark">
+                                <span class="info-box-icon"> <i class="ion ion-ios-home-outline"></i></span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Nombre des operations de transformations</span>
+                                  <span class="info-box-number">{{somOpTransformation}}</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+
+
+
                                <!-- /.info-box -->
 
                                <!-- PRODUCT LIST -->
@@ -284,18 +296,18 @@
                                <!-- /.card -->
                              </div>
                              <!-- /.col -->
-                            
 
-                             <!-- <ngx-charts-pie-chart 
+
+                             <!-- <ngx-charts-pie-chart
                              [results]="data"
                              [legend]="true"
-                             [legendTitle]="'Product Sale Report'" 
+                             [legendTitle]="'Product Sale Report'"
                              [view]="[1000,250]"
-                             [scheme]="colorScheme" 
+                             [scheme]="colorScheme"
                              [labels]="true" >
                              </ngx-charts-pie-chart> -->
 
-                         
+
                            </div>
                            <!-- /.col -->
 
@@ -305,42 +317,75 @@
                        <!-- ./card-body -->
                        <div class="card-footer">
                          <div class="row">
-                           <div class="col-sm-2 col-6">
+
+
+                          <!-- /.col -->
+                          <div class="col-sm-4 col-6">
+                            <div class="description-block border-right">
+                              <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{prcTankRemplis}}%</span>
+                              <h5 class="description-header">{{somTRemplis}}</h5>
+                              <span class="description-text">TOTAL TANKS REMPLIS</span>
+                            </div>
+                            <!-- /.description-block -->
+                          </div>
+                          <!-- /.col -->
+
+
+                          <!-- /.col -->
+                          <div class="col-sm-4 col-6">
+                          <div class="description-block border-right">
+                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{prcTankNonRemplis}}%</span>
+                            <h5 class="description-header">{{somTVide}}</h5>
+                            <span class="description-text">TOTAL TANKS VIDES</span>
+                          </div>
+                          <!-- /.description-block -->
+                          </div>
+                          <!-- /.col -->
+
+
+
+                          <!-- /.col -->
+                          <div class="col-sm-4 col-6">
+                          <div class="description-block border-right">
+                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{prcTankEnCours}}%</span>
+                            <h5 class="description-header">{{somTEnCours}}</h5>
+                            <span class="description-text">TOTAL TANKS EN COURS DE REMPLISSAGE</span>
+                          </div>
+                          <!-- /.description-block -->
+                          </div>
+                          <!-- /.col -->
+
+
+
+                           <div class="col-sm-4 col-6">
                              <div class="description-block border-right">
-                               <!-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span> -->
-                               <h5 class="description-header">{{somTank}}</h5>
-                               <span class="description-text">TOTAL TANK</span>
+                               <span class="description-percentage  text-primary"><i class="fas fa-caret-up"></i> {{prcOpRetrait}}%</span>
+                               <h5 class="description-header">{{somOpRetrait}}</h5>
+                               <span class="description-text">TOTAL OPERATIONS DE RETARITS</span>
                              </div>
                              <!-- /.description-block -->
                            </div>
                            <!-- /.col -->
-                           <div class="col-sm-2 col-6">
+                           <div class="col-sm-4 col-6">
                              <div class="description-block border-right">
-                               <!-- <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span> -->
-                               <h5 class="description-header">{{somMagasin}}</h5>
-                               <span class="description-text">TOTAL MAGASINS</span>
+                               <span class="description-percentage text-primary"><i class="fas fa-caret-up"></i>{{prcOpRemplissage}}%</span>
+                               <h5 class="description-header">{{somOpRemplissage}}</h5>
+                               <span class="description-text">TOTAL  OPERATIONS DE REMPLISSAGES</span>
                              </div>
                              <!-- /.description-block -->
                            </div>
                            <!-- /.col -->
-                           <div class="col-sm-2 col-6">
+                           <div class="col-sm-4 col-6">
                              <div class="description-block border-right">
-                               <!-- <span class="description-percentage text-primary"><i class="fas fa-caret-up"></i> 20%</span> -->
-                               <h5 class="description-header">{{somOperation}}</h5>
-                               <span class="description-text">TOTAL OPERATIONS</span>
+                               <span class="description-percentage text-primary"><i class="fas fa-caret-up"></i> {{prcOpTransformation}}%</span>
+                               <h5 class="description-header">{{somOpTransformation}}</h5>
+                               <span class="description-text">TOTAL  OPERATIONS DE REMPLISSAGES</span>
                              </div>
                              <!-- /.description-block -->
                            </div>
                            <!-- /.col -->
 
-                           <div class="col-sm-2 col-6">
-                            <div class="description-block">
-                              <!-- <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span> -->
-                              <h5 class="description-header">{{somProduit}}</h5>
-                              <span class="description-text">TOTAL PRODUITS</span>
-                            </div>
-                            <!-- /.description-block -->
-                          </div>
+                           
 
 
                          </div>

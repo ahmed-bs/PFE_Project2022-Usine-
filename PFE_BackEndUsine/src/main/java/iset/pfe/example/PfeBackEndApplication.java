@@ -93,9 +93,11 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		
 		User ch1=new User();
 		ch1.setUsername("nour");
+		ch1.setPrenom("Nour");
 		ch1.setPassword(encoder.encode("nour"));
-		ch1.setNom("nour");
+		ch1.setNom("Guerfali");
 		ch1.setCin(11431134);
+		ch1.setTel(54546450);
 		ch1.getRoles().add(role1);
 		userRepository.save(ch1);
 

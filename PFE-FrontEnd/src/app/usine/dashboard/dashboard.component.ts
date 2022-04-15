@@ -28,9 +28,25 @@ export class DashboardComponent implements OnInit {
   somOperation?:number;
   somProduit?:number;
 
+  prcOpRetrait="";
+  prcOpRemplissage="";
+  prcOpTransformation="";
+
+  prcTankRemplis="";
+  prcTankNonRemplis="";
+  prcTankEnCours="";
+
   somOpRetrait?:number;
   somOpRemplissage?:number;
   somOpTransformation?:number;
+
+  somTRemplis?:number;
+  somTVide?:number;
+  somTEnCours?:number;
+
+  x=0;
+  y=0;
+  z=0;
 
   list?: any[];
   annee: any[]=["annee"];
@@ -204,24 +220,50 @@ export class DashboardComponent implements OnInit {
     //Get all opertions
     this.tankService.getNbTanks().subscribe(o =>{
       this.somTank = o;
-      console.log(this.somTank);});
+      console.log(this.somTank);
+
+
+      this.tankService.getNbTanksRemplis().subscribe(t=>{
+      this.somTRemplis=t;
+      this.x=(t/o)*100;
+      this.prcTankRemplis=this.x.toFixed(2);
+      });
+
+      this.tankService.getNbTanksVide().subscribe(t1=>{
+      this.somTVide=t1;
+      this.y=(t1/o)*100;
+      this.prcTankNonRemplis=this.y.toFixed(2);
+      });
+
+      this.tankService.getNbTanksEnCours().subscribe(t2=>{
+        this.somTEnCours=t2;
+        this.z=(t2/o)*100;
+        this.prcTankEnCours=this.z.toFixed(2);
+    });
+  });
 
       this.operationService.getNbOp().subscribe(a =>{
         this.somOperation= a;
-        console.log(this.somOperation);});
+        console.log(this.somOperation);
 
         this.operationService.getNbOpRetrait().subscribe(y =>{
           this.somOpRetrait= y;
+          this.x=(y/a)*100;
+          this.prcOpRetrait= this.x.toFixed(2);
           console.log(this.somOpRetrait);});
 
           this.operationService.getNbOpRemplissage().subscribe(x =>{
             this.somOpRemplissage= x;
+            this.y=(x/a)*100;
+            this.prcOpRemplissage= this.y.toFixed(2);
             console.log(this.somOpRemplissage);});
 
             this.operationService.getNbOpTransformation().subscribe(n =>{
               this.somOpTransformation= n;
+              this.z=(n/a)*100;
+              this.prcOpTransformation= this.z.toFixed(2);
               console.log(this.somOpTransformation);});
-
+            });
       this.magasinService.getNbMagasins().subscribe(b =>{
         this.somMagasin = b;
         console.log(this.somMagasin);});

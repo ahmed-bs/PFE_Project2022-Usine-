@@ -17,20 +17,25 @@ export class TankService {
   baseUrl3 : string = 'http://localhost:3802/qteTanksLibre';
   baseUrl4 : string = 'http://localhost:3802/qteTanksGenerale';
   baseUrl6 : string = 'http://localhost:3802/nbreT';
-  // URL : Quanitite que je peux l'inserer .. date d'aujourd hui 
+  // URL : Quanitite que je peux l'inserer .. date d'aujourd hui
   baseUrl7 : string = 'http://localhost:3802/tanksQte';
   baseUrl8 : string = 'http://localhost:3802/QteG';
   baseUrl9 : string = 'http://localhost:3802/QteTanks';
   baseUrl10 : string = 'http://localhost:3802/tanksDispo';
+  baseUrl11 : string = 'http://localhost:3802/nbTankRemplis';
+  baseUrl12 : string = 'http://localhost:3802/nbTankVide';
+  baseUrl13 : string = 'http://localhost:3802/nbTankEnCours';
 
 
-  // 
+
+
+  //
   constructor(private http: HttpClient,private authService :AuthService ) { }
 
   getTanks(): Observable<any> {
    let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl}`);
   }
@@ -39,7 +44,7 @@ export class TankService {
   getTanksDispo(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl10}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl10}`);
   }
@@ -47,15 +52,40 @@ export class TankService {
   getNbTanks(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl6}`);
+  }
+
+  getNbTanksRemplis(): Observable<any> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl11}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl6}`);
+  }
+
+  getNbTanksVide(): Observable<any> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl12}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl6}`);
+  }
+
+
+  getNbTanksEnCours(): Observable<any> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl13}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl6}`);
   }
 
   getQteLibreAujourdhui(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl7}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl7}`);
   }
@@ -63,7 +93,7 @@ export class TankService {
   getQteTanks(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl9}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl9}`);
   }
@@ -72,7 +102,7 @@ export class TankService {
   getQteG(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl8}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl8}`);
   }
@@ -81,7 +111,7 @@ export class TankService {
   getTanksQteLibre(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl3}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl3}`);
   }
@@ -90,7 +120,7 @@ export class TankService {
   getTanksQteGenerale(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl4}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl4}`);
   }
@@ -98,7 +128,7 @@ export class TankService {
   getTanksFiltres(): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get(`${this.baseUrl2}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl2}`);
   }
@@ -106,7 +136,7 @@ export class TankService {
   getTank(id: number): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl}/${id}`
     return this.http.get(url,{headers:httpHeaders});
   }
@@ -115,7 +145,7 @@ export class TankService {
   createTank(tank:any){
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.post(this.baseUrl,tank,{headers:httpHeaders});
     // return this.http.post(this.baseUrl,tank);
   }
@@ -124,18 +154,18 @@ export class TankService {
   updateTank(id: number, value:any): Observable<Object> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl}/${id}`
     return this.http.put(url, value,{headers:httpHeaders});
     // return this.http.put(url, value);
   }
 
-  
+
 
   deleteTank(id: number): Observable<any> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl}/${id}`
     return this.http.delete(url,{headers:httpHeaders});
     // return this.http.delete(url);
@@ -144,10 +174,10 @@ export class TankService {
   getTankList(): Observable<Tank[]> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get<Tank[]>(this.baseUrl,{headers:httpHeaders});
     // return this.http.get<Tank[]>(this.baseUrl);
-   
+
   }
 }
 

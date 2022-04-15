@@ -27,21 +27,27 @@ public class UserRestController {
 		return userRepository.findAll();
 	}
 		
-	@RequestMapping(value="/users/{idChef}",method = RequestMethod.GET)
-    public User getidU(@PathVariable Integer idChef) {
-		Optional<User> ag = userRepository.findById(idChef);
+	@RequestMapping(value="/users/{idU}",method = RequestMethod.GET)
+    public User getidU(@PathVariable Integer idU) {
+		Optional<User> ag = userRepository.findById(idU);
 		if (ag.isPresent()) { 
 			return ag.get();
 		}else throw new RuntimeException("Chef introuvable !!");
 	}
 	
+	@RequestMapping(value="/getUser/{username}",method = RequestMethod.GET)
+    public User getuser(@PathVariable String username) {
+		User u=userRepository.findUserWithName(username).get();
+		return u;
+	}
 	
-	@RequestMapping(value="/users/{idChef}",method = RequestMethod.DELETE)
+	
+	@RequestMapping(value="/users/{idU}",method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteidU(@PathVariable Integer idChef) {
-		Optional<User> user = userRepository.findById(idChef);
+	public void deleteidU(@PathVariable Integer idU) {
+		Optional<User> user = userRepository.findById(idU);
 				if (user.isPresent()) { 
-				userRepository.deleteById(idChef);
+				userRepository.deleteById(idU);
 		    }else throw new RuntimeException("Chef introuvable ! vous ne pouvez pas le supprimer !!");
 	}
 	

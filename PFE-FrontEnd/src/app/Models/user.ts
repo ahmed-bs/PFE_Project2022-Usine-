@@ -1,5 +1,5 @@
 export class User{
-  idChef!:number;
+  idU!:number;
   nom!: string;
   prenom!: string;
   tel!:number;
