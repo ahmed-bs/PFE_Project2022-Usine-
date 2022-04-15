@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import iset.pfe.example.entities.Operation;
 import iset.pfe.example.entities.Tank;
 
 public interface TankRepository extends JpaRepository<Tank,Integer>{
@@ -26,5 +28,8 @@ public interface TankRepository extends JpaRepository<Tank,Integer>{
 		//les tanks ou la qte est > 0
 		@Query("select o from Tank o where o.poidActuel>0")
 		public List<Tank> findTanksDispo();
+		
+		   @Query("select t from Tank t where t.etat=:etat")
+			public List<Tank> findTankEtat(@Param("etat") String etat);
 		
 }

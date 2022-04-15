@@ -77,10 +77,10 @@ export class CreateCentreCollecteComponent implements OnInit {
           // "etat":this.myForm.get('etat')?.value,
         })
         .subscribe(o=>{
-          window.location.reload();
+          // window.location.reload();
           console.log(this.centre);
           localStorage.setItem('Toast', JSON.stringify(["Success","Un cnetre a été ajouté avec succès"]));
-          window.location.reload();
+         this.onClose();
         });
       }
     }
@@ -94,10 +94,15 @@ export class CreateCentreCollecteComponent implements OnInit {
     this.router.navigate(['usine/centreCollecte/listeCentreCollecte']);
   }
 
+  onReload(){
+    this.router.navigate([this.router.url]);
+  }
+
 
   onClose() {
     this.dialogClose.closeAll();
-    this.gotoList();
+    // this.gotoList();
+    this.onReload();
   }
 
  get nomCentre(){

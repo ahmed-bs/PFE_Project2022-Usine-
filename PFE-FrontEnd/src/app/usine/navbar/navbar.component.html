@@ -31,8 +31,20 @@
           
             </h3>
             <p class="text-sm text-muted" style="margin-left:25px;">     
-              <span style="font-weight: bold;"> UserName  &nbsp;:</span>  &nbsp; {{authService.loggedUser}} <br>
-              <span style="font-weight: bold;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Role  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;: </span>&nbsp;  &nbsp;{{authService.getRole()}} </p>
+              <span style="font-weight: bold;"><i class="fas fa-solid fa-user-check fa-lg"></i> &nbsp;Username  &nbsp;:</span> {{authService.loggedUser}} <br>
+              <span style="font-weight: bold;"><i class="fas fa-solid fa-briefcase fa-lg"></i> &nbsp;&nbsp;Role  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;:</span> {{authService.getRole()}} 
+            </p><br>
+              <h6 style="font-weight: bold;color:blue"> &nbsp;&nbsp; Autres informations : </h6>
+
+              <p class="text-sm text-muted" style="margin-left:25px;">   
+              <span style="font-weight: bold;"><i class="fas fa-solid fa-file-signature fa-lg"></i> Nom&nbsp;&nbsp;:</span> {{nom}} <br>
+              <span style="font-weight: bold;"><i class="fas fa-solid fa-file-signature fa-lg"></i> Prenom &nbsp; &nbsp;:</span> {{prenom}} <br>
+              <span style="font-weight: bold;"><i class="fas fa-solid fa-id-card fa-lg"></i> CIN &nbsp;:</span> {{cin}} <br>
+              <span style="font-weight: bold;"><i class="fas fa-solid fa-phone fa-lg"></i> Téléphone&nbsp;:</span> {{tel}} <br>
+            </p>
+            
+          
+              
           </div>
         </div>
         <div class="dropdown-divider"></div>

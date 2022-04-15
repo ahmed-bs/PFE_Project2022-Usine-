@@ -17,6 +17,7 @@ export class ProduitService {
   baseUrl : string = 'http://localhost:3802/produits';
   baseUrl6 : string = 'http://localhost:3802/nbreP';
   baseUrl7 : string = 'http://localhost:3802/qteProduitG';
+  baseUrl8 : string = 'http://localhost:3802/produitsDispo';
 
   // 
   constructor(private http: HttpClient,private authService :AuthService) { }
@@ -26,6 +27,14 @@ export class ProduitService {
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
     return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl6}`);
+  }
+
+  getProduitsDispo(): Observable<any> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    return this.http.get(`${this.baseUrl8}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl6}`);
   }
 

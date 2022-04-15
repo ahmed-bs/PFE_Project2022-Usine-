@@ -48,6 +48,23 @@ public class TankRestController {
 			return tankRepository.findAll();
 		}
 		
+		
+		@RequestMapping(value="/nbTankRemplis",method = RequestMethod.GET)
+		public int getnbTankRemplis(){
+			return tankRepository.findTankEtat("Remplis").size();
+		}
+		
+		@RequestMapping(value="/nbTankVide",method = RequestMethod.GET)
+		public int getnbTankVide(){
+			return tankRepository.findTankEtat("Vide").size();
+		}
+		
+		@RequestMapping(value="/nbTankEnCours",method = RequestMethod.GET)
+		public int getnbTankEnCours(){
+			return tankRepository.findTankEtat("En cours").size();
+		}
+		
+		
 		@RequestMapping(value="/nbreT",method = RequestMethod.GET)
 		public int getNbTanks(){
 			return tankRepository.findAll().size();

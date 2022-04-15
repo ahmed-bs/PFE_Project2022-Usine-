@@ -58,7 +58,7 @@ export class CreateOperationRetraitComponent implements OnInit {
     //this.ValidatedForm();
     this.tanks=this.tankService.getTanksFiltres();
     this.magasins=this.magasinService.getMagasins();
-    this.produits=this.produitService.getProduits();
+    this.produits=this.produitService.getProduitsDispo();
 
     this.operationService.getNbOp().subscribe(o=>{
     console.log(o);
