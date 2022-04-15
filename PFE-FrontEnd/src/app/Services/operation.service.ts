@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Operation } from '../Models/operation';
+import { AuthService } from './auth.service';
 
-
+const httpOptions = {
+  headers: new HttpHeaders( {'Content-Type': 'application/json'} )
+  };
 @Injectable({
   providedIn: 'root'
 })
@@ -31,200 +34,199 @@ export class OperationService {
 
 
 
-  // ,private authService :AuthService
-  constructor(private http: HttpClient) { }
+  // 
+  constructor(private http: HttpClient,private authService :AuthService) { }
 
 
   getNbOp(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl6}`);
+    return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
   }
 
   getNbOpRetrait(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl14}`);
-  }
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl14}`,{headers:httpHeaders});
+   }
 
 
   getNbOpRemplissage(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl15}`);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl15}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl15}`);
   }
 
 
   getNbOpTransformation(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl16}`);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl16}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl16}`);
   }
 
 
 
   getOperations(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl}`);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl}`);
   }
 
   getOperationsRemplissages(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl4}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl4}`);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl4}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl4}`);
   }
 
   
   getOperationsTransfs(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl4}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl11}`);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl11}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl11}`);
   }
 
   getOperationsRetraits(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl3}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl3}`);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl3}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl3}`);
   }
 
   getOperationsTanks(): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get(`${this.baseUrl5}`,{headers:httpHeaders});
-    return this.http.get(`${this.baseUrl5}`);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get(`${this.baseUrl5}`,{headers:httpHeaders});
+    // return this.http.get(`${this.baseUrl5}`);
   }
 
   getOperation(id: number): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl}/${id}`
-    // return this.http.get(url,{headers:httpHeaders});
-    return this.http.get(url);
+    return this.http.get(url,{headers:httpHeaders});
+   
   }
 
 
   getOpTank(id: number): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl8}/${id}`
-    // return this.http.get(url,{headers:httpHeaders});
-    return this.http.get(url);
+    return this.http.get(url,{headers:httpHeaders});
+
   }
 
 
   getOperationTank(id: number): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl5}/${id}`
-    // return this.http.get(url,{headers:httpHeaders});
-    return this.http.get(url);
+    return this.http.get(url,{headers:httpHeaders});
+    // return this.http.get(url);
   }
 
   createOperation(f:any){
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.post(this.baseUrl1,f,{headers:httpHeaders});
-    return this.http.post(this.baseUrl9,f);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.post(this.baseUrl9,f,{headers:httpHeaders});
+    // return this.http.post(this.baseUrl9,f);
   }
 
   createOperationTransf(f:any){
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.post(this.baseUrl1,f,{headers:httpHeaders});
-    return this.http.post(this.baseUrl10,f);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.post(this.baseUrl10,f,{headers:httpHeaders});
+    // return this.http.post(this.baseUrl10,f);
   }
 
   createOperationRemplissage(f:any){
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.post(this.baseUrl2,f,{headers:httpHeaders});
-    return this.http.post(this.baseUrl2,f);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.post(this.baseUrl2,f,{headers:httpHeaders});
+    // return this.http.post(this.baseUrl2,f);
   }
 
   updateOperation(id: number, value:any) {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl}/${id}`
-    // return this.http.put(url, value,{headers:httpHeaders});
-    return this.http.put(url, value);
+    return this.http.put(url, value,{headers:httpHeaders});
+    // return this.http.put(url, value);
   }
 
   updateOperationR(id: number, value:any) {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
     const url = `${this.baseUrl7}/${id}`
-    // return this.http.put(url, value,{headers:httpHeaders});
-    return this.http.put(url, value);
+    return this.http.put(url, value,{headers:httpHeaders});
+    // return this.http.put(url, value);
   }
 
 
 
   deleteOperation(id: number): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
 
     const url = `${this.baseUrl}/${id}`
-    // return this.http.delete(url,{headers:httpHeaders});
-    return this.http.delete(url);
+    return this.http.delete(url,{headers:httpHeaders});
+    // return this.http.delete(url);
   }
 
 
   deleteOperationR(id: number): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
 
     const url = `${this.baseUrl12}/${id}`
-    // return this.http.delete(url,{headers:httpHeaders});
-    return this.http.delete(url);
+    return this.http.delete(url,{headers:httpHeaders});
+    // return this.http.delete(url);
   }
 
 
   
   deleteOperationT(id: number): Observable<any> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
 
     const url = `${this.baseUrl13}/${id}`
-    // return this.http.delete(url,{headers:httpHeaders});
-    return this.http.delete(url);
+    return this.http.delete(url,{headers:httpHeaders});
+    // return this.http.delete(url);
   }
 
 
 
   getOperationList(): Observable<Operation[]> {
-    // let jwt = this.authService.getToken();
-    // jwt = "Bearer "+jwt;
-    // let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    // return this.http.get<Operation[]>(this.baseUrl,{headers:httpHeaders});
-    return this.http.get<Operation[]>(this.baseUrl);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<Operation[]>(this.baseUrl,{headers:httpHeaders});
+    // return this.http.get<Operation[]>(this.baseUrl);
   }
 }
