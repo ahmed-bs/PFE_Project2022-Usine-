@@ -55,7 +55,8 @@ export class CreateProduitComponent implements OnInit {
         .createProduit(this.produit)
         .subscribe(o=>{
           localStorage.setItem('Toast', JSON.stringify(["Success","Un produit a été ajouté avec succès"]));   
-          window.location.reload();
+          // window.location.reload();
+          this.onClose();
           console.log(this.produit);
         });
     }
@@ -73,10 +74,17 @@ export class CreateProduitComponent implements OnInit {
   }
 
 
+  onReload(){
+    this.router.navigate([this.router.url]);
+  }
+  
+  
   onClose() {
     this.dialogClose.closeAll();
-    this.gotoList();
+    // this.gotoList();
+    this.onReload();
   }
+
 
   ValidatedForm(){
     this.myForm = new FormGroup({

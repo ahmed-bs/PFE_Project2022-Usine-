@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Magasin } from 'src/app/Models/magasin';
 import { MagasinService } from 'src/app/Services/magasin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-magasin',
@@ -24,6 +25,7 @@ export class UpdateMagasinComponent implements OnInit {
 
    constructor(
      private dialogClose: MatDialog,
+     private router:Router,
      private magasinService:MagasinService,
 
    ) { }
@@ -48,8 +50,9 @@ export class UpdateMagasinComponent implements OnInit {
          })
          .subscribe(o=>{
            localStorage.setItem('Toast', JSON.stringify(["Success","Un magasin a été modifié avec succes"]));
-           window.location.reload();
+          //  window.location.reload();
            console.log(this.magasin);
+           this.onClose();
          },
          (error) => {
            console.log("Failed")
@@ -69,9 +72,16 @@ get ville(){
   return this.myForm.get('ville') ;
 }
 
-   onClose() {
-     this.dialogClose.closeAll();
-   }
+onReload(){
+  this.router.navigate([this.router.url]);
+}
+
+
+onClose() {
+  this.dialogClose.closeAll();
+  // this.gotoList();
+  this.onReload();
+}
 
  }
 

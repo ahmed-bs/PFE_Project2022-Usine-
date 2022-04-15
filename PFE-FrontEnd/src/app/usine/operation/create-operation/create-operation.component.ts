@@ -128,11 +128,10 @@ export class CreateOperationComponent implements OnInit {
           }
         )
         .subscribe(o=>{
-          window.location.reload();
+         this.onClose();
           console.log(this.operation);
 
           localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
-          window.location.reload();
         },
         (error) => {
           console.log("Failed")
@@ -167,9 +166,15 @@ export class CreateOperationComponent implements OnInit {
   }
 
 
+  onReload(){
+    this.router.navigate([this.router.url]);
+  }
+  
+  
   onClose() {
     this.dialogClose.closeAll();
-    this.gotoList();
+    // this.gotoList();
+    this.onReload();
   }
 
  get poidsLait(){

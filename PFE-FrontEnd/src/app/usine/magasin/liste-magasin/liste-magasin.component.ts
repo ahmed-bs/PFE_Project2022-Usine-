@@ -77,7 +77,8 @@ export class ListeMagasinComponent implements OnInit {
         this.Toast[0] = 'Success';
         this.Toast[1] ='magasin a été supprimé avec succès';
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
-        window.location.reload();
+        // window.location.reload();
+        this.onClose();
       },
       (error) => {
         this.idContenu = 'TostDangerContenu';
@@ -116,6 +117,17 @@ export class ListeMagasinComponent implements OnInit {
       this.dialog.open(CreateMagasinComponent, dialogConfig);
     }
   
+
+    onReload(){
+      this.router.navigate([this.router.url]);
+    }
+    
+    
+    onClose() {
+      this.dialog.closeAll();
+      // this.gotoList();
+      this.onReload();
+    }
   
   
     filterData($event:any){

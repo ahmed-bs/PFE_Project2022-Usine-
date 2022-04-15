@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Produit } from 'src/app/Models/produit';
 import { ProduitService } from 'src/app/Services/produit.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class UpdateProduitComponent implements OnInit {
   CheckesCompetance:boolean=false;
 
   constructor(
+    private router:Router,
     private dialogClose: MatDialog,
     private produitService:ProduitService,
 
@@ -39,8 +41,9 @@ export class UpdateProduitComponent implements OnInit {
         .updateProduit(this.produit.idProduit,this.produit)
         .subscribe(o=>{
           localStorage.setItem('Toast', JSON.stringify(["Success","Produit modifié avec succes ! "]));
-          window.location.reload();
+          // window.location.reload();
           console.log(this.produit);
+          this.onClose();
         },
         (error) => {
           console.log("Failed")
@@ -65,8 +68,15 @@ get libelle(){
   return this.myForm.get('libelle') ;
 }
 
-  onClose() {
-    this.dialogClose.closeAll();
-  }
+onReload(){
+  this.router.navigate([this.router.url]);
+}
+
+
+onClose() {
+  this.dialogClose.closeAll();
+  // this.gotoList();
+  this.onReload();
+}
 
 }
