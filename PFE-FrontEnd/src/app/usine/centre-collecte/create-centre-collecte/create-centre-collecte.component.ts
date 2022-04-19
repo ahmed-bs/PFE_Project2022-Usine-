@@ -50,32 +50,10 @@ export class CreateCentreCollecteComponent implements OnInit {
 
   save() {
 
-   if(this.myForm.get('nomCentre')?.value==null){
+   if(this.myForm.get('nomCentre')?.value==null || this.myForm.get('ville')?.value==null || this.myForm.get('adresse')?.value==null){
     this.msg="vous devez remplir le formulaire !!";
    }
    else{
-    this.msg="";
-   }
-
-  //  if(this.myForm.get('nomCentre')?.value.length<3){
-  //   this.msg="vous devez remplir le formulaire !!";
-  //  }
-  //  else{
-  //   this.msg="";
-  //  }
-
-   if(this.myForm.get('ville')?.value==null){
-    this.msg="vous devez remplir le formulaire !!";
-  }
-  else{
-    this.msg="";
-   }
-
-
-   if(this.myForm.get('adresse')?.value==null){
-    this.msg="vous devez remplir le formulaire !!";
-  }
-  else{
     this.msg="";
    }
 
@@ -119,19 +97,20 @@ export class CreateCentreCollecteComponent implements OnInit {
     this.router.navigate(['usine/centreCollecte/listeCentreCollecte']);
   }
 
+  
   onReload(){
-    this.router.navigate([this.router.url]);
-    // this.router.navigateByUrl("usine/centreCollecte/listeCentreCollecte",{skipLocationChange: true}).then( response=> {
-    //   this.router.navigate([decodeURI(this.location.path())]);
-    // })
-  }
+    // this.router.navigate([this.router.url]);
+this.router.navigateByUrl("/usine/centreCollecte/listeCentreCollecte",{skipLocationChange: true}).then( response=> {
+ this.router.navigate([decodeURI(this.location.path())]);
+})
+}
 
 
-  onClose() {
-    this.dialogClose.closeAll();
-    // this.gotoList();
-    this.onReload();
-  }
+onClose() {
+ this.dialogClose.closeAll();
+ // this.gotoList();
+ this.onReload();
+}
 
  get nomCentre(){
   return this.myForm.get('nomCentre') ;
