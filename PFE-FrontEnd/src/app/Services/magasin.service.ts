@@ -12,6 +12,7 @@ export class MagasinService {
 
   baseUrl : string = 'http://localhost:3802/magasin';
   baseUrl1 : string = 'http://localhost:3802/nbreM';
+  baseUrl2 : string = 'http://localhost:3802/magasins';
 
   // 
   constructor(private http: HttpClient,private authService :AuthService) { }
@@ -21,8 +22,17 @@ export class MagasinService {
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
     return this.http.get(`${this.baseUrl}`,{headers:httpHeaders});
-   
   }
+
+    // test si le nom du magasin exist ou nn
+    getMagasinUtilise(nomMag: string): Observable<any> {
+      let jwt = this.authService.getToken();
+      jwt = "Bearer "+jwt;
+      let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+      const url = `${this.baseUrl2}/${nomMag}`
+      return this.http.get(url,{headers:httpHeaders});
+    }
+
 
   getNbMagasins(): Observable<any> {
     let jwt = this.authService.getToken();

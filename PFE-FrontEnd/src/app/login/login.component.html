@@ -9,26 +9,26 @@
   <script>
 
     const inputs = document.querySelectorAll(".input");
-    
-    
+
+
     function addcl(){
       let parent = this.parentNode.parentNode;
       parent.classList.add("focus");
     }
-    
+
     function remcl(){
       let parent = this.parentNode.parentNode;
       if(this.value == ""){
         parent.classList.remove("focus");
       }
     }
-    
-    
+
+
     inputs.forEach(input => {
       input.addEventListener("focus", addcl);
       input.addEventListener("blur", remcl);
     });
-    
+
     </script>
 </head>
 <body>
@@ -45,7 +45,7 @@
          <br>
 
          <img src="../../assets/avatar.svg" alt="cccccccc">
-         <h2 class="title">Welcome</h2>
+         <h2 class="title">Bienvenu(e)s</h2>
                 <div class="input-div one">
                    <div class="i">
                        <i class="fas fa-user"></i>
@@ -56,7 +56,7 @@
                    </div>
                 </div>
                 <div class="input-div pass">
-                   <div class="i"> 
+                   <div class="i">
                       <i class="fas fa-lock"></i>
                    </div>
                    <div class="div">
@@ -65,13 +65,13 @@
                   </div>
                </div>
                <div>
-                 <input class="a" type="checkbox" (click)="myFunction()"> Show Password        
-               </div> 
+                 <input style="color:green;padding-top:20px; width:22px; height:17px;" class="a"  type="checkbox" (click)="myFunction()"> Montrer le mot de passe ...
+               </div>
                <input type="submit" class="btn"  (click)="onLoggedin()" value="Login">
+               
              </form>
         </div>
     </div>
-   
+
 </body>
 </html>
-

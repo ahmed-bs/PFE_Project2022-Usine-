@@ -58,4 +58,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
    
   ]
 })
-export class CentreCollecteModule { }
+export class CentreCollecteModule { 
+  // defaultValue= {hour: 13, minute: 30};
+
+  // timeChangeHandler(event: Event) {
+  //   console.log(event);
+  // }
+  }

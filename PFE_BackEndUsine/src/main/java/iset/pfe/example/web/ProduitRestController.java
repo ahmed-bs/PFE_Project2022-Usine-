@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.entities.Produit;
 import iset.pfe.example.repositories.ProduitRepository;
 
@@ -30,6 +32,32 @@ public class ProduitRestController {
 	@RequestMapping(value="/produits",method = RequestMethod.GET)
 	public List<Produit> getNourritures(){
 		return produitRepository.findAll();
+	}
+	
+	@RequestMapping(value="/intitule/{intitule}",method = RequestMethod.GET)
+	public int getProdIntituleUtilise(@PathVariable String intitule){
+		int msg=0;
+		for(int i=0;i<produitRepository.findAll().size();i++) {
+			Produit t=produitRepository.findAll().get(i);
+			if(intitule.equals(t.getIntitule())) {
+				msg=1;
+			}
+			
+		}
+		return msg;
+	}
+	
+	@RequestMapping(value="/libelle/{libelle}",method = RequestMethod.GET)
+	public int getProdLibelleUtilise(@PathVariable String libelle){
+		int msg=0;
+		for(int i=0;i<produitRepository.findAll().size();i++) {
+			Produit t=produitRepository.findAll().get(i);
+			if(libelle.equals(t.getLibelle())) {
+				msg=1;
+			}
+			
+		}
+		return msg;
 	}
 	
 	@RequestMapping(value="/produitsDispo",method = RequestMethod.GET)

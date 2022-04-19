@@ -18,6 +18,8 @@ export class ProduitService {
   baseUrl6 : string = 'http://localhost:3802/nbreP';
   baseUrl7 : string = 'http://localhost:3802/qteProduitG';
   baseUrl8 : string = 'http://localhost:3802/produitsDispo';
+  baseUrl9 : string = 'http://localhost:3802/intitule';
+  baseUrl10 : string = 'http://localhost:3802/libelle';
 
   // 
   constructor(private http: HttpClient,private authService :AuthService) { }
@@ -29,6 +31,24 @@ export class ProduitService {
     return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
     // return this.http.get(`${this.baseUrl6}`);
   }
+
+  // test si l'intitule exist ou nn
+  getProdIntituleUtilise(intitule: string): Observable<any> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    const url = `${this.baseUrl9}/${intitule}`
+    return this.http.get(url,{headers:httpHeaders});
+  }
+
+    // test si le libelle exist ou nn
+    getProdLibelleUtilise(libelle: string): Observable<any> {
+      let jwt = this.authService.getToken();
+      jwt = "Bearer "+jwt;
+      let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+      const url = `${this.baseUrl10}/${libelle}`
+      return this.http.get(url,{headers:httpHeaders});
+    }
 
   getProduitsDispo(): Observable<any> {
     let jwt = this.authService.getToken();

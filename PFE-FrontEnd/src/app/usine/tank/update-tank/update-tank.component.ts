@@ -17,8 +17,8 @@ export class UpdateTankComponent implements OnInit {
    CheckesCompetance:boolean=false;
 
    myForm=new  FormGroup({
-     matricule : new FormControl(null,[Validators.required]),
-     poidVide : new FormControl(null,[Validators.required ]),
+    matricule : new FormControl(null,[Validators.required,Validators.minLength(8)]),
+    poidVide : new FormControl(null,[Validators.required,Validators.min(500)]),
     //  poidActuel : new FormControl(null,[Validators.required ]),
     //  etat : new FormControl(null,[Validators.required ]),
  })
@@ -41,7 +41,8 @@ export class UpdateTankComponent implements OnInit {
    }
 
    updateTank(){
-
+    if(this.myForm.get('poidVide')?.value!=null && this.myForm.get('matricule')?.value!=null 
+    && this.myForm.get('poidVide')?.value>=500  && this.myForm.get('matricule')?.value.length>=8){
      this.tankService
      // .updateTank(this.Tank.idTank,this.Tank)
          .updateTank(this.tank.idTank,{
@@ -61,6 +62,7 @@ export class UpdateTankComponent implements OnInit {
            console.log("Failed")
          }
        );
+     }
    }
 
   get matricule(){

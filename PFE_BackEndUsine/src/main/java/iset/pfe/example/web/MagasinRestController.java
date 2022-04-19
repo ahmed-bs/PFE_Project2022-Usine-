@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import iset.pfe.example.entities.CentreCollecte;
 import iset.pfe.example.entities.Magasin;
 import iset.pfe.example.repositories.MagasinRepository;
 
@@ -29,6 +31,19 @@ public class MagasinRestController {
 	@RequestMapping(value="/nbreM",method = RequestMethod.GET)
 	public int getNbMagasin(){
 		return magasinRepository.findAll().size();
+	}
+	
+	@RequestMapping(value="/magasins/{nomMag}",method = RequestMethod.GET)
+	public int getCollUtilise(@PathVariable String nomMag){
+		int msg=0;
+		for(int i=0;i<magasinRepository.findAll().size();i++) {
+			Magasin t=magasinRepository.findAll().get(i);
+			if(nomMag.equals(t.getNomMag())) {
+				msg=1;
+			}
+			
+		}
+		return msg;
 	}
 	
 	@RequestMapping(value="/magasin/{idMag}",method = RequestMethod.GET)

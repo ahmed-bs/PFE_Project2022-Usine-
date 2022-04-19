@@ -10,24 +10,21 @@
             <div class="form-row">
               <div class="form-group col-md-6 mb-3">
 
-                <label>Quantité : <span style="color:red;">*</span> </label>
+                <label>Quantité (minimum 5 Lots): <span style="color:red;">*</span> </label>
                 
                 <input type="number"
                  formControlName="qtePrise"
                  class="form-control"
                  id="qtePrise"
+                 placeholder="exp : 5 Lots .."
                  name="qtePrise">
     
-                 <div *ngIf="qtePrise?.invalid && qtePrise?.touched && msgErreur==1" class="text-danger">
+                 <div *ngIf="qtePrise?.invalid && qtePrise?.touched || msgErreur==1" class="text-danger">
                   Quantité  invalide !
               </div>
               <div *ngIf="qtePrise?.valid && qtePrise?.touched && msgErreur==0"  class="text-success">
                 Quantité  valide!
               </div>
-                <div *ngIf="msgErreur==1" class="text-danger">
-                  Vous ne pouvez pas prendre cette quantité !! car la quantité de lait disponible est: {{qteMax}} !
-                  <br> Vous devez introduire une quantite moins ou egale a {{qteMax}} .
-                </div>
     
               </div>
 
@@ -53,7 +50,7 @@
 
               <div class="form-row">
               <div class="form-group col-md-12 mb-3">
-                <label class="mr-sm-5" for="inlineFormCustomSelect">   produits : <span style="color:red;">*</span></label>
+                <label class="mr-sm-5" for="inlineFormCustomSelect"> Produits : <span style="color:red;">*</span></label>
                 <select formControlName="produit" name="produit"  class="custom-select mr-sm-2" id="produit" >
                   <option disabled selected value [ngValue]="null">Choisir un produit...</option>
                   <option *ngFor="let produit of produits | async" [value]="produit.idProduit">{{produit.intitule}}</option>
@@ -74,7 +71,12 @@
               &nbsp;&nbsp;  <h5 style="color:blue">Voici le code de la livraison  :<strong><i> {{som}} </i> </strong> </h5><br><br>
 
             </div>
-  
+
+            <div *ngIf="msgErreur==1" class="text-danger">
+              Vous ne pouvez pas prendre cette quantité !! car la quantité de lait disponible est: {{qteMax}} !
+              <br> Vous devez introduire une quantite moins ou egale a {{qteMax}} .
+            </div> <br>
+
             <div class="form-group">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="cgu" required>

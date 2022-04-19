@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-create-centre-collecte',
@@ -15,13 +16,16 @@ export class CreateCentreCollecteComponent implements OnInit {
   centre:Centre = new Centre();
   submitted = false;
   msg="";
+  msg1=0;
+  msg2=0;
+  msg3=0;
   msgErreur=0;
   qteAct=0;
 
   myForm=new  FormGroup({
-     nomCentre : new FormControl(null,[Validators.required]),
-      adresse : new FormControl(null,[Validators.required ]),
-      ville : new FormControl(null,[Validators.required ]),
+      nomCentre : new FormControl(null,[Validators.required,Validators.minLength(3)]),
+      adresse : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
+      ville : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
       // poidActuel : new FormControl(null,[Validators.required ]),
       // etat : new FormControl(null,[Validators.required ]),
   })
@@ -30,6 +34,7 @@ export class CreateCentreCollecteComponent implements OnInit {
   // fournisseurs!:Observable<Fournisseur[]>;
 
   constructor(
+    private location:Location,
      private centreCollecteService: CentreCollecteService,
      private router: Router,
      private dialogClose: MatDialog,) { }
@@ -52,6 +57,13 @@ export class CreateCentreCollecteComponent implements OnInit {
     this.msg="";
    }
 
+  //  if(this.myForm.get('nomCentre')?.value.length<3){
+  //   this.msg="vous devez remplir le formulaire !!";
+  //  }
+  //  else{
+  //   this.msg="";
+  //  }
+
    if(this.myForm.get('ville')?.value==null){
     this.msg="vous devez remplir le formulaire !!";
   }
@@ -67,7 +79,19 @@ export class CreateCentreCollecteComponent implements OnInit {
     this.msg="";
    }
 
-  if(this.myForm.get('nomCentre')?.value!=null && this.myForm.get('ville')?.value!=null && this.myForm.get('adresse')?.value!=null){
+
+   this.centreCollecteService.getCollecteurUtilise(this.myForm.get('nomCentre')?.value).subscribe(t=>{
+    console.log(t);
+    if(t==1){
+      this.msg1=1;
+     }
+     else{
+      this.msg1=0;
+     }
+
+  if(this.myForm.get('nomCentre')?.value!=null && this.myForm.get('ville')?.value!=null && this.myForm.get('adresse')?.value!=null
+  && this.myForm.get('nomCentre')?.value.length>=3 && this.myForm.get('ville')?.value.length>=4 
+  && this.myForm.get('adresse')?.value.length>=4   && t==0){
     this.centreCollecteService
         .createCentre({
           "nomCentre":this.myForm.get('nomCentre')?.value,
@@ -83,6 +107,7 @@ export class CreateCentreCollecteComponent implements OnInit {
          this.onClose();
         });
       }
+    });
     }
 
 
@@ -96,6 +121,9 @@ export class CreateCentreCollecteComponent implements OnInit {
 
   onReload(){
     this.router.navigate([this.router.url]);
+    // this.router.navigateByUrl("usine/centreCollecte/listeCentreCollecte",{skipLocationChange: true}).then( response=> {
+    //   this.router.navigate([decodeURI(this.location.path())]);
+    // })
   }
 
 

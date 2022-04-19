@@ -32,8 +32,8 @@ export class CreateOperationTransformationComponent implements OnInit {
   q=0;
   som=0;
   myForm=new  FormGroup({
-    poidsLait : new FormControl(null,[Validators.required]),
-    qtePrise : new FormControl(null,[Validators.required]),
+    poidsLait : new FormControl(null,[Validators.required,Validators.min(1)]),
+    qtePrise : new FormControl(null,[Validators.required,Validators.min(1)]),
     produit : new FormControl(null,[Validators.required ]),
     tank : new FormControl(null,[Validators.required ]),
     
@@ -68,38 +68,18 @@ export class CreateOperationTransformationComponent implements OnInit {
 
   save() {
 
-    if(this.myForm.get('produit')?.value==null){
+    if(this.myForm.get('produit')?.value==null || this.myForm.get('poidsLait')?.value==null ||
+      this.myForm.get('qtePrise')?.value==null || this.myForm.get('tank')?.value==null){
       this.msg="vous devez remplir le formulaire !!";
      }
      else{
       this.msg="";
      }
   
-     if(this.myForm.get('poidsLait')?.value==null){
-      this.msg="vous devez remplir le formulaire !!";
-    }
-    else{
-      this.msg="";
-     }
-  
-     if(this.myForm.get('qtePrise')?.value==null){
-      this.msg="vous devez remplir le formulaire !!";
-    }
-    else{
-      this.msg="";
-     }
-  
-     
-     if(this.myForm.get('tank')?.value==null){
-      this.msg="vous devez remplir le formulaire !!";
-    }
-    else{
-      this.msg="";
-     }
-  
   
     if(this.myForm.get('produit')?.value!=null && this.myForm.get('qtePrise')?.value!=null
-     && this.myForm.get('poidsLait')?.value!=null && this.myForm.get('tank')?.value!=null ){
+     && this.myForm.get('poidsLait')?.value!=null && this.myForm.get('tank')?.value!=null 
+     && this.myForm.get('poidsLait')?.value>=1 && this.myForm.get('qtePrise')?.value>=1 ){
 
     this.operationService
     .createOperationTransf(

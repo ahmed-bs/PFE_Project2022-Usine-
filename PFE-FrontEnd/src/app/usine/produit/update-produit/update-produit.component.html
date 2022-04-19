@@ -4,10 +4,11 @@
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div><br>
+    </div>
+    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
     <form [formGroup]="myForm" class="needs-validation" novalidate>
       <div class="form-group">
-        <label>Intitulé :</label>
+        <label>Intitulé (min 3 caracteres):<span style="color:red;">*</span></label>
         <input type="text"
                class="form-control"
                formControlName="intitule"
@@ -27,7 +28,7 @@
       </div>
   
       <div class="lg mb-3">
-        <label>Libellé :</label>
+        <label for="type">Libellé (min 8 caracteres):<span style="color:red;">*</span></label>
         <input class="form-control"
                   placeholder="Description Post here ...."
                   name="libelle"

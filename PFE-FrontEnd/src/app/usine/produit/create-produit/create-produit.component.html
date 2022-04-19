@@ -4,11 +4,12 @@
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div><br>
+    </div>
+    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
           <form [formGroup]="myForm"  novalidate >
             <div class="form-row">
               <div class="form-group col-md-6 mb-3">
-                <label>Intitulé : </label>
+                <label>Intitulé (min 3 caracteres):<span style="color:red;">*</span></label>
                 <input type="text"
                  formControlName="intitule"
                  class="form-control"
@@ -19,14 +20,17 @@
                 <div *ngIf="intitule?.invalid && intitule?.touched" class="text-danger">
                   Intitule invalide !
                 </div>
-                <div *ngIf="intitule?.valid && intitule?.touched" class="text-success">
+                <div *ngIf="intitule?.valid && intitule?.touched  && msg1==0" class="text-success">
                   Intitule valide!
+                </div>
+                <div *ngIf="msg1==1"  class="text-danger">
+                  &nbsp;Intitulé existe deja !
                 </div>
     
               </div>
   
               <div class="col-md-6 mb-3">
-                <label for="type">Libellé :</label>
+                <label for="type">Libellé (min 8 caracteres):<span style="color:red;">*</span></label>
                 <input type="text"
                  class="form-control"
                   id="libelle"
@@ -37,8 +41,11 @@
                   <div *ngIf="libelle?.invalid && libelle?.touched" class="text-danger">
                     invalide libellé!
                   </div>
-                  <div *ngIf="libelle?.valid && libelle?.touched" class="text-success">
+                  <div *ngIf="libelle?.valid && libelle?.touched  && msg2==0" class="text-success">
                    Libellé valide!
+                  </div>
+                  <div *ngIf="msg2==1"  class="text-danger">
+                    &nbsp;Libellé existe deja !
                   </div>
     
               </div>

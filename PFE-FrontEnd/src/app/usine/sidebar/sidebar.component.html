@@ -1,7 +1,7 @@
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4 " style="position: fixed !important;">
-  
+
     <!-- Brand Logo -->
     <a class="brand-link">
       <img src="assets/image_usine.png" alt="RMS Logo" class="image-responsive img-circle elevation-1" style="margin-left: -10px">
@@ -10,10 +10,11 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-  
+
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="info" style="margin-left:20px" >
-        <a  class="d-block" style="margin-left:2px;color:white; font-weight: bold;" ><i style="color:red;" class="fas fa-heart fa-lg fa-spin"></i>&nbsp; Bienvenu(e) {{authService.loggedUser}}</a>
+        <!-- <i style="color:red;" class="fas fa-heart fa-lg fa-spin"></i>& -->
+        <a  class="d-block" style="margin-left:2px;color:white; font-weight: bold;" >&nbsp; Bienvenu(e) {{authService.loggedUser}}</a>
       </div>
     </div>
 
@@ -27,12 +28,12 @@
           </div>
         </div>
       </div>
-  
+
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           <li class="nav-item">
-            <a routerLink="dashboard" class="nav-link">
+            <a routerLink="./dashboard" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fas fa-chart-area"></i>
               <!-- <i class="fas fa-chart-area"></i> -->
               <p>DashBoard</p>
@@ -40,17 +41,17 @@
           </li>
 
           <li  class="nav-item">
-            <a routerLink="centreCollecte/listeCentreCollecte" routerLinkActive="active" class="nav-link">
+            <a routerLink="./centreCollecte/listeCentreCollecte" routerLinkActive="active" class="nav-link">
               <!-- <i class="nav-icon fas fa-list"></i> -->
               <i class="nav-icon fas fa-clinic-medical"></i>
-              <p>Gestion des centres 
+              <p>Gestion des centres
               </p>
             </a>
           </li>
-         
+
           <!-- Partie Job Offers lel Admin w recruteur -->
           <li class="nav-item">
-            <a routerLink="magasin/listeMagasin" class="nav-link ">
+            <a routerLink="magasin/listeMagasin" routerLinkActive="active" class="nav-link">
               <!-- <i class="nav-icon fas fa-shopping"></i> -->
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>Gestion des magasins</p>
@@ -58,7 +59,7 @@
           </li>
 
           <li class="nav-item">
-            <a routerLink="produit/listeProduit" class="nav-link ">
+            <a routerLink="produit/listeProduit" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fab fa-product-hunt"></i>
               <p>Gestion des produits</p>
             </a>
@@ -66,14 +67,14 @@
 
           <!-- Partie Condidates List lel Recruteur wel admin -->
           <li class="nav-item">
-            <a routerLink="tank/listeTank" class="nav-link ">
+            <a routerLink="tank/listeTank" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-bitbucket"></i>
               <p>Gestion des tanks</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a  routerLink="operation/listeOperation" class="nav-link ">
+            <a  routerLink="operation/listeOperation" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fas fa-plus"></i>
               <p>Gestion des operations  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;de remplissage</p>
             </a>
@@ -81,26 +82,26 @@
 
 
           <li class="nav-item">
-            <a routerLink="operation/listeOperationT" routerLinkActive="active" class="nav-link" routerLinkActive="active">
+            <a routerLink="operation/listeOperationT" routerLinkActive="active" class="nav-link" >
               <i class="nav-icon fas fa-exchange-alt"></i>
               <p>Transfert lait/produit</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a routerLink="operation/listeOperationRetrait" class="nav-link">
+            <a routerLink="operation/listeOperationRetrait" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fas fa-minus"></i>
               <p>Gestion des operations &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de retrait</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a routerLink="operation/listeOperationTank" class="nav-link">
+            <a routerLink="operation/listeOperationTank" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-id-card-o"></i>
               <p>Gestion des operations &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sur les tanks </p>
             </a>
           </li>
-  
+
           <!-- <li class="nav-header">Schedule</li>
           <li class="nav-item">
             <a class="nav-link">
@@ -117,6 +118,5 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-  
-  
-  
+
+

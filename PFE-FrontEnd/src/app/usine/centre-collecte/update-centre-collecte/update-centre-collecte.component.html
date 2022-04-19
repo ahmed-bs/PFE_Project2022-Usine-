@@ -4,12 +4,13 @@
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div><br>
+    </div>
+    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
     <form [formGroup]="myForm" class="needs-validation" novalidate>
 
       <div class="form-group">
         <div class="col-md-12 mb-3">
-        <label>Nom du centre:</label>
+        <label>Nom centre (min 3 caracteres):<span style="color:red;">*</span></label>
         <input type="text"
                class="form-control"
                formControlName="nomCentre"
@@ -19,17 +20,17 @@
           <div
                *ngIf="nomCentre?.invalid && nomCentre?.touched"
                 class="text-danger">
-                nomCentre invalide !
+                Nom du centre invalide !
          </div>
          <div
               *ngIf="nomCentre?.valid && nomCentre?.touched"
               class="text-success">
-               nomCentre valide !
+              Nom du centre valide !
          </div>
         </div>
 
         <div class="col-md-12 mb-3">
-          <label>Adresse du centre :</label>
+          <label>Adresse (min 4 caracteres): <span style="color:red;">*</span></label>
           <input type="text"
                  class="form-control"
                  formControlName="adresse"
@@ -50,7 +51,7 @@
 
 
           <div class="col-md-12 mb-3">
-            <label>Ville :</label>
+            <label>Ville du centre (min 4 caracteres): <span style="color:red;">*</span></label>
             <input type="text"
                    class="form-control"
                    formControlName="ville"
@@ -60,12 +61,12 @@
               <div
                    *ngIf="ville?.invalid && ville?.touched"
                     class="text-danger">
-                    Adresse Actuel invalide !
+                    Ville invalide !
              </div>
              <div
                   *ngIf="ville?.valid && ville?.touched"
                   class="text-success">
-                  Adresse Actuel valide !
+                 Ville valide !
              </div>
             </div>
 

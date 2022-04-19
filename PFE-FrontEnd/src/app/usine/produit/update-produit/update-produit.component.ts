@@ -36,7 +36,8 @@ export class UpdateProduitComponent implements OnInit {
   }
 
   updateProduit(){
-
+    if(this.myForm.get('intitule')?.value!=null && this.myForm.get('libelle')?.value!=null 
+    && this.myForm.get('intitule')?.value.length>=3 && this.myForm.get('libelle')?.value.length>=8 ){
     this.produitService
         .updateProduit(this.produit.idProduit,this.produit)
         .subscribe(o=>{
@@ -50,12 +51,12 @@ export class UpdateProduitComponent implements OnInit {
         }
       );
   }
+}
 
   ValidatedForm(){
     this.myForm = new FormGroup({
-      'intitule' : new FormControl(null,[Validators.required,]),
-      'libelle' : new FormControl(null,[Validators.required, ]),
- 
+      'intitule' : new FormControl(null,[Validators.required,Validators.minLength(3)]),
+      'libelle' : new FormControl(null,[Validators.required,Validators.minLength(8)]),
       });
  }
 

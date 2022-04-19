@@ -30,8 +30,10 @@ export class CreateOperationComponent implements OnInit {
   qteRsetLaitTank=0;
   valeur1=0;
   valeur2=0;
+  msg1=0;
+  qte=0;
   myForm=new  FormGroup({
-      poidsLait : new FormControl(null,[Validators.required]),
+      poidsLait : new FormControl(null,[Validators.required,Validators.min(1)]),
       code : new FormControl(null,[Validators.required ]),
       centreCollecte : new FormControl(null,[Validators.required ]),
      
@@ -77,9 +79,6 @@ export class CreateOperationComponent implements OnInit {
   
       });
 
-    
-
-
   });
 
   }
@@ -92,29 +91,25 @@ export class CreateOperationComponent implements OnInit {
   save() {
 
 
-  if(this.myForm.get('poidsLait')?.value==null){
+  if(this.myForm.get('poidsLait')?.value==null || this.myForm.get('centreCollecte')?.value==null || this.myForm.get('code')?.value==null ){
     this.msg="vous devez remplir le formulaire !!";
   }
   else{
     this.msg="";
    }
 
-   if(this.myForm.get('centreCollecte')?.value==null){
-    this.msg="vous devez remplir le formulaire !!";
-  }
-  else{
-    this.msg="";
-   }
+   this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe(t=>{
+    console.log(t);
+    if(t==1){
+      this.msg1=1;
+     }
+     else{
+      this.msg1=0;
+     }
 
-   
-   if(this.myForm.get('code')?.value==null){
-    this.msg="vous devez remplir le formulaire !!";
-  }
-  else{
-    this.msg="";
-   }
 
-    if(this.myForm.get('poidsLait')?.value!=null && this.myForm.get('centreCollecte')?.value!=null && this.myForm.get('code')?.value!=null ){
+    if(this.myForm.get('poidsLait')?.value!=null && this.myForm.get('centreCollecte')?.value!=null && this.myForm.get('code')?.value!=null
+    && this.myForm.get('poidsLait')?.value>=1  && t==0 ){
 
     this.operationService
         .createOperationRemplissage(
@@ -135,10 +130,9 @@ export class CreateOperationComponent implements OnInit {
         },
         (error) => {
           console.log("Failed")
-        }
-      );
-
+        });
       }
+    });
   }
 
 

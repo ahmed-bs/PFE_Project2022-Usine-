@@ -16,13 +16,14 @@ export class CreateMagasinComponent implements OnInit {
   magasin:Magasin = new Magasin();
   submitted = false;
   msg="";
+  msg1=0;
   msgErreur=0;
   qteAct=0;
 
   myForm=new  FormGroup({
-      nomMag : new FormControl(null,[Validators.required]),
-      adresse : new FormControl(null,[Validators.required ]),
-      ville : new FormControl(null,[Validators.required ]),
+      nomMag : new FormControl(null,[Validators.required,Validators.minLength(3)]),
+      adresse : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
+      ville : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
   })
 
 
@@ -63,7 +64,18 @@ export class CreateMagasinComponent implements OnInit {
     this.msg="";
    }
   
-   if( this.myForm.get('adresse')?.value!=null && this.myForm.get('nomMag')?.value!=null&& this.myForm.get('ville')?.value!=null  ){
+   this.magasinService.getMagasinUtilise(this.myForm.get('nomMag')?.value).subscribe(t=>{
+    console.log(t);
+    if(t==1){
+      this.msg1=1;
+     }
+     else{
+      this.msg1=0;
+     }
+
+   if( this.myForm.get('adresse')?.value!=null && this.myForm.get('nomMag')?.value!=null&& this.myForm.get('ville')?.value!=null 
+   && this.myForm.get('nomMag')?.value.length>=3 && this.myForm.get('ville')?.value.length>=4 
+   && this.myForm.get('adresse')?.value.length>=4   && t==0){
 
     this.magasinService
         .createMagasin({
@@ -78,7 +90,8 @@ export class CreateMagasinComponent implements OnInit {
          this.onClose();    
         });
     }
-  }
+  });
+}
 
 
   onSubmit() {

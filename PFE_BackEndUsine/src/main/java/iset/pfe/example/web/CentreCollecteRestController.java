@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import iset.pfe.example.entities.CentreCollecte;
 import iset.pfe.example.repositories.CentreCollecteRepository;
 
@@ -31,6 +30,19 @@ public class CentreCollecteRestController {
 	@RequestMapping(value="/nbreC",method = RequestMethod.GET)
 	public int getNbCentre(){
 		return centreCollecteRepository.findAll().size();
+	}
+	
+	@RequestMapping(value="/centres/{nomCentre}",method = RequestMethod.GET)
+	public int getCollUtilise(@PathVariable String nomCentre){
+		int msg=0;
+		for(int i=0;i<centreCollecteRepository.findAll().size();i++) {
+			CentreCollecte t=centreCollecteRepository.findAll().get(i);
+			if(nomCentre.equals(t.getNomCentre())) {
+				msg=1;
+			}
+			
+		}
+		return msg;
 	}
 	
 	@RequestMapping(value="/centre/{idCentre}",method = RequestMethod.GET)
