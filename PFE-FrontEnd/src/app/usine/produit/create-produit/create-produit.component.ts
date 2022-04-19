@@ -16,6 +16,8 @@ export class CreateProduitComponent implements OnInit {
   submitted = false;
   myForm!:FormGroup;
   msg="";
+  msg1=0;
+  msg2=0;
 
   constructor(private produitService: ProduitService,
     private router: Router, private dialogClose: MatDialog,) { }
@@ -46,9 +48,27 @@ export class CreateProduitComponent implements OnInit {
       this.msg="";
      }
 
+     this.produitService.getProdIntituleUtilise(this.myForm.get('intitule')?.value).subscribe(t=>{
+      console.log(t);
+      if(t==1){
+        this.msg1=1;
+       }
+       else{
+        this.msg1=0;
+       }
+
+       this.produitService.getProdLibelleUtilise(this.myForm.get('libelle')?.value).subscribe(l=>{
+        console.log(l);
+        if(l==1){
+          this.msg2=1;
+         }
+         else{
+          this.msg2=0;
+         }
 
      
-     if(this.myForm.get('intitule')?.value!=null && this.myForm.get('libelle')?.value!=null){
+     if(this.myForm.get('intitule')?.value!=null && this.myForm.get('libelle')?.value!=null 
+     && this.myForm.get('intitule')?.value.length>=3 && this.myForm.get('libelle')?.value.length>=8  && t==0 && l==0){
     console.log(this.produit);
     this.produit.idProduit = 1;
     this.produitService
@@ -60,6 +80,8 @@ export class CreateProduitComponent implements OnInit {
           console.log(this.produit);
         });
     }
+  });
+});
   }
 
 
@@ -88,8 +110,8 @@ export class CreateProduitComponent implements OnInit {
 
   ValidatedForm(){
     this.myForm = new FormGroup({
-      'intitule' : new FormControl(null,[Validators.required,]),
-      'libelle' : new FormControl(null,[Validators.required, ]),
+      'intitule' : new FormControl(null,[Validators.required,Validators.minLength(3)]),
+      'libelle' : new FormControl(null,[Validators.required,Validators.minLength(8)]),
       });
  }
 

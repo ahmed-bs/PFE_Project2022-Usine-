@@ -32,7 +32,7 @@ export class CreateOperationRetraitComponent implements OnInit {
   q=0;
   som=0;
   myForm=new  FormGroup({
-      qtePrise : new FormControl(null,[Validators.required]),
+      qtePrise : new FormControl(null,[Validators.required, Validators.min(5)]),
       produit : new FormControl(null,[Validators.required ]),
       magasin : new FormControl(null,[Validators.required ]),
     
@@ -77,29 +77,15 @@ export class CreateOperationRetraitComponent implements OnInit {
 
   save() {
 
-    if(this.myForm.get('qtePrise')?.value==null){
-      this.msg="vous devez remplir le formulaire !!";
-    }
-    else{
-      this.msg="";
-     }
-  
-     if(this.myForm.get('magasin')?.value==null){
+    if(this.myForm.get('qtePrise')?.value==null ||this.myForm.get('magasin')?.value==null || this.myForm.get('produit')?.value==null  ){
       this.msg="vous devez remplir le formulaire !!";
     }
     else{
       this.msg="";
      }
 
-     if(this.myForm.get('produit')?.value==null){
-      this.msg="vous devez remplir le formulaire !!";
-    }
-    else{
-      this.msg="";
-     }
-
-
-     if(this.myForm.get('qtePrise')?.value!=null && this.myForm.get('magasin')?.value!=null && this.myForm.get('produit')?.value!=null ){
+     if(this.myForm.get('qtePrise')?.value!=null && this.myForm.get('magasin')?.value!=null &&
+      this.myForm.get('produit')?.value!=null && this.myForm.get('qtePrise')?.value>=5 ){
 
     this.operationService
     .createOperation(

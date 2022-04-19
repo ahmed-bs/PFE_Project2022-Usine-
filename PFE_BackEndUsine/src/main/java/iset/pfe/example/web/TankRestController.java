@@ -48,6 +48,19 @@ public class TankRestController {
 			return tankRepository.findAll();
 		}
 		
+		@RequestMapping(value="/tank/{matricule}",method = RequestMethod.GET)
+		public int getTanksUtilise(@PathVariable String matricule){
+			int msg=0;
+			for(int i=0;i<tankRepository.findAll().size();i++) {
+				Tank t=tankRepository.findAll().get(i);
+				if(matricule.equals(t.getMatricule())) {
+					msg=1;
+				}
+				
+			}
+			return msg;
+		}
+		
 		
 		@RequestMapping(value="/nbTankRemplis",method = RequestMethod.GET)
 		public int getnbTankRemplis(){

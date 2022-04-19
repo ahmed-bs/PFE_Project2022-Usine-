@@ -4,12 +4,13 @@
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div><br>
+    </div>
+    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
     <form [formGroup]="myForm" class="needs-validation" novalidate>
 
       <div class="form-group">
         <div class="col-md-12 mb-3">
-        <label>nom de l'magasin :</label>
+          <label>Nom du magasin (minimum 3 caracteres) :<span style="color:red;">*</span></label>
         <input type="text"
                class="form-control"
                formControlName="nomMag"
@@ -30,7 +31,7 @@
 
 
           <div class="col-md-12 mb-3">
-            <label>Adresse :</label>
+            <label>Adresse (minimum 4 caracteres) :<span style="color:red;">*</span></label>
             <input type="text"
                    class="form-control"
                    formControlName="adresse"
@@ -53,7 +54,7 @@
 
 
     <div class="col-md-12 mb-3">
-      <label>Ville :</label>
+      <label>Adresse (minimum 4 caracteres) :<span style="color:red;">*</span></label>
       <input type="text"
              class="form-control"
              formControlName="ville"

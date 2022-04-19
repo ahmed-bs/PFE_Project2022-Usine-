@@ -1,6 +1,6 @@
 <div class="ContenuCard" >
     <div class="modal-header">
-      <h2 id="modal-title"><b>Ajouter un nouveau lot :</b></h2>
+      <h4 id="modal-title"><b>Transformation des produits laitiers :</b></h4>
       <button qtePrise="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -8,7 +8,6 @@
     <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
           <form [formGroup]="myForm"  novalidate >
             <div class="form-row">
-           
   
               <div class="col-md-6 mb-3">
                 <label class="mr-sm-5" for="inlineFormCustomSelect">Tank : <span style="color:red;">*</span></label>
@@ -31,10 +30,11 @@
   
               <div class="form-group col-md-6 mb-3">
                 <label>Quantite prise du tank : <span style="color:red;">*</span></label>
-                <input qte="text"
+                <input type="number"
                  formControlName="poidsLait"
                  class="form-control"
                  id="poidsLait"
+                 placeholder="exp : 50 Litres"
                  name="poidsLait">
   
                 <div *ngIf="poidsLait?.invalid && poidsLait?.touched" class="text-danger">
@@ -54,28 +54,22 @@
   
              <div class="form-row"> 
               <div class="form-group col-md-6 mb-3">
-                <label>Quantite (Lots) : <span style="color:red;">*</span></label>
-                <input qtePrise="text"
+                <label>Quantité (Lots) : <span style="color:red;">*</span></label>
+                <input type="number"
                  formControlName="qtePrise"
                  class="form-control"
                  id="qtePrise"
+                 placeholder="exp : 15 (lots)"
                  name="qtePrise">
   
                 <div *ngIf="qtePrise?.invalid && qtePrise?.touched" class="text-danger">
-                  Quantite invalide !
+                  Quantité invalide !
                 </div>
                 <div *ngIf="qtePrise?.valid && qtePrise?.touched " class="text-success">
-                  Quantite valide!
+                  Quantité valide!
                 </div>
-                <!-- <div *ngIf="msgErreur==1" class="text-danger">
-                  Vous ne pouvez pas prendre cette quantité!! car la quantité disponible dans le stock est: {{qtePriseAct}} !
-                  <br> Vous devez introduire une quantite moins ou egale a {{qtePriseAct}} .
-                </div> --> 
-  
                </div> 
              
-  
-  
               <div class="col-md-6 mb-3">
                 <label class="mr-sm-5" for="inlineFormCustomSelect">Produit : <span style="color:red;">*</span></label>
                 <select formControlName="produit" name="produit"  class="custom-select mr-sm-2" id="produit" >
@@ -104,7 +98,7 @@
   
             <div class="form-group">
               <div class="form-check">
-                <input class="form-check-input" name="checkbox" value="" id="cgu" required>
+                <input class="form-check-input" type="checkbox" value="" id="cgu" required>
                 <label class="form-check-label" for="cgu">J'accepte les conditions générales d'utilisation</label>
                 <br>
                 <span style="color:red;margin-bottom:45px;">{{msg}}</span>

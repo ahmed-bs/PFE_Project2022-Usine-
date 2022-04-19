@@ -30,6 +30,8 @@ export class OperationService {
   baseUrl15 : string = 'http://localhost:3802/nbOpRemplissage';
   baseUrl16 : string = 'http://localhost:3802/nbOpTransformation';
 
+  baseUrl17 : string = 'http://localhost:3802/op';
+
 
 
 
@@ -45,6 +47,17 @@ export class OperationService {
     // return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
     return this.http.get(`${this.baseUrl6}`,{headers:httpHeaders});
   }
+
+
+  // test si le code exist ou nn
+  getOpCodeUtilise(code: number): Observable<any> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    const url = `${this.baseUrl17}/${code}`
+    return this.http.get(url,{headers:httpHeaders});
+  }
+
 
   getNbOpRetrait(): Observable<any> {
     let jwt = this.authService.getToken();

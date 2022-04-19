@@ -15,6 +15,8 @@ export class CentreCollecteService {
 
   baseUrl : string = 'http://localhost:3802/centre';
   baseUrl1 : string = 'http://localhost:3802/nbreC';
+  baseUrl2 : string = 'http://localhost:3802/centres';
+  
 
   //
   constructor(private http: HttpClient ,private authService :AuthService) { }
@@ -25,6 +27,15 @@ export class CentreCollecteService {
     let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
     return this.http.get(`${this.baseUrl}`,{headers:httpHeaders});
 
+  }
+
+  // test si le nom du collecteur exist ou nn
+  getCollecteurUtilise(nomCollecteur: string): Observable<any> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    const url = `${this.baseUrl2}/${nomCollecteur}`
+    return this.http.get(url,{headers:httpHeaders});
   }
 
   getNbCentres(): Observable<any> {
