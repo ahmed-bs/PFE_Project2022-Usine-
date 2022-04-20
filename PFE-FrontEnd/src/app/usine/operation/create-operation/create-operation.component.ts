@@ -10,6 +10,7 @@ import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-create-operation',
@@ -49,6 +50,7 @@ export class CreateOperationComponent implements OnInit {
   elem?:OperationTank;
 
   constructor(
+    private location:Location,
     private operationService: OperationService,
     private tankService:TankService,
     private centreCollecteService:CentreCollecteService,
@@ -161,8 +163,11 @@ export class CreateOperationComponent implements OnInit {
 
 
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
   
   
   onClose() {

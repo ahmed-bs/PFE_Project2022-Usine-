@@ -10,6 +10,7 @@ import { TankService } from 'src/app/Services/tank.service';
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 import { DetailsOperationComponent } from '../details-operation/details-operation.component';
 import { UpdateOperationComponent } from '../update-operation/update-operation.component';
+import {Location} from "@angular/common";
 
 
 @Component({
@@ -41,6 +42,7 @@ export class ListeOperationComponent implements OnInit {
   displayedColumns: string[] = ['idOperation','poidsLait', 'dateOperation','centreCollecte','code', 'action'];
   constructor(private operationService: OperationService,
     private tankService:TankService,
+    private location:Location,
     private router: Router, private dialog:MatDialog) { }
 
 
@@ -133,9 +135,12 @@ export class ListeOperationComponent implements OnInit {
 
 
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
-  
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
+ 
   
   onClose() {
     this.dialog.closeAll();

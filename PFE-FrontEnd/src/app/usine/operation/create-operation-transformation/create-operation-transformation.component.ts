@@ -14,6 +14,7 @@ import { ProduitService } from 'src/app/Services/produit.service';
 import { MagasinService } from 'src/app/Services/magasin.service';
 import { LotService } from 'src/app/Services/lot.service';
 import { DatePipe } from '@angular/common';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-create-operation-transformation',
@@ -48,6 +49,7 @@ export class CreateOperationTransformationComponent implements OnInit {
 
 
   constructor(
+    private location:Location,
     private operationService: OperationService,
     private tankService:TankService,
     private lotService:LotService,
@@ -135,8 +137,11 @@ export class CreateOperationTransformationComponent implements OnInit {
 
 
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
   
   
   onClose() {

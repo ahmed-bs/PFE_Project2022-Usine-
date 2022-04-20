@@ -11,6 +11,7 @@ import { CreateOperationTransformationComponent } from '../create-operation-tran
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 import { DetailsOperationTransformationComponent } from '../details-operation-transformation/details-operation-transformation.component';
 import { UpdateOperationComponent } from '../update-operation/update-operation.component';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-liste-operation-transformation',
@@ -41,6 +42,7 @@ export class ListeOperationTransformationComponent implements OnInit {
   displayedColumns: string[] = ['idOperation','poidsLait','tank','qtePrise','produit', 'dateOperation', 'action'];
   constructor(private operationService: OperationService,
     private tankService:TankService,
+    private location:Location,
     private router: Router, private dialog:MatDialog) { }
 
 
@@ -126,8 +128,11 @@ export class ListeOperationTransformationComponent implements OnInit {
 
 
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
   
   
   onClose() {

@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DetailsTankComponent } from '../details-tank/details-tank.component';
 import { UpdateTankComponent } from '../update-tank/update-tank.component';
 import { CreateTankComponent } from '../create-tank/create-tank.component';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-liste-tank',
@@ -35,6 +36,7 @@ export class ListeTankComponent implements OnInit {
   displayedColumns: string[] = ['idTank','matricule','poidVide','poidActuel','etat','action'];
 
   constructor(
+    private location:Location,
     private tankService: TankService,
     private router: Router,
     private dialog:MatDialog) { }
@@ -92,8 +94,11 @@ export class ListeTankComponent implements OnInit {
   
   
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
   
   
   onClose() {

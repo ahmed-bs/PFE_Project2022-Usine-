@@ -13,13 +13,13 @@ export class AppComponent {
   mySubscription: any;
 
   constructor(public authService: AuthService,private router: Router, private activatedRoute: ActivatedRoute){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-         // Trick the Router into believing it's last link wasn't previously loaded
-         this.router.navigated = false;
-      }
-    }); 
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // this.mySubscription = this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //      // Trick the Router into believing it's last link wasn't previously loaded
+    //      this.router.navigated = false;
+    //   }
+    // }); 
  }
 
 ngOnInit () {
@@ -31,11 +31,11 @@ ngOnInit () {
       }
 }
 
-ngOnDestroy(){
-  if (this.mySubscription) {
-    this.mySubscription.unsubscribe();
-  }
-}
+// ngOnDestroy(){
+//   if (this.mySubscription) {
+//     this.mySubscription.unsubscribe();
+//   }
+// }
 
 onLogout(){
   this.authService.logout();

@@ -9,7 +9,7 @@
           <form [formGroup]="myForm"  novalidate >
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <label>Poids Lait (minimum 5L) : <span style="color:red;">*</span></label>
+                <label>Poids Lait (minimum 1L) : <span style="color:red;">*</span></label>
                 <input type="number"
                  formControlName="poidsLait"
                  class="form-control"
@@ -60,6 +60,7 @@
          formControlName="code"
          class="form-control"
          id="code"
+         placeholder="111111 .. "
          name="code">
   
         <div *ngIf="code?.invalid && code?.touched" class="text-danger">
