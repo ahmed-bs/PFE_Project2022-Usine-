@@ -13,6 +13,7 @@ import { TankService } from 'src/app/Services/tank.service';
 import { MagasinService } from 'src/app/Services/magasin.service';
 import { ProduitService } from 'src/app/Services/produit.service';
 import { DatePipe } from '@angular/common';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-create-operation-retrait',
@@ -47,6 +48,7 @@ export class CreateOperationRetraitComponent implements OnInit {
 
 
   constructor(
+    private location:Location,
     private operationService: OperationService,
     private tankService:TankService,
     private produitService:ProduitService,
@@ -144,8 +146,11 @@ export class CreateOperationRetraitComponent implements OnInit {
   }
 
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
   
   
   onClose() {

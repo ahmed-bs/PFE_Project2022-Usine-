@@ -10,6 +10,7 @@ import { CreateMagasinComponent } from '../create-magasin/create-magasin.compone
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Magasin } from 'src/app/Models/magasin';
 import { MagasinService } from 'src/app/Services/magasin.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-liste-magasin',
@@ -35,6 +36,7 @@ export class ListeMagasinComponent implements OnInit {
   displayedColumns: string[] = ['idMag','nomMag','adresse','ville','action'];
 
   constructor(
+    private location:Location,
     private magasinService: MagasinService,
     private router: Router,
     private dialog:MatDialog) { }
@@ -118,8 +120,12 @@ export class ListeMagasinComponent implements OnInit {
     }
   
 
+  
     onReload(){
-      this.router.navigate([this.router.url]);
+      // this.router.navigate([this.router.url]);
+      this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+       this.router.navigate([decodeURI(this.location.path())]);
+     })
     }
     
     

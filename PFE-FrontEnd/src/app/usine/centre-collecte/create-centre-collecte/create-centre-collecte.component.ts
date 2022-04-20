@@ -37,7 +37,9 @@ export class CreateCentreCollecteComponent implements OnInit {
     private location:Location,
      private centreCollecteService: CentreCollecteService,
      private router: Router,
-     private dialogClose: MatDialog,) { }
+     private dialogClose: MatDialog,) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      }
 
   ngOnInit() {
 
@@ -97,12 +99,12 @@ export class CreateCentreCollecteComponent implements OnInit {
     this.router.navigate(['usine/centreCollecte/listeCentreCollecte']);
   }
 
-  
-  onReload(){
     // this.router.navigate([this.router.url]);
-this.router.navigateByUrl("/usine/centreCollecte/listeCentreCollecte",{skipLocationChange: true}).then( response=> {
- this.router.navigate([decodeURI(this.location.path())]);
-})
+    onReload(){
+      // this.router.navigate([this.router.url]);
+      this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+       this.router.navigate([decodeURI(this.location.path())]);
+     })
 }
 
 
@@ -110,6 +112,7 @@ onClose() {
  this.dialogClose.closeAll();
  // this.gotoList();
  this.onReload();
+//  this.ngOnInit();
 }
 
  get nomCentre(){

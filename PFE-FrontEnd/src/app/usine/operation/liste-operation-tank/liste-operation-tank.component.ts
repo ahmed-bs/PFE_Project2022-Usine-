@@ -9,6 +9,7 @@ import { OperationTank } from 'src/app/Models/operationTank';
 import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { DetailsOperationTankComponent } from '../details-operation-tank/details-operation-tank.component';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-liste-operation-tank',
@@ -37,6 +38,7 @@ export class ListeOperationTankComponent implements OnInit {
   constructor(
     private operationService: OperationService, 
     private tankService:TankService, 
+    private location:Location,
     private router: Router, private dialog:MatDialog) { }
 
 

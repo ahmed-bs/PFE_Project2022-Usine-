@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
+import {Location} from "@angular/common";
 
 
 @Component({
@@ -27,6 +28,7 @@ export class UpdateCentreCollecteComponent implements OnInit {
 
 
    constructor(
+    private location:Location,
     private router: Router,
      private dialogClose: MatDialog,
      private centreService:CentreCollecteService,
@@ -85,9 +87,11 @@ export class UpdateCentreCollecteComponent implements OnInit {
 }
 
 onReload(){
-  this.router.navigate([this.router.url]);
+  // this.router.navigate([this.router.url]);
+  this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+   this.router.navigate([decodeURI(this.location.path())]);
+ })
 }
-
 
 onClose() {
   this.dialogClose.closeAll();

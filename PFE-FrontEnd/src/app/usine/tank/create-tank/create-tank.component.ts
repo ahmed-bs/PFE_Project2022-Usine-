@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Tank } from 'src/app/Models/tank';
 import { TankService } from 'src/app/Services/tank.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-create-tank',
@@ -29,6 +30,7 @@ export class CreateTankComponent implements OnInit {
   // fournisseurs!:Observable<Fournisseur[]>;
 
   constructor(
+    private location:Location,
      private tankService: TankService,
      private router: Router,
      private dialogClose: MatDialog,) { }
@@ -99,8 +101,11 @@ export class CreateTankComponent implements OnInit {
 
 
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
   
   
   onClose() {

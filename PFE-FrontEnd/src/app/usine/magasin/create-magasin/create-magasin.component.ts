@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Magasin } from 'src/app/Models/magasin';
 import { MagasinService } from 'src/app/Services/magasin.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-create-magasin',
@@ -28,6 +29,7 @@ export class CreateMagasinComponent implements OnInit {
 
 
   constructor(
+    private location:Location,
      private magasinService: MagasinService,
      private router: Router, 
      private dialogClose: MatDialog,) { }
@@ -104,7 +106,10 @@ export class CreateMagasinComponent implements OnInit {
 
 
   onReload(){
-    this.router.navigate([this.router.url]);
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
   }
   
   

@@ -10,6 +10,7 @@ import { Centre } from 'src/app/Models/centre';
 import { DetailsCentreCollecteComponent } from '../details-centre-collecte/details-centre-collecte.component';
 import { UpdateCentreCollecteComponent } from '../update-centre-collecte/update-centre-collecte.component';
 import { CreateCentreCollecteComponent } from '../create-centre-collecte/create-centre-collecte.component';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-liste-centre-collecte',
@@ -35,6 +36,7 @@ export class ListeCentreCollecteComponent implements OnInit {
   displayedColumns: string[] = ['idCentre','nomCentre','adresse','ville','action'];
 
   constructor(
+    private location:Location,
     private centreCollecteService: CentreCollecteService,
     private router: Router,
     private dialog:MatDialog) { }
@@ -117,9 +119,16 @@ export class ListeCentreCollecteComponent implements OnInit {
     }
   
 
+    // onReload(){
+    //   this.router.navigate([this.router.url]);
+    // }
+
     onReload(){
-      this.router.navigate([this.router.url]);
-    }
+      // this.router.navigate([this.router.url]);
+      this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+       this.router.navigate([decodeURI(this.location.path())]);
+     })
+   }
     
     
     onClose() {

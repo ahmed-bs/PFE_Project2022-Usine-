@@ -12,6 +12,7 @@ import { CreateOperationRetraitComponent } from '../create-operation-retrait/cre
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 // import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
 import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
+import {Location} from "@angular/common";
 // import { UpdateOperationRetraitComponent } from '../update-operation-retrait/update-operation-retrait.component';
 
 @Component({
@@ -42,6 +43,7 @@ export class ListeOperationRetraitComponent implements OnInit {
   displayedColumns: string[] = ['idOperation','qtePrise','code', 'dateOperation','magasin','produit', 'action'];
   constructor(private operationService: OperationService,
     private tankService:TankService,
+    private location:Location,
     private produitService:ProduitService,
     private router: Router, private dialog:MatDialog) { }
 
@@ -124,9 +126,12 @@ export class ListeOperationRetraitComponent implements OnInit {
 
 
   onReload(){
-    this.router.navigate([this.router.url]);
-  }
-  
+    // this.router.navigate([this.router.url]);
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+     this.router.navigate([decodeURI(this.location.path())]);
+   })
+ }
+ 
   
   onClose() {
     this.dialog.closeAll();

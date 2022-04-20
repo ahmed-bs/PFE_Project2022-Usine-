@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Magasin } from 'src/app/Models/magasin';
 import { MagasinService } from 'src/app/Services/magasin.service';
 import { Router } from '@angular/router';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-update-magasin',
@@ -24,6 +25,7 @@ export class UpdateMagasinComponent implements OnInit {
 
 
    constructor(
+    private location:Location,
      private dialogClose: MatDialog,
      private router:Router,
      private magasinService:MagasinService,
@@ -77,7 +79,10 @@ get ville(){
 }
 
 onReload(){
-  this.router.navigate([this.router.url]);
+  // this.router.navigate([this.router.url]);
+  this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+   this.router.navigate([decodeURI(this.location.path())]);
+ })
 }
 
 

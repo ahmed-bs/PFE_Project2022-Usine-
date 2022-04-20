@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Tank } from 'src/app/Models/tank';
 import { Router } from '@angular/router';
 import { TankService } from 'src/app/Services/tank.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-update-tank',
@@ -25,6 +26,7 @@ export class UpdateTankComponent implements OnInit {
 
 
    constructor(
+    private location:Location,
      private router:Router,
      private dialogClose: MatDialog,
      private tankService:TankService,
@@ -84,9 +86,11 @@ export class UpdateTankComponent implements OnInit {
 // }
 
 onReload(){
-  this.router.navigate([this.router.url]);
+  // this.router.navigate([this.router.url]);
+  this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
+   this.router.navigate([decodeURI(this.location.path())]);
+ })
 }
-
 
 onClose() {
   this.dialogClose.closeAll();
