@@ -193,7 +193,6 @@ export class ListeOperationRetraitComponent implements OnInit {
       if (this.ShowToast == 'hide') {
         setTimeout(() => {
           this.ShowToast = 'show';
-          console.log(this.ShowToast);
         }, 1);
       }
   
@@ -201,11 +200,9 @@ export class ListeOperationRetraitComponent implements OnInit {
         this.ShowToast = 'hide';
         this.Toast = [];
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
-        console.log(this.ShowToast);
       }, 9100);
       this.intervalId = setInterval(() => {
         this.counter = this.counter + 1;
-        console.log(this.counter);
         if (this.counter === 9)
         clearInterval(this.intervalId);
       }, 1000);

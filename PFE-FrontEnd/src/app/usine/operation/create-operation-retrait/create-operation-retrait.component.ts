@@ -14,7 +14,10 @@ import { MagasinService } from 'src/app/Services/magasin.service';
 import { ProduitService } from 'src/app/Services/produit.service';
 import { DatePipe } from '@angular/common';
 import {Location} from "@angular/common";
-
+import { ethers } from 'ethers';
+declare let require: any;
+declare let window: any;
+let Remplissage = require('../../../../../build/contracts/RetraitUsine.json');
 @Component({
   selector: 'app-create-operation-retrait',
   templateUrl: './create-operation-retrait.component.html',
@@ -23,7 +26,7 @@ import {Location} from "@angular/common";
 export class CreateOperationRetraitComponent implements OnInit {
 
  
-  operation:Operation = new Operation();
+  operation:any;
   t:Tank=new Tank();
   submitted = false;
   msg="";
@@ -42,7 +45,7 @@ export class CreateOperationRetraitComponent implements OnInit {
   magasins!:Observable<Magasin[]>;
   lots!:Observable<Lot[]>;
   produits!:Observable<Produit[]>;
-
+  tab!: any[];
 
   maDate = new Date();
 
@@ -103,12 +106,21 @@ export class CreateOperationRetraitComponent implements OnInit {
         },
       
     )
-    .subscribe(o =>{
+    .subscribe(o =>{    
+      this.magasinService.getMagasin(this.myForm.get('magasin')?.value).subscribe(
+      b=>{
+        console.log(b)
+        localStorage.setItem('magasin',JSON.stringify(b))
+      })
+      this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(
+        v=>{
+          console.log(v)
+          localStorage.setItem('produit',JSON.stringify(v))
+        })
       // window.location.reload();
-      console.log(this.operation);   
-      console.log("nourrrrrrrr");
-      console.log(this.operation);
-      console.log("nourrrrrrrr");  
+      this.tab=Object.values(o);
+      console.log(o);
+      localStorage.setItem('operation',JSON.stringify(this.tab))
       localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
     //  window.location.reload(); 
     this.onClose();     
@@ -123,6 +135,39 @@ export class CreateOperationRetraitComponent implements OnInit {
   }
 
 
+
+
+  async  requestAccount() {
+    if (typeof window.ethereum !== 'undefined') {
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    }
+  }
+
+
+  count!: number;
+//elem0!: Operation;
+elem0: Operation[]=[];
+elem2: Operation=new Operation();
+  async saveInBc(){
+    const depKEY=Object.keys(Remplissage.networks)[0];
+    await this.requestAccount()
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(Remplissage.networks[depKEY].address, Remplissage.abi, signer)
+    this.elem0=JSON.parse(localStorage.getItem('operation') || '[]')|| []  ;
+    console.log(this.elem0);
+
+
+   
+    this.elem0[6]= JSON.parse(localStorage.getItem('magasin') || '[]') || []  ;
+    this.elem0[7]=JSON.parse(localStorage.getItem('produit') || '[]') || []  ;
+  
+    console.log("222222222222222222222222222222222222222");
+    console.log(this.elem0[0]);
+    const transaction = await contract.RetraitOperationTank(this.elem0);
+    await transaction.wait() ; 
+    }
+
   onSubmit() {
     this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(a=>{
       this.q=a.qte;
@@ -131,6 +176,7 @@ export class CreateOperationRetraitComponent implements OnInit {
       if(this.myForm.get('qtePrise')?.value<=this.q  ){
       this.save();
       this.msgErreur=0;
+      this.saveInBc()
     }
       else{
       this.msgErreur=1;

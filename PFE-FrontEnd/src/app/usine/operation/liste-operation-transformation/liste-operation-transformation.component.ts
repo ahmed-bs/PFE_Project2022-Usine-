@@ -198,7 +198,6 @@ export class ListeOperationTransformationComponent implements OnInit {
       if (this.ShowToast == 'hide') {
         setTimeout(() => {
           this.ShowToast = 'show';
-          console.log(this.ShowToast);
         }, 1);
       }
 
@@ -206,11 +205,9 @@ export class ListeOperationTransformationComponent implements OnInit {
         this.ShowToast = 'hide';
         this.Toast = [];
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
-        console.log(this.ShowToast);
       }, 12100);
       this.intervalId = setInterval(() => {
         this.counter = this.counter + 1;
-        console.log(this.counter);
         if (this.counter === 15)
         clearInterval(this.intervalId);
       }, 1000);

@@ -11,7 +11,10 @@ import { TankService } from 'src/app/Services/tank.service';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
 import {Location} from "@angular/common";
-
+import { ethers } from 'ethers';
+declare let require: any;
+declare let window: any;
+let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json');
 @Component({
   selector: 'app-create-operation',
   templateUrl: './create-operation.component.html',
@@ -45,10 +48,11 @@ export class CreateOperationComponent implements OnInit {
   centres!:Observable<Centre[]>;
 
   length=0;
-
+  kk!: any;
   ELEMENT_DATA?:OperationTank[];
   elem?:OperationTank;
-
+  tab!: any[];
+  tabTankId!: any[];
   constructor(
     private location:Location,
     private operationService: OperationService,
@@ -56,7 +60,7 @@ export class CreateOperationComponent implements OnInit {
     private centreCollecteService:CentreCollecteService,
     private router: Router,
     private dialogClose: MatDialog) { }
-
+   
   async ngOnInit() {
     //this.ValidatedForm();
     this.tanks=this.tankService.getTanks();
@@ -71,15 +75,7 @@ export class CreateOperationComponent implements OnInit {
       this.msgErreur=1;
       this.qteRsetLait=o;
       }
-
-      this.operationService.getOpTank(JSON.parse(localStorage.getItem('IdOperation') || '[]') || []).subscribe(async i=>{
-         this.ELEMENT_DATA=await i;
-       // this.length=this.ELEMENT_DATA?.length;
-        console.log(i.idOpTank);
-        console.log(this.ELEMENT_DATA);
-        //console.log(this.ELEMENT_DATA?.idOpTank);
-  
-      });
+      this.onReload();
 
   });
 
@@ -125,17 +121,58 @@ export class CreateOperationComponent implements OnInit {
           }
         )
         .subscribe(o=>{
-         this.onClose();
-          console.log(this.operation);
 
+
+          this.tab = Object.values(o)
+          console.log("ssssssssssssssssssssssssssssssss")
+          console.log(this.tab)
+          localStorage.setItem('IdOperation',this.tab[0])
+          this.onReload();
+         this.onClose();
           localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
+          this.operationService.getOpTank(this.tab[0]).subscribe( i=>{
+            // this.length=this.ELEMENT_DATA?.length;
+            this.tabTankId = Object.values(i)
+            console.log('5555555555555555555555555');
+             console.log(this.tabTankId);
+             localStorage.setItem('tabTankId',JSON.stringify(this.tabTankId))
+           });
         },
         (error) => {
           console.log("Failed")
         });
+ 
+ 
       }
     });
   }
+
+
+  async  requestAccount() {
+    if (typeof window.ethereum !== 'undefined') {
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    }
+  }
+
+
+  count!: number;
+elem0: OperationTank[] = [];
+
+
+  async saveInBc(){
+    const depKEY=Object.keys(Remplissage.networks)[0];
+    await this.requestAccount()
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(Remplissage.networks[depKEY].address, Remplissage.abi, signer)
+    this.elem0=JSON.parse(localStorage.getItem('tabTankId') || '[]') || []  ;
+    console.log("222222222222222222222222222222222222222");
+    console.log(this.elem0);
+    this.count=this.elem0.length
+    const transaction = await contract.addOperationTankUsine(this.elem0,this.count);
+    await transaction.wait() ; 
+    }
+
 
 
   onSubmit() {
@@ -146,6 +183,7 @@ export class CreateOperationComponent implements OnInit {
       if(this.myForm.get('poidsLait')?.value<=o){
       this.save();
       this.msgErreur=0;
+      this.saveInBc()
       }
       else{
       this.msgErreur=1;
