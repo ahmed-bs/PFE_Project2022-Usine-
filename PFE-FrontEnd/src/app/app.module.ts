@@ -32,7 +32,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    
+
     FormsModule,
     ReactiveFormsModule,
   ],

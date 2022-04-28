@@ -34,20 +34,20 @@
   
   
               <div class="col-md-6 mb-3">
-                <label class="mr-sm-5" for="inlineFormCustomSelect">centre Collecte : <span style="color:red;">*</span></label>
+                <label class="mr-sm-5" for="inlineFormCustomSelect">Centre du collecte : <span style="color:red;">*</span></label>
                 <select formControlName="centreCollecte" name="centreCollecte"  class="custom-select mr-sm-2" id="centreCollecte" >
-                  <option disabled selected value [ngValue]="null">Choisir un centreCollecte...</option>
+                  <option disabled selected value [ngValue]="null">Choisir un centre de collecte...</option>
                   <option *ngFor="let centreCollecte of centres | async" [value]="centreCollecte.idCentre">{{centreCollecte.nomCentre}}</option>
                 </select>
                 <div
                 *ngIf="centreCollecte?.invalid && centreCollecte?.touched"
                  class="text-danger">
-                    invalide centreCollecte!
+                    Choix du centre invalid!
              </div>
                <div
                *ngIf="centreCollecte?.valid && centreCollecte?.touched"
                class="text-success">
-               centreCollecte valide!
+               Choix du centre valide!
              </div>
               </div>
   

@@ -67,7 +67,7 @@ export class CreateOperationRetraitComponent implements OnInit {
 
     this.operationService.getNbOp().subscribe(o=>{
     console.log(o);
-    this.som=10000+o+1;  
+    this.som=20000000+o+1;  
     });
 
     console.log(this.maDate);

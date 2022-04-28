@@ -61,6 +61,11 @@ export class CreateOperationTransformationComponent implements OnInit {
   ngOnInit() {
     this.produits=this.produitService.getProduits();
     this.tanks=this.tankService.getTanksDispo();
+    
+    this.operationService.getNbOp().subscribe(o=>{
+      console.log(o);
+      this.som=100000000+o+1;  
+      });
   }
 
   newEmployee(): void {
@@ -94,8 +99,9 @@ export class CreateOperationTransformationComponent implements OnInit {
      },
          "poidsLait":this.myForm.get('poidsLait')?.value,
          "qtePrise":this.myForm.get('qtePrise')?.value,
+         "code":this.som,
         },
-      
+        
     )
     .subscribe(o =>{
       // window.location.reload();
