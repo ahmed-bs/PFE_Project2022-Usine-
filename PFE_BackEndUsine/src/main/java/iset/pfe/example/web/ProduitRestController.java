@@ -47,6 +47,7 @@ public class ProduitRestController {
 		return msg;
 	}
 	
+	
 	@RequestMapping(value="/libelle/{libelle}",method = RequestMethod.GET)
 	public int getProdLibelleUtilise(@PathVariable String libelle){
 		int msg=0;

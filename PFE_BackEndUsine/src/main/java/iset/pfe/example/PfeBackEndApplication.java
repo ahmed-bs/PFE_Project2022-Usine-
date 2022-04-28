@@ -74,10 +74,6 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		
 		CentreCollecte c1=new CentreCollecte("centre 1", "Bizerte", "Bizerte");
 		centreCollecteRepository.save(c1);
-		
-		Operation o1=new Operation(120, dateA.toLocaleString(), "Remplissage", 112200);
-		o1.setCentreCollecte(c1);
-		operationRepository.save(o1);
 
 
 		Produit p1=new Produit("yaourt - fraise", "akf5rfvn54");
@@ -86,6 +82,7 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		
 		Role role1=new Role("USER");
 		roleRepository.save(role1);
+		
 		
 		
 		BCryptPasswordEncoder encoder; 

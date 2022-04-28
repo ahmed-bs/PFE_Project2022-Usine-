@@ -118,6 +118,14 @@ export class CreateOperationTransformationComponent implements OnInit {
 
 
   onSubmit() {
+    if(this.myForm.get('produit')?.value==null || this.myForm.get('poidsLait')?.value==null ||
+    this.myForm.get('qtePrise')?.value==null || this.myForm.get('tank')?.value==null){
+    this.msg="vous devez remplir le formulaire !!";
+   }
+   else{
+    this.msg="";
+   }
+
     this.tankService.getTank(this.myForm.get('tank')?.value).subscribe( i=>{
       console.log(i.poidActuel);
   
