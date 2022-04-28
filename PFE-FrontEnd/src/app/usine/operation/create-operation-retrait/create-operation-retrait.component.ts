@@ -169,6 +169,13 @@ elem2: Operation=new Operation();
     }
 
   onSubmit() {
+    if(this.myForm.get('qtePrise')?.value==null ||this.myForm.get('magasin')?.value==null || this.myForm.get('produit')?.value==null  ){
+      this.msg="vous devez remplir le formulaire !!";
+    }
+    else{
+      this.msg="";
+     }
+     
     this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(a=>{
       this.q=a.qte;
       console.log(this.q);
