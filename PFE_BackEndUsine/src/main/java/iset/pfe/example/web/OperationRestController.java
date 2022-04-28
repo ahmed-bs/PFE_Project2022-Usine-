@@ -2,6 +2,7 @@ package iset.pfe.example.web;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -228,12 +229,38 @@ public class OperationRestController {
 	     qte=(int) (t.getPoidActuel()-operation.getPoidsLait());
 	     t.setPoidActuel(qte);
 	     tankRepository.save(t);
+	    
 	     Produit p=produitRepository.findById(operation.getProduit().getIdProduit()).get();
 	     int qte1=p.getQte()+operation.getQtePrise();
 	     p.setQte(qte1);
 	     produitRepository.save(p);
+	     
+	     if(t.getPoidActuel()==0) {
+				t.setCodeTank(null);
+			    tankRepository.save(t);
+		}
+	     
+	 	for(int i=0;i<tankRepository.findAll().size();i++) {
+			
+			Tank tank2=tankRepository.findAll().get(i);
+			
+			if(tank2.getPoidActuel()==tank2.getPoidVide()) {
+			tank2.setEtat("Remplis");
+			tankRepository.save(tank2);
+			}
+			else if(tank2.getPoidActuel()==0) {
+				tank2.setEtat("Vide");
+				tank2.setDateIns(null);
+				tankRepository.save(tank2);
+				}
+			else if(tank2.getPoidActuel()<tank2.getPoidVide()) {
+				tank2.setEtat("En cours");
+				tankRepository.save(tank2);
+				}
+		}
 
 		operation.setDateOperation(currentDateTime);
+		//operation.setCode(1000000+operationRepository.findAll());
 		operation.setTypeOp("Transformation");			
 
 	return operationRepository.save(operation);
@@ -345,6 +372,7 @@ public class OperationRestController {
 			
 			tank.setPoidActuel(tank.getPoidVide());
 			tank.setDateIns(currentDateTime);
+			tank.getCodeTank().add(operation.getCode());
 			a=a-s;
 			//tank.getOperations().add(operation);
 			tankRepository.save(tank);
@@ -370,7 +398,7 @@ public class OperationRestController {
 		 
 			tank.setPoidActuel(tank.getPoidActuel()+a);
 			tank.setDateIns(currentDateTime);
-			
+			tank.getCodeTank().add(operation.getCode());
 			//tank.getOperations().add(operation);
 			tankRepository.save(tank);
 			OperationTank opt=new OperationTank(currentDateTime);
@@ -395,6 +423,7 @@ public class OperationRestController {
 			
 			tank.setPoidActuel(tank.getPoidVide());
 			tank.setDateIns(currentDateTime);
+			tank.getCodeTank().add(operation.getCode());
 			a=a-s;
 			//tank.getOperations().add(operation);
 			tankRepository.save(tank);
@@ -418,6 +447,7 @@ public class OperationRestController {
 						diff=tank1.getPoidVide()-tank1.getPoidActuel();
 						tank1.setPoidActuel(tank1.getPoidVide()-tank1.getPoidActuel());
 						tank1.setDateIns(currentDateTime);
+						tank1.getCodeTank().add(operation.getCode());
 						//tank1.getOperations().add(operation);
 						tankRepository.save(tank1);
 						//operation.getTanks().add(tank1);
@@ -438,6 +468,7 @@ public class OperationRestController {
 						
 						tank1.setPoidActuel(a);
 						tank1.setDateIns(currentDateTime);
+						tank1.getCodeTank().add(operation.getCode());
 						//tank1.getOperations().add(operation);
 						tankRepository.save(tank1);
 						//operation.getTanks().add(tank1);
@@ -462,6 +493,7 @@ public class OperationRestController {
 						diff=tank1.getPoidVide()-tank1.getPoidActuel();
 						tank1.setPoidActuel(tank1.getPoidVide()-tank1.getPoidActuel());
 						tank1.setDateIns(currentDateTime);
+						tank1.getCodeTank().add(operation.getCode());
 						//tank1.getOperations().add(operation);
 						tankRepository.save(tank1);
 						//operation.getTanks().add(tank1);
@@ -480,6 +512,7 @@ public class OperationRestController {
 					if(tank1.getPoidActuel()==0 && a<100 && a>0  && tank1.getDateIns()==null) {
 						tank1.setPoidActuel(a);
 						tank1.setDateIns(currentDateTime);
+						tank1.getCodeTank().add(operation.getCode());
 						//tank1.getOperations().add(operation);
 						tankRepository.save(tank1);
 						//operation.getTanks().add(tank1);
@@ -504,20 +537,20 @@ public class OperationRestController {
 							Tank tank2=tankRepository.findAll().get(i);
 							
 							if(tank2.getPoidActuel()==tank2.getPoidVide()) {
-							tank2.setEtat("Remplis");
-							tankRepository.save(tank2);
-						
-							}
-							else if(tank2.getPoidActuel()==0) {
-								tank2.setEtat("Vide");
-								tank2.setDateIns(null);
+								tank2.setEtat("Remplis");
 								tankRepository.save(tank2);
-								
+							
 								}
-							else if(tank2.getPoidActuel()>0 && tank2.getPoidActuel()<tank2.getPoidVide()) {
-								tank2.setEtat("En cours");
-								tankRepository.save(tank2);
-								}
+								else if(tank2.getPoidActuel()==0) {
+									tank2.setEtat("Vide");
+									tank2.setDateIns(null);
+									tankRepository.save(tank2);
+									
+									}
+								else if(tank2.getPoidActuel()<tank2.getPoidVide()) {
+									tank2.setEtat("En cours");
+									tankRepository.save(tank2);
+									}
 						}
 		}
 			
