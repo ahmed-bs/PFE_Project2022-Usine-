@@ -16,6 +16,7 @@ export class CentreCollecteService {
   baseUrl : string = 'http://localhost:3802/centre';
   baseUrl1 : string = 'http://localhost:3802/nbreC';
   baseUrl2 : string = 'http://localhost:3802/centres';
+  baseUrl3 : string = 'http://localhost:3802/tel';
   
 
   //
@@ -37,6 +38,15 @@ export class CentreCollecteService {
     const url = `${this.baseUrl2}/${nomCollecteur}`
     return this.http.get(url,{headers:httpHeaders});
   }
+
+    // test si le telephone exist ou nn
+    getTelUtilise(tel: number): Observable<any> {
+      let jwt = this.authService.getToken();
+      jwt = "Bearer "+jwt;
+      let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+      const url = `${this.baseUrl3}/${tel}`
+      return this.http.get(url,{headers:httpHeaders});
+    }
 
   getNbCentres(): Observable<any> {
     let jwt = this.authService.getToken();

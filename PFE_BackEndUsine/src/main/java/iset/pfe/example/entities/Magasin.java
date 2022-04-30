@@ -20,6 +20,7 @@ public class Magasin implements Serializable{
 	private String nomMag;
 	private String adresse;
 	private String ville;
+	private int tel;
 	
 	@OneToMany(mappedBy="magasin",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
@@ -95,5 +96,16 @@ public class Magasin implements Serializable{
 	public void setOperations(Set<Operation> operations) {
 		this.operations = operations;
 	}
+
+
+	public int getTel() {
+		return tel;
+	}
+
+
+	public void setTel(int tel) {
+		this.tel = tel;
+	}
+	
 	
 }

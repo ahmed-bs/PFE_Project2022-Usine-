@@ -33,7 +33,7 @@ export class ListeCentreCollecteComponent implements OnInit {
   ELEMENT_DATA?:Centre[];
   // Centre?:Centre;
   dataSource!:MatTableDataSource<any>;
-  displayedColumns: string[] = ['idCentre','nomCentre','adresse','ville','action'];
+  displayedColumns: string[] = ['idCentre','nomCentre','adresse','ville','tel','action'];
 
   constructor(
     private location:Location,

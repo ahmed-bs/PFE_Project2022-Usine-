@@ -3,5 +3,6 @@ export class Centre{
     nomCentre!: string
     adresse!: string;
     ville!:string;
+    tel!:number;
    
   }

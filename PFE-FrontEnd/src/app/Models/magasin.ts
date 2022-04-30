@@ -3,5 +3,6 @@ export class Magasin{
     nomMag!: string
     adresse!: string;
     ville!:string;
+    tel!:number;
    
   }

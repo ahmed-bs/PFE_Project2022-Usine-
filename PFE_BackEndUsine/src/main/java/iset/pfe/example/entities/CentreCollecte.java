@@ -21,6 +21,7 @@ public class CentreCollecte  implements Serializable{
 	private String nomCentre;
 	private String adresse;
 	private String ville;
+	private int tel;
 	
 	@OneToMany(mappedBy="centreCollecte",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
@@ -79,5 +80,14 @@ public class CentreCollecte  implements Serializable{
 	public void setOperations(Set<Operation> operations) {
 		this.operations = operations;
 	}
+
+	public int getTel() {
+		return tel;
+	}
+
+	public void setTel(int tel) {
+		this.tel = tel;
+	}
+	
 
 }

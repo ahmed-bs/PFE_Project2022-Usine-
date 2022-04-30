@@ -46,6 +46,20 @@ public class MagasinRestController {
 		return msg;
 	}
 	
+	@RequestMapping(value="/Mtel/{tel}",method = RequestMethod.GET)
+	public int gettelUtilise(@PathVariable int tel){
+		int msg=0;
+		for(int i=0;i<magasinRepository.findAll().size();i++) {
+			Magasin t=magasinRepository.findAll().get(i);
+			if(tel==t.getTel()) {
+				msg=1;
+			}
+			
+		}
+		return msg;
+	}
+	
+	
 	@RequestMapping(value="/magasin/{idMag}",method = RequestMethod.GET)
     public Magasin getMagasin(@PathVariable Integer idMag) {
 		Optional<Magasin> mag= magasinRepository.findById(idMag);
@@ -75,6 +89,7 @@ public class MagasinRestController {
     	u.setAdresse(magasin.getAdresse());
     	u.setNomMag(magasin.getNomMag());
     	u.setVille(magasin.getVille());
+    	u.setTel(magasin.getTel());
 		magasinRepository.save(u);
 			
 	  	return u;

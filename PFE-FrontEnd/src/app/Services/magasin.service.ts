@@ -13,6 +13,7 @@ export class MagasinService {
   baseUrl : string = 'http://localhost:3802/magasin';
   baseUrl1 : string = 'http://localhost:3802/nbreM';
   baseUrl2 : string = 'http://localhost:3802/magasins';
+  baseUrl3 : string = 'http://localhost:3802/Mtel';
 
   // 
   constructor(private http: HttpClient,private authService :AuthService) { }
@@ -32,6 +33,15 @@ export class MagasinService {
       const url = `${this.baseUrl2}/${nomMag}`
       return this.http.get(url,{headers:httpHeaders});
     }
+
+      // test si le telephone exist ou nn
+      getMTelUtilise(tel: number): Observable<any> {
+        let jwt = this.authService.getToken();
+        jwt = "Bearer "+jwt;
+        let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+        const url = `${this.baseUrl3}/${tel}`
+        return this.http.get(url,{headers:httpHeaders});
+      }
 
 
   getNbMagasins(): Observable<any> {

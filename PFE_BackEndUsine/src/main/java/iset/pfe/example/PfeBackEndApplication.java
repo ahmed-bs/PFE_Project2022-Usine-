@@ -70,9 +70,11 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		
 		
 		Magasin m1=new Magasin("magasin numero 1", "manzel abderahmen", "Bizerte");
+		m1.setTel(54858595);
 		magasinRepository.save(m1);
 		
 		CentreCollecte c1=new CentreCollecte("centre 1", "Bizerte", "Bizerte");
+		c1.setTel(22554425);
 		centreCollecteRepository.save(c1);
 
 
