@@ -33,7 +33,7 @@ export class ListeMagasinComponent implements OnInit {
   ELEMENT_DATA?:Magasin[];
   magasin?:Magasin;
   dataSource!:MatTableDataSource<any>;
-  displayedColumns: string[] = ['idMag','nomMag','adresse','ville','action'];
+  displayedColumns: string[] = ['idMag','nomMag','adresse','ville','tel','action'];
 
   constructor(
     private location:Location,

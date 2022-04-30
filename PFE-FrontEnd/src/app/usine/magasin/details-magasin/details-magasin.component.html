@@ -17,25 +17,34 @@
                 <div class=" pb-5 pt-3">
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre">Nom du magasin : </span>
-                    <span>{{magasin.nomMag}}</span>
+                    <span id="titre">Nom du magasin :</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{magasin.nomMag}}</span>
                   </div>
+
+                  <div class="text-uppercase fs-08">
+                    <span id="titre">Numéro de téléphone :</span>
+                    <span>{{magasin.tel}}</span>
+                  </div>  
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre"> Adresse : </span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{magasin.adresse}}</span>
+                    <span id="titre"> Ville (magasin) :</span>
+                    <span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{magasin.ville}}</span>
+                  </div>
+
+                  <div class="text-uppercase fs-08">
+                    <span id="titre"> Adresse :</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{magasin.adresse}}</span>
                   </div>
 
                   
-                  <div class="text-uppercase fs-08">
-                    <span id="titre"> Ville : </span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{magasin.ville}}</span>
-                  </div>
+             
+
+                     
                     
                 </div>
             </div>
-  
+  <br><br>
             <div class="details project">
               <div class="head text-uppercase">
                 <button id="btn" (click)="closeDetails()" class="btn btn ml-150  btn-rounded waves-effect w-md waves-light">

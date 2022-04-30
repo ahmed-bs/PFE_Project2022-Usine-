@@ -22,8 +22,7 @@ export class UpdateCentreCollecteComponent implements OnInit {
     nomCentre : new FormControl(null,[Validators.required,Validators.minLength(3)]),
     adresse : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
     ville : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
-        //  poidActuel : new FormControl(null,[Validators.required ]),
-    //  etat : new FormControl(null,[Validators.required ]),
+    tel : new FormControl(null,[Validators.required,Validators.pattern("[0-9 ]{8}") ]),
  })
 
 
@@ -48,7 +47,7 @@ export class UpdateCentreCollecteComponent implements OnInit {
 
     if(this.myForm.get('nomCentre')?.value!=null && this.myForm.get('ville')?.value!=null && this.myForm.get('adresse')?.value!=null
     && this.myForm.get('nomCentre')?.value.length>=3 && this.myForm.get('ville')?.value.length>=4 
-    && this.myForm.get('adresse')?.value.length>=4 ){
+    && this.myForm.get('adresse')?.value.length>=4 && this.myForm.get('tel')?.value!=null && this.myForm.get('tel')?.value.toString().length==8 ){
 
      this.centreService
      // .updatecentre(this.centre.idcentre,this.centre)
@@ -56,6 +55,7 @@ export class UpdateCentreCollecteComponent implements OnInit {
            "nomCentre":this.myForm.get('nomCentre')?.value,
            "adresse":this.myForm.get('adresse')?.value,
            "ville":this.myForm.get('ville')?.value,
+           "tel":this.myForm.get('tel')?.value,
           //  "poidActuel":this.myForm.get('poidActuel')?.value,
           //  "etat":this.myForm.get('etat')?.value,
 
@@ -84,6 +84,10 @@ export class UpdateCentreCollecteComponent implements OnInit {
  
  get ville(){
   return this.myForm.get('ville') ;
+}
+
+get tel(){
+  return this.myForm.get('tel') ;
 }
 
 onReload(){

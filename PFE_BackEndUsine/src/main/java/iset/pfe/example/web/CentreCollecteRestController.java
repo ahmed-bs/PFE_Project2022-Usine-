@@ -44,6 +44,20 @@ public class CentreCollecteRestController {
 		}
 		return msg;
 	}
+
+	@RequestMapping(value="/tel/{tel}",method = RequestMethod.GET)
+	public int gettelUtilise(@PathVariable int tel){
+		int msg=0;
+		for(int i=0;i<centreCollecteRepository.findAll().size();i++) {
+			CentreCollecte t=centreCollecteRepository.findAll().get(i);
+			if(tel==t.getTel()) {
+				msg=1;
+			}
+			
+		}
+		return msg;
+	}
+	
 	
 	@RequestMapping(value="/centre/{idCentre}",method = RequestMethod.GET)
     public CentreCollecte getCentre(@PathVariable Integer idCentre) {
@@ -74,6 +88,7 @@ public class CentreCollecteRestController {
     	u.setAdresse(centres.getAdresse());
 		u.setNomCentre(centres.getNomCentre());
 		u.setVille(centres.getVille());
+		u.setTel(centres.getTel());
 		centreCollecteRepository.save(u);
 			
 	  	return u;

@@ -21,6 +21,7 @@ export class UpdateMagasinComponent implements OnInit {
        nomMag : new FormControl(null,[Validators.required,Validators.minLength(3)]),
       adresse : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
       ville : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
+      tel : new FormControl(null,[Validators.required,Validators.pattern("[0-9 ]{8}") ]),
  })
 
 
@@ -44,7 +45,7 @@ export class UpdateMagasinComponent implements OnInit {
    updateMagasin(){
     if( this.myForm.get('adresse')?.value!=null && this.myForm.get('nomMag')?.value!=null&& this.myForm.get('ville')?.value!=null 
     && this.myForm.get('nomMag')?.value.length>=3 && this.myForm.get('ville')?.value.length>=4 
-    && this.myForm.get('adresse')?.value.length>=4   ){
+    && this.myForm.get('adresse')?.value.length>=4 && this.myForm.get('tel')?.value!=null && this.myForm.get('tel')?.value.toString().length==8  ){
 
      this.magasinService
      // .updateMagasin(this.Magasin.idMagasin,this.Magasin)
@@ -52,6 +53,7 @@ export class UpdateMagasinComponent implements OnInit {
            "nomMag":this.myForm.get('nomMag')?.value,
            "adresse":this.myForm.get('adresse')?.value,
            "ville":this.myForm.get('ville')?.value,
+           "tel":this.myForm.get('tel')?.value,
          })
          .subscribe(o=>{
            localStorage.setItem('Toast', JSON.stringify(["Success","Un magasin a été modifié avec succes"]));
@@ -77,6 +79,11 @@ export class UpdateMagasinComponent implements OnInit {
 get ville(){
   return this.myForm.get('ville') ;
 }
+
+get tel(){
+  return this.myForm.get('tel') ;
+}
+
 
 onReload(){
   // this.router.navigate([this.router.url]);

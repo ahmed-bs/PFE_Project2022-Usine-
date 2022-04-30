@@ -18,21 +18,25 @@
   
                   <div class="text-uppercase fs-08">
                     <span id="titre">Nom du centre : </span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;{{centre.nomCentre}}</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{centre.nomCentre}}</span>
                   </div>
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre">Adresse (centre) :</span>
-                    <span>&nbsp;{{centre.adresse}}</span>
+                    <span id="titre">Adresse (centre) : </span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{centre.adresse}}</span>
                   </div>
                     <div class="text-uppercase fs-08">
-                      <span id="titre">Ville :</span>
-                      <span id="titre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{centre.ville}}</span>
-                    </div>                 
+                      <span id="titre">Ville (centre) : </span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{centre.ville}}</span>
+                    </div>  
+                    <div class="text-uppercase fs-08">
+                      <span id="titre">Numéro de téléphone :</span>
+                      <span>{{centre.tel}}</span>
+                    </div>                
                     
                 </div>
             </div>
-  
+  <br><br>
             <div class="details project">
               <div class="head text-uppercase">
                 <button id="btn" (click)="closeDetails()" class="btn btn ml-150  btn-rounded waves-effect w-md waves-light">

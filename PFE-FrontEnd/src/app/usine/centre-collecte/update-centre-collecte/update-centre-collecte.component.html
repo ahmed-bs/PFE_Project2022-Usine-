@@ -5,7 +5,7 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
+    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) champ obligatoire</span><br><br>
     <form [formGroup]="myForm" class="needs-validation" novalidate>
 
       <div class="form-group">
@@ -29,6 +29,29 @@
          </div>
         </div>
 
+        <div class="col-md-12 mb-3">
+          <label>Numéro de téléphone  (Exactement 8 chiffres) : <span style="color:red;">*</span></label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="tel"
+                 name="tel"
+                 [(ngModel)]="centre.tel"
+                 placeholder="Post Name here ..">
+            <div
+                 *ngIf="tel?.invalid && tel?.touched"
+                  class="text-danger">
+                  Numéro de téléphone invalide !
+           </div>
+           <div
+                *ngIf="tel?.valid && tel?.touched"
+                class="text-success">
+                Numéro de téléphone valide !
+           </div>
+          </div>
+
+      </div>
+
+      <div class="form-group">
         <div class="col-md-12 mb-3">
           <label>Adresse (min 4 caracteres): <span style="color:red;">*</span></label>
           <input type="text"
