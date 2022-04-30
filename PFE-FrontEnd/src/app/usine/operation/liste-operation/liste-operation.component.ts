@@ -11,8 +11,12 @@ import { CreateOperationComponent } from '../create-operation/create-operation.c
 import { DetailsOperationComponent } from '../details-operation/details-operation.component';
 import { UpdateOperationComponent } from '../update-operation/update-operation.component';
 import {Location} from "@angular/common";
-
-
+import { ethers } from 'ethers';
+import { async, Observable } from 'rxjs';
+import { OperationTank } from 'src/app/Models/operationTank';
+declare let require: any;
+declare let window: any;
+let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json');
 @Component({
   selector: 'app-liste-operation',
   templateUrl: './liste-operation.component.html',
@@ -48,6 +52,7 @@ export class ListeOperationComponent implements OnInit {
 
     ngOnInit() {
       this.reloadData();
+      this.reloadData00u();
       console.log(this.tankService.getTanksQteLibre());
 
       this.idContenu = 'TostSuccessContenu';
@@ -61,9 +66,6 @@ export class ListeOperationComponent implements OnInit {
         console.log('Toast Vide');
       }
 
-
-      
-
       // this.tankService.getQteLibreAujourdhui().subscribe(
 
       //   o=>{
@@ -74,6 +76,30 @@ export class ListeOperationComponent implements OnInit {
       //   });
 
     }
+
+
+    operations!: Observable<OperationTank[]>;
+    jj!: number;
+
+     reloadData00u() {
+      const depKEY = Object.keys(Remplissage.networks)[0];
+      if (typeof window.ethereum !== 'undefined') {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        console.log(signer);
+        const contract = new ethers.Contract(
+          Remplissage.networks[depKEY].address,
+          Remplissage.abi,
+          signer
+        );
+        this.operations = contract.getOperationTanksUsine();
+      }
+      console.log('**************************4471441714144');
+      console.log(this.operations);
+    }
+
+
+
 
     reloadData() {
         this.operationService.getOperationsRemplissages().subscribe(o =>{

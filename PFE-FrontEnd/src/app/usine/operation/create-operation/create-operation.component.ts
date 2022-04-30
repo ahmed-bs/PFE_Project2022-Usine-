@@ -128,9 +128,9 @@ export class CreateOperationComponent implements OnInit {
           console.log(this.tab)
           localStorage.setItem('IdOperation',this.tab[0])
           this.onReload();
-         this.onClose();
           localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
           this.operationService.getOpTank(this.tab[0]).subscribe( i=>{
+            this.onReload();
             // this.length=this.ELEMENT_DATA?.length;
             this.tabTankId = Object.values(i)
             console.log('5555555555555555555555555');
@@ -144,7 +144,9 @@ export class CreateOperationComponent implements OnInit {
  
  
       }
+      this.onReload();
     });
+    this.onReload();
   }
 
 
@@ -171,6 +173,8 @@ elem0: OperationTank[] = [];
     this.count=this.elem0.length
     const transaction = await contract.addOperationTankUsine(this.elem0,this.count);
     await transaction.wait() ; 
+ 
+    this.onClose()
     }
 
 

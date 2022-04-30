@@ -16,6 +16,10 @@ import { LotService } from 'src/app/Services/lot.service';
 import { DatePipe } from '@angular/common';
 import {Location} from "@angular/common";
 
+import { ethers } from 'ethers';
+declare let require: any;
+declare let window: any;
+let Remplissage = require('../../../../../build/contracts/Transformation.json');
 @Component({
   selector: 'app-create-operation-transformation',
   templateUrl: './create-operation-transformation.component.html',
@@ -46,7 +50,8 @@ export class CreateOperationTransformationComponent implements OnInit {
 
 
   maDate = new Date();
-
+  tab!: any[];
+  tabTankId!: any[];
 
   constructor(
     private location:Location,
@@ -104,23 +109,94 @@ export class CreateOperationTransformationComponent implements OnInit {
         
     )
     .subscribe(o =>{
+      this.tab=Object.values(o);
       // window.location.reload();
-      console.log(this.operation);   
+      console.log(this.tab);   
       console.log("nourrrrrrrr");
-      console.log(this.operation);
-      console.log("nourrrrrrrr");  
+      localStorage.setItem('operation',JSON.stringify(this.tab))
+      localStorage.setItem('produit',JSON.stringify(this.tab[10].idProduit))
       localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
+      console.log(this.myForm.get('tank')?.value);
+      console.log(this.myForm.get('tank')?.value.idTank);
+      this.tankService.getTank(this.myForm.get('tank')?.value).subscribe(o => {
+        console.log(o);
+        localStorage.setItem('tabTank', JSON.stringify(o));
+      });
+
+        
+      this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(
+        a=>{
+          console.log(a);
+          this.prrod = a;
+          console.log(this.prrod);
+          localStorage.setItem('prod', JSON.stringify(a));
+          this.onReload();
+        }    
+      )
+    // this.tankService.getTank(kk).subscribe((i) => {
+    //   this.tabTankId = Object.values(i);
+    //   // this.length=this.ELEMENT_DATA?.length;
+    //   localStorage.setItem('tabTankId', JSON.stringify(i.idTank));
+    //   console.log('///////////////////////////////////////////000000');
+    //   // this.tankService.getTank(i.idTank).subscribe(
+    //   //   a=>{
+    //   //     console.log(a);
+    //   //     this.ttank = a;
+    //   //     console.log(this.ttank);
+    //   //    
+    //   //     this.onReload();
+    //   //   }
+    //   // )
+    //   this.onReload();
+    // });
+
     //  window.location.reload(); 
-    this.onClose();     
+
+
+
+    this.onReload();     
     },
     (error) => {
       console.log("Failed")
     }
   );
-
+  this.onReload();
      }
-    
+     this.onReload();
   }
+
+  async  requestAccount() {
+    if (typeof window.ethereum !== 'undefined') {
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    }
+  }
+  ttank: Tank=new Tank() ;
+  prrod: Produit=new Produit() ;
+  elem0: Operation[]=[];
+  elem2: Operation=new Operation();
+    async saveInBc(){
+      const depKEY=Object.keys(Remplissage.networks)[0];
+      await this.requestAccount()
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner()
+      const contract = new ethers.Contract(Remplissage.networks[depKEY].address, Remplissage.abi, signer)
+      console.log(this.elem0);
+      this.elem0= JSON.parse(localStorage.getItem('operation') || '[]')|| []  ;
+
+      console.log("222222222222222222222222222222222222222");
+      console.log(this.elem0);
+
+      console.log("555555555555555555555555555555555555555");
+      console.log(JSON.parse(localStorage.getItem('prod') || '[]')|| []);
+      this.elem0[6]=  JSON.parse(localStorage.getItem('tabTank') || '[]')|| []  ;
+      this.elem0[7]=  JSON.parse(localStorage.getItem('prod') || '[]')|| []  ;
+      // this.elem0[8]= JSON.parse(localStorage.getItem('tabTankId') || '[]')|| []  ;  
+      console.log("222222222222222222222222222222222222222");
+      console.log(this.elem0);
+      const transaction = await contract.RetraitOperationTank(this.elem0);
+      await transaction.wait() ; 
+      this.onClose();
+      }
 
 
   onSubmit() {
@@ -138,6 +214,7 @@ export class CreateOperationTransformationComponent implements OnInit {
       console.log(this.myForm.get('poidsLait')?.value);
       if(this.myForm.get('poidsLait')?.value <=i.poidActuel){
         this.save();
+        this.saveInBc();
       }else{
         this.msgErreur=1;
         this.qteMax=i.poidActuel;

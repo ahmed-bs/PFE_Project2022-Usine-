@@ -5,5 +5,5 @@ export class Tank{
     poidVide!: number;
     poidActuel!: number;
     etat!: string;
-    
+    codeTank!:[]
   }
