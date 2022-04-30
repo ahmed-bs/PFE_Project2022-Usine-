@@ -28,25 +28,25 @@
                                 <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.idOperation}}</td>
                             </ng-container>
                             <ng-container matColumnDef="qtePrise" >
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">Quantité prise(Kg)</th>
-                              <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.qtePrise}} kg</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">Quantité prise(lots)</th>
+                              <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.qtePrise}} lots</td>
                             </ng-container>
                             <ng-container matColumnDef="dateOperation">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Date opération</th>
-                              <td mat-cell *matCellDef="let element" ><span class="mode mode_on" style="font-size: small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{element.dateOperation}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Date de l'opération</th>
+                              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mode mode_date" style="font-size: small;font-weight:bold;color:blue">&nbsp;<b>{{element.dateOperation}}</b>&nbsp;</span></td>
                             </ng-container>
                             <ng-container matColumnDef="magasin">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;Magasin</th>
-                              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.magasin.nomMag}}</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">&nbsp;Magasin</th>
+                              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;{{element.magasin.nomMag}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="produit">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">&nbsp;&nbsp;Produit</th>
-                              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;{{element.produit.intitule}}</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Produit</th>
+                              <td mat-cell *matCellDef="let element" >&nbsp;{{element.produit.intitule}}</td>
                             </ng-container>
                             <ng-container matColumnDef="code">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Code de livraison</th>
-                              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span class="mode mode_process" style="font-size: small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{element.code}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">&nbsp;Code</th>
+                              <td mat-cell *matCellDef="let element" ><span class="mode mode_code" style="font-size: small;font-weight:bold;color:black;">&nbsp;<b>{{element.code}}</b>&nbsp;</span></td>
                             </ng-container>
                             
                             <ng-container matColumnDef="action">
@@ -66,7 +66,7 @@
                                   </div> 
                                   &nbsp;-->
                                   
-                                  <div class="btn-group">
+                                  <div class="btn-group" style="margin-top:-8px;">
                                       <a class="dropdown-toggle dropdown_icon" style="color:#2399BF;border: 1px solid #2399BF" data-toggle="dropdown"> 
                                           <i class="fa fa-info-circle fa-lg" ></i>
                                       </a>
@@ -80,7 +80,7 @@
                                   </div>
                                   &nbsp;
 
-                                  <div class="btn-group">
+                                  <div class="btn-group" style="margin-top:-8px;">
                                     <a class="dropdown-toggle dropdown_icon"style="color:#D41616;border: 1px solid #D41616"  data-toggle="dropdown"> 
                                       <i class="fa fa-trash fa-lg" style="color:#D41616;"></i>
                                     </a>

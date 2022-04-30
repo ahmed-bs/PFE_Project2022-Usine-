@@ -5,7 +5,7 @@
   padding-bottom: 20px;
 }
 th{
-  color: #9DE22D ;
+  color: #FFC300  ;
   font-size: large;
   padding-left: 25px !important;
   padding-bottom: 15px !important;
@@ -82,7 +82,7 @@ margin: 20px;
 #title-Table{
 
   border-radius: 10px;
-  background-color: #9DE22D ;
+  background-color: #FFC300  ;
   margin-left: 20px !important;
   margin-right: 20px !important;
   bottom: 19px;
@@ -433,6 +433,12 @@ body{
 }
 .mode_done{
   background-color: #03a9f3;
+}
+.mode_date{
+  background-color: #D3D5D6 ;
+}
+.mode_code{
+  background-color: #F4F007 ;
 }
 @media only screen and (max-width:1200px){
   .overflow-x{

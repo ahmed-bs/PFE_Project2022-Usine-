@@ -1,11 +1,11 @@
 <div class="ContenuCard" >
     <div class="modal-header">
-      <h3 id="modal-title"><b>Modifier le produit numero :{{produit.idProduit}}</b></h3>
+      <h3 id="modal-title"><b>Modifier le produit numéro :{{produit.idProduit}}</b></h3>
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
+    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) champ obligatoire</span><br><br>
     <form [formGroup]="myForm" class="needs-validation" novalidate>
       <div class="form-group">
         <label>Intitulé (min 3 caracteres):<span style="color:red;">*</span></label>

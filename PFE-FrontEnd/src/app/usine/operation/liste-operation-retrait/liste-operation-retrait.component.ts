@@ -40,7 +40,7 @@ export class ListeOperationRetraitComponent implements OnInit {
   v=0;
   q=0;
   p=0;
-  displayedColumns: string[] = ['idOperation','qtePrise','code', 'dateOperation','magasin','produit', 'action'];
+  displayedColumns: string[] = ['idOperation','qtePrise','produit','magasin','code', 'dateOperation', 'action'];
   constructor(private operationService: OperationService,
     private tankService:TankService,
     private location:Location,
