@@ -3,7 +3,7 @@
  
       <div class="col-md-12 main-datatable">
         <div class="card-header card-header-danger" id="title-Table">
-          <h3 class="card-title" id="titre">Table pour les tankssssssss</h3><br>
+          <h3 class="card-title" id="titre">Table pour les tanks</h3><br>
         </div>
           <div class="card_body">
               <div class="row d-flex">
@@ -28,65 +28,65 @@
                                 <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.idTank}}</td>
                             </ng-container>
                             <ng-container matColumnDef="matricule" >
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">matricule tank</th>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">Matricule tank</th>
                               <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.matricule}}</td>
                             </ng-container>
                             <ng-container matColumnDef="poidVide">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Poids Vide</th>
-                              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.poidVide}}</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Contenance maximale</th>
+                              <td mat-cell *matCellDef="let element" style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.poidVide}} Kg</td>
                             </ng-container>
                             <ng-container matColumnDef="poidActuel">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">poids Actuel</th>
-                              <td mat-cell *matCellDef="let element" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.poidActuel}}</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Quantité de lait inserée</th>
+                              <td mat-cell *matCellDef="let element" style="font-weight:bold"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.poidActuel}} Kg</td>
                             </ng-container>
 
                             <ng-container matColumnDef="etat" >
                               <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Etat du tank</th>
                               <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span *ngIf="this.element.etat==='Vide'"  class="mode mode_done" style="font-size: small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{element.etat}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <span *ngIf="this.element.etat==='Remplis'" class="mode mode_on" style="font-size: small;">&nbsp;<b>{{element.etat}}</b>&nbsp;&nbsp;</span>
+                                <span *ngIf="this.element.etat==='Vide'"  class="mode mode_off" style="font-size: small;">&nbsp;&nbsp;&nbsp;&nbsp;<b>{{element.etat}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span *ngIf="this.element.etat==='Remplis'" class="mode mode_on" style="font-size: small;">&nbsp;&nbsp;<b>{{element.etat}}</b>&nbsp;&nbsp;</span>
                                 <span *ngIf="this.element.etat==='En cours'"  class="mode mode_process" style="font-size: small;">&nbsp;<b>{{element.etat}}</b>&nbsp;</span></td>
                             </ng-container>
                             
                             <ng-container matColumnDef="action">
                               <th  mat-header-cell *matHeaderCellDef style="min-width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action</th>
                               <td mat-cell *matCellDef="let element">
-                                  <div class="btn-group"  style="color:#3E8D07;">
+                                  <div class="btn-group"  style="color:#3E8D07;margin-top:-8px;">
                                       <a class="dropdown-toggle dropdown_icon"  style="color:#3E8D07;border: 1px solid #3E8D07;" data-toggle="dropdown">
                                       <i class="fa fa-pencil-square-o fa-lg" style="color:#3E8D07;"></i> </a>
-                                      <!-- <ul class="dropdown-menu">
-                                        <li class="li2"> -->
+                                      <ul class="dropdown-menu">
+                                        <li class="li2">
                                           <a (click)="updateTank(element)" target="_blank">
-                                            <i class="fa fa-pencil-square-o fa-lg" style="color:#3E8D07;"> </i> 
+                                            <i class="fa fa-pencil-square-o fa-lg" style="color:#3E8D07;"> Modifier </i> 
                                           </a>
-                                      <!-- </li>
+                                      </li>
                                    
-                                      </ul> -->
+                                      </ul>
                                   </div>
                                   &nbsp;
                                   
-                                  <div class="btn-group">
+                                  <div class="btn-group" style="margin-top:-8px;">
                                       <a class="dropdown-toggle dropdown_icon" style="color:#2399BF;border: 1px solid #2399BF" data-toggle="dropdown"> 
                                           <i class="fa fa-info-circle fa-lg" ></i>
                                       </a>
                                       <ul class="dropdown-menu dropdown_more">
                                           <li class="li">
                                               <a (click)="detailsTank(element)"target="_black">
-                                                <i class="fa fa-info-circle fa-lg" >  </i>
+                                                <i class="fa fa-info-circle fa-lg" >  plus de details  </i>
                                               </a>
                                           </li>
                                       </ul>
                                   </div>
                                   &nbsp;
 
-                                  <div class="btn-group">
-                                    <a class="dropdown-toggle dropdown_icon"style="color:#D41616;border: 1px solid #D41616"  > 
+                                  <div class="btn-group" style="margin-top:-8px;">
+                                    <a class="dropdown-toggle dropdown_icon"style="color:#D41616;border: 1px solid #D41616"  data-toggle="dropdown"> 
                                       <i class="fa fa-trash fa-lg" style="color:#D41616;"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown_more">
                                         <li class="li1">
                                          
-                                    <a (click)="deleteTank(element.idTank)"> <i class="fa fa-trash fa-lg" style="color:#D41616;"></i></a>
+                                    <a (click)="deleteTank(element.idTank)"> <i class="fa fa-trash fa-lg" style="color:#D41616;">&nbsp; <b>Supprimer</b></i></a>
                                   </li>
                                 </ul>
                             </div>

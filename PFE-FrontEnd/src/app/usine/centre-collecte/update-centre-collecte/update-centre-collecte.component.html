@@ -1,6 +1,6 @@
 <div class="ContenuCard" >
     <div class="modal-header">
-      <h3 id="modal-title"><b>Modifier le centre numero : {{centre.idCentre}}</b></h3>
+      <h3 id="modal-title"><b>Modifier le centre numéro : {{centre.idCentre}}</b></h3>
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -10,7 +10,7 @@
 
       <div class="form-group">
         <div class="col-md-12 mb-3">
-        <label>Nom centre (min 3 caracteres):<span style="color:red;">*</span></label>
+        <label>Nom du centre (minimum 3 caracteres):<span style="color:red;">*</span></label>
         <input type="text"
                class="form-control"
                formControlName="nomCentre"
@@ -31,7 +31,7 @@
 
         <div class="col-md-12 mb-3">
           <label>Numéro de téléphone  (Exactement 8 chiffres) : <span style="color:red;">*</span></label>
-          <input type="text"
+          <input type="number"
                  class="form-control"
                  formControlName="tel"
                  name="tel"
@@ -53,7 +53,7 @@
 
       <div class="form-group">
         <div class="col-md-12 mb-3">
-          <label>Adresse (min 4 caracteres): <span style="color:red;">*</span></label>
+          <label>Adresse (minimum 4 caracteres): <span style="color:red;">*</span></label>
           <input type="text"
                  class="form-control"
                  formControlName="adresse"
@@ -74,7 +74,7 @@
 
 
           <div class="col-md-12 mb-3">
-            <label>Ville du centre (min 4 caracteres): <span style="color:red;">*</span></label>
+            <label>Ville du centre (minimum 4 caracteres): <span style="color:red;">*</span></label>
             <input type="text"
                    class="form-control"
                    formControlName="ville"

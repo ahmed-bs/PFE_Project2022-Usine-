@@ -1,11 +1,11 @@
 <div class="ContenuCard" >
     <div class="modal-header">
-      <h2 id="modal-title"><b>Creer un nouveau produit :</b></h2>
+      <h2 id="modal-title"><b>Créer un nouveau produit :</b></h2>
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <span style="color:red;margin-top:-105px;">(*) champ obligatoire</span><br><br>
+    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) champ obligatoire</span><br><br>
           <form [formGroup]="myForm"  novalidate >
             <div class="form-row">
               <div class="form-group col-md-6 mb-3">
@@ -14,6 +14,7 @@
                  formControlName="intitule"
                  class="form-control"
                  id="intitule"
+                 placeholder="produit 1 ..."
                  [(ngModel)]="produit.intitule"
                  name="intitule">
     
@@ -34,6 +35,7 @@
                 <input type="text"
                  class="form-control"
                   id="libelle"
+                  placeholder="1a1a1a1a"
                   formControlName="libelle"
                   [(ngModel)]="produit.libelle"
                   name="libelle">
@@ -57,7 +59,7 @@
                 <input class="form-check-input" type="checkbox" value="" id="cgu" required>
                 <label class="form-check-label" for="cgu">J'accepte les conditions générales d'utilisation</label>
                 <br>
-                <span style="color:red;margin-bottom:45px;">{{msg}}</span>
+                <span style="color:red;margin-bottom:45px;font-size:1.1em">{{msg}}</span>
                 <div class="invalid-feedback">Vous devez accepter les CGU pour continuer</div>
               </div>
             </div>
