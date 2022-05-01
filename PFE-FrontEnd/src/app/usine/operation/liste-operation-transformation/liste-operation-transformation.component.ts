@@ -53,7 +53,7 @@ export class ListeOperationTransformationComponent implements OnInit {
 
   ngOnInit() {
     this.reloadData();
-    this.reloadData00();
+   // this.reloadData00();
     console.log(this.tankService.getTanksQteLibre());
 
     this.idContenu = 'TostSuccessContenu';

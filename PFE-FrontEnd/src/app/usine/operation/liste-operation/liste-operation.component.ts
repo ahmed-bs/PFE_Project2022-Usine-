@@ -52,7 +52,7 @@ export class ListeOperationComponent implements OnInit {
 
     ngOnInit() {
       this.reloadData();
-      this.reloadData00u();
+    //  this.reloadData00u();
       console.log(this.tankService.getTanksQteLibre());
 
       this.idContenu = 'TostSuccessContenu';
