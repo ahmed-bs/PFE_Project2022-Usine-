@@ -10,7 +10,7 @@ import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
-import {Location} from "@angular/common";
+import { Location } from "@angular/common";
 import { ethers } from 'ethers';
 declare let require: any;
 declare let window: any;
@@ -22,62 +22,62 @@ let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json'
 })
 export class CreateOperationComponent implements OnInit {
 
-  operation:Operation = new Operation();
+  operation: Operation = new Operation();
   submitted = false;
-  msg="";
-  t:Tank=new Tank();
-  msgErreur=0;
-  msgErreur2=0;
+  msg = "";
+  t: Tank = new Tank();
+  msgErreur = 0;
+  msgErreur2 = 0;
   // qte de lait restante pour chaque vache
-  qteRsetLait=0;
+  qteRsetLait = 0;
   //qte restante de lait pour un tank
-  qteRsetLaitTank=0;
-  valeur1=0;
-  valeur2=0;
-  msg1=0;
-  qte=0;
-  myForm=new  FormGroup({
-      poidsLait : new FormControl(null,[Validators.required,Validators.min(1)]),
-      code : new FormControl(null,[Validators.required ]),
-      centreCollecte : new FormControl(null,[Validators.required ]),
-     
+  qteRsetLaitTank = 0;
+  valeur1 = 0;
+  valeur2 = 0;
+  msg1 = 0;
+  qte = 0;
+  myForm = new FormGroup({
+    poidsLait: new FormControl(null, [Validators.required, Validators.min(1)]),
+    code: new FormControl(null, [Validators.required]),
+    centreCollecte: new FormControl(null, [Validators.required]),
+
 
   })
 
-  tanks!:Observable<Tank[]>;
-  centres!:Observable<Centre[]>;
+  tanks!: Observable<Tank[]>;
+  centres!: Observable<Centre[]>;
 
-  length=0;
+  length = 0;
   kk!: any;
-  ELEMENT_DATA?:OperationTank[];
-  elem?:OperationTank;
+  ELEMENT_DATA?: OperationTank[];
+  elem?: OperationTank;
   tab!: any[];
   tabTankId!: any[];
   constructor(
-    private location:Location,
+    private location: Location,
     private operationService: OperationService,
-    private tankService:TankService,
-    private centreCollecteService:CentreCollecteService,
+    private tankService: TankService,
+    private centreCollecteService: CentreCollecteService,
     private router: Router,
     private dialogClose: MatDialog) { }
-   
+
   async ngOnInit() {
     //this.ValidatedForm();
-    this.tanks=this.tankService.getTanks();
-    this.centres=this.centreCollecteService.getCentres();
+    this.tanks = this.tankService.getTanks();
+    this.centres = this.centreCollecteService.getCentres();
 
     this.tankService.getTanksQteLibre().subscribe(
-      o=>{
-      console.log(o);
-      if(this.myForm.get('poidsLait')?.value<=o)
-      this.msgErreur=0;
-      else{
-      this.msgErreur=1;
-      this.qteRsetLait=o;
-      }
-      this.onReload();
+      o => {
+        console.log(o);
+        if (this.myForm.get('poidsLait')?.value <= o)
+          this.msgErreur = 0;
+        else {
+          this.msgErreur = 1;
+          this.qteRsetLait = o;
+        }
+        this.onReload();
 
-  });
+      });
 
   }
 
@@ -89,60 +89,57 @@ export class CreateOperationComponent implements OnInit {
   save() {
 
 
-  if(this.myForm.get('poidsLait')?.value==null || this.myForm.get('centreCollecte')?.value==null || this.myForm.get('code')?.value==null ){
-    this.msg="vous devez remplir le formulaire !!";
-  }
-  else{
-    this.msg="";
-   }
+    if (this.myForm.get('poidsLait')?.value == null || this.myForm.get('centreCollecte')?.value == null || this.myForm.get('code')?.value == null) {
+      this.msg = "vous devez remplir le formulaire !!";
+    }
+    else {
+      this.msg = "";
+    }
 
-   this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe(t=>{
-    console.log(t);
-    if(t==1){
-      this.msg1=1;
-     }
-     else{
-      this.msg1=0;
-     }
-
-
-    if(this.myForm.get('poidsLait')?.value!=null && this.myForm.get('centreCollecte')?.value!=null && this.myForm.get('code')?.value!=null
-    && this.myForm.get('poidsLait')?.value>=1  && t==0 ){
-
-    this.operationService
-        .createOperationRemplissage(
-          {
-            "poidsLait":this.myForm.get('poidsLait')?.value,
-            "code":this.myForm.get('code')?.value,
-            "centreCollecte":{
-              "idCentre":this.myForm.get('centreCollecte')?.value,
-           },
-
-          }
-        )
-        .subscribe(o=>{
+    this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe(t => {
+      console.log(t);
+      if (t == 1) {
+        this.msg1 = 1;
+      }
+      else {
+        this.msg1 = 0;
+      }
 
 
-          this.tab = Object.values(o)
-          console.log("ssssssssssssssssssssssssssssssss")
-          console.log(this.tab)
-          localStorage.setItem('IdOperation',this.tab[0])
-          this.onReload();
-          localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
-          this.operationService.getOpTank(this.tab[0]).subscribe( i=>{
+      if (this.myForm.get('poidsLait')?.value != null && this.myForm.get('centreCollecte')?.value != null && this.myForm.get('code')?.value != null
+        && this.myForm.get('poidsLait')?.value >= 1 && t == 0) {
+
+        this.operationService
+          .createOperationRemplissage(
+            {
+              "poidsLait": this.myForm.get('poidsLait')?.value,
+              "code": this.myForm.get('code')?.value,
+              "centreCollecte": {
+                "idCentre": this.myForm.get('centreCollecte')?.value,
+              },
+
+            }
+          )
+          .subscribe(o => {
+
+
+            this.tab = Object.values(o)
+            console.log("ssssssssssssssssssssssssssssssss")
+            console.log(this.tab)
+            localStorage.setItem('IdOperation', this.tab[0])
+            localStorage.setItem('Toast', JSON.stringify(["Success", "Une operation a été ajouté avec succès"]));
+            this.operationService.getOpTank(this.tab[0]).subscribe(i => {
+              // this.length=this.ELEMENT_DATA?.length;
+              this.tabTankId = Object.values(i)
+              console.log('5555555555555555555555555');
+              console.log(this.tabTankId);
+              localStorage.setItem('tabTankId', JSON.stringify(this.tabTankId))
+            });
             this.onReload();
-            // this.length=this.ELEMENT_DATA?.length;
-            this.tabTankId = Object.values(i)
-            console.log('5555555555555555555555555');
-             console.log(this.tabTankId);
-             localStorage.setItem('tabTankId',JSON.stringify(this.tabTankId))
-           });
-        },
-        (error) => {
-          console.log("Failed")
-        });
- 
- 
+          },
+            (error) => {
+              console.log("Failed")
+            });
       }
       this.onReload();
     });
@@ -150,52 +147,52 @@ export class CreateOperationComponent implements OnInit {
   }
 
 
-  async  requestAccount() {
+  async requestAccount() {
     if (typeof window.ethereum !== 'undefined') {
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
     }
   }
 
 
   count!: number;
-elem0: OperationTank[] = [];
+  elem0: OperationTank[] = [];
 
 
-  async saveInBc(){
-    const depKEY=Object.keys(Remplissage.networks)[0];
+  async saveInBc() {
+    const depKEY = Object.keys(Remplissage.networks)[0];
     await this.requestAccount()
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner()
     const contract = new ethers.Contract(Remplissage.networks[depKEY].address, Remplissage.abi, signer)
-    this.elem0=JSON.parse(localStorage.getItem('tabTankId') || '[]') || []  ;
+    this.elem0 = JSON.parse(localStorage.getItem('tabTankId') || '[]') || [];
     console.log("222222222222222222222222222222222222222");
     console.log(this.elem0);
-    this.count=this.elem0.length
-    const transaction = await contract.addOperationTankUsine(this.elem0,this.count);
-    await transaction.wait() ; 
- 
+    this.count = this.elem0.length
+    const transaction = await contract.addOperationTankUsine(this.elem0, this.count);
+    await transaction.wait();
+
     this.onClose()
-    }
+  }
 
 
 
   onSubmit() {
     //this.submitted = true;
     this.tankService.getTanksQteLibre().subscribe(
-      o=>{
-      console.log(o);
-      if(this.myForm.get('poidsLait')?.value<=o){
-      this.save();
-      this.msgErreur=0;
-      this.saveInBc()
-      }
-      else{
-      this.msgErreur=1;
-      this.qteRsetLait=o;
-      }
+      o => {
+        console.log(o);
+        if (this.myForm.get('poidsLait')?.value <= o) {
+          this.save();
+          this.msgErreur = 0;
+          this.saveInBc()
+        }
+        else {
+          this.msgErreur = 1;
+          this.qteRsetLait = o;
+        }
 
 
-  });
+      });
 
   }
 
@@ -204,33 +201,33 @@ elem0: OperationTank[] = [];
   }
 
 
-  onReload(){
+  onReload() {
     // this.router.navigate([this.router.url]);
-    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
-     this.router.navigate([decodeURI(this.location.path())]);
-   })
- }
-  
-  
+    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur", { skipLocationChange: true }).then(response => {
+      this.router.navigate([decodeURI(this.location.path())]);
+    })
+  }
+
+
   onClose() {
     this.dialogClose.closeAll();
     // this.gotoList();
     this.onReload();
   }
 
- get poidsLait(){
-  return this.myForm.get('poidsLait') ;
-}
+  get poidsLait() {
+    return this.myForm.get('poidsLait');
+  }
 
 
-get centreCollecte(){
-  return this.myForm.get('centreCollecte') ;
-}
+  get centreCollecte() {
+    return this.myForm.get('centreCollecte');
+  }
 
 
-get code(){
-  return this.myForm.get('code') ;
-}
+  get code() {
+    return this.myForm.get('code');
+  }
 
 
 }
