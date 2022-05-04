@@ -235,10 +235,10 @@ public class OperationRestController {
 	     p.setQte(qte1);
 	     produitRepository.save(p);
 	     
-	     if(t.getPoidActuel()==0) {
-				t.setCodeTank(null);
-			    tankRepository.save(t);
-		}
+//	     if(t.getPoidActuel()==0) {
+//				t.setCodeTank(null);
+//			    tankRepository.save(t);
+//		}
 	     
 	 	for(int i=0;i<tankRepository.findAll().size();i++) {
 			
@@ -258,7 +258,34 @@ public class OperationRestController {
 				tankRepository.save(tank2);
 				}
 		}
-
+		for(int i=0;i<tankRepository.findAll().size();i++) {
+			Tank tank2=tankRepository.findAll().get(i);
+			List<Integer> liste=new ArrayList<>();
+			if(tank2.getPoidActuel()==0) {
+				for(int j=0;j<tank2.getCodeTank().size();j++) {
+					liste.add(tank2.getCodeTank().get(j));
+					operation.setCodeRemplissage(liste);
+					operationRepository.save(operation);
+				}
+				tank2.setCodeTank(null);
+					tankRepository.save(tank2);
+			}
+		}
+		for(int i=0;i<tankRepository.findAll().size();i++) {
+			List<Integer> liste = new ArrayList<>();
+			Tank tank2=tankRepository.findAll().get(i);
+			if(tank2.getPoidActuel()>0) {
+			for(int j=0;j<tank2.getCodeTank().size();j++) {
+				liste.add(tank2.getCodeTank().get(j));
+				operation.setCodeRemplissage(liste);
+				operationRepository.save(operation);
+				
+				System.out.println("ye <3 <3 <3 <3 <3 <3 <3 <3 <3 ===> aaaaaaaa  bbbbbbbbb "+liste);
+				System.out.println("ye <3 <3 <3 <3 <3 <3 <3 <3 <3 ===> aaaaaaaa  bbbbbbbbb "+operation.getCodeRemplissage());
+			}
+			System.out.println("ye <3 <3 <3 <3 <3 <3 <3 <3 <3 ===> "+operation.getCodeRemplissage());
+		}
+		}
 		operation.setDateOperation(currentDateTime);
 		//operation.setCode(1000000+operationRepository.findAll());
 		operation.setTypeOp("Transformation");			
@@ -314,6 +341,7 @@ public class OperationRestController {
 		{
 			Tank tank3=tankRepository.findAll().get(j);
 			qte=qte+tank3.getPoidVide();
+			
 		}
 		qteLibreLait=qte-qteGeneraleLait;
 		System.out.println("######"+qteLibreLait);
@@ -379,7 +407,7 @@ public class OperationRestController {
 			
 			tank.setPoidActuel(tank.getPoidVide());
 			tank.setDateIns(currentDateTime);
-			
+			tank.getCodeTank().add(operation.getCode());
 			a=a-s;
 			tankRepository.save(tank);
 			
@@ -406,7 +434,7 @@ public class OperationRestController {
 		 
 			tank.setPoidActuel(tank.getPoidActuel()+a);
 			tank.setDateIns(currentDateTime);
-			
+			tank.getCodeTank().add(operation.getCode());
 			tankRepository.save(tank);
 			
 			OperationTank opt=new OperationTank(currentDateTime);
@@ -432,6 +460,7 @@ public class OperationRestController {
 			
 			tank.setPoidActuel(tank.getPoidVide());
 			tank.setDateIns(currentDateTime);
+			tank.getCodeTank().add(operation.getCode());
 			a=a-s;
 			
 			tankRepository.save(tank);
@@ -452,6 +481,7 @@ public class OperationRestController {
 			
 			tank.setPoidActuel(tank.getPoidVide());
 			tank.setDateIns(currentDateTime);
+			tank.getCodeTank().add(operation.getCode());
 			a=a-s;
 			tankRepository.save(tank);
 			
@@ -472,7 +502,7 @@ public class OperationRestController {
 						diff=tank1.getPoidVide()-tank1.getPoidActuel();
 						tank1.setPoidActuel(tank1.getPoidVide()-tank1.getPoidActuel());
 						tank1.setDateIns(currentDateTime);
-						
+						tank1.getCodeTank().add(operation.getCode());
 						tankRepository.save(tank1);
 						OperationTank opt=new OperationTank(currentDateTime);
 						opt.setOperation(operation);
@@ -491,6 +521,7 @@ public class OperationRestController {
 						
 						tank1.setPoidActuel(a);
 						tank1.setDateIns(currentDateTime);
+						tank1.getCodeTank().add(operation.getCode());
 						tankRepository.save(tank1);
 						
 						OperationTank opt=new OperationTank(currentDateTime);
@@ -514,6 +545,7 @@ public class OperationRestController {
 						diff=tank1.getPoidVide()-tank1.getPoidActuel();
 						tank1.setPoidActuel(tank1.getPoidVide()-tank1.getPoidActuel());
 						tank1.setDateIns(currentDateTime);
+						tank1.getCodeTank().add(operation.getCode());
 						tankRepository.save(tank1);
 					
 						OperationTank opt=new OperationTank(currentDateTime);
@@ -530,6 +562,7 @@ public class OperationRestController {
 					if(tank1.getPoidActuel()==0 && a<tank1.getPoidVide() && a>0  && tank1.getDateIns()==null) {
 						tank1.setPoidActuel(a);
 						tank1.setDateIns(currentDateTime);
+						tank1.getCodeTank().add(operation.getCode());
 						tankRepository.save(tank1);
 						
 						OperationTank opt=new OperationTank(currentDateTime);

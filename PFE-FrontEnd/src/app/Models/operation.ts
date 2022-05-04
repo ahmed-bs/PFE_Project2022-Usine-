@@ -18,5 +18,6 @@ export class Operation{
     centreCollecte!:Centre;
     tank!:Tank;
     produit!:Produit;
+    codeRemplissage!:number[];
     
   }
