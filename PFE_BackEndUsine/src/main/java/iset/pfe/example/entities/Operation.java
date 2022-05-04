@@ -1,9 +1,11 @@
 package iset.pfe.example.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Operation implements Serializable{
 	@Id
@@ -25,7 +26,19 @@ public class Operation implements Serializable{
 	private Integer code;
 	private int qtePrise;	
 	
+	@ElementCollection
+	private List<Integer> codeRemplissage; 
 	
+	public List<Integer> getCodeRemplissage() {
+		return codeRemplissage;
+	}
+
+
+	public void setCodeRemplissage(List<Integer> codeRemplissage) {
+		this.codeRemplissage = codeRemplissage;
+	}
+
+
 	@ManyToOne
 	@JoinColumn(name="idU")
 	private User user;
@@ -55,6 +68,25 @@ public class Operation implements Serializable{
 	public Operation() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public Operation(double poidsLait, String dateOperation, String typeOp, Integer code, int qtePrise,
+			List<Integer> codeRemplissage, User user, Magasin magasin, Tank tank, CentreCollecte centreCollecte,
+			Produit produit, Set<OperationTank> operationstank) {
+		super();
+		this.poidsLait = poidsLait;
+		this.dateOperation = dateOperation;
+		this.typeOp = typeOp;
+		this.code = code;
+		this.qtePrise = qtePrise;
+		this.codeRemplissage = codeRemplissage;
+		this.user = user;
+		this.magasin = magasin;
+		this.tank = tank;
+		this.centreCollecte = centreCollecte;
+		this.produit = produit;
+		this.operationstank = operationstank;
 	}
 
 

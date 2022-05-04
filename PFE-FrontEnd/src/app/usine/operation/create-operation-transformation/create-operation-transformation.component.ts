@@ -69,7 +69,7 @@ export class CreateOperationTransformationComponent implements OnInit {
     
     this.operationService.getNbOp().subscribe(o=>{
       console.log(o);
-      this.som=100000000+o+1;  
+      this.som=100000000000+o+1;  
       });
   }
 
@@ -111,28 +111,22 @@ export class CreateOperationTransformationComponent implements OnInit {
     .subscribe(o =>{
       this.tab=Object.values(o);
       // window.location.reload();
-      console.log(this.tab);   
+      console.log(o);
+      console.log(this.tab);    
       console.log("nourrrrrrrr");
       localStorage.setItem('operation',JSON.stringify(this.tab))
-      localStorage.setItem('produit',JSON.stringify(this.tab[10].idProduit))
       localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
-      console.log(this.myForm.get('tank')?.value);
-      console.log(this.myForm.get('tank')?.value.idTank);
       this.tankService.getTank(this.myForm.get('tank')?.value).subscribe(o => {
         console.log(o);
         localStorage.setItem('tabTank', JSON.stringify(o));
       });
-
-        
       this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(
         a=>{
           console.log(a);
           this.prrod = a;
           console.log(this.prrod);
           localStorage.setItem('prod', JSON.stringify(a));
-          this.onReload();
-        }    
-      )
+        });
     // this.tankService.getTank(kk).subscribe((i) => {
     //   this.tabTankId = Object.values(i);
     //   // this.length=this.ELEMENT_DATA?.length;
@@ -158,8 +152,7 @@ export class CreateOperationTransformationComponent implements OnInit {
     },
     (error) => {
       console.log("Failed")
-    }
-  );
+    });
   this.onReload();
      }
      this.onReload();
@@ -185,16 +178,20 @@ export class CreateOperationTransformationComponent implements OnInit {
 
       console.log("222222222222222222222222222222222222222");
       console.log(this.elem0);
-
-      console.log("555555555555555555555555555555555555555");
+   
       console.log(JSON.parse(localStorage.getItem('prod') || '[]')|| []);
+      this.elem0[8]=  this.elem0[6];
       this.elem0[6]=  JSON.parse(localStorage.getItem('tabTank') || '[]')|| []  ;
       this.elem0[7]=  JSON.parse(localStorage.getItem('prod') || '[]')|| []  ;
-      // this.elem0[8]= JSON.parse(localStorage.getItem('tabTankId') || '[]')|| []  ;  
+      
+      this.elem0[10]=  this.elem0[6];
+      // this.elem0[9]= JSON.parse(localStorage.getItem('tabTankId') || '[]')|| []  ;  
       console.log("222222222222222222222222222222222222222");
       console.log(this.elem0);
       const transaction = await contract.RetraitOperationTank(this.elem0);
       await transaction.wait() ; 
+      window.localStorage.removeItem("prod");
+      window.localStorage.removeItem("tabTank");
       this.onClose();
       }
 
