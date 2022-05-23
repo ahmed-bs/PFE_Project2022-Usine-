@@ -3,7 +3,7 @@
   <div class="wrapper" *ngIf="operation">
     <div class="card text-white">
         <div class="bg-pink"></div>
-        <div class="img-container d-flex align-items-center justify-content-center"><h5>Consulter l'operation numéro</h5> </div>
+        <div class="img-container d-flex align-items-center justify-content-center"><h5>{{'Consult the operation number' | translate}}</h5> </div>
         <div class="user">
             <div class="h5 text-center m-0"> {{idO}} </div>
         </div>
@@ -15,37 +15,37 @@
                 </div>
             </div>
             <div class="skills">
-                <div class=" head text-uppercase"><h5>Autre Informations :</h5></div>
+                <div class=" head text-uppercase"><h5>{{'Other Information' | translate}} :</h5></div>
                 <div class=" pb-5 pt-3">
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre">Quantité prise (tank) : </span>
+                    <span id="titre">{{'Quantity Taken' | translate}} (tank) : </span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{operation.poidsLait}} Kg</span>
                   </div>
 
                   <div class="text-uppercase fs-08" >
-                    <span id="titre">Matricule du tank : </span>
+                    <span id="titre">{{'Tank registration number' | translate}} : </span>
                     <span id="titre">&nbsp;&nbsp;&nbsp;&nbsp;{{operation.tank.matricule}}</span>
                   </div> 
 
                   <div class="text-uppercase fs-08">
-                    <span id="titre">Quantité produise : </span>
+                    <span id="titre"> {{'Quantity produced' | translate}}: </span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{operation.qtePrise}} lots</span>
                   </div>
 
                   <div class="text-uppercase fs-08" >
-                    <span id="titre"> Produit concerné : </span>
+                    <span id="titre"> {{ "Product concerned" | translate }} : </span>
                     <span id="titre"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{operation.produit.intitule}}</span>
                   </div> 
 
                  
                     <div class="text-uppercase fs-08">
-                      <span id="titre"> Type operation : </span>
+                      <span id="titre"> {{'Operation type' | translate}} : </span>
                       <span id="titre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{operation.typeOp}}</span>
                     </div> 
                     
                     <div class="text-uppercase fs-08">
-                      <span id="titre"> Date operation : </span>
+                      <span id="titre"> {{'Operation Date' | translate}} : </span>
                       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{operation.dateOperation}}</span>
                     </div>
                     
@@ -57,7 +57,7 @@
             <div class="details project">
               <div class="head text-uppercase">
                 <button id="btn" (click)="closeDetails()"  style="margin-left:115px;" class="btn btn ml-135  btn-rounded waves-effect w-md waves-light">
-                  Fermer les détails
+                  {{'Close details' | translate}}
                 </button>
               </div>
           </div>

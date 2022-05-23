@@ -11,6 +11,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Magasin } from 'src/app/Models/magasin';
 import { MagasinService } from 'src/app/Services/magasin.service';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-liste-magasin',
@@ -36,10 +37,14 @@ export class ListeMagasinComponent implements OnInit {
   displayedColumns: string[] = ['idMag','nomMag','adresse','ville','tel','action'];
 
   constructor(
+    private translateService :TranslateService,
     private location:Location,
     private magasinService: MagasinService,
     private router: Router,
-    private dialog:MatDialog) { }
+    private dialog:MatDialog) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
 
     ngOnInit() {

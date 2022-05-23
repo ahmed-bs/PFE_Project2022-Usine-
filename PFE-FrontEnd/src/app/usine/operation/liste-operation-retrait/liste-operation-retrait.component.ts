@@ -13,6 +13,7 @@ import { CreateOperationComponent } from '../create-operation/create-operation.c
 // import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
 import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 // import { UpdateOperationRetraitComponent } from '../update-operation-retrait/update-operation-retrait.component';
 
 @Component({
@@ -41,11 +42,17 @@ export class ListeOperationRetraitComponent implements OnInit {
   q=0;
   p=0;
   displayedColumns: string[] = ['idOperation','qtePrise','produit','magasin','code', 'dateOperation', 'action'];
-  constructor(private operationService: OperationService,
+
+  constructor(
+    private translateService :TranslateService,
+    private operationService: OperationService,
     private tankService:TankService,
     private location:Location,
     private produitService:ProduitService,
-    private router: Router, private dialog:MatDialog) { }
+    private router: Router, private dialog:MatDialog) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
 
     ngOnInit() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Magasin } from 'src/app/Models/magasin';
 import { MagasinService } from 'src/app/Services/magasin.service';
 
@@ -17,10 +18,14 @@ export class DetailsMagasinComponent implements OnInit {
   magasin?:Magasin = new Magasin();
 
   constructor(
+    private translateService :TranslateService,
     private dialogClose: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private magasinService: MagasinService) { }
+    private magasinService: MagasinService) {
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+     }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

@@ -10,7 +10,7 @@
 
         </div>
         
-        <div class="img-container d-flex align-items-center justify-content-center"><h5>Consulter le produit numéro</h5> </div>
+        <div class="img-container d-flex align-items-center justify-content-center"><h5>{{'Consult product numbe' | translate}}</h5> </div>
         <div class="user">
             <div class="h5 text-center m-0"> {{idP}} </div>
         </div>
@@ -22,20 +22,20 @@
                 </div>
             </div>
             <div class="skills">
-                <div class=" head text-uppercase"><h5>Autre Informations :</h5></div>
+                <div class=" head text-uppercase"><h5>{{'Other Information' | translate}} :</h5></div>
                 <div class=" pb-5 pt-3">
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre">Intitulé produit :</span>
+                    <span id="titre">{{'Product title' | translate}}:</span>
                     <span>{{produit.intitule}}</span>
                   </div>
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre">Libellé produit :</span>
+                    <span id="titre"> {{'Product Label' | translate}}:</span>
                     <span>&nbsp;&nbsp;{{produit.libelle}}</span>
                   </div>
                     <div class="text-uppercase fs-08">
-                      <span id="titre"> Quantité disponible :</span>
+                      <span id="titre"> {{'Quantity available' | translate}} :</span>
                       <span>{{produit.qte}} lots</span>
                     </div>
                     
@@ -46,7 +46,7 @@
             <div class="details project">
               <div class="head text-uppercase">
                 <button id="btn" (click)="closeDetails()"  style="margin-left:115px;" class="btn btn ml-135  btn-rounded waves-effect w-md waves-light">
-                  Fermer les détails
+                  {{'Close details' | translate}}
                 </button>
               </div>
           </div>

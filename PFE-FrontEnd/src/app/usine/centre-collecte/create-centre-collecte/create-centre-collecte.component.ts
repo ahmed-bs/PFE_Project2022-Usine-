@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-centre-collecte',
@@ -35,10 +36,13 @@ export class CreateCentreCollecteComponent implements OnInit {
   // fournisseurs!:Observable<Fournisseur[]>;
 
   constructor(
+    private translateService :TranslateService,
     private location:Location,
      private centreCollecteService: CentreCollecteService,
      private router: Router,
      private dialogClose: MatDialog,) {
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       }
 

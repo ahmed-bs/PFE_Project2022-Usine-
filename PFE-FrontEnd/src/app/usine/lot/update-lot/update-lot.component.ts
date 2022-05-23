@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Lot } from 'src/app/Models/lot';
 import { LotService } from 'src/app/Services/lot.service';
 
@@ -23,10 +24,14 @@ export class UpdateLotComponent implements OnInit {
 
 
    constructor(
+    private translateService :TranslateService,
      private dialogClose: MatDialog,
      private lotService:LotService,
 
-   ) { }
+   ) {
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
    ngOnInit(): void {
      //this.ValidatedForm();

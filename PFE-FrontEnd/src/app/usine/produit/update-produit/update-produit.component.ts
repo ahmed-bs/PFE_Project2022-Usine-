@@ -5,6 +5,7 @@ import { Produit } from 'src/app/Models/produit';
 import { ProduitService } from 'src/app/Services/produit.service';
 import { Router } from '@angular/router';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -19,13 +20,15 @@ export class UpdateProduitComponent implements OnInit {
   CheckesCompetance:boolean=false;
 
   constructor(
+    private translateService :TranslateService,
     private location:Location,
     private router:Router,
     private dialogClose: MatDialog,
     private produitService:ProduitService,
-
-
-  ) { }
+  ) {
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en')
+   }
 
   ngOnInit(): void {
    

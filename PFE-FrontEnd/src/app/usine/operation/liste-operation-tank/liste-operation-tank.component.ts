@@ -10,6 +10,7 @@ import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { DetailsOperationTankComponent } from '../details-operation-tank/details-operation-tank.component';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-liste-operation-tank',
@@ -35,11 +36,16 @@ export class ListeOperationTankComponent implements OnInit {
   dataSource!:MatTableDataSource<any>;
   v=0;
   displayedColumns: string[] = ['idOpTank','operation','matricule','date', 'qteInsereTank','action'];
+
   constructor(
+    private translateService :TranslateService,
     private operationService: OperationService, 
     private tankService:TankService, 
     private location:Location,
-    private router: Router, private dialog:MatDialog) { }
+    private router: Router, private dialog:MatDialog) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
 
     ngOnInit() {

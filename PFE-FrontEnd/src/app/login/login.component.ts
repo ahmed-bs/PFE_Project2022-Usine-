@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from '../Models/user';
 import { AuthService } from '../Services/auth.service';
 import { UserService } from '../Services/user.service';
@@ -13,9 +14,13 @@ export class LoginComponent implements OnInit {
   err:number=0;
   
     constructor( 
+      private translateService :TranslateService,
       private authService: AuthService,
       private userService:UserService,
-      public router:Router ) { }
+      public router:Router ) {
+        this.translateService.setDefaultLang('en');
+        this.translateService.use(localStorage.getItem('lang') || 'en')
+       }
 
 
 

@@ -12,6 +12,7 @@ import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
 import { Location } from "@angular/common";
 import { ethers } from 'ethers';
+import { TranslateService } from '@ngx-translate/core';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json');
@@ -54,12 +55,16 @@ export class CreateOperationComponent implements OnInit {
   tab!: any[];
   tabTankId!: any[];
   constructor(
+    private translateService :TranslateService,
     private location: Location,
     private operationService: OperationService,
     private tankService: TankService,
     private centreCollecteService: CentreCollecteService,
     private router: Router,
-    private dialogClose: MatDialog) { }
+    private dialogClose: MatDialog) {
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+     }
 
   async ngOnInit() {
     //this.ValidatedForm();

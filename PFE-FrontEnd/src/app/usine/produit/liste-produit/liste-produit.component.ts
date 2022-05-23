@@ -10,6 +10,7 @@ import { CreateProduitComponent } from '../create-produit/create-produit.compone
 import { DetailsProduitComponent } from '../details-produit/details-produit.component';
 import {Location} from "@angular/common";
 import { UpdateProduitComponent } from '../update-produit/update-produit.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-liste-produit',
@@ -36,9 +37,13 @@ export class ListeProduitComponent implements OnInit {
   dataSource!:MatTableDataSource<any>;
   displayedColumns: string[] = ['idProduit','intitule','qte', 'libelle','action'];
   constructor(
+    private translateService :TranslateService,
     private location:Location,
     private produitService: ProduitService,
-    private router: Router, private dialog:MatDialog) { }
+    private router: Router, private dialog:MatDialog) {
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+     }
 
 
     ngOnInit() {

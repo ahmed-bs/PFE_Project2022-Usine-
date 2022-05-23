@@ -9,6 +9,7 @@ import { ProduitService } from 'src/app/Services/produit.service';
 import { Observable } from 'rxjs';
 import { TankService } from 'src/app/Services/tank.service';
 import { Tank } from 'src/app/Models/tank';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -38,11 +39,15 @@ export class CreateLotComponent implements OnInit {
   // fournisseurs!:Observable<Fournisseur[]>;
 
   constructor(
+    private translateService :TranslateService,
      private lotService: LotService,
      private produitService:ProduitService,
      private tankService:TankService,
      private router: Router,
-     private dialogClose: MatDialog,) { }
+     private dialogClose: MatDialog,) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+     }
 
   ngOnInit() {
     this.produits=this.produitService.getProduits();

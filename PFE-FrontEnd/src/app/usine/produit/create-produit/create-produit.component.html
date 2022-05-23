@@ -1,15 +1,15 @@
 <div class="ContenuCard" >
     <div class="modal-header">
-      <h2 id="modal-title"><b>Créer un nouveau produit :</b></h2>
+      <h2 id="modal-title"><b>{{'Create a new product' | translate}}:</b></h2>
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) champ obligatoire</span><br><br>
+    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) {{'Required Field' | translate}}</span><br><br>
           <form [formGroup]="myForm"  novalidate >
             <div class="form-row">
               <div class="form-group col-md-6 mb-3">
-                <label>Intitulé (min 3 caracteres):<span style="color:red;">*</span></label>
+                <label>{{'Entitled' | translate}}{{'(minimum 3 characters)' | translate}}:<span style="color:red;">*</span></label>
                 <input type="text"
                  formControlName="intitule"
                  class="form-control"
@@ -19,19 +19,19 @@
                  name="intitule">
     
                 <div *ngIf="intitule?.invalid && intitule?.touched" class="text-danger">
-                  Intitule invalide !
+                  {{'Invalid title' | translate}} !
                 </div>
                 <div *ngIf="intitule?.valid && intitule?.touched  && msg1==0" class="text-success">
-                  Intitule valide!
+                  {{'Valid title' | translate}}!
                 </div>
                 <div *ngIf="msg1==1"  class="text-danger">
-                  &nbsp;Intitulé existe deja !
+                  &nbsp;{{'Title already exists' | translate}} !
                 </div>
     
               </div>
   
               <div class="col-md-6 mb-3">
-                <label for="type">Libellé (min 8 caracteres):<span style="color:red;">*</span></label>
+                <label for="type"> {{'Label' | translate}}{{'(minimum 8 characters)' | translate}}:<span style="color:red;">*</span></label>
                 <input type="text"
                  class="form-control"
                   id="libelle"
@@ -41,13 +41,13 @@
                   name="libelle">
     
                   <div *ngIf="libelle?.invalid && libelle?.touched" class="text-danger">
-                    invalide libellé!
+                    {{'Invalid label' | translate}}!
                   </div>
                   <div *ngIf="libelle?.valid && libelle?.touched  && msg2==0" class="text-success">
-                   Libellé valide!
+                   {{'Valid label' | translate}}!
                   </div>
                   <div *ngIf="msg2==1"  class="text-danger">
-                    &nbsp;Libellé existe deja !
+                    &nbsp; {{'label already exists' | translate}}!
                   </div>
     
               </div>
@@ -57,15 +57,15 @@
             <div class="form-group">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="cgu" required>
-                <label class="form-check-label" for="cgu">J'accepte les conditions générales d'utilisation</label>
+                <label class="form-check-label" for="cgu">{{ "p2" | translate }}</label>
                 <br>
-                <span style="color:red;margin-bottom:45px;font-size:1.1em">{{msg}}</span>
-                <div class="invalid-feedback">Vous devez accepter les CGU pour continuer</div>
+                <span style="color:red;margin-bottom:45px;font-size:1.1em"*ngIf="msg != ''">{{'Please fill in all required fields' | translate}}</span>
+                <div class="invalid-feedback">{{ "p3" | translate }}</div>
               </div>
             </div>
-            <button class="btn btn-primary" style="margin:11px" (click)=" onSubmit()"  type="submit">Envoyer</button>
+            <button class="btn btn-primary" style="margin:11px" (click)=" onSubmit()"  type="submit">{{ "Send" | translate }}</button>
             <!-- close popup -->
-            <button (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">{{'Close' | translate}}</button>
   
           </form>
         </div>
