@@ -11,6 +11,7 @@ import { DetailsCentreCollecteComponent } from '../details-centre-collecte/detai
 import { UpdateCentreCollecteComponent } from '../update-centre-collecte/update-centre-collecte.component';
 import { CreateCentreCollecteComponent } from '../create-centre-collecte/create-centre-collecte.component';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-liste-centre-collecte',
@@ -36,10 +37,14 @@ export class ListeCentreCollecteComponent implements OnInit {
   displayedColumns: string[] = ['idCentre','nomCentre','adresse','ville','tel','action'];
 
   constructor(
+    private translateService :TranslateService,
     private location:Location,
     private centreCollecteService: CentreCollecteService,
     private router: Router,
-    private dialog:MatDialog) { }
+    private dialog:MatDialog) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
 
     ngOnInit() {

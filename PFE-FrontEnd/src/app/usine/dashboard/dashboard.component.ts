@@ -8,6 +8,7 @@ import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
 import { MagasinService } from 'src/app/Services/magasin.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -83,12 +84,16 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(
+    private translateService :TranslateService,
     private operationService: OperationService,
     private tankService:TankService,
      private centreService:CentreCollecteService,
      private magasinService:MagasinService,
      private produitService:ProduitService,
-    private router: Router) {}
+    private router: Router) {
+      this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
 
     getData(){

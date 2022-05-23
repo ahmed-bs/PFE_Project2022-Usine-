@@ -14,6 +14,7 @@ import {Location} from "@angular/common";
 import { ethers } from 'ethers';
 import { async, Observable } from 'rxjs';
 import { OperationTank } from 'src/app/Models/operationTank';
+import { TranslateService } from '@ngx-translate/core';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json');
@@ -44,10 +45,16 @@ export class ListeOperationComponent implements OnInit {
   p=0;
   q=0;
   displayedColumns: string[] = ['idOperation','poidsLait', 'dateOperation','centreCollecte','code', 'action'];
-  constructor(private operationService: OperationService,
+
+  constructor(
+    private translateService :TranslateService,
+    private operationService: OperationService,
     private tankService:TankService,
     private location:Location,
-    private router: Router, private dialog:MatDialog) { }
+    private router: Router, private dialog:MatDialog) {
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+     }
 
 
     ngOnInit() {

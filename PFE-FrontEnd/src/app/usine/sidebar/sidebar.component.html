@@ -5,7 +5,7 @@
     <!-- Brand Logo -->
     <a class="brand-link">
       <img src="assets/image_usine.png" alt="RMS Logo" class="image-responsive img-circle elevation-1" style="margin-left: -10px">
-      <span class="brand-text font-weight-light gradient-text" style="font-size: 1.0em; color:white; font-weight: bold;  font-family: 'Archivo Black', sans-serif;">Usine Application</span>
+      <span class="brand-text font-weight-light gradient-text" style="font-size: 1.0em; color:white; font-weight: bold;  font-family: 'Archivo Black', sans-serif;">{{'Factorie' | translate}} Application</span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +14,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="info" style="margin-left:10px" >
         <!-- <i style="color:red;" class="fas fa-heart fa-lg fa-spin"></i>& -->
-        <a  class="d-block" style="margin-left:2px;color:white; font-weight: bold;" >  <img style="padding-left:-55px;width:40px;height:40px;" src="../../assets/person.png" alt="cccccccc">&nbsp; Bienvenu(e) {{authService.loggedUser}}</a>
+        <a  class="d-block" style="margin-left:2px;color:white; font-weight: bold;" >  <img style="padding-left:-55px;width:40px;height:40px;" src="../../assets/person.png" alt="cccccccc">&nbsp;{{'Welcome' | translate}} {{authService.loggedUser}}</a>
       </div>
     </div>
 
@@ -36,7 +36,7 @@
             <a routerLink="./dashboard" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fas fa-chart-area"></i>
               <!-- <i class="fas fa-chart-area"></i> -->
-              <p>DashBoard</p>
+              <p> {{'boardTable' | translate}}</p>
             </a>
           </li>
 
@@ -44,7 +44,7 @@
             <a routerLink="./centreCollecte/listeCentreCollecte" routerLinkActive="active" class="nav-link">
               <!-- <i class="nav-icon fas fa-list"></i> -->
               <i class="nav-icon fas fa-clinic-medical"></i>
-              <p>Gestion des centres
+              <p>{{'Center management' | translate}}
               </p>
             </a>
           </li>
@@ -54,14 +54,14 @@
             <a routerLink="magasin/listeMagasin" routerLinkActive="active" class="nav-link">
               <!-- <i class="nav-icon fas fa-shopping"></i> -->
               <i class="nav-icon fas fa-shopping-cart"></i>
-              <p>Gestion des magasins</p>
+              <p>{{'Store management' | translate}}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a routerLink="produit/listeProduit" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fab fa-product-hunt"></i>
-              <p>Gestion des produits</p>
+              <p>{{'Product management' | translate}}</p>
             </a>
           </li>
 
@@ -69,14 +69,14 @@
           <li class="nav-item">
             <a routerLink="tank/listeTank" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-bitbucket"></i>
-              <p>Gestion des tanks</p>
+              <p>{{'Tank management' | translate}}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a  routerLink="operation/listeOperation" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fas fa-plus"></i>
-              <p>Gestion des operations  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;de remplissage</p>
+              <p>{{'Operations management' | translate}} {{'Filling' | translate}}</p>
             </a>
           </li>
 
@@ -84,21 +84,21 @@
           <li class="nav-item">
             <a routerLink="operation/listeOperationT" routerLinkActive="active" class="nav-link" >
               <i class="nav-icon fas fa-exchange-alt"></i>
-              <p>Transfert lait/produit</p>
+              <p>{{'Milk/product transfer' | translate}}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a routerLink="operation/listeOperationRetrait" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fas fa-minus"></i>
-              <p>Gestion des operations &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de retrait</p>
+              <p>{{'Operations management' | translate}} {{'Withdrawal' | translate}}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a routerLink="operation/listeOperationTank" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-id-card-o"></i>
-              <p>Gestion des operations &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sur les tanks </p>
+              <p>{{'tank s operations management' | translate}}</p>
             </a>
           </li>
 

@@ -1,7 +1,7 @@
 <div class="wrapper" *ngIf="lot">
     <div class="card text-white">
         <div class="bg-pink"></div>
-        <div class="img-container d-flex align-items-center justify-content-center"><h5>Consulter le lot numero</h5> </div>
+        <div class="img-container d-flex align-items-center justify-content-center"><h5>{{'Consult lot number' | translate }}</h5> </div>
         <div class="user">
             <div class="h5 text-center m-0"> {{idC}} </div>
         </div>
@@ -13,27 +13,27 @@
                 </div>
             </div>
             <div class="skills">
-                <div class=" head text-uppercase"><h5>Autre Informations :</h5></div>
+                <div class=" head text-uppercase"><h5>{{'Other Information' | translate}} :</h5></div>
                 <div class=" pb-5 pt-3">
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre"> Intitulé du tank : </span>
+                    <span id="titre">  {{'Tank title' | translate }}: </span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.tank.matricule}}</span>
                   </div>
 
                   <div class="text-uppercase fs-08">
-                    <span id="titre"> Quantité prise Tank : </span>
+                    <span id="titre"> {{'Quantity Taken Tank' | translate }}: </span>
                     <span>&nbsp;&nbsp;{{lot.qtePriseTank}}</span>
                   </div>
 
   
                   <div class="text-uppercase fs-08">
-                    <span id="titre"> Produit Concerné : </span>
+                    <span id="titre"> {{'Product concerned' | translate }}: </span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.produit.intitule}}</span>
                   </div>
 
                   <div class="text-uppercase fs-08">
-                    <span id="titre"> Quantité (Lots)  : </span>
+                    <span id="titre"> {{'Quantity' | translate }} (Lots)  : </span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lot.qteLot}}</span>
                   </div>
 
@@ -49,7 +49,7 @@
             <div class="details project">
               <div class="head text-uppercase">
                 <button id="btn" (click)="closeDetails()" class="btn btn ml-150  btn-rounded waves-effect w-md waves-light">
-                  Close Details
+                  {{'Close details' | translate }}
                 </button>
               </div>
           </div>

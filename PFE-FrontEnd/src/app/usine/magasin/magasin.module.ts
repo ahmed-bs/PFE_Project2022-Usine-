@@ -7,7 +7,7 @@ import { CreateMagasinComponent } from './create-magasin/create-magasin.componen
 import { DetailsMagasinComponent } from './details-magasin/details-magasin.component';
 import { UpdateMagasinComponent } from './update-magasin/update-magasin.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 // import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -58,6 +62,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
      MatInputModule,
      MatTableModule,
      MatSnackBarModule,
+     TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
   ]
 })
 export class MagasinModule { }

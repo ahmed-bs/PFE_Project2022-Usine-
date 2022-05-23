@@ -15,6 +15,10 @@ import { ProduitService } from 'src/app/Services/produit.service';
 import { DatePipe } from '@angular/common';
 import {Location} from "@angular/common";
 import { ethers } from 'ethers';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/RetraitUsine.json');
@@ -49,15 +53,46 @@ export class CreateOperationRetraitComponent implements OnInit {
 
   maDate = new Date();
 
+  exportOne( op : Operation , confirmation: string){
+    // new CsvBuilder("operation.csv")
+    // .setColumns(["#ID","Quantity of milk taken(Kg)","Operation Code","collector name","Operation Date","Action"])
+    // .addRow([op.idOperation.toString() , op.poidsLait.toString() , op.code.toString() , op.collecteur.nomCollecteur , op.dateOperation , confirmation])
+    // .exportFile();
 
+
+    const doc = new jsPDF(); 
+    var imageData = environment.img 
+    const n = op.code.toString() + '.pdf'
+      // const head = [['ID',"Quantity of milk taken(Kg)","Operation Code","collector name","Operation Date","Action"]]
+    // const data = [
+    //     [op.idOperation, op.poidsLait, op.code , op.collecteur.nomCollecteur , op.dateOperation , confirmation],
+doc.addImage(imageData,'JPEG',0,0,210,297);
+    // ]
+    doc.text(op.code.toString(),92,54)
+    doc.text(op.centreCollecte.nomCentre.toString(),75,107.2)
+    doc.text(op.magasin.nomMag.toString(),107,139)
+    doc.text(op.dateOperation.toString(),120,123.5)
+    // doc.text(op.code.toString().toString(),92,157)
+    // autoTable(doc, {
+    //     head: head,
+    //     body: data,
+    //     didDrawCell: (data) => { },
+    // });
+
+    doc.save(n);
+    }
   constructor(
+    private translateService :TranslateService,
     private location:Location,
     private operationService: OperationService,
     private tankService:TankService,
     private produitService:ProduitService,
     private router: Router,
     private magasinService:MagasinService, 
-    private dialogClose: MatDialog) { }
+    private dialogClose: MatDialog) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
   ngOnInit() {
     //this.ValidatedForm();
@@ -143,7 +178,7 @@ export class CreateOperationRetraitComponent implements OnInit {
     }
   }
 
-
+  confirmation: string = "confirmed";
   count!: number;
 //elem0!: Operation;
 elem0: Operation[]=[];
@@ -164,8 +199,15 @@ elem2: Operation=new Operation();
   
     console.log("222222222222222222222222222222222222222");
     console.log(this.elem0[0]);
+    try {
     const transaction = await contract.RetraitOperationTank(this.elem0);
     await transaction.wait() ; 
+  } catch (error) {
+    this.confirmation = "rejected"
+  }
+    if(this.confirmation =="confirmed"){
+      this.exportOne(this.elem0[0],this.confirmation)
+    }
     }
 
   onSubmit() {

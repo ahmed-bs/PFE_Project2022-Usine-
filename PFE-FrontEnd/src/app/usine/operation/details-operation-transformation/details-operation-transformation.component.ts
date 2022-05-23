@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Operation } from 'src/app/Models/operation';
 import { OperationService } from 'src/app/Services/operation.service';
 
@@ -16,9 +17,13 @@ export class DetailsOperationTransformationComponent implements OnInit {
   operation?:Operation = new Operation();
 
   constructor(
+    private translateService :TranslateService,
     private dialogClose: MatDialog,
     private route: ActivatedRoute,private router: Router,
-    private operationService: OperationService) { }
+    private operationService: OperationService) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

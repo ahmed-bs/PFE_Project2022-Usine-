@@ -1,16 +1,16 @@
 <div class="ContenuCard" >
     <div class="modal-header">
-      <h3 id="modal-title"><b>Modifier le magasin numéro : {{magasin.idMag}}</b></h3>
+      <h3 id="modal-title"><b>{{'Change store number' | translate}}: {{magasin.idMag}}</b></h3>
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) champ obligatoire</span><br><br>
+    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) {{'Required Field' | translate}}</span><br><br>
     <form [formGroup]="myForm" class="needs-validation" novalidate>
 
       <div class="form-group">
         <div class="col-md-12 mb-3">
-          <label>Nom du magasin (minimum 3 caracteres) :<span style="color:red;">*</span></label>
+          <label> {{'Store name (minimum 3 characters)' | translate}}:<span style="color:red;">*</span></label>
         <input type="text"
                class="form-control"
                formControlName="nomMag"
@@ -20,18 +20,18 @@
           <div
                *ngIf="nomMag?.invalid && nomMag?.touched"
                 class="text-danger">
-                Nom du magasin invalide !
+                {{ "Invalid store name" | translate }}  !
          </div>
          <div
               *ngIf="nomMag?.valid && nomMag?.touched"
               class="text-success">
-              Nom du magasin valide !
+              {{ "Valid store name" | translate }}  !
          </div>
         </div>
 
 
           <div class="col-md-12 mb-3">
-            <label>Adresse (minimum 4 caracteres) :<span style="color:red;">*</span></label>
+            <label>{{ "Address (minimum 4 characters)" | translate }} :<span style="color:red;">*</span></label>
             <input type="text"
                    class="form-control"
                    formControlName="adresse"
@@ -41,12 +41,12 @@
               <div
                    *ngIf="adresse?.invalid && adresse?.touched"
                     class="text-danger">
-                    adresse invalide !
+                    {{ "Invalid address" | translate }} !
              </div>
              <div
                   *ngIf="adresse?.valid && adresse?.touched"
                   class="text-success">
-                  adresse valide !
+                  {{ "Valid address" | translate }} !
              </div>
             </div>
 
@@ -56,7 +56,7 @@
     <div class="form-group">
 
     <div class="col-md-12 mb-3">
-      <label>Adresse (minimum 4 caracteres) :<span style="color:red;">*</span></label>
+      <label>{{ "City (minimum 4 characters)" | translate }} :<span style="color:red;">*</span></label>
       <input type="text"
              class="form-control"
              formControlName="ville"
@@ -66,19 +66,19 @@
         <div
              *ngIf="ville?.invalid && ville?.touched"
               class="text-danger">
-              ville invalide !
+              {{ "Invalid city" | translate }} !
        </div>
        <div
             *ngIf="ville?.valid && ville?.touched"
             class="text-success">
-            ville valide !
+            {{ "Valid City" | translate }} !
        </div>
           
 
       </div>
 
       <div class="col-md-12 mb-3">
-        <label>Numéro de téléphone (Exactement 8 chiffres) : <span style="color:red;">*</span></label>
+        <label>{{ "Phone number (8 digits)" | translate }} : <span style="color:red;">*</span></label>
         <input type="number"
                class="form-control"
                formControlName="tel"
@@ -88,20 +88,20 @@
           <div
                *ngIf="tel?.invalid && tel?.touched"
                 class="text-danger">
-                Numéro de téléphone invalide !
+                {{ "Invalid phone number" | translate }} !
          </div>
          <div
               *ngIf="tel?.valid && tel?.touched"
               class="text-success">
-              Numéro de téléphone valide !
+              {{ "Valid phone number" | translate }} !
          </div>
         </div>
         
     </div>
 
       <div class="modal-footer">
-        <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="submit" (click)="updateMagasin()" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer </button>
+        <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">{{ "Close" | translate }}</button>
+        <button type="submit" (click)="updateMagasin()" [disabled]="myForm.invalid" class="btn btn-primary">{{'Save' | translate}} </button>
       </div>
     </form>
 

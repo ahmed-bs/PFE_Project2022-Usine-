@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Lot } from 'src/app/Models/lot';
 import { LotService } from 'src/app/Services/lot.service';
 
@@ -17,10 +18,14 @@ export class DetailsLotComponent implements OnInit {
   lot?:Lot = new Lot();
 
   constructor(
+    private translateService :TranslateService,
     private dialogClose: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private lotService: LotService) { }
+    private lotService: LotService) { 
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

@@ -1,14 +1,14 @@
 <div class="ContenuCard" >
     <div class="modal-header">
-      <h3 id="modal-title"><b>Modifier le produit numéro :{{produit.idProduit}}</b></h3>
+      <h3 id="modal-title"><b>{{'Change product number' | translate}} :{{produit.idProduit}}</b></h3>
       <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) champ obligatoire</span><br><br>
+    <span style="color:red;margin-top:-105px;font-size:1.1em">(*) {{'Required Field' | translate}}</span><br><br>
     <form [formGroup]="myForm" class="needs-validation" novalidate>
       <div class="form-group">
-        <label>Intitulé (min 3 caracteres):<span style="color:red;">*</span></label>
+        <label>{{'Entitled' | translate}}{{'(minimum 3 characters)' | translate}}:<span style="color:red;">*</span></label>
         <input type="text"
                class="form-control"
                formControlName="intitule"
@@ -18,17 +18,17 @@
           <div
                *ngIf="intitule?.invalid && intitule?.touched"
                 class="text-danger">
-                Intitulé invalide !
+                {{'Invalid title' | translate}} !
          </div>
          <div
               *ngIf="intitule?.valid && intitule?.touched"
               class="text-success">
-               Intitulé valide !
+              {{'Valid title' | translate}} !
          </div>
       </div>
   
       <div class="lg mb-3">
-        <label for="type">Libellé (min 8 caracteres):<span style="color:red;">*</span></label>
+        <label for="type">{{'Label' | translate}}{{'(minimum 8 characters)' | translate}}:<span style="color:red;">*</span></label>
         <input class="form-control"
                   placeholder="Description Post here ...."
                   name="libelle"
@@ -38,18 +38,18 @@
             <div
                   *ngIf="libelle?.invalid && libelle?.touched"
                    class="text-danger">
-                   Libellé invalide !
+                   {{'Invalid label' | translate}} !
             </div>
             <div
                  *ngIf="libelle?.valid && libelle?.touched"
                  class="text-success">
-                 Libellé valide !
+                 {{'Valid label' | translate}} !
             </div>
       </div>
   
       <div class="modal-footer">
-        <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="submit" (click)="updateProduit()" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer </button>
+        <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">{{'Close' | translate}}</button>
+        <button type="submit" (click)="updateProduit()" [disabled]="myForm.invalid" class="btn btn-primary">{{'Save' | translate}} </button>
       </div>
     </form>
   

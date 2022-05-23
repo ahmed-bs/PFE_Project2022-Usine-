@@ -5,6 +5,7 @@ import { Magasin } from 'src/app/Models/magasin';
 import { MagasinService } from 'src/app/Services/magasin.service';
 import { Router } from '@angular/router';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-update-magasin',
@@ -26,12 +27,16 @@ export class UpdateMagasinComponent implements OnInit {
 
 
    constructor(
+    private translateService :TranslateService,
     private location:Location,
      private dialogClose: MatDialog,
      private router:Router,
      private magasinService:MagasinService,
 
-   ) { }
+   ) { 
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en')
+   }
 
    ngOnInit(): void {
      //this.ValidatedForm();

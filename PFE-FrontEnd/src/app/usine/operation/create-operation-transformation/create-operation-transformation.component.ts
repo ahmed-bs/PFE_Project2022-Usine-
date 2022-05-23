@@ -17,6 +17,7 @@ import { DatePipe } from '@angular/common';
 import {Location} from "@angular/common";
 
 import { ethers } from 'ethers';
+import { TranslateService } from '@ngx-translate/core';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/Transformation.json');
@@ -54,6 +55,7 @@ export class CreateOperationTransformationComponent implements OnInit {
   tabTankId!: any[];
 
   constructor(
+    private translateService :TranslateService,
     private location:Location,
     private operationService: OperationService,
     private tankService:TankService,
@@ -61,7 +63,10 @@ export class CreateOperationTransformationComponent implements OnInit {
     private produitService:ProduitService,
     private router: Router,
     private magasinService:MagasinService, 
-    private dialogClose: MatDialog) { }
+    private dialogClose: MatDialog) {
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+     }
 
   ngOnInit() {
     this.produits=this.produitService.getProduits();
@@ -188,8 +193,14 @@ export class CreateOperationTransformationComponent implements OnInit {
       // this.elem0[9]= JSON.parse(localStorage.getItem('tabTankId') || '[]')|| []  ;  
       console.log("222222222222222222222222222222222222222");
       console.log(this.elem0);
-      const transaction = await contract.RetraitOperationTank(this.elem0);
-      await transaction.wait() ; 
+      try {
+        const transaction = await contract.RetraitOperationTank(this.elem0);
+        await transaction.wait() ; 
+      } catch (error) {
+        console.log("22ssssssssssssssssssssssssssssssss22222222222");
+        console.log(this.elem0);
+      }
+ 
       window.localStorage.removeItem("prod");
       window.localStorage.removeItem("tabTank");
       this.onClose();

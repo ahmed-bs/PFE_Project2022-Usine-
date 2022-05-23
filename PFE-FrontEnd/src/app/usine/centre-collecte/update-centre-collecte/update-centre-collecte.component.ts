@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
 import {Location} from "@angular/common";
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -27,12 +28,16 @@ export class UpdateCentreCollecteComponent implements OnInit {
 
 
    constructor(
+    private translateService :TranslateService,
     private location:Location,
     private router: Router,
      private dialogClose: MatDialog,
      private centreService:CentreCollecteService,
 
-   ) { }
+   ) {
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
 
    ngOnInit(): void {
      //this.ValidatedForm();

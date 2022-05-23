@@ -11,6 +11,7 @@ import { UpdateLotComponent } from '../update-lot/update-lot.component';
 import { CreateLotComponent } from '../create-lot/create-lot.component';
 import { LotService } from 'src/app/Services/lot.service';
 import { TankService } from 'src/app/Services/tank.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-liste-lot',
@@ -37,10 +38,14 @@ export class ListeLotComponent implements OnInit {
   displayedColumns: string[] = ['idL','produit','qteLot','tank','qtePriseTank','date','action'];
 
   constructor(
+    private translateService :TranslateService,
     private lotService: LotService,
     private tankService:TankService,
     private router: Router,
-    private dialog:MatDialog) { }
+    private dialog:MatDialog) {
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+     }
 
 
     ngOnInit() {

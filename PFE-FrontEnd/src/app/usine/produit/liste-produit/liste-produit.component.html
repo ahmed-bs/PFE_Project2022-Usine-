@@ -3,16 +3,16 @@
 
       <div class="col-md-12 main-datatable">
         <div class="card-header card-header-danger" id="title-Table">
-          <h3 class="card-title" id="titre">Table pour les produits</h3><br>
+          <h3 class="card-title" id="titre">{{'Table for products' | translate}}</h3><br>
         </div>
           <div class="card_body">
               <div class="row d-flex">
                   <div class="col-sm-4 createSegment">
-                   <a class="btn dim_button create_new" (click)="onOpenDialogCreate()"> <span class="glyphicon glyphicon-plus"></span><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un element </a>
+                   <a class="btn dim_button create_new" (click)="onOpenDialogCreate()"> <span class="glyphicon glyphicon-plus"></span><i class="fa fa-plus" aria-hidden="true"></i> {{'Add item' | translate}} </a>
                   </div>
                   <div class="col-sm-8 add_flex">
                       <div class="form-group searchInput" aria-autocomplete="on" (keyup)="filterData($event)">
-                          <label for="email">Recherche:</label>
+                          <label for="email">{{'Research' | translate}}:</label>
                           <input type="search"  class="form-control" id="filterbox" matInput placeholder=" ">
                       </div>
                   </div>
@@ -28,16 +28,16 @@
                                 <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.idProduit}}</td>
                             </ng-container>
                             <ng-container matColumnDef="intitule" >
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">Intitulé du produit</th>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">{{'Product title' | translate}}</th>
                               <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.intitule}}</td>
                             </ng-container>
                        
                             <ng-container matColumnDef="libelle">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Libellé du produit</th>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">{{'Product Label' | translate}}</th>
                               <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.libelle}}</td>
                             </ng-container>
                             <ng-container matColumnDef="qte">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Quantité disponible (Lots)</th>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">{{'Quantity available' | translate}} (Lots)</th>
                               <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{element.qte}} lots</b></td>
                              
@@ -52,7 +52,7 @@
                                       <ul class="dropdown-menu">
                                         <li class="li2">
                                           <a (click)="updateProduit(element)" target="_blank">
-                                            <i class="fa fa-pencil-square-o fa-lg" style="color:#3E8D07;"> Modifier </i>
+                                            <i class="fa fa-pencil-square-o fa-lg" style="color:#3E8D07;"> {{'modify' | translate}} </i>
                                           </a>
                                       </li>
 
@@ -67,7 +67,7 @@
                                       <ul class="dropdown-menu dropdown_more">
                                           <li class="li">
                                               <a (click)="detailsProduit(element)"target="_black">
-                                                <i class="fa fa-info-circle fa-lg" >  plus de details  </i>
+                                                <i class="fa fa-info-circle fa-lg" >  {{'More_information' | translate}}  </i>
                                               </a>
                                           </li>
                                       </ul>
@@ -81,7 +81,7 @@
                                     <ul class="dropdown-menu dropdown_more">
                                         <li class="li1">
 
-                                    <a (click)="deleteProduit(element.idProduit)"> <i class="fa fa-trash fa-lg" style="color:#D41616;">&nbsp; <b>Supprimer</b></i></a>
+                                    <a (click)="deleteProduit(element.idProduit)"> <i class="fa fa-trash fa-lg" style="color:#D41616;">&nbsp; <b>{{'DELETE' | translate}}</b></i></a>
                                   </li>
                                 </ul>
                             </div>

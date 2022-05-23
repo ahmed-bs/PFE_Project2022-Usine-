@@ -15,7 +15,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ScaleLinear, ScalePoint, ScaleTime,ScaleBand } from 'd3-scale';
 import { UsineComponent } from './usine.component';
 import { ProduitComponent } from './produit/produit.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -31,10 +39,19 @@ import { ProduitComponent } from './produit/produit.component';
     ProduitComponent
   ],
   imports: [
+    MatTableModule,
+    MatTableExporterModule,
     CommonModule,
     UsineRoutingModule,
     NgxChartsModule,
     MatSnackBarModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
   ]
 })
 export class UsineModule { }
