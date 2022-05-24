@@ -79,7 +79,9 @@ export class DashboardComponent implements OnInit {
 
   colorScheme : any = {
     // domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-    domain: ['#ffc107', '#EE9C4A','#3772C8','#E71F2B ','#28a745', '#756E6F','#17a2b8', '#AAAAAA','#32DA1E','#FF5733','#AE0D05']
+   // domain: ['#ffc107', '#EE9C4A','#3772C8','#E71F2B ','#28a745', '#756E6F','#17a2b8', '#AAAAAA','#32DA1E','#FF5733','#AE0D05']
+      domain: ['#FFDD94','#FAB97B ','#CCABD8','#86E3CE', '#D0E6A5', '#756E6F','#17a2b8', '#AAAAAA','#32DA1E','#FF5733','#AE0D05']
+
   };
 
 

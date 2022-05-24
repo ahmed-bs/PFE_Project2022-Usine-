@@ -50,7 +50,8 @@ export class CreateOperationRetraitComponent implements OnInit {
   lots!:Observable<Lot[]>;
   produits!:Observable<Produit[]>;
   tab!: any[];
-
+  tab0!: any[];
+  tab1!: any[];
   maDate = new Date();
 
   exportOne( op : Operation , confirmation: string){
@@ -69,7 +70,7 @@ export class CreateOperationRetraitComponent implements OnInit {
 doc.addImage(imageData,'JPEG',0,0,210,297);
     // ]
     doc.text(op.code.toString(),92,54)
-    doc.text(op.centreCollecte.nomCentre.toString(),75,107.2)
+    doc.text("op.centreCollecte.nomCentre.toString()",75,107.2)
     doc.text(op.magasin.nomMag.toString(),107,139)
     doc.text(op.dateOperation.toString(),120,123.5)
     // doc.text(op.code.toString().toString(),92,157)
@@ -115,8 +116,13 @@ doc.addImage(imageData,'JPEG',0,0,210,297);
     this.operation = new Operation();
   }
 
-  save() {
 
+  opr: Operation=new Operation();
+  mgz : Magasin=new Magasin();
+  prd : Produit=new Produit();
+  save() {
+    environment.wating = 'startwaiting';
+    this.onReload();
     if(this.myForm.get('qtePrise')?.value==null ||this.myForm.get('magasin')?.value==null || this.myForm.get('produit')?.value==null  ){
       this.msg="vous devez remplir le formulaire !!";
     }
@@ -142,23 +148,54 @@ doc.addImage(imageData,'JPEG',0,0,210,297);
       
     )
     .subscribe(o =>{    
+      this.tab = Object.values(o)
+
+      console.log("this wut u r looking for ");
+      console.log(this.tab);
+      this.opr.idOperation= this.tab[0]
+      this.opr.poidsLait= this.tab[1]
+      this.opr.dateOperation= this.tab[2]
+      this.opr.typeOp= this.tab[3]
+      this.opr.code= this.tab[4]
+      this.opr.qtePrise= this.tab[5]
+
+      console.log(this.opr);
       this.magasinService.getMagasin(this.myForm.get('magasin')?.value).subscribe(
       b=>{
-        console.log(b)
-        localStorage.setItem('magasin',JSON.stringify(b))
-      })
-      this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(
-        v=>{
-          console.log(v)
-          localStorage.setItem('produit',JSON.stringify(v))
-        })
-      // window.location.reload();
-      this.tab=Object.values(o);
-      console.log(o);
-      localStorage.setItem('operation',JSON.stringify(this.tab))
-      localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
-    //  window.location.reload(); 
-    this.onClose();     
+        this.tab0 = Object.values(b)
+        console.log(this.tab0);
+        this.mgz.adresse=this.tab0 [2]
+        this.mgz.idMag=this.tab0 [0]
+        this.mgz.nomMag=this.tab0 [1]
+        this.mgz.tel=this.tab0 [4]
+        this.mgz.ville=this.tab0 [3]
+
+        this.opr.magasin = this.mgz
+
+
+        this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(
+          v=>{
+            this.tab1 = Object.values(v)
+            console.log(this.tab1);
+
+
+            this.prd.idProduit=this.tab1 [0]
+            this.prd.intitule=this.tab1 [1]
+            this.prd.libelle=this.tab1 [2]
+            this.prd.qte=this.tab1 [3]
+            this.opr.produit = this.prd
+            this.saveInBc(this.opr)
+            if (environment.wating == 'confirmed') {
+              localStorage.setItem(
+                'Toast',
+                JSON.stringify([
+                  'Success',
+                  'Une operation a été ajouté avec succès',
+                ])
+              );
+            }
+          })
+      })  
     },
     (error) => {
       console.log("Failed")
@@ -179,36 +216,58 @@ doc.addImage(imageData,'JPEG',0,0,210,297);
   }
 
   confirmation: string = "confirmed";
-  count!: number;
-//elem0!: Operation;
-elem0: Operation[]=[];
+
+
 elem2: Operation=new Operation();
-  async saveInBc(){
+
+
+  async saveInBc(elem0: Operation){
     const depKEY=Object.keys(Remplissage.networks)[0];
     await this.requestAccount()
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner()
     const contract = new ethers.Contract(Remplissage.networks[depKEY].address, Remplissage.abi, signer)
-    this.elem0=JSON.parse(localStorage.getItem('operation') || '[]')|| []  ;
-    console.log(this.elem0);
 
-
-   
-    this.elem0[6]= JSON.parse(localStorage.getItem('magasin') || '[]') || []  ;
-    this.elem0[7]=JSON.parse(localStorage.getItem('produit') || '[]') || []  ;
-  
-    console.log("222222222222222222222222222222222222222");
-    console.log(this.elem0[0]);
     try {
-    const transaction = await contract.RetraitOperationTank(this.elem0);
+    const transaction = await contract.RetraitOperationTank(elem0);
     await transaction.wait() ; 
+    environment.wating = 'confirmed';
   } catch (error) {
     this.confirmation = "rejected"
   }
-    if(this.confirmation =="confirmed"){
-      this.exportOne(this.elem0[0],this.confirmation)
+    
+    if (this.confirmation == 'confirmed') {
+      environment.wating = 'confirmed';
+      this.exportOne(elem0,this.confirmation)
     }
+    if (this.confirmation == 'rejected') {
+      environment.wating = 'rejected';
+      try{
+        this.operationService
+        .deleteOperation(elem0.idOperation)
+        .subscribe((d) => {
+          this.onReload();
+        });
+      }catch (error){
+
+      }
+
     }
+    this.onReload();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   onSubmit() {
     if(this.myForm.get('qtePrise')?.value==null ||this.myForm.get('magasin')?.value==null || this.myForm.get('produit')?.value==null  ){
@@ -224,8 +283,9 @@ elem2: Operation=new Operation();
  
       if(this.myForm.get('qtePrise')?.value<=this.q  ){
       this.save();
+      this.onClose()
       this.msgErreur=0;
-      this.saveInBc()
+ //     this.saveInBc()
     }
       else{
       this.msgErreur=1;

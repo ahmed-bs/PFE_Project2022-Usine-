@@ -141,167 +141,190 @@
                        </div>
                        <!-- /.card-header -->
                        <div class="card-body">
+                        <div class="row">
+
+                          <p class="text-center" style="height: 50px;width:350px;margin:auto;overflow: hidden">
+                            <strong>{{myDate}}</strong>
+                          </p>
+
+
+                        </div>
+                        <div class="row">
+
+                          <div id="time" style="height: 385px;width:350px;margin:auto;margin-top:-20px;overflow: hidden"></div>
+
+
+                        </div>
+
+
+
                          <div class="row">
-                           <div class="col-md-8">
-                             <p class="text-center">
-                               <strong>{{myDate}}</strong>
-                             </p>
 
-                             <div class="chart">
+                          <div class="col-xl-7">
+                            <div class="card m-b-30">
+                                <div class="card-body">
+                                  <h4 class="mt-0 header-title mb-4">Bar Chart</h4>
+                                    <div id="morris-donut-example" class="morris-charts morris-chart-height">
 
-                               <ngx-charts-bar-vertical style="color :white;"  [view]="[600,350]" scheme="cool" [results]="data"
-                               [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
-                               [showXAxisLabel]="showXAxisLabel" 
-                               [showYAxisLabel]="showYAxisLabel" 
-                               xAxisLabel="{{'Tank names' | translate }}"
-                               yAxisLabel="{{'Filling state' | translate }}"   
-                               [scheme]="colorScheme"  >
-                             </ngx-charts-bar-vertical>
+                                      <ngx-charts-bar-vertical style="color :white;"  [view]="[750,400]" scheme="cool" [results]="data"
+                                      [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+                                      [showXAxisLabel]="showXAxisLabel" 
+                                      [showYAxisLabel]="showYAxisLabel" 
+                                      xAxisLabel="{{'Tank names' | translate }}"
+                                      yAxisLabel="{{'Filling state' | translate }}"   
+                                      [scheme]="colorScheme"  >
+                                    </ngx-charts-bar-vertical>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                             <br><br><br><br><br><br><br>
+                        <div class="col-xl-5">
+                          <div class="card m-b-30">
+                              <div class="card-body">
+                                  <h4 class="mt-0 header-title mb-4">Donut Chart</h4>
+                                  <div id="morris-donut-example" class="morris-charts morris-chart-height">
+                                    <ngx-charts-pie-chart
+                                    [results]="data"
+                                    [legend]="true"
+                                    [legendTitle]="'Product Sale Report'"
+                                    [view]="[500,400]"
+                                    [scheme]="colorScheme"
+                                    [labels]="true" >
+                                    </ngx-charts-pie-chart>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                      <!-- /.row -->
+                      <div class="row">
 
-                             <div  style="margin-top:25px;margin-left:-100px;margin-right:70px">
-                             <ngx-charts-pie-chart
-                             [results]="data"
-                             [legend]="true"
-                             [legendTitle]="'Product Sale Report'"
-                             [view]="[1000,400]"
-                             [scheme]="colorScheme"
-                             [labels]="true" >
-                             </ngx-charts-pie-chart>
+                        <div class="col-xl-8">
+                          <div class="card m-b-30">
+                            <div class="card-body">
+                        <img src="./../../../assets/3542817.jpg" alt="" style="height: 300px;width:500px;margin:auto">
+                      </div>
+                    </div>
+                    <div class="card m-b-30">
+                      <div class="card-body">
+                        <ngx-charts-advanced-pie-chart 
+                        [results]="data"
+                        [view]="[900,275]"
+                        [scheme]="colorScheme"
+                        [gradient]="true" >
+                       </ngx-charts-advanced-pie-chart>
+                      </div>
+                    </div>
+                      </div>
+                      <div class="col-xl-4">
+
+                          <!-- Info Boxes Style 2 -->
+                          <div class="info-box mb-3 bg-warning">
+                            <span class="info-box-icon"><i class="ion ion-ios-film-outline" style="color: white"></i></span>
+                            <div class="info-box-content">
+                              <span class="info-box-text">{{'Number of products' | translate }}</span>
+                              <span class="info-box-number">{{somProduit}}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                          </div>
+                          <!-- /.info-box -->
+                          <div class="info-box mb-3 bg-success">
+                            <span class="info-box-icon"> <i class="ion ion-beaker"></i></span>
+
+                            <div class="info-box-content">
+                              <span class="info-box-text">{{'Number of tanks' | translate }}</span>
+                              <span class="info-box-number">{{somTank}}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                          </div>
+                          <!-- /.info-box -->
+
+                          <div class="info-box mb-3 bg-danger" >
+                            <span class="info-box-icon">  <i class="ion ion-ios-cart"></i></span>
+
+                            <div class="info-box-content">
+                              <span class="info-box-text">{{'Number of Stores' | translate }}</span>
+                              <span class="info-box-number">{{somMagasin}} </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                          </div>
+                          <!-- /.info-box -->
+                          <!-- <div class="info-box mb-3 bg-info">
+                            <span class="info-box-icon"> <i class="ion ion-ios-list-outline"></i></span>
+
+                            <div class="info-box-content">
+                              <span class="info-box-text">Nombre des operations</span>
+                              <span class="info-box-number">{{somOperation}}</span>
                             </div>
 
-                            <br><br>
-                             <ngx-charts-advanced-pie-chart  style="margin-top:-1020px;margin-bottom:-550px;"
-                             [results]="data"
-                             [view]="[800,300]"
-                             [scheme]="colorScheme"
-                             [gradient]="true" >
-                            </ngx-charts-advanced-pie-chart>
+                          </div> -->
 
 
-                             </div>
-                             <!-- /.chart-responsive -->
+                          <div class="info-box mb-3 bg-info">
+                           <span class="info-box-icon"> <i class="ion ion-ios-list-outline"></i></span>
+
+                           <div class="info-box-content">
+                             <span class="info-box-text">{{'Number of filling operations' | translate }}</span>
+                             <span class="info-box-number">{{somOpRemplissage}}</span>
                            </div>
-
-                           <!-- /.col -->
-                           <div class="col-md-4">
-
-                             <div id="time" style="height: 385px;width:350px;margin-top:-20px;margin-right:-80px;margin-bottom:-50px;overflow: hidden"></div>
-
-                             <p class="text-center">
-                               <br>
-                               <!-- <strong style="margin-right:105px;">Time</strong> -->
-                             </p>
-
-
-                             <div  style="margin-top:40px;margin-left:-20px;margin-right:70px">
-                               <!-- Info Boxes Style 2 -->
-                               <div class="info-box mb-3 bg-warning">
-                                 <span class="info-box-icon"><i class="ion ion-ios-film-outline" style="color: white"></i></span>
-                                 <div class="info-box-content">
-                                   <span class="info-box-text">{{'Number of products' | translate }}</span>
-                                   <span class="info-box-number">{{somProduit}}</span>
-                                 </div>
-                                 <!-- /.info-box-content -->
-                               </div>
-                               <!-- /.info-box -->
-                               <div class="info-box mb-3 bg-success">
-                                 <span class="info-box-icon"> <i class="ion ion-beaker"></i></span>
-
-                                 <div class="info-box-content">
-                                   <span class="info-box-text">{{'Number of tanks' | translate }}</span>
-                                   <span class="info-box-number">{{somTank}}</span>
-                                 </div>
-                                 <!-- /.info-box-content -->
-                               </div>
-                               <!-- /.info-box -->
-
-                               <div class="info-box mb-3 bg-danger" >
-                                 <span class="info-box-icon">  <i class="ion ion-ios-cart"></i></span>
-
-                                 <div class="info-box-content">
-                                   <span class="info-box-text">{{'Number of Stores' | translate }}</span>
-                                   <span class="info-box-number">{{somMagasin}} </span>
-                                 </div>
-                                 <!-- /.info-box-content -->
-                               </div>
-                               <!-- /.info-box -->
-                               <!-- <div class="info-box mb-3 bg-info">
-                                 <span class="info-box-icon"> <i class="ion ion-ios-list-outline"></i></span>
-
-                                 <div class="info-box-content">
-                                   <span class="info-box-text">Nombre des operations</span>
-                                   <span class="info-box-number">{{somOperation}}</span>
-                                 </div>
-
-                               </div> -->
-
-
-                               <div class="info-box mb-3 bg-info">
-                                <span class="info-box-icon"> <i class="ion ion-ios-list-outline"></i></span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">{{'Number of filling operations' | translate }}</span>
-                                  <span class="info-box-number">{{somOpRemplissage}}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-
-                              <div class="info-box mb-3 bg-light">
-                                <span class="info-box-icon"> <i class="ion ion-ios-list-outline"></i></span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">{{'Number of withdrawal operations' | translate }}</span>
-                                  <span class="info-box-number">{{somOpRetrait}}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-                              
-                              <div class="info-box mb-3  bg-secondary">
-                                <span class="info-box-icon"> <i class="ion ion-ios-home-outline"></i></span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">{{'Number of Transformation Operations' | translate }}</span>
-                                  <span class="info-box-number">{{somOpTransformation}}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-
-                              <div class="info-box mb-3 bg-dark">
-                                <span class="info-box-icon"> <i class="ion ion-ios-home-outline"></i></span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">{{'Number of collection centers' | translate }}</span>
-                                  <span class="info-box-number">{{somCentre}}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-
-                               <!-- /.info-box -->
-
-                               <!-- PRODUCT LIST -->
-
-                               <!-- /.card -->
-                             </div>
-                             <!-- /.col -->
-
-
-                             <!-- <ngx-charts-pie-chart
-                             [results]="data"
-                             [legend]="true"
-                             [legendTitle]="'Product Sale Report'"
-                             [view]="[1000,250]"
-                             [scheme]="colorScheme"
-                             [labels]="true" >
-                             </ngx-charts-pie-chart> -->
-
-
-                           </div>
-                           <!-- /.col -->
-
+                           <!-- /.info-box-content -->
                          </div>
-                         <!-- /.row -->
+
+                         <div class="info-box mb-3 bg-light">
+                           <span class="info-box-icon"> <i class="ion ion-ios-list-outline"></i></span>
+
+                           <div class="info-box-content">
+                             <span class="info-box-text">{{'Number of withdrawal operations' | translate }}</span>
+                             <span class="info-box-number">{{somOpRetrait}}</span>
+                           </div>
+                           <!-- /.info-box-content -->
+                         </div>
+                         
+                         <div class="info-box mb-3  bg-secondary">
+                           <span class="info-box-icon"> <i class="ion ion-ios-home-outline"></i></span>
+
+                           <div class="info-box-content">
+                             <span class="info-box-text">{{'Number of Transformation Operations' | translate }}</span>
+                             <span class="info-box-number">{{somOpTransformation}}</span>
+                           </div>
+                           <!-- /.info-box-content -->
+                         </div>
+
+                         <div class="info-box mb-3 bg-dark">
+                           <span class="info-box-icon"> <i class="ion ion-ios-home-outline"></i></span>
+
+                           <div class="info-box-content">
+                             <span class="info-box-text">{{'Number of collection centers' | translate }}</span>
+                             <span class="info-box-number">{{somCentre}}</span>
+                           </div>
+                           <!-- /.info-box-content -->
+                         </div>
+
+                          <!-- /.info-box -->
+
+                          <!-- PRODUCT LIST -->
+
+                          <!-- /.card -->
+            
+                        <!-- /.col -->
+
+
+                        <!-- <ngx-charts-pie-chart
+                        [results]="data"
+                        [legend]="true"
+                        [legendTitle]="'Product Sale Report'"
+                        [view]="[1000,250]"
+                        [scheme]="colorScheme"
+                        [labels]="true" >
+                        </ngx-charts-pie-chart> -->
+
+
+                      </div>
+                      </div>
+ <!-- /.row -->
+
+                    
                        </div>
                        <!-- ./card-body -->
                        <div class="card-footer">
