@@ -10,22 +10,22 @@ import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
 import { Centre } from 'src/app/Models/centre';
 import { CentreCollecteService } from 'src/app/Services/centre-collecte.service';
-import { Location } from "@angular/common";
+import { Location } from '@angular/common';
 import { ethers } from 'ethers';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json');
 @Component({
   selector: 'app-create-operation',
   templateUrl: './create-operation.component.html',
-  styleUrls: ['./create-operation.component.css']
+  styleUrls: ['./create-operation.component.css'],
 })
 export class CreateOperationComponent implements OnInit {
-
   operation: Operation = new Operation();
   submitted = false;
-  msg = "";
+  msg = '';
   t: Tank = new Tank();
   msgErreur = 0;
   msgErreur2 = 0;
@@ -41,9 +41,7 @@ export class CreateOperationComponent implements OnInit {
     poidsLait: new FormControl(null, [Validators.required, Validators.min(1)]),
     code: new FormControl(null, [Validators.required]),
     centreCollecte: new FormControl(null, [Validators.required]),
-
-
-  })
+  });
 
   tanks!: Observable<Tank[]>;
   centres!: Observable<Centre[]>;
@@ -55,35 +53,32 @@ export class CreateOperationComponent implements OnInit {
   tab!: any[];
   tabTankId!: any[];
   constructor(
-    private translateService :TranslateService,
+    private translateService: TranslateService,
     private location: Location,
     private operationService: OperationService,
     private tankService: TankService,
     private centreCollecteService: CentreCollecteService,
     private router: Router,
-    private dialogClose: MatDialog) {
-      this.translateService.setDefaultLang('en');
-      this.translateService.use(localStorage.getItem('lang') || 'en')
-     }
+    private dialogClose: MatDialog
+  ) {
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en');
+  }
 
   async ngOnInit() {
     //this.ValidatedForm();
     this.tanks = this.tankService.getTanks();
     this.centres = this.centreCollecteService.getCentres();
 
-    this.tankService.getTanksQteLibre().subscribe(
-      o => {
-        console.log(o);
-        if (this.myForm.get('poidsLait')?.value <= o)
-          this.msgErreur = 0;
-        else {
-          this.msgErreur = 1;
-          this.qteRsetLait = o;
-        }
-        this.onReload();
-
-      });
-
+    this.tankService.getTanksQteLibre().subscribe((o) => {
+      console.log(o);
+      if (this.myForm.get('poidsLait')?.value <= o) this.msgErreur = 0;
+      else {
+        this.msgErreur = 1;
+        this.qteRsetLait = o;
+      }
+      this.onReload();
+    });
   }
 
   newEmployee(): void {
@@ -92,127 +87,136 @@ export class CreateOperationComponent implements OnInit {
   }
 
   save() {
-
-
-    if (this.myForm.get('poidsLait')?.value == null || this.myForm.get('centreCollecte')?.value == null || this.myForm.get('code')?.value == null) {
-      this.msg = "vous devez remplir le formulaire !!";
-    }
-    else {
-      this.msg = "";
-    }
-
-    this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe(t => {
-      console.log(t);
-      if (t == 1) {
-        this.msg1 = 1;
-      }
-      else {
-        this.msg1 = 0;
-      }
-
-
-      if (this.myForm.get('poidsLait')?.value != null && this.myForm.get('centreCollecte')?.value != null && this.myForm.get('code')?.value != null
-        && this.myForm.get('poidsLait')?.value >= 1 && t == 0) {
-
-        this.operationService
-          .createOperationRemplissage(
-            {
-              "poidsLait": this.myForm.get('poidsLait')?.value,
-              "code": this.myForm.get('code')?.value,
-              "centreCollecte": {
-                "idCentre": this.myForm.get('centreCollecte')?.value,
-              },
-
-            }
-          )
-          .subscribe(o => {
-
-
-            this.tab = Object.values(o)
-            console.log("ssssssssssssssssssssssssssssssss")
-            console.log(this.tab)
-            localStorage.setItem('IdOperation', this.tab[0])
-            localStorage.setItem('Toast', JSON.stringify(["Success", "Une operation a été ajouté avec succès"]));
-            this.operationService.getOpTank(this.tab[0]).subscribe(i => {
-              // this.length=this.ELEMENT_DATA?.length;
-              this.tabTankId = Object.values(i)
-              console.log('5555555555555555555555555');
-              console.log(this.tabTankId);
-              localStorage.setItem('tabTankId', JSON.stringify(this.tabTankId))
-            });
-            this.onReload();
-          },
-            (error) => {
-              console.log("Failed")
-            });
-      }
-      this.onReload();
-    });
+    environment.wating = 'startwaiting';
     this.onReload();
-  }
+    if (
+      this.myForm.get('poidsLait')?.value == null ||
+      this.myForm.get('centreCollecte')?.value == null ||
+      this.myForm.get('code')?.value == null
+    ) {
+      this.msg = 'vous devez remplir le formulaire !!';
+    } else {
+      this.msg = '';
+    }
 
+    this.operationService
+      .getOpCodeUtilise(this.myForm.get('code')?.value)
+      .subscribe((t) => {
+        console.log(t);
+        if (t == 1) {
+          this.msg1 = 1;
+        } else {
+          this.msg1 = 0;
+        }
+
+        if (
+          this.myForm.get('poidsLait')?.value != null &&
+          this.myForm.get('centreCollecte')?.value != null &&
+          this.myForm.get('code')?.value != null &&
+          this.myForm.get('poidsLait')?.value >= 1 &&
+          t == 0
+        ) {
+          this.operationService
+            .createOperationRemplissage({
+              poidsLait: this.myForm.get('poidsLait')?.value,
+              code: this.myForm.get('code')?.value,
+              centreCollecte: {
+                idCentre: this.myForm.get('centreCollecte')?.value,
+              },
+            })
+            .subscribe(
+              (o) => {
+                this.tab = Object.values(o);
+                this.operationService.getOpTank(this.tab[0]).subscribe((i) => {
+                  this.tabTankId = Object.values(i);
+                  this.saveInBc(this.tabTankId, this.tabTankId.length);
+                  if (this.confirmation == 'confirmed') {
+                    localStorage.setItem(
+                      'Toast',
+                      JSON.stringify([
+                        'Success',
+                        'Une operation a été ajouté avec succès',
+                      ])
+                    );
+                  }
+                });
+              },
+              (error) => {
+                console.log('Failed');
+              }
+            );
+        }
+      });
+  }
 
   async requestAccount() {
     if (typeof window.ethereum !== 'undefined') {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
     }
   }
+  confirmation: string = 'confirmed';
 
-
-  count!: number;
-  elem0: OperationTank[] = [];
-
-
-  async saveInBc() {
+  async saveInBc(elem0: OperationTank[], count: number) {
     const depKEY = Object.keys(Remplissage.networks)[0];
-    await this.requestAccount()
+    await this.requestAccount();
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner()
-    const contract = new ethers.Contract(Remplissage.networks[depKEY].address, Remplissage.abi, signer)
-    this.elem0 = JSON.parse(localStorage.getItem('tabTankId') || '[]') || [];
-    console.log("222222222222222222222222222222222222222");
-    console.log(this.elem0);
-    this.count = this.elem0.length
-    const transaction = await contract.addOperationTankUsine(this.elem0, this.count);
-    await transaction.wait();
-    window.localStorage.removeItem("tabTankId");
-    this.onClose()
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      Remplissage.networks[depKEY].address,
+      Remplissage.abi,
+      signer
+    );
+    try {
+      const transaction = await contract.addOperationTankUsine(elem0, count);
+      await transaction.wait();
+      environment.wating = 'confirmed';
+    } catch (error) {
+      this.confirmation = 'rejected';
+      console.log('rejected');
+    }
+    if (this.confirmation == 'confirmed') {
+      environment.wating = 'confirmed';
+    }
+    if (this.confirmation == 'rejected') {
+      environment.wating = 'rejected';
+      this.operationService
+        .deleteOperation(elem0[0].operation.idOperation)
+        .subscribe((d) => {
+          this.onReload();
+        });
+    }
+    this.onReload();
   }
-
-
 
   onSubmit() {
     //this.submitted = true;
-    this.tankService.getTanksQteLibre().subscribe(
-      o => {
-        console.log(o);
-        if (this.myForm.get('poidsLait')?.value <= o) {
-          this.save();
-          this.msgErreur = 0;
-          this.saveInBc()
-        }
-        else {
-          this.msgErreur = 1;
-          this.qteRsetLait = o;
-        }
-
-
-      });
-
+    this.tankService.getTanksQteLibre().subscribe((o) => {
+      console.log(o);
+      if (this.myForm.get('poidsLait')?.value <= o) {
+        this.save();
+        this.onClose();
+        this.msgErreur = 0;
+      } else {
+        this.msgErreur = 1;
+        this.qteRsetLait = o;
+      }
+    });
   }
 
   gotoList() {
     this.router.navigate(['chef/operation/listeOperation']);
   }
 
-
   onReload() {
     // this.router.navigate([this.router.url]);
-    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur", { skipLocationChange: true }).then(response => {
-      this.router.navigate([decodeURI(this.location.path())]);
-    })
+    this.router
+      .navigateByUrl("/'agriculteur/bon/listeFournisseur", {
+        skipLocationChange: true,
+      })
+      .then((response) => {
+        this.router.navigate([decodeURI(this.location.path())]);
+      });
   }
-
 
   onClose() {
     this.dialogClose.closeAll();
@@ -224,16 +228,11 @@ export class CreateOperationComponent implements OnInit {
     return this.myForm.get('poidsLait');
   }
 
-
   get centreCollecte() {
     return this.myForm.get('centreCollecte');
   }
 
-
   get code() {
     return this.myForm.get('code');
   }
-
-
 }
-

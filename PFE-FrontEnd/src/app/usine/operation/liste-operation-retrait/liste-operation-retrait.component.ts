@@ -14,6 +14,7 @@ import { CreateOperationComponent } from '../create-operation/create-operation.c
 import { DetailsOperationRetraitComponent } from '../details-operation-retrait/details-operation-retrait.component';
 import {Location} from "@angular/common";
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 // import { UpdateOperationRetraitComponent } from '../update-operation-retrait/update-operation-retrait.component';
 
 @Component({
@@ -34,7 +35,7 @@ export class ListeOperationRetraitComponent implements OnInit {
   counter: number = 0;
   ShowToast: string = 'hide';
   erreur =0;
-
+  waiting = environment.wating;
   ELEMENT_DATA?:Operation[];
   operation?:Operation;
   dataSource!:MatTableDataSource<any>;

@@ -15,6 +15,7 @@ import { ethers } from 'ethers';
 import { async, Observable } from 'rxjs';
 import { OperationTank } from 'src/app/Models/operationTank';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json');
@@ -35,7 +36,7 @@ export class ListeOperationComponent implements OnInit {
   Toast!: string[];
   counter: number = 0;
   ShowToast: string = 'hide';
-
+  waiting = environment.wating;
   ELEMENT_DATA?:Operation[];
   operation?:Operation;
   dataSource!:MatTableDataSource<any>;

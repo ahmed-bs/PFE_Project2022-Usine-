@@ -18,6 +18,7 @@ import {Location} from "@angular/common";
 
 import { ethers } from 'ethers';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/Transformation.json');
@@ -52,8 +53,8 @@ export class CreateOperationTransformationComponent implements OnInit {
 
   maDate = new Date();
   tab!: any[];
-  tabTankId!: any[];
-
+  tab0!: any[];
+  tab1!: any[];
   constructor(
     private translateService :TranslateService,
     private location:Location,
@@ -74,7 +75,7 @@ export class CreateOperationTransformationComponent implements OnInit {
     
     this.operationService.getNbOp().subscribe(o=>{
       console.log(o);
-      this.som=100000000000+o+1;  
+      this.som=100000+o+1;  
       });
   }
 
@@ -83,8 +84,16 @@ export class CreateOperationTransformationComponent implements OnInit {
     this.operation = new Operation();
   }
 
-  save() {
 
+  opr :Operation = new Operation() ;
+  tnk :Tank = new Tank() ;
+  prd :Produit = new Produit() ;
+
+
+
+  save() {
+    environment.wating = 'startwaiting';
+    this.onReload();
     if(this.myForm.get('produit')?.value==null || this.myForm.get('poidsLait')?.value==null ||
       this.myForm.get('qtePrise')?.value==null || this.myForm.get('tank')?.value==null){
       this.msg="vous devez remplir le formulaire !!";
@@ -97,113 +106,132 @@ export class CreateOperationTransformationComponent implements OnInit {
     if(this.myForm.get('produit')?.value!=null && this.myForm.get('qtePrise')?.value!=null
      && this.myForm.get('poidsLait')?.value!=null && this.myForm.get('tank')?.value!=null 
      && this.myForm.get('poidsLait')?.value>=1 && this.myForm.get('qtePrise')?.value>=1 ){
-
-    this.operationService
-    .createOperationTransf(
+    this.operationService.createOperationTransf(
+      
       {
-        "produit":{
-          "idProduit":this.myForm.get('produit')?.value,
+        poidsLait:this.myForm.get('poidsLait')?.value,
+        qtePrise:this.myForm.get('qtePrise')?.value,
+        produit:{
+          idProduit:this.myForm.get('produit')?.value,
        },
-       "tank":{
-        "idTank":this.myForm.get('tank')?.value,
+       tank:{
+        idTank:this.myForm.get('tank')?.value,
      },
-         "poidsLait":this.myForm.get('poidsLait')?.value,
-         "qtePrise":this.myForm.get('qtePrise')?.value,
-         "code":this.som,
-        },
         
-    )
-    .subscribe(o =>{
+        
+         code:this.som,
+        })
+    .subscribe((o) =>{
+
       this.tab=Object.values(o);
-      // window.location.reload();
-      console.log(o);
-      console.log(this.tab);    
-      console.log("nourrrrrrrr");
-      localStorage.setItem('operation',JSON.stringify(this.tab))
-      localStorage.setItem('Toast', JSON.stringify(["Success","Une operation a été ajouté avec succès"]));
-      this.tankService.getTank(this.myForm.get('tank')?.value).subscribe(o => {
-        console.log(o);
-        localStorage.setItem('tabTank', JSON.stringify(o));
+
+      this.opr.idOperation = this.tab[0]
+      this.opr.code = this.tab[4]
+      this.opr.dateOperation = this.tab[2]
+      this.opr.typeOp = this.tab[3]
+      this.opr.lot = this.tab[5]
+      this.opr.qtePrise = this.tab[1]
+      this.opr.poidsLait = this.tab[1]
+      this.opr.codeRemplissage = this.tab[6]
+     
+
+
+      this.tankService.getTank(this.myForm.get('tank')?.value).subscribe(k => {
+        this.tab0=Object.values(k);
+      
+        this.tnk.codeTank = this.tab0[6]
+        this.tnk.etat = this.tab0[4]
+        this.tnk.idTank = this.tab0[0]
+        this.tnk.matricule = this.tab0[1]
+        this.tnk.poidActuel = this.tab0[3]
+        this.tnk.poidVide = this.tab0[2]
+
+       this.opr.tank =this.tnk
+        this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(
+          a=>{
+            this.tab1=Object.values(a);
+           this.prd.idProduit =  this.tab1[0]
+            this.prd.intitule=  this.tab1[1]
+            this.prd.libelle=  this.tab1[2]
+            this.prd.qte=  this.tab1[3]
+            this.opr.produit =this.prd 
+
+          this.saveInBc(this.opr)
+          if (environment.wating == 'confirmed') {
+            localStorage.setItem(
+              'Toast',
+              JSON.stringify([
+                'Success',
+                'Une operation a été ajouté avec succès',
+              ])
+            );
+          }
+          });
       });
-      this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(
-        a=>{
-          console.log(a);
-          this.prrod = a;
-          console.log(this.prrod);
-          localStorage.setItem('prod', JSON.stringify(a));
-        });
-    // this.tankService.getTank(kk).subscribe((i) => {
-    //   this.tabTankId = Object.values(i);
-    //   // this.length=this.ELEMENT_DATA?.length;
-    //   localStorage.setItem('tabTankId', JSON.stringify(i.idTank));
-    //   console.log('///////////////////////////////////////////000000');
-    //   // this.tankService.getTank(i.idTank).subscribe(
-    //   //   a=>{
-    //   //     console.log(a);
-    //   //     this.ttank = a;
-    //   //     console.log(this.ttank);
-    //   //    
-    //   //     this.onReload();
-    //   //   }
-    //   // )
-    //   this.onReload();
-    // });
-
-    //  window.location.reload(); 
-
-
-
-    this.onReload();     
     },
     (error) => {
       console.log("Failed")
     });
-  this.onReload();
      }
-     this.onReload();
   }
+
+
+
+
+
+
+
+
 
   async  requestAccount() {
     if (typeof window.ethereum !== 'undefined') {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
     }
   }
-  ttank: Tank=new Tank() ;
-  prrod: Produit=new Produit() ;
-  elem0: Operation[]=[];
-  elem2: Operation=new Operation();
-    async saveInBc(){
+
+
+
+
+
+
+
+
+  confirmation: string = 'confirmed';
+    async saveInBc(elem0: Operation){
+      
       const depKEY=Object.keys(Remplissage.networks)[0];
       await this.requestAccount()
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner()
       const contract = new ethers.Contract(Remplissage.networks[depKEY].address, Remplissage.abi, signer)
-      console.log(this.elem0);
-      this.elem0= JSON.parse(localStorage.getItem('operation') || '[]')|| []  ;
 
-      console.log("222222222222222222222222222222222222222");
-      console.log(this.elem0);
-   
-      console.log(JSON.parse(localStorage.getItem('prod') || '[]')|| []);
-      this.elem0[8]=  this.elem0[6];
-      this.elem0[6]=  JSON.parse(localStorage.getItem('tabTank') || '[]')|| []  ;
-      this.elem0[7]=  JSON.parse(localStorage.getItem('prod') || '[]')|| []  ;
-      
-      this.elem0[10]=  this.elem0[6];
-      // this.elem0[9]= JSON.parse(localStorage.getItem('tabTankId') || '[]')|| []  ;  
-      console.log("222222222222222222222222222222222222222");
-      console.log(this.elem0);
       try {
-        const transaction = await contract.RetraitOperationTank(this.elem0);
+        const transaction = await contract.RetraitOperationTank(elem0);
         await transaction.wait() ; 
+        environment.wating = 'confirmed';
       } catch (error) {
-        console.log("22ssssssssssssssssssssssssssssssss22222222222");
-        console.log(this.elem0);
+        this.confirmation = 'rejected';
+        console.log('rejected');
       }
- 
-      window.localStorage.removeItem("prod");
-      window.localStorage.removeItem("tabTank");
-      this.onClose();
+
+      if (this.confirmation == 'confirmed') {
+        environment.wating = 'confirmed';
+      }
+      if (this.confirmation == 'rejected') {
+        environment.wating = 'rejected';
+        try{
+          this.operationService
+          .deleteOperation(elem0.idOperation)
+          .subscribe((d) => {
+            this.onReload();
+          });
+        }catch (error){
+
+        }
+
+      }
+      this.onReload();
+
       }
 
 
@@ -222,7 +250,7 @@ export class CreateOperationTransformationComponent implements OnInit {
       console.log(this.myForm.get('poidsLait')?.value);
       if(this.myForm.get('poidsLait')?.value <=i.poidActuel){
         this.save();
-        this.saveInBc();
+        this.onClose();
       }else{
         this.msgErreur=1;
         this.qteMax=i.poidActuel;
