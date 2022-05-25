@@ -14,6 +14,7 @@ import { Location } from '@angular/common';
 import { ethers } from 'ethers';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/Services/auth.service';
 declare let require: any;
 declare let window: any;
 let Remplissage = require('../../../../../build/contracts/RemplissageUsine.json');
@@ -37,10 +38,12 @@ export class CreateOperationComponent implements OnInit {
   valeur2 = 0;
   msg1 = 0;
   qte = 0;
+  msg4=0;
   myForm = new FormGroup({
     poidsLait: new FormControl(null, [Validators.required, Validators.min(1)]),
     code: new FormControl(null, [Validators.required]),
     centreCollecte: new FormControl(null, [Validators.required]),
+    cgu: new FormControl(false, Validators.requiredTrue),
   });
 
   tanks!: Observable<Tank[]>;
@@ -114,7 +117,10 @@ export class CreateOperationComponent implements OnInit {
           this.myForm.get('centreCollecte')?.value != null &&
           this.myForm.get('code')?.value != null &&
           this.myForm.get('poidsLait')?.value >= 1 &&
-          t == 0
+          this.myForm.get('cgu')?.value==true &&
+          t == 0 &&
+          this.myForm.get('code')?.value.toString().length >= 5 &&
+          this.msg == ''
         ) {
           this.operationService
             .createOperationRemplissage({
@@ -127,9 +133,9 @@ export class CreateOperationComponent implements OnInit {
             .subscribe(
               (o) => {
                 this.tab = Object.values(o);
-                this.operationService.getOpTank(this.tab[0]).subscribe((i) => {
+                this.operationService.getOpTank(this.tab[0]).subscribe( async(i)  => {
                   this.tabTankId = Object.values(i);
-                  this.saveInBc(this.tabTankId, this.tabTankId.length);
+                await  this.saveInBc(this.tabTankId, this.tabTankId.length);
                   if (this.confirmation == 'confirmed') {
                     localStorage.setItem(
                       'Toast',
@@ -145,6 +151,13 @@ export class CreateOperationComponent implements OnInit {
                 console.log('Failed');
               }
             );
+            this.tankService.getTanksQteLibre().subscribe((o) => {
+              if (this.myForm.get('poidsLait')?.value <= o) this.msgErreur = 0;
+              else {
+                this.msgErreur = 1;
+                this.qteRsetLait = o;
+              }
+            });
         }
       });
   }
@@ -189,9 +202,39 @@ export class CreateOperationComponent implements OnInit {
   }
 
   onSubmit() {
-    //this.submitted = true;
+       //this.submitted = true; 
+       if (this.myForm.get('poidsLait')?.value == null) {
+        this.msg = 'vous devez remplir le formulaire !!';
+      } else {
+        this.msg = '';
+      }
+  
+      if (this.myForm.get('centreCollecte')?.value == null) {
+        this.msg = 'vous devez remplir le formulaire !!';
+      } else {
+        this.msg = '';
+      }
+  
+      if (this.myForm.get('code')?.value == null) {
+        this.msg = 'vous devez remplir le formulaire !!';
+      } else {
+        this.msg = '';
+      }
+      if(this.myForm.get('cgu')?.value==true){
+        this.msg4=0;
+      }
+      else{
+        this.msg4=1;
+      }
     this.tankService.getTanksQteLibre().subscribe((o) => {
       console.log(o);
+      if (
+        this.myForm.get('poidsLait')?.value != null &&
+        this.myForm.get('centreCollecte')?.value != null &&
+        this.myForm.get('poidsLait')?.value > 0 &&
+        this.myForm.get('cgu')?.value==true &&
+        this.myForm.get('code')?.value != null 
+      ) {
       if (this.myForm.get('poidsLait')?.value <= o) {
         this.save();
         this.onClose();
@@ -199,7 +242,7 @@ export class CreateOperationComponent implements OnInit {
       } else {
         this.msgErreur = 1;
         this.qteRsetLait = o;
-      }
+      }}
     });
   }
 

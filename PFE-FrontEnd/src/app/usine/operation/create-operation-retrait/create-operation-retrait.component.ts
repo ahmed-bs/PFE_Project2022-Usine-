@@ -39,11 +39,12 @@ export class CreateOperationRetraitComponent implements OnInit {
   qteMax=0;
   q=0;
   som=0;
+  msg4=0;
   myForm=new  FormGroup({
       qtePrise : new FormControl(null,[Validators.required, Validators.min(5)]),
       produit : new FormControl(null,[Validators.required ]),
       magasin : new FormControl(null,[Validators.required ]),
-    
+      cgu: new FormControl(false, Validators.requiredTrue),
   })
   tanks!:Observable<Tank[]>;
   magasins!:Observable<Magasin[]>;
@@ -131,7 +132,8 @@ doc.addImage(imageData,'JPEG',0,0,210,297);
      }
 
      if(this.myForm.get('qtePrise')?.value!=null && this.myForm.get('magasin')?.value!=null &&
-      this.myForm.get('produit')?.value!=null && this.myForm.get('qtePrise')?.value>=5 ){
+      this.myForm.get('produit')?.value!=null && this.myForm.get('qtePrise')?.value>=5 &&
+      this.myForm.get('cgu')?.value==true ){
 
     this.operationService
     .createOperation(
@@ -270,7 +272,11 @@ elem2: Operation=new Operation();
 
 
   onSubmit() {
-    if(this.myForm.get('qtePrise')?.value==null ||this.myForm.get('magasin')?.value==null || this.myForm.get('produit')?.value==null  ){
+           //this.submitted = true; 
+    if(this.myForm.get('qtePrise')?.value==null ||
+    this.myForm.get('magasin')?.value==null ||
+     this.myForm.get('produit')?.value==null
+     ||this.myForm.get('cgu')?.value==true  ){
       this.msg="vous devez remplir le formulaire !!";
     }
     else{
@@ -280,7 +286,13 @@ elem2: Operation=new Operation();
     this.produitService.getProduit(this.myForm.get('produit')?.value).subscribe(a=>{
       this.q=a.qte;
       console.log(this.q);
- 
+      if (
+        this.myForm.get('qtePrise')?.value != null &&
+        this.myForm.get('magasin')?.value != null &&
+        this.myForm.get('produit')?.value != null &&
+        this.myForm.get('cgu')?.value==true &&
+        this.myForm.get('poidsLait')?.value > 0 
+      ) {
       if(this.myForm.get('qtePrise')?.value<=this.q  ){
       this.save();
       this.onClose()
@@ -291,7 +303,7 @@ elem2: Operation=new Operation();
       this.msgErreur=1;
       // this.qteActLaitTank=o;
        this.qteMax=this.q;
-          }
+          }}
         }); 
 
 }

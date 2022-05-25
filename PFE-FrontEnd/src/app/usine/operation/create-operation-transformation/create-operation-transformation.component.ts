@@ -37,12 +37,14 @@ export class CreateOperationTransformationComponent implements OnInit {
   qteActLaitTank=0;
   qteMax=0;
   q=0;
+  msg4=0;
   som=0;
   myForm=new  FormGroup({
     poidsLait : new FormControl(null,[Validators.required,Validators.min(1)]),
     qtePrise : new FormControl(null,[Validators.required,Validators.min(1)]),
     produit : new FormControl(null,[Validators.required ]),
     tank : new FormControl(null,[Validators.required ]),
+    cgu: new FormControl(false, Validators.requiredTrue),
     
   })
   tanks!:Observable<Tank[]>;
@@ -55,6 +57,11 @@ export class CreateOperationTransformationComponent implements OnInit {
   tab!: any[];
   tab0!: any[];
   tab1!: any[];
+
+  public myAngularxQrCode: string = "http://localhost:51845/detailComponent/";
+  elementType= "canvas";
+  parentElement : any
+
   constructor(
     private translateService :TranslateService,
     private location:Location,
@@ -75,9 +82,56 @@ export class CreateOperationTransformationComponent implements OnInit {
     
     this.operationService.getNbOp().subscribe(o=>{
       console.log(o);
-      this.som=100000+o+1;  
+      this.som=100000000+o+1;  
       });
   }
+
+
+
+
+
+
+
+
+  saveAsImage(parent: any) {
+    if (this.elementType === "canvas") {
+    // fetches base 64 data from canvas
+         this.parentElement = parent.qrcElement.nativeElement
+            .querySelector("canvas")
+            .toDataURL("image/png")
+    } else if (this.elementType === "img") {
+        // fetches base 64 data from image
+         this.parentElement  = parent.qrcElement.nativeElement.querySelector("img").src
+        // use 'parentElement' for your firebase storage
+    } else {
+        alert("Set elementType to 'canvas', 'img' or 'url'.")
+    }
+
+    if (this.parentElement) {
+        // If you want to download the image, continue here
+        // converts base 64 encoded image to blobData
+        let blobData = this.convertBase64ToBlob(this.parentElement)
+        // saves as image
+        const blob = new Blob([blobData], { type: "image/png" })
+        const url = window.URL.createObjectURL(blob)
+        const link = document.createElement("a")
+        link.href = url
+        link.download = "Qrcode"
+        link.click()
+    }
+}
+
+// Only used if you plan to download the img
+private convertBase64ToBlob(Base64Image: string) {
+  const parts = Base64Image.split(";base64,")
+  const imageType = parts[0].split(":")[1]
+  const decodedData = window.atob(parts[1])
+  const uInt8Array = new Uint8Array(decodedData.length)
+  for (let i = 0; i < decodedData.length; ++i) {
+    uInt8Array[i] = decodedData.charCodeAt(i)
+  }
+  return new Blob([uInt8Array], { type: imageType })
+}
 
   newEmployee(): void {
     this.submitted = false;
@@ -91,7 +145,7 @@ export class CreateOperationTransformationComponent implements OnInit {
 
 
 
-  save() {
+  save(parent:any) {
     environment.wating = 'startwaiting';
     this.onReload();
     if(this.myForm.get('produit')?.value==null || this.myForm.get('poidsLait')?.value==null ||
@@ -105,7 +159,8 @@ export class CreateOperationTransformationComponent implements OnInit {
   
     if(this.myForm.get('produit')?.value!=null && this.myForm.get('qtePrise')?.value!=null
      && this.myForm.get('poidsLait')?.value!=null && this.myForm.get('tank')?.value!=null 
-     && this.myForm.get('poidsLait')?.value>=1 && this.myForm.get('qtePrise')?.value>=1 ){
+     && this.myForm.get('poidsLait')?.value>=1 && this.myForm.get('qtePrise')?.value>=1  && 
+     this.myForm.get('cgu')?.value==true ){
     this.operationService.createOperationTransf(
       
       {
@@ -156,7 +211,7 @@ export class CreateOperationTransformationComponent implements OnInit {
             this.prd.qte=  this.tab1[3]
             this.opr.produit =this.prd 
 
-          this.saveInBc(this.opr)
+          this.saveInBc(this.opr,parent)
           if (environment.wating == 'confirmed') {
             localStorage.setItem(
               'Toast',
@@ -197,7 +252,7 @@ export class CreateOperationTransformationComponent implements OnInit {
 
 
   confirmation: string = 'confirmed';
-    async saveInBc(elem0: Operation){
+    async saveInBc(elem0: Operation,parent : any){
       
       const depKEY=Object.keys(Remplissage.networks)[0];
       await this.requestAccount()
@@ -209,6 +264,8 @@ export class CreateOperationTransformationComponent implements OnInit {
         const transaction = await contract.RetraitOperationTank(elem0);
         await transaction.wait() ; 
         environment.wating = 'confirmed';
+
+        this.saveAsImage(parent);
       } catch (error) {
         this.confirmation = 'rejected';
         console.log('rejected');
@@ -216,6 +273,7 @@ export class CreateOperationTransformationComponent implements OnInit {
 
       if (this.confirmation == 'confirmed') {
         environment.wating = 'confirmed';
+
       }
       if (this.confirmation == 'rejected') {
         environment.wating = 'rejected';
@@ -235,7 +293,14 @@ export class CreateOperationTransformationComponent implements OnInit {
       }
 
 
-  onSubmit() {
+   onSubmit(parent:any) {
+
+    if(this.myForm.get('cgu')?.value==true){
+      this.msg4=0;
+    }
+    else{
+      this.msg4=1;
+    }
     if(this.myForm.get('produit')?.value==null || this.myForm.get('poidsLait')?.value==null ||
     this.myForm.get('qtePrise')?.value==null || this.myForm.get('tank')?.value==null){
     this.msg="vous devez remplir le formulaire !!";
@@ -248,13 +313,23 @@ export class CreateOperationTransformationComponent implements OnInit {
       console.log(i.poidActuel);
   
       console.log(this.myForm.get('poidsLait')?.value);
+
+      if (
+        this.myForm.get('poidsLait')?.value != null &&
+        this.myForm.get('produit')?.value != null &&
+        this.myForm.get('qtePrise')?.value != null &&
+        this.myForm.get('tank')?.value != null &&
+        this.myForm.get('cgu')?.value==true &&
+        this.myForm.get('poidsLait')?.value > 0 
+      ) {
       if(this.myForm.get('poidsLait')?.value <=i.poidActuel){
-        this.save();
-        this.onClose();
+        this.myAngularxQrCode=this.myAngularxQrCode + this.som.toString();
+        this.save(parent);
+        this.onClose();    
       }else{
         this.msgErreur=1;
         this.qteMax=i.poidActuel;
-      }
+      }}
       });
   }
 
