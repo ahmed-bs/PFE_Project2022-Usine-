@@ -39,6 +39,7 @@ import { DetailsOperationTankComponent } from './details-operation-tank/details-
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { QRCodeModule } from 'angularx-qrcode';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -58,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DetailsOperationTankComponent
   ],
   imports: [
+    QRCodeModule,
     CommonModule,
     OperationRoutingModule,
     MatTableExporterModule,

@@ -17,6 +17,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTableModule } from '@angular/material/table';
+import { QRCodeModule } from 'angularx-qrcode';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -27,6 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
   ],
   imports: [
+    QRCodeModule ,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

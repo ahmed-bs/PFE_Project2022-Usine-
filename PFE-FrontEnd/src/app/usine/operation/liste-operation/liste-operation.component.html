@@ -27,33 +27,33 @@
               <div class="overflow-x">
                   <table  matTableExporter #exporter="matTableExporter" style="width:100%;" id="filtertable" class="table cust-datatable dataTable no-footer"  mat-table matSort [dataSource]="dataSource!"  >
                                <thead>
-                                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                   <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: center;"></tr>
                                </thead>
                           <tr>
                             <ng-container matColumnDef="idOperation" >
-                              <th mat-header-cell *matHeaderCellDef  style="min-width:50px;">#ID</th>
-                              <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.idOperation}}</td>
+                              <th mat-header-cell *matHeaderCellDef  style="min-width:50px;text-align: center;">#ID</th>
+                              <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.idOperation}}</td>
                           </ng-container>
                           <ng-container matColumnDef="poidsLait" >
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">{{'Quantity of milk (Kg)' | translate}}</th>
-                            <td mat-cell *matCellDef="let element" style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.poidsLait}} kg</td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;text-align: center;">{{'Quantity of milk (Kg)' | translate}}</th>
+                            <td mat-cell *matCellDef="let element" style="font-weight:bold;text-align: center;">{{element.poidsLait}} kg</td>
                           </ng-container>
                           <ng-container matColumnDef="dateOperation">
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">{{'Operation Date' | translate}}</th>
-                            <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mode mode_date" style="font-size: small;font-weight:bold;color:blue">&nbsp;<b>{{element.dateOperation}}</b>&nbsp;</span></td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">{{'Operation Date' | translate}}</th>
+                            <td mat-cell *matCellDef="let element" style="text-align: center;"><span class="mode mode_date" style="font-size: small;font-weight:bold;color:blue"><b>{{element.dateOperation}}</b></span></td>
                           </ng-container>
                             <ng-container matColumnDef="centreCollecte">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">{{'Collection center name' | translate}}</th>
-                              <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.centreCollecte.nomCentre}}</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">{{'Collection center name' | translate}}</th>
+                              <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.centreCollecte.nomCentre}}</td>
                             </ng-container>
                             <ng-container matColumnDef="code">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">Code </th>
-                              <td mat-cell *matCellDef="let element" ><span class="mode mode_code" style="font-size: small;color:black">&nbsp;<b>{{element.code}}</b>&nbsp;</span></td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="text-align: center;">&nbsp;&nbsp;Code </th>
+                              <td mat-cell *matCellDef="let element" style="text-align: center;"><span class="mode mode_code" style="font-size: small;text-align: center;color:black"><b>{{element.code}}</b></span></td>
                             </ng-container>
                             
                             <ng-container matColumnDef="action">
-                              <th  mat-header-cell *matHeaderCellDef style="min-width:150px;">&nbsp;&nbsp;Action</th>
-                              <td mat-cell *matCellDef="let element">
+                              <th  mat-header-cell *matHeaderCellDef style="min-width:150px;text-align: center;">Action</th>
+                              <td mat-cell *matCellDef="let element" style="text-align: center;">
                                   <!-- <div class="btn-group"  style="color:#3E8D07;">
                                       <a class="dropdown-toggle dropdown_icon"  style="color:#3E8D07;border: 1px solid #3E8D07;" data-toggle="dropdown">
                                       <i class="fa fa-pencil-square-o fa-lg" style="color:#3E8D07;"></i> </a>
