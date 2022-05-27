@@ -4,6 +4,11 @@
   padding-top: 27px;
   padding-bottom: 20px;
 }
+table {
+  width: 100%;
+  text-align: center !important;
+}
+
 th{
   color:  #22E1D3 ;
   font-size: large;

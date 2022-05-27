@@ -24,30 +24,30 @@
                                </thead>
                           <tr>
                             <ng-container matColumnDef="idMag" >
-                              <th mat-header-cell *matHeaderCellDef  style="min-width:50px;">#ID</th>
-                              <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.idMag}}</td>
+                              <th mat-header-cell *matHeaderCellDef  style="width:auto; text-align: center !important;">#ID</th>
+                              <td mat-cell *matCellDef="let element">        {{element.idMag}}</td>
                           </ng-container>
                           <ng-container matColumnDef="nomMag" >
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;">{{ "Store name" | translate }}  </th>
-                            <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{element.nomMag}}</td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style=" width : auto "><p style=" margin-left: 35px !important;">{{ "Store name" | translate }} </p> </th>
+                            <td mat-cell *matCellDef="let element">       {{element.nomMag}}</td>
                           </ng-container>
                           
                           <ng-container matColumnDef="adresse">
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">{{ "Adress" | translate }}</th>
-                            <td mat-cell *matCellDef="let element" >&nbsp;{{element.adresse}}</td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto"><p style=" margin-left: 55px !important;"></p>{{ "Adress" | translate }}</th>
+                            <td mat-cell *matCellDef="let element" > {{element.adresse}}</td>
                           </ng-container>
                           <ng-container matColumnDef="ville">
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">{{'City' | translate}}</th>
-                            <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;{{element.ville}}</td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto"><p style=" margin-left: 25px !important;"></p>{{'City' | translate}}</th>
+                            <td mat-cell *matCellDef="let element" >    {{element.ville}}</td>
                           </ng-container>
                           
                           <ng-container matColumnDef="tel">
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;">{{'Phone number' | translate}} </th>
-                            <td mat-cell *matCellDef="let element" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mode mode_done" style="font-size: small;"><b>+216 {{element.tel}}</b>&nbsp;</span></td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto"><p style=" margin-left: 55px !important;"></p>{{'Phone number' | translate}} </th>
+                            <td mat-cell *matCellDef="let element" >              <span class="mode mode_done" style="font-size: small;"><b>+216 {{element.tel}}</b> </span></td>
                           </ng-container>
 
                             <ng-container matColumnDef="action">
-                              <th  mat-header-cell *matHeaderCellDef style="min-width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action</th>
+                              <th  mat-header-cell *matHeaderCellDef style="width:auto; text-align: center !important;">      Action</th>
                               <td mat-cell *matCellDef="let element">
                                   <div class="btn-group"  style="color:#3E8D07;margin-top:-8px;">
                                       <a class="dropdown-toggle dropdown_icon"  style="color:#3E8D07;border: 1px solid #3E8D07;" data-toggle="dropdown">
