@@ -226,6 +226,27 @@ export class CreateOperationComponent implements OnInit {
       else{
         this.msg4=1;
       }
+
+      this.tankService.getTanksQteLibre().subscribe((o) => {
+        if (this.myForm.get('poidsLait')?.value <= o) {
+          this.msgErreur = 0;
+        }
+          else{
+            this.msgErreur = 1;
+            this.qteRsetLait = o;
+          }
+        });
+
+
+        this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe((t) => {
+          console.log(t);
+          if (t == 1) {
+            this.msg1 = 1;
+          } else {
+            this.msg1 = 0;
+          }
+    
+
     this.tankService.getTanksQteLibre().subscribe((o) => {
       console.log(o);
       if (
@@ -234,6 +255,7 @@ export class CreateOperationComponent implements OnInit {
         this.myForm.get('poidsLait')?.value > 0 &&
         this.myForm.get('cgu')?.value==true &&
         this.myForm.get('code')?.value != null 
+        && t==0
       ) {
       if (this.myForm.get('poidsLait')?.value <= o) {
         this.save();
@@ -242,7 +264,9 @@ export class CreateOperationComponent implements OnInit {
       } else {
         this.msgErreur = 1;
         this.qteRsetLait = o;
-      }}
+      }
+    }
+  });
     });
   }
 
