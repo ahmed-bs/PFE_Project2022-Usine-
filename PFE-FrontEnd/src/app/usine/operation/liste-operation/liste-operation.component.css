@@ -440,6 +440,8 @@ body{
 .mode_code{
   background-color: #F4F007 ;
 }
+
+
 @media only screen and (max-width:1200px){
   .overflow-x{
       overflow-x:scroll;

@@ -45,7 +45,7 @@ export class CreateOperationTransformationComponent implements OnInit {
     produit : new FormControl(null,[Validators.required ]),
     tank : new FormControl(null,[Validators.required ]),
     cgu: new FormControl(false, Validators.requiredTrue),
-    
+
   })
   tanks!:Observable<Tank[]>;
   magasins!:Observable<Magasin[]>;
@@ -58,7 +58,7 @@ export class CreateOperationTransformationComponent implements OnInit {
   tab0!: any[];
   tab1!: any[];
 
-  public myAngularxQrCode: string = "http://localhost:51845/detailComponent/";
+  public myAngularxQrCode: string = "http://localhost:63361/detailComponent/";
   elementType= "canvas";
   parentElement : any
 
@@ -70,7 +70,7 @@ export class CreateOperationTransformationComponent implements OnInit {
     private lotService:LotService,
     private produitService:ProduitService,
     private router: Router,
-    private magasinService:MagasinService, 
+    private magasinService:MagasinService,
     private dialogClose: MatDialog) {
       this.translateService.setDefaultLang('en');
       this.translateService.use(localStorage.getItem('lang') || 'en')
@@ -79,10 +79,10 @@ export class CreateOperationTransformationComponent implements OnInit {
   ngOnInit() {
     this.produits=this.produitService.getProduits();
     this.tanks=this.tankService.getTanksDispo();
-    
+
     this.operationService.getNbOp().subscribe(o=>{
       console.log(o);
-      this.som=100000000+o+1;  
+      this.som=100000000+o+1;
       });
   }
 
@@ -155,14 +155,14 @@ private convertBase64ToBlob(Base64Image: string) {
      else{
       this.msg="";
      }
-  
-  
+
+
     if(this.myForm.get('produit')?.value!=null && this.myForm.get('qtePrise')?.value!=null
-     && this.myForm.get('poidsLait')?.value!=null && this.myForm.get('tank')?.value!=null 
-     && this.myForm.get('poidsLait')?.value>=1 && this.myForm.get('qtePrise')?.value>=1  && 
+     && this.myForm.get('poidsLait')?.value!=null && this.myForm.get('tank')?.value!=null
+     && this.myForm.get('poidsLait')?.value>=1 && this.myForm.get('qtePrise')?.value>=1  &&
      this.myForm.get('cgu')?.value==true ){
     this.operationService.createOperationTransf(
-      
+
       {
         poidsLait:this.myForm.get('poidsLait')?.value,
         qtePrise:this.myForm.get('qtePrise')?.value,
@@ -172,8 +172,8 @@ private convertBase64ToBlob(Base64Image: string) {
        tank:{
         idTank:this.myForm.get('tank')?.value,
      },
-        
-        
+
+
          code:this.som,
         })
     .subscribe((o) =>{
@@ -188,12 +188,12 @@ private convertBase64ToBlob(Base64Image: string) {
       this.opr.qtePrise = this.tab[1]
       this.opr.poidsLait = this.tab[1]
       this.opr.codeRemplissage = this.tab[6]
-     
+
 
 
       this.tankService.getTank(this.myForm.get('tank')?.value).subscribe(k => {
         this.tab0=Object.values(k);
-      
+
         this.tnk.codeTank = this.tab0[6]
         this.tnk.etat = this.tab0[4]
         this.tnk.idTank = this.tab0[0]
@@ -209,7 +209,7 @@ private convertBase64ToBlob(Base64Image: string) {
             this.prd.intitule=  this.tab1[1]
             this.prd.libelle=  this.tab1[2]
             this.prd.qte=  this.tab1[3]
-            this.opr.produit =this.prd 
+            this.opr.produit =this.prd
 
           this.saveInBc(this.opr,parent)
           if (environment.wating == 'confirmed') {
@@ -253,7 +253,7 @@ private convertBase64ToBlob(Base64Image: string) {
 
   confirmation: string = 'confirmed';
     async saveInBc(elem0: Operation,parent : any){
-      
+
       const depKEY=Object.keys(Remplissage.networks)[0];
       await this.requestAccount()
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -262,7 +262,7 @@ private convertBase64ToBlob(Base64Image: string) {
 
       try {
         const transaction = await contract.RetraitOperationTank(elem0);
-        await transaction.wait() ; 
+        await transaction.wait() ;
         environment.wating = 'confirmed';
 
         this.saveAsImage(parent);
@@ -311,7 +311,7 @@ private convertBase64ToBlob(Base64Image: string) {
 
     this.tankService.getTank(this.myForm.get('tank')?.value).subscribe( i=>{
       console.log(i.poidActuel);
-  
+
       console.log(this.myForm.get('poidsLait')?.value);
 
       if (
@@ -320,12 +320,12 @@ private convertBase64ToBlob(Base64Image: string) {
         this.myForm.get('qtePrise')?.value != null &&
         this.myForm.get('tank')?.value != null &&
         this.myForm.get('cgu')?.value==true &&
-        this.myForm.get('poidsLait')?.value > 0 
+        this.myForm.get('poidsLait')?.value > 0
       ) {
       if(this.myForm.get('poidsLait')?.value <=i.poidActuel){
         this.myAngularxQrCode=this.myAngularxQrCode + this.som.toString();
         this.save(parent);
-        this.onClose();    
+        this.onClose();
       }else{
         this.msgErreur=1;
         this.qteMax=i.poidActuel;
@@ -344,8 +344,8 @@ private convertBase64ToBlob(Base64Image: string) {
      this.router.navigate([decodeURI(this.location.path())]);
    })
  }
-  
-  
+
+
   onClose() {
     this.dialogClose.closeAll();
     // this.gotoList();
@@ -355,19 +355,19 @@ private convertBase64ToBlob(Base64Image: string) {
   get produit(){
     return this.myForm.get('produit') ;
   }
-  
+
   get poidsLait(){
     return this.myForm.get('poidsLait') ;
   }
-  
+
   get qtePrise(){
     return this.myForm.get('qtePrise') ;
   }
-  
+
   get tank(){
     return this.myForm.get('tank') ;
   }
-  
+
   }
-  
+
 

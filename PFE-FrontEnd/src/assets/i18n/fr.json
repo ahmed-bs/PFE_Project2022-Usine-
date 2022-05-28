@@ -218,7 +218,7 @@
      "Filling" :"Remplissage",
      "Withdrawal" : "Retrait",
      "on the tanks" : "du tanks",
-     "tank s operations management" : "gestion des opérations des tanks",
+     "tank s operations management" : "Liste des operations sur    les tanks",
 
      "Create a new tank" : "Créer un nouveau tank",
      "Maximum capacity" : "Contenance maximale",
@@ -342,7 +342,7 @@
      "Quantity available" : "Quantité disponible",
      "Center management" : "Gestion des centres",
      "Store management" : "Gestion des magasins",
-     "Milk/product transfer" : "Transfert lait/produit"
+     "Milk/product transfer" : "Transformation du lait"
  
 
 

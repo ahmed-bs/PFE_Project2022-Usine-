@@ -268,7 +268,7 @@
     "Factorie" : "Factorie",
     "Gestion des agriculteurs": "Gestion des agriculteurs",
     "Factory management" : "Factory management",
-    "tank s operations management" : "tank's operations management" ,
+    "tank s operations management" : "List of tank's operations" ,
     "Add a new tank" : "Add a new tank",
     "Add a new factory" : "Add a new factory",
     "Invalid factory name" : "Invalid factory name",
@@ -333,7 +333,7 @@
     "Quantity available" : "Quantity available" ,
     "Center management" : "Center management" ,
     "Store management" : "Store management",
-    "Milk/product transfer" : "Milk/product transfer" 
+    "Milk/product transfer" : "Processing Milk/product" 
 
      
 
