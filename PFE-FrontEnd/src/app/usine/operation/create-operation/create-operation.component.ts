@@ -202,19 +202,19 @@ export class CreateOperationComponent implements OnInit {
   }
 
   onSubmit() {
-       //this.submitted = true; 
+       //this.submitted = true;
        if (this.myForm.get('poidsLait')?.value == null) {
         this.msg = 'vous devez remplir le formulaire !!';
       } else {
         this.msg = '';
       }
-  
+
       if (this.myForm.get('centreCollecte')?.value == null) {
         this.msg = 'vous devez remplir le formulaire !!';
       } else {
         this.msg = '';
       }
-  
+
       if (this.myForm.get('code')?.value == null) {
         this.msg = 'vous devez remplir le formulaire !!';
       } else {
@@ -245,7 +245,7 @@ export class CreateOperationComponent implements OnInit {
           } else {
             this.msg1 = 0;
           }
-    
+
 
     this.tankService.getTanksQteLibre().subscribe((o) => {
       console.log(o);
@@ -254,7 +254,7 @@ export class CreateOperationComponent implements OnInit {
         this.myForm.get('centreCollecte')?.value != null &&
         this.myForm.get('poidsLait')?.value > 0 &&
         this.myForm.get('cgu')?.value==true &&
-        this.myForm.get('code')?.value != null 
+        this.myForm.get('code')?.value != null
         && t==0
       ) {
       if (this.myForm.get('poidsLait')?.value <= o) {
