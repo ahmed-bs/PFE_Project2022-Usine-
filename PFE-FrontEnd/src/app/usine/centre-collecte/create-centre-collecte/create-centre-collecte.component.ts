@@ -20,6 +20,7 @@ export class CreateCentreCollecteComponent implements OnInit {
   msg1=0;
   msg2=0;
   msg3=0;
+  msg4=0;
   msgErreur=0;
   qteAct=0;
 
@@ -28,6 +29,7 @@ export class CreateCentreCollecteComponent implements OnInit {
       adresse : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
       ville : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
       tel : new FormControl(null,[Validators.required,Validators.pattern("[0-9 ]{8}") ]),
+      cgu: new FormControl(false, Validators.requiredTrue),
       // poidActuel : new FormControl(null,[Validators.required ]),
       // etat : new FormControl(null,[Validators.required ]),
   })
@@ -86,7 +88,7 @@ export class CreateCentreCollecteComponent implements OnInit {
 
   if(this.myForm.get('nomCentre')?.value!=null && this.myForm.get('ville')?.value!=null && this.myForm.get('adresse')?.value!=null
   && this.myForm.get('nomCentre')?.value.length>=3 && this.myForm.get('ville')?.value.length>=4 && this.myForm.get('tel')?.value.toString().length==8
-  && this.myForm.get('adresse')?.value.length>=4 && this.myForm.get('tel')?.value!=null && t==0 && t2==0){
+  && this.myForm.get('adresse')?.value.length>=4 && this.myForm.get('tel')?.value!=null && t==0 && t2==0  &&  this.myForm.get('cgu')?.value==true){
     this.centreCollecteService
         .createCentre({
           "nomCentre":this.myForm.get('nomCentre')?.value,
@@ -109,6 +111,14 @@ export class CreateCentreCollecteComponent implements OnInit {
 
 
   onSubmit() {
+
+    if(this.myForm.get('cgu')?.value==true){
+      this.msg4=0;
+    }
+    else{
+      this.msg4=1;
+    }
+
     
    if(this.myForm.get('nomCentre')?.value==null || this.myForm.get('ville')?.value==null 
    || this.myForm.get('adresse')?.value==null || this.myForm.get('tel')?.value==null  ){

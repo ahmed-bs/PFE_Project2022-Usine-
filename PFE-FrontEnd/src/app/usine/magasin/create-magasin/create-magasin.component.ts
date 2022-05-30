@@ -20,6 +20,7 @@ export class CreateMagasinComponent implements OnInit {
   msg="";
   msg1=0;
   msg2=0;
+  msg4=0;
   msgErreur=0;
   qteAct=0;
 
@@ -28,6 +29,7 @@ export class CreateMagasinComponent implements OnInit {
       adresse : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
       ville : new FormControl(null,[Validators.required ,Validators.minLength(4)]),
       tel : new FormControl(null,[Validators.required,Validators.pattern("[0-9 ]{8}") ]),
+      cgu: new FormControl(false, Validators.requiredTrue),
   })
 
 
@@ -82,7 +84,7 @@ export class CreateMagasinComponent implements OnInit {
 
    if( this.myForm.get('adresse')?.value!=null && this.myForm.get('nomMag')?.value!=null&& this.myForm.get('ville')?.value!=null 
    && this.myForm.get('nomMag')?.value.length>=3 && this.myForm.get('ville')?.value.length>=4 && this.myForm.get('tel')?.value.toString().length==8
-   && this.myForm.get('adresse')?.value.length>=4 && this.myForm.get('tel')?.value!=null  && t==0 && t2==0){
+   && this.myForm.get('adresse')?.value.length>=4 && this.myForm.get('tel')?.value!=null  && t==0 && t2==0 && this.myForm.get('cgu')?.value==true){
 
     this.magasinService
         .createMagasin({
@@ -104,6 +106,15 @@ export class CreateMagasinComponent implements OnInit {
 
 
   onSubmit() {
+
+    if(this.myForm.get('cgu')?.value==true){
+      this.msg4=0;
+    }
+    else{
+      this.msg4=1;
+    }
+
+
     if(this.myForm.get('nomMag')?.value==null ||this.myForm.get('adresse')?.value==null
     || this.myForm.get('ville')?.value==null  || this.myForm.get('tel')?.value==null){
     this.msg="vous devez remplir le formulaire !!";
