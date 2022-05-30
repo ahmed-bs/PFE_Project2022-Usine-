@@ -25,25 +25,25 @@
                           <tr>
                             <ng-container matColumnDef="idMag" >
                               <th mat-header-cell *matHeaderCellDef  style="width:auto; text-align: center !important;">#ID</th>
-                              <td mat-cell *matCellDef="let element">        {{element.idMag}}</td>
+                              <td mat-cell *matCellDef="let element"><p  style="text-align:center;margin-left:-65px;">{{element.idMag}}</p></td>
                           </ng-container>
                           <ng-container matColumnDef="nomMag" >
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style=" width : auto "><p style=" margin-left: 35px !important;">{{ "Store name" | translate }} </p> </th>
-                            <td mat-cell *matCellDef="let element">       {{element.nomMag}}</td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style=" width : auto ">{{ "Store name" | translate }} </th>
+                            <td mat-cell *matCellDef="let element"> <p  style="text-align:center;margin-left:-65px;">{{element.nomMag}}</p></td>
                           </ng-container>
                           
                           <ng-container matColumnDef="adresse">
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto"><p style=" margin-left: 55px !important;"></p>{{ "Adress" | translate }}</th>
-                            <td mat-cell *matCellDef="let element" > {{element.adresse}}</td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto">{{ "Adress" | translate }}</th>
+                            <td mat-cell *matCellDef="let element" > <p  style="text-align:center;margin-left:-65px;">{{element.adresse}}</p></td>
                           </ng-container>
                           <ng-container matColumnDef="ville">
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto"><p style=" margin-left: 25px !important;"></p>{{'City' | translate}}</th>
-                            <td mat-cell *matCellDef="let element" >    {{element.ville}}</td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto">{{'City' | translate}}</th>
+                            <td mat-cell *matCellDef="let element" ><p  style="text-align:center;margin-left:-45px;">{{element.ville}}</p></td>
                           </ng-container>
                           
                           <ng-container matColumnDef="tel">
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto"><p style=" margin-left: 55px !important;"></p>{{'Phone number' | translate}} </th>
-                            <td mat-cell *matCellDef="let element" >              <span class="mode mode_done" style="font-size: small;"><b>+216 {{element.tel}}</b> </span></td>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef style=" width : auto">{{'Phone number' | translate}} </th>
+                            <td mat-cell *matCellDef="let element" > <p  style="text-align:center;margin-left:-85px;"><span class="mode mode_done" style="font-size: small;"><b>+216 {{element.tel}}</b> </span></p></td>
                           </ng-container>
 
                             <ng-container matColumnDef="action">

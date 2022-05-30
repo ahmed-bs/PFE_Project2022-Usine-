@@ -69,7 +69,7 @@
      "Quantity produced" : "Quantité produit",
      "Name of supplier" : "Nom du fournisseur",
      "First name of supplier" : "Prénom du fournisseur",
-     "Product title" : "Intitulé du produit",
+     "Product title" : "Intitulé produit",
      "Table for entry vouchers" : "Table pour les bons d'entrées",
      "Research" : "Recherche",
      "Add item" : "Ajouter un element",
@@ -156,7 +156,7 @@
 
      "p6" : "NB : La Quantité de lait disponible dans les tanks est",
      "Create a fill operation" : "Créer une operation de remplissage",
-     "Quantity of milk (Kg)" : "Quantité de lait (Kg)" ,
+     "Quantity of milk (Kg)" : "Quantité lait" ,
      "Invalid amount of milk" : "Quantité de lait invalide",
      "Valid amount of milk" : "Quantité de lait valide",
 
@@ -167,7 +167,9 @@
      "Quantity of milk withdrawn" :"Quantité de lait retirée",
      "Collector name" : "Nom du collecteur",
      "Operation type" : "Type opération",
-     "Operation Date" : "Date de l'opération",
+     "Operation Date" : "Date",
+     "Op Date" : "Date de l'opération",
+     "Quantity milk (Kg)" :" Quantité de lait" ,
      "Tank registration number" : "Matricule tank" ,
      "registration number" : "Matricule",
      "Operation ID" : "Id Opération",
@@ -199,7 +201,7 @@
 
 
      "Consult product number" : "Consulter le produit numéro",
-     "Product label" :"Libellé du produit",
+     "Product Label" :"Libellé produit",
 
      "Table for products" : "Table pour les produits",
      "Change product number" : "Modifier le produit numéro",
@@ -226,7 +228,7 @@
      "Maximum valid capacity" : "Contenance maximale valide",
 
      "Consult tank number" : "Consulter le tank numéro",
-     "tank status" : "Etat du tank",
+     "tank status" : " Etat du tank ",
      "Table for tanks" : "Table pour les tanks",
      "Modify the tank number" : "Modifier le tank numéro",
 
