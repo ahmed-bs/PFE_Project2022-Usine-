@@ -95,11 +95,11 @@ export class ListeOperationTransformationComponent implements OnInit {
   }
 
   deleteOperation(id: number) {
-    let confirmation = confirm("Êtes-vous sûr de supprimer l'Operation où son id est egale à : " + id + " ??")
+    let confirmation = confirm("Êtes-vous sûr de supprimer l'opération où son id est égale à : " + id + " ??")
     if (confirmation)
       this.operationService.deleteOperationT(id).subscribe(() => {
         this.Toast[0] = 'Success';
-        this.Toast[1] = 'Operation a été supprimé avec succès';
+        this.Toast[1] = 'Une opération a été supprimée avec succès';
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
         // window.location.reload();
         this.onClose();
@@ -108,7 +108,7 @@ export class ListeOperationTransformationComponent implements OnInit {
           this.idContenu = 'TostDangerContenu';
           this.idTitle = 'TostDangerTile';
           this.Toast[0] = 'Failed';
-          this.Toast[1] = 'Échec de la suppression du Operation !!';
+          this.Toast[1] = 'Échec de la suppression !!';
           this.showToast();
         }
       );
@@ -137,7 +137,7 @@ export class ListeOperationTransformationComponent implements OnInit {
           this.idContenu = 'TostDangerContenu';
           this.idTitle = 'TostDangerTile';
           this.Toast[0] = 'Failed';
-          this.Toast[1] = 'Vous ne pouvez pas supprimer cette opereation , car la quantité du tank concerné a été reinitialisé !! voici la novelle quantité :' + b.poidActuel;
+          this.Toast[1] = 'Vous ne pouvez pas supprimer cette opération, car la quantité disponible dans le tank concerné a été reinitialisé !! voici la nouvelle quantité :' + b.poidActuel;
           this.showToast();
         }
       });

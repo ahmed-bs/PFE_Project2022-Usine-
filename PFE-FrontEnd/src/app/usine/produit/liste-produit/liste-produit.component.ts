@@ -88,11 +88,11 @@ export class ListeProduitComponent implements OnInit {
     // }
   
     deleteProduit(id: number) {
-      let confirmation =confirm("Êtes-vous sûr de supprimer le produit où son id est egale à : "+id+" ??")
+      let confirmation =confirm("Êtes-vous sûr de supprimer le produit où son id est égale à : "+id+" ??")
       if(confirmation)
       this.produitService.deleteProduit(id).subscribe(()=>{
         this.Toast[0] = 'Success';
-        this.Toast[1] ='Produit a été supprimé avec succès';
+        this.Toast[1] ='Un produit a été supprimé avec succès';
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
         // window.location.reload();
         this.onClose();

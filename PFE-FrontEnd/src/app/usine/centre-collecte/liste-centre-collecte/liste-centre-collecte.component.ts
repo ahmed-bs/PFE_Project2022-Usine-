@@ -78,11 +78,11 @@ export class ListeCentreCollecteComponent implements OnInit {
    
 
     deleteCentre(id:number){
-      let confirmation =confirm("Êtes-vous sûr de supprimer le Centre numero :"+id+" ??")
+      let confirmation =confirm("Êtes-vous sûr de supprimer le Ccntre numéro :"+id+" ??")
       if(confirmation)
       this.centreCollecteService.deleteCentre(id).subscribe(()=>{
         this.Toast[0] = 'Success';
-        this.Toast[1] ='Centre a été supprimé avec succès';
+        this.Toast[1] ='Un centre a été supprimé avec succès';
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
         this.onClose();
       },
@@ -90,7 +90,7 @@ export class ListeCentreCollecteComponent implements OnInit {
         this.idContenu = 'TostDangerContenu';
         this.idTitle = 'TostDangerTile';
         this.Toast[0] = 'Failed';
-        this.Toast[1] ='Échec de la suppression du Centre !!';
+        this.Toast[1] ='Échec de la suppression !!';
         this.showToast();
       }
     );

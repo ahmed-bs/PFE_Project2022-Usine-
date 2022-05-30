@@ -217,7 +217,7 @@ private convertBase64ToBlob(Base64Image: string) {
               'Toast',
               JSON.stringify([
                 'Success',
-                'Une operation a été ajouté avec succès',
+                'Une opération a été ajoutée avec succès',
               ])
             );
           }

@@ -78,7 +78,7 @@ export class ListeMagasinComponent implements OnInit {
    
 
     deleteMagasin(id:number){
-      let confirmation =confirm("Êtes-vous sûr de supprimer le magasin où son id est egale à : "+id+" ??")
+      let confirmation =confirm("Êtes-vous sûr de supprimer le magasin où son id est égale à : "+id+" ??")
       if(confirmation)
       this.magasinService.deleteMagasin(id).subscribe(()=>{
         this.Toast[0] = 'Success';
@@ -91,7 +91,7 @@ export class ListeMagasinComponent implements OnInit {
         this.idContenu = 'TostDangerContenu';
         this.idTitle = 'TostDangerTile';
         this.Toast[0] = 'Failed';
-        this.Toast[1] ='Échec de la suppression du magasin !!';
+        this.Toast[1] ='Échec de la suppression !!';
         this.showToast();
       }
     );
