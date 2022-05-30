@@ -20,6 +20,7 @@ export class CreateProduitComponent implements OnInit {
   msg="";
   msg1=0;
   msg2=0;
+  msg4=0;
 
   constructor(
     private translateService :TranslateService,
@@ -75,7 +76,7 @@ export class CreateProduitComponent implements OnInit {
          }
 
      
-     if(this.myForm.get('intitule')?.value!=null && this.myForm.get('libelle')?.value!=null 
+     if(this.myForm.get('intitule')?.value!=null && this.myForm.get('libelle')?.value!=null && this.myForm.get('cgu')?.value==true
      && this.myForm.get('intitule')?.value.length>=3 && this.myForm.get('libelle')?.value.length>=8  && t==0 && l==0){
     console.log(this.produit);
     this.produit.idProduit = 1;
@@ -94,9 +95,22 @@ export class CreateProduitComponent implements OnInit {
 
 
   onSubmit() {
-    this.submitted = true;
-    this.save();
+    if(this.myForm.get('cgu')?.value==true){
+      this.msg4=0;
+    }
+    else{
+      this.msg4=1;
+    }
 
+
+    if(this.myForm.get('intitule')?.value==null 
+    || this.myForm.get('libelle')?.value==null  ){
+    this.msg="vous devez remplir le formulaire !!";
+   }
+   else{
+    this.msg="";
+   }
+        this.save();
   }
 
   gotoList() {
@@ -123,6 +137,7 @@ export class CreateProduitComponent implements OnInit {
     this.myForm = new FormGroup({
       'intitule' : new FormControl(null,[Validators.required,Validators.minLength(3)]),
       'libelle' : new FormControl(null,[Validators.required,Validators.minLength(8)]),
+      cgu: new FormControl(false, Validators.requiredTrue),
       });
  }
 

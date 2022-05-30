@@ -19,10 +19,12 @@ export class CreateTankComponent implements OnInit {
   msg1=0;
   msgErreur=0;
   qteAct=0;
+  msg4=0;
 
   myForm=new  FormGroup({
       matricule : new FormControl(null,[Validators.required,Validators.minLength(8)]),
       poidVide : new FormControl(null,[Validators.required,Validators.min(500)]),
+      cgu: new FormControl(false, Validators.requiredTrue),
       // poidActuel : new FormControl(null,[Validators.required ]),
       // etat : new FormControl(null,[Validators.required ]),
   })
@@ -75,7 +77,7 @@ export class CreateTankComponent implements OnInit {
      }
 
 
-  if(this.myForm.get('poidVide')?.value!=null && this.myForm.get('matricule')?.value!=null 
+  if(this.myForm.get('poidVide')?.value!=null && this.myForm.get('matricule')?.value!=null  && this.myForm.get('cgu')?.value==true
   && this.myForm.get('poidVide')?.value>=500  && this.myForm.get('matricule')?.value.length>=8 && t==0){
     this.tankService
         .createTank({
@@ -97,8 +99,23 @@ export class CreateTankComponent implements OnInit {
 
 
   onSubmit() {
+    if(this.myForm.get('cgu')?.value==true){
+      this.msg4=0;
+    }
+    else{
+      this.msg4=1;
+    }
+
+   if(this.myForm.get('poidVide')?.value==null 
+    || this.myForm.get('matricule')?.value==null  ){
+    this.msg="vous devez remplir le formulaire !!";
+   }
+   else{
+    this.msg="";
+   }
         this.save();
   }
+
 
   gotoList() {
     this.router.navigate(['chef/tank/listeTank']);
