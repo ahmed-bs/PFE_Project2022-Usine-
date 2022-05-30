@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Operation } from 'src/app/Models/operation';
 import { OperationService } from 'src/app/Services/operation.service';
 import { TankService } from 'src/app/Services/tank.service';
+import { ProduitService } from 'src/app/Services/produit.service';
 import { CreateOperationTransformationComponent } from '../create-operation-transformation/create-operation-transformation.component';
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 import { DetailsOperationTransformationComponent } from '../details-operation-transformation/details-operation-transformation.component';
@@ -52,6 +53,7 @@ export class ListeOperationTransformationComponent implements OnInit {
     private translateService :TranslateService,
     private operationService: OperationService,
     private tankService: TankService,
+    private produitService: ProduitService,
     private location: Location,
     private router: Router, private dialog: MatDialog) {
       this.translateService.setDefaultLang('en');
@@ -95,6 +97,7 @@ export class ListeOperationTransformationComponent implements OnInit {
   }
 
   deleteOperation(id: number) {
+
     let confirmation = confirm("Êtes-vous sûr de supprimer l'opération où son id est égale à : " + id + " ??")
     if (confirmation)
       this.operationService.deleteOperationT(id).subscribe(() => {
@@ -122,26 +125,43 @@ export class ListeOperationTransformationComponent implements OnInit {
     //   console.log(o);
     //   this.q=o;
     this.operationService.getOperation(id).subscribe(a => {
-      console.log(a.poidsLait);
-      console.log(a.tank.idTank);
-      console.log(a.produit.idProduit);
+  
+      console.log("***** 2 *****"+a.tank.idTank);
+      console.log("***** 3 *****"+a.produit.idProduit);
       this.tankService.getTank(a.tank.idTank).subscribe(b => {
-        console.log(b.poidActuel);
-        console.log(b);
+     
+
+        this.produitService.getProduit(a.produit.idProduit).subscribe(c => {
+
+          console.log("***** produit *****"+c.qte);
+          console.log("***** operation *****"+a.qtePrise);
 
         this.p = a.poidsLait + b.poidActuel;
 
-        if (this.p <= b.poidVide) {
+        console.log("*****  operation *****"+a.poidsLait);
+        console.log("***** Tank *****"+(b.poidVide-b.poidActuel));
+
+        if (this.p <= b.poidVide && (c.qte-a.qtePrise) >=0) {
           this.deleteOperation(id);
-        } else {
+        } 
+        
+        else if(this.p > b.poidVide ) {
           this.idContenu = 'TostDangerContenu';
           this.idTitle = 'TostDangerTile';
           this.Toast[0] = 'Failed';
           this.Toast[1] = 'Vous ne pouvez pas supprimer cette opération, car la quantité disponible dans le tank concerné a été reinitialisé !! voici la nouvelle quantité :' + b.poidActuel;
           this.showToast();
         }
+        else if((c.qte-a.qtePrise) <0 ) {
+          this.idContenu = 'TostDangerContenu';
+          this.idTitle = 'TostDangerTile';
+          this.Toast[0] = 'Failed';
+          this.Toast[1] = 'Vous ne pouvez pas supprimer cette opération, car la quantité disponible dans le stock du produit concerné a été reinitialisé !! voici la nouvelle quantité :' + c.qte;
+          this.showToast();
+        }
       });
       // 
+    });
     });
   }
 

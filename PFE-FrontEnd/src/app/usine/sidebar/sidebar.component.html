@@ -12,9 +12,9 @@
     <div class="sidebar">
 
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="info" style="margin-left:10px" >
+      <div class="info" style="margin:auto;"  >
         <!-- <i style="color:red;" class="fas fa-heart fa-lg fa-spin"></i>& -->
-        <a  class="d-block" style="margin-left:2px;color:white; font-weight: bold;" >  <img style="padding-left:-55px;width:40px;height:40px;" src="../../assets/person.png" alt="cccccccc">&nbsp;{{'Welcome' | translate}} {{authService.loggedUser}}</a>
+        <a  class="d-block" style="margin-left:2px;color:white; font-weight: bold;" > <p style="text-align:center;">{{'Welcome' | translate}} {{authService.loggedUser}}</p></a>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
 
           <li class="nav-item">
             <a routerLink="./dashboard" routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-chart-area" style="margin-left:-14px;"></i>
+              <i class="nav-icon fas fa-chart-area" style="margin-left:-10px;"></i>
               <!-- <i class="fas fa-chart-area"></i> -->
               <p style="margin-left:-5px;"> {{'boardTable' | translate}}</p>
             </a>
@@ -43,7 +43,7 @@
           <li  class="nav-item">
             <a routerLink="./centreCollecte/listeCentreCollecte" routerLinkActive="active" class="nav-link">
               <!-- <i class="nav-icon fas fa-list"></i> -->
-              <i class="nav-icon fas fa-clinic-medical"style="margin-left:-14px;"></i>
+              <i class="nav-icon fas fa-clinic-medical"style="margin-left:-10px;"></i>
               <p>{{'Center management' | translate}}
               </p>
             </a>
@@ -53,14 +53,14 @@
           <li class="nav-item">
             <a routerLink="magasin/listeMagasin" routerLinkActive="active" class="nav-link">
               <!-- <i class="nav-icon fas fa-shopping"></i> -->
-              <i class="nav-icon fas fa-shopping-cart" style="margin-left:-14px;"></i>
+              <i class="nav-icon fas fa-shopping-cart" style="margin-left:-10px;"></i>
               <p>{{'Store management' | translate}}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a routerLink="produit/listeProduit" routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fab fa-product-hunt" style="margin-left:-14px;"></i>
+              <i class="nav-icon fab fa-product-hunt" style="margin-left:-10px;"></i>
               <p>{{'Product management' | translate}}</p>
             </a>
           </li>
@@ -68,7 +68,7 @@
           <!-- Partie Condidates List lel Recruteur wel admin -->
           <li class="nav-item">
             <a routerLink="tank/listeTank" routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fa fa-bitbucket" style="margin-left:-14px;"></i>
+              <i class="nav-icon fa fa-bitbucket" style="margin-left:-10px;"></i>
               <p>{{'Tank management' | translate}}</p>
             </a>
           </li>
@@ -99,8 +99,8 @@
 
           <li class="nav-item">
             <a href="" class="nav-link" routerLinkActive="active">
-              <i class="far fa-circle nav-icon" style="margin-left:-14px;"></i>
-              <p>{{'Operations management' | translate}}<i class="right fas fa-angle-left"style="margin-left:13px;margin-right:-6px;margin-top:3.5px;"></i></p>
+              <i class="far fa-circle nav-icon" style="margin-left:-10px;"></i>
+              <p>{{'Operations management' | translate}}<i class="right fas fa-angle-left" style="margin-left:auto;margin-right:-6px;margin-top:3.5px;"></i></p>
             </a>
             <ul class="nav nav-treeview">
 
@@ -132,7 +132,7 @@
 
             <li class="nav-item">
               <a routerLink="operation/listeOperationTank" routerLinkActive="active" class="nav-link">
-                <i class="nav-icon fa fa-id-card-o" style="margin-left:-14px;"></i>
+                <i class="nav-icon fa fa-id-card-o" style="margin-left:-10px;"></i>
                 <p>{{'tank s operations management' | translate}}</p>
               </a>
             </li>
