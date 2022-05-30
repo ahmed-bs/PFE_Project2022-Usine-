@@ -99,7 +99,7 @@ export class ListeOperationRetraitComponent implements OnInit {
       if(confirmation)
       this.operationService.deleteOperationR(id).subscribe(data => {
         this.Toast[0] = 'Success';
-        this.Toast[1] ='Operation a été supprimé avec succès';
+        this.Toast[1] ='Une opération a été supprimée avec succès';
         localStorage.setItem('Toast', JSON.stringify(this.Toast));
         // window.location.reload();
         this.onClose();
@@ -108,7 +108,7 @@ export class ListeOperationRetraitComponent implements OnInit {
         this.idContenu = 'TostDangerContenu';
         this.idTitle = 'TostDangerTile';
         this.Toast[0] = 'Failed';
-        this.Toast[1] ='Échec de la suppression du Operation !!';
+        this.Toast[1] ='Échec de la suppression !!';
         this.showToast();
       }
     );
@@ -130,7 +130,7 @@ export class ListeOperationRetraitComponent implements OnInit {
           this.idContenu = 'TostDangerContenu';
           this.idTitle = 'TostDangerTile';
           this.Toast[0] = 'Failed';
-          this.Toast[1] ='Vous ne pouvez pas supprimer cette opereation, car la quantite restante est inferieur a la quantite que vous voulez la supprimer !!';
+          this.Toast[1] ='Vous ne pouvez pas supprimer cette opération, car la quantité disponible est inferieur à la quantité que vous voulez la supprimée !!';
           this.showToast();
         }
       });
@@ -186,7 +186,7 @@ export class ListeOperationRetraitComponent implements OnInit {
         this.idContenu = 'TostDangerContenu';
         this.idTitle = 'TostDangerTile';
         this.Toast[0] = 'Erreur';
-        this.Toast[1] ='Le stock est vide !! \n Vous ne pouvez pas effectuer l\'operation de retrait !!';
+        this.Toast[1] ='Le stock est vide !! \n Vous ne pouvez pas effectuer l\'opération de retrait !!';
         this.showToast();
     }
     });

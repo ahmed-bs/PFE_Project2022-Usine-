@@ -192,7 +192,7 @@ doc.addImage(imageData,'JPEG',0,0,210,297);
                 'Toast',
                 JSON.stringify([
                   'Success',
-                  'Une operation a été ajouté avec succès',
+                  'Une opération a été ajoutée avec succès',
                 ])
               );
             }

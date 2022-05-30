@@ -141,7 +141,7 @@ export class CreateOperationComponent implements OnInit {
                       'Toast',
                       JSON.stringify([
                         'Success',
-                        'Une operation a été ajouté avec succès',
+                        'Une opération a été ajoutée avec succès',
                       ])
                     );
                   }

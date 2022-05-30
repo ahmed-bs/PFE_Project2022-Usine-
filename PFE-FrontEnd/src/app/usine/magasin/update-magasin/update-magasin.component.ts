@@ -61,7 +61,7 @@ export class UpdateMagasinComponent implements OnInit {
            "tel":this.myForm.get('tel')?.value,
          })
          .subscribe(o=>{
-           localStorage.setItem('Toast', JSON.stringify(["Success","Un magasin a été modifié avec succes"]));
+           localStorage.setItem('Toast', JSON.stringify(["Success","Un magasin a été modifié avec succès"]));
           //  window.location.reload();
            console.log(this.magasin);
            this.onClose();
