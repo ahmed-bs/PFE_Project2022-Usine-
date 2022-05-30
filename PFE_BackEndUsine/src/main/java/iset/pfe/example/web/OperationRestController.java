@@ -204,6 +204,7 @@ public class OperationRestController {
     		t.setPoidActuel(qte1);
     		tankRepository.save(t);
 			o.setIdOperation(idOperation);
+			o.setCodeRemplissage(null);
 			operationRepository.save(o);
 				
 		if (op.isPresent()) { 
