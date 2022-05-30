@@ -158,7 +158,8 @@
 
      "p6" : "NB: The quantity of milk available in the tanks is",
     "Create a fill operation" : "Create a fill operation",
-    "Quantity of milk (Kg)" :" Quantity of milk (Kg)" ,
+    "Quantity of milk (Kg)" :" Quantity milk" ,
+    "Quantity milk (Kg)" :" Quantity of milk" ,
     "Invalid amount of milk" : "Invalid amount of milk",
     "Valid amount of milk" : "Valid amount of milk",
     "p7" : "You must insert a Quantity of milk between 0 and" ,
@@ -168,12 +169,12 @@
     "Quantity of milk withdrawn": "Quantity of milk withdrawn", 
     "Collector name": "Collector name",
     "Operation type" : "Operation type",
-    "Operation Date" : "Operation Date",
-    "Tank registration number" : "Tank registration number",
+    "Operation Date" : "Date",
+    "Tank registration number" : "Registration number",
     "Operation ID" : "Operation ID",
     "Type of operation" : "Type of operation",
     "Quantity(Insert/Remove)" : "Quantity(Insert/Remove)",
-
+    "Op Date" : "Date of operation",
     "Table for filling operations" : "Table for filling operations",
     "Table for withdrawal operations" : "Table for withdrawal operations",
     "Quantity of milk taken" : "Quantity of milk taken",
@@ -222,7 +223,7 @@
     "Maximum valid capacity" : "Maximum valid capacity",
 
     "Consult tank number" : "Consult tank number",
-    "tank status" : "tank status",
+    "tank status" : "Status",
     "Table for tanks" : "Table for tanks",
     "Modify the tank number" :  "Modify the tank number" ,
 

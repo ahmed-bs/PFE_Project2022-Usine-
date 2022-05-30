@@ -272,11 +272,17 @@ elem2: Operation=new Operation();
 
 
   onSubmit() {
-           //this.submitted = true; 
+           //this.submitted = true;
+           if(this.myForm.get('cgu')?.value==true){
+            this.msg4=0;
+          }
+          else{
+            this.msg4=1;
+          }
+           
     if(this.myForm.get('qtePrise')?.value==null ||
     this.myForm.get('magasin')?.value==null ||
-     this.myForm.get('produit')?.value==null
-     ||this.myForm.get('cgu')?.value==true  ){
+     this.myForm.get('produit')?.value==null ){
       this.msg="vous devez remplir le formulaire !!";
     }
     else{
@@ -291,7 +297,7 @@ elem2: Operation=new Operation();
         this.myForm.get('magasin')?.value != null &&
         this.myForm.get('produit')?.value != null &&
         this.myForm.get('cgu')?.value==true &&
-        this.myForm.get('poidsLait')?.value > 0 
+        this.myForm.get('qtePrise')?.value > 0 
       ) {
       if(this.myForm.get('qtePrise')?.value<=this.q  ){
       this.save();

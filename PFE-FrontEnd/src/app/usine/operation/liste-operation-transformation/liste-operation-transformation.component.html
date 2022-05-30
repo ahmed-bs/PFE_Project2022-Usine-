@@ -32,31 +32,31 @@
                           <tr>
                             <ng-container matColumnDef="idOperation" >
                                 <th mat-header-cell *matHeaderCellDef  style="min-width:50px; text-align: center;">#ID</th>
-                                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.idOperation}}</td>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;"><p  style="text-align:center;margin-left:-5px;">{{element.idOperation}}</p></td>
                             </ng-container>
                             <ng-container matColumnDef="poidsLait" >
                               <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:120px;text-align: center;"> {{'Quantity of milk (Kg)' | translate}}</th>
-                              <td mat-cell *matCellDef="let element" style="font-weight:bold ;text-align: center;">{{element.poidsLait}} kg</td>
+                              <td mat-cell *matCellDef="let element" style="font-weight:bold ;text-align: center;"><p  style="text-align:center;margin-left:-45px;">{{element.poidsLait}} kg</p></td>
                             </ng-container>
                             <ng-container matColumnDef="qtePrise" >
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;text-align: center;"> &nbsp;&nbsp;{{'Quantity' | translate}}</th>
-                              <td mat-cell *matCellDef="let element"style="font-weight:bold;text-align: center;">{{element.qtePrise}} Lots</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef  style="min-width:100px;text-align: center;">{{'Quantity' | translate}}</th>
+                              <td mat-cell *matCellDef="let element"style="font-weight:bold;text-align: center;"><p  style="text-align:center;margin-left:-25px;">{{element.qtePrise}} Lots</p></td>
                             </ng-container>
                             <ng-container matColumnDef="dateOperation">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">{{'Operation Date' | translate}}</th>
-                              <td mat-cell *matCellDef="let element" ><span class="mode mode_date" style="text-align: center;font-size: small;font-weight:bold;color:blue">&nbsp;<b>{{element.dateOperation}}</b>&nbsp;</span></td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">&nbsp;{{'Operation Date' | translate}}</th>
+                              <td mat-cell *matCellDef="let element" ><p  style="text-align:center;margin-left:-45px;"><span class="mode mode_date" style="text-align: center;font-size: small;font-weight:bold;color:blue"><b>{{element.dateOperation}}</b>&nbsp;</span></p></td>
                             </ng-container>
                             <ng-container matColumnDef="tank">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">&nbsp;&nbsp;&nbsp;Tank</th>
-                              <td mat-cell *matCellDef="let element" style="text-align: center;" >{{element.tank.matricule}}</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">Tank</th>
+                              <td mat-cell *matCellDef="let element" style="text-align: center;" ><p  style="text-align:center;margin-left:-45px;">{{element.tank.matricule}}</p></td>
                             </ng-container>
                             <ng-container matColumnDef="produit">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;"> &nbsp;&nbsp;{{'Product' | translate}}</th>
-                              <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.produit.intitule}}</td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">{{'Product' | translate}}</th>
+                              <td mat-cell *matCellDef="let element" style="text-align: center;"><p  style="text-align:center;margin-left:-45px;">{{element.produit.intitule}}</p></td>
                             </ng-container>
                             <ng-container matColumnDef="code">
-                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">&nbsp;&nbsp;&nbsp;Code </th>
-                              <td mat-cell *matCellDef="let element" style="text-align: center;"><span class="mode mode_code" style="font-size: small;color:black">&nbsp;<b>{{element.code}}</b>&nbsp;</span></td>
+                              <th mat-sort-header mat-header-cell *matHeaderCellDef style="min-width:100px;text-align: center;">Code </th>
+                              <td mat-cell *matCellDef="let element" style="text-align: center;"><p  style="text-align:center;margin-left:-60px;"><span class="mode mode_code" style="font-size: small;color:black">&nbsp;<b>{{element.code}}</b>&nbsp;</span></p></td>
                             </ng-container>
                             <ng-container matColumnDef="action">
                               <th  mat-header-cell *matHeaderCellDef style="min-width:150px;text-align: center;">&nbsp;&nbsp;Action</th>
