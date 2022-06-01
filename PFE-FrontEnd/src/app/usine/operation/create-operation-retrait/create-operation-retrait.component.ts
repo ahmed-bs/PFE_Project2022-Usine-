@@ -17,6 +17,7 @@ import {Location} from "@angular/common";
 import { ethers } from 'ethers';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/Services/user.service';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 declare let require: any;
@@ -40,6 +41,8 @@ export class CreateOperationRetraitComponent implements OnInit {
   q=0;
   som=0;
   msg4=0;
+  nom="";
+  prenom="";
   myForm=new  FormGroup({
       qtePrise : new FormControl(null,[Validators.required, Validators.min(5)]),
       produit : new FormControl(null,[Validators.required ]),
@@ -54,6 +57,8 @@ export class CreateOperationRetraitComponent implements OnInit {
   tab0!: any[];
   tab1!: any[];
   maDate = new Date();
+  np="";
+  text="";
 
   exportOne( op : Operation , confirmation: string){
     // new CsvBuilder("operation.csv")
@@ -69,10 +74,22 @@ export class CreateOperationRetraitComponent implements OnInit {
     // const data = [
     //     [op.idOperation, op.poidsLait, op.code , op.collecteur.nomCollecteur , op.dateOperation , confirmation],
 doc.addImage(imageData,'JPEG',0,0,210,297);
+
+this.userService.getUser(JSON.parse(localStorage.getItem('IdUser') || '[]') || []).subscribe(o => {
+  this.nom = o.nom;
+  this.prenom = o.prenom;
+  console.log("#################################################");
+  console.log(o);
+  console.log(o.idU);
+  console.log("#################################################");
+
+
+this.np=this.nom+" "+this.prenom;
+this.text=op.magasin.nomMag+" "+op.magasin.adresse+" "+op.magasin.ville;
     // ]
     doc.text(op.code.toString(),92,54)
-    doc.text("op.centreCollecte.nomCentre.toString()",75,107.2)
-    doc.text(op.magasin.nomMag.toString(),107,139)
+    doc.text(this.np.toString(),75,107.2)
+    doc.text(this.text.toString(),74,139)
     doc.text(op.dateOperation.toString(),120,123.5)
     // doc.text(op.code.toString().toString(),92,157)
     // autoTable(doc, {
@@ -82,6 +99,7 @@ doc.addImage(imageData,'JPEG',0,0,210,297);
     // });
 
     doc.save(n);
+  });
     }
   constructor(
     private translateService :TranslateService,
@@ -91,6 +109,7 @@ doc.addImage(imageData,'JPEG',0,0,210,297);
     private produitService:ProduitService,
     private router: Router,
     private magasinService:MagasinService, 
+    private userService:UserService,
     private dialogClose: MatDialog) { 
       this.translateService.setDefaultLang('en');
       this.translateService.use(localStorage.getItem('lang') || 'en')

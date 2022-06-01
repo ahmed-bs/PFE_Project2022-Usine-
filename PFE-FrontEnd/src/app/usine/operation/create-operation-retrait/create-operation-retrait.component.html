@@ -56,7 +56,7 @@
                 <label class="mr-sm-5" for="inlineFormCustomSelect"> {{'Store' | translate}} : <span style="color:red;">*</span></label>
                 <select formControlName="magasin" name="magasin"  class="custom-select mr-sm-2" id="magasin" >
                   <option disabled selected value [ngValue]="null">{{'Choose a store' | translate}}...</option>
-                  <option *ngFor="let magasin of magasins | async" [value]="magasin.idMag">{{magasin.nomMag}}</option>
+                  <option *ngFor="let magasin of magasins | async" [value]="magasin.idMag">{{magasin.nomMag}} - {{magasin.adresse}} - {{magasin.ville}}</option>
                 </select>
                 <div
                 *ngIf="magasin?.invalid && magasin?.touched"

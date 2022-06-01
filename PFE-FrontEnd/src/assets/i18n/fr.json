@@ -159,10 +159,12 @@
      "Quantity of milk (Kg)" : "Quantité lait" ,
      "Invalid amount of milk" : "Quantité de lait invalide",
      "Valid amount of milk" : "Quantité de lait valide",
+     "usine" : "Responsable d'usine",
 
      "p7" : "Vous devez inserer une Quantité de lait comprise entre 0 et" ,
      "Welcom" : "Bienvenu(e)",
-     
+     "not connect": "Non connecté(e)",
+     "connect": "Connecté(e)",
      "Consult the operation number" : "Consulter l'opération numéro",
      "Amount of milk inserted" : "Quantité de lait inserée",
      "Quantity of milk withdrawn" :"Quantité de lait retirée",
