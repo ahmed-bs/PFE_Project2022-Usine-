@@ -12,8 +12,8 @@
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <button class="button" (click)="requestAccount()">00</button>
-    <h6 *ngIf="!connected">Not Connected</h6>
-    <h6 *ngIf="connected">Connected</h6>
+    <h6 style="margin-left : 4px;margin-right:14px;padding-top:11px;" *ngIf="!connected"> {{'not connect' | translate}}</h6>
+    <h6 style="margin-left : 4px;margin-right:14px;padding-top:11px;" *ngIf="connected">{{'connect' | translate}}</h6>
     <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
       
       <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false" *ngIf ="lang == 'en'">
@@ -41,8 +41,7 @@
     
     <li class="nav-item">&nbsp;</li>
     <li class="nav-item">&nbsp;</li>
-
-    <li style="margin-right:5px;margin-top:6px;"> {{authService.loggedUser}}</li>
+    <li class="gradient-text" style="margin-left:6px;margin-right:-2px;margin-top:6px;font-size: 1.1em;"><b> {{authService.loggedUser}}</b></li>
 
     <!-- <li class="nav-item dropdown" >
       <a class="nav-link" data-toggle="dropdown" href="#">
@@ -66,7 +65,7 @@
                 &nbsp; {{nom}}&nbsp;{{prenom}}
                 <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
               </h3>
-               <strong><p class="text-sm gradient-text" style="margin-top:auto;margin-left:10px;margin-top:9px;margin-bottom:9px;font-size: 3.8em;">Chef de l'usine</p></strong>
+               <strong><p class="text-sm gradient-text" style="margin-top:auto;margin-left:11px;margin-top:9px;margin-bottom:9px;font-size: 3.8em;">{{ "usine" | translate }}</p></strong>
              
             </div>
           </div>

@@ -80,7 +80,8 @@
      "Use-by date" : "Use-by date",
      "Table for exit vouchers" : "Table for exit vouchers" ,
      "Welcom" : "Welcome",
-
+     "not connect": "Not connected",
+     "connect": "Connected",
      "Save" : "Save",
      "Change voucher number" : "Change voucher number",
 
@@ -89,6 +90,7 @@
      "Farmer" : "Farmer" ,
      "Farmers" : "Farmers" ,
      "Factories" : "Factories",
+     "usine" : "Factory manager",
 
      "Add a new center" :"Add a new center",
      "Center name (minimum 4 characters)" :"Center name (minimum 4 characters)",

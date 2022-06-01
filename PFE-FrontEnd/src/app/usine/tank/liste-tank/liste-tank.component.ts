@@ -30,6 +30,7 @@ export class ListeTankComponent implements OnInit {
   Toast!: string[];
   counter: number = 0;
   ShowToast: string = 'hide';
+  lang="";
 
   ELEMENT_DATA?:Tank[];
   tank?:Tank;
@@ -48,6 +49,10 @@ export class ListeTankComponent implements OnInit {
 
 
     ngOnInit() {
+
+      console.log(localStorage.getItem('lang')  || 'en');
+      this.lang=localStorage.getItem('lang')  || 'en';
+
       this.reloadData();
 
       this.idContenu = 'TostSuccessContenu';

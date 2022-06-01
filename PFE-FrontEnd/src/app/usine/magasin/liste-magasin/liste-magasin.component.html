@@ -28,7 +28,7 @@
                               <td mat-cell *matCellDef="let element"><p  style="text-align:center;margin-left:-65px;">{{element.idMag}}</p></td>
                           </ng-container>
                           <ng-container matColumnDef="nomMag" >
-                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style=" width : auto ">{{ "Store name" | translate }} </th>
+                            <th mat-sort-header mat-header-cell *matHeaderCellDef  style=" width : auto ">&nbsp;&nbsp;<span *ngIf="lang=='en'">&nbsp;</span>{{ "Store name" | translate }} </th>
                             <td mat-cell *matCellDef="let element"> <p  style="text-align:center;margin-left:-65px;">{{element.nomMag}}</p></td>
                           </ng-container>
                           
