@@ -28,6 +28,7 @@ export class CreateOperationComponent implements OnInit {
   submitted = false;
   msg = '';
   t: Tank = new Tank();
+  connected!: boolean;
   msgErreur = 0;
   msgErreur2 = 0;
   // qte de lait restante pour chaque vache
@@ -37,8 +38,10 @@ export class CreateOperationComponent implements OnInit {
   valeur1 = 0;
   valeur2 = 0;
   msg1 = 0;
+  pp: number = 0;
+  msg2 = '';
   qte = 0;
-  msg4=0;
+  msg4 = 0;
   myForm = new FormGroup({
     poidsLait: new FormControl(null, [Validators.required, Validators.min(1)]),
     code: new FormControl(null, [Validators.required]),
@@ -69,6 +72,7 @@ export class CreateOperationComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.reloadDataUinseRemplissage01()
     //this.ValidatedForm();
     this.tanks = this.tankService.getTanks();
     this.centres = this.centreCollecteService.getCentres();
@@ -83,6 +87,30 @@ export class CreateOperationComponent implements OnInit {
       this.onReload();
     });
   }
+
+
+  OpTankRemplissageUsineTabs!: OperationTank[];
+  async reloadDataUinseRemplissage01() {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const depKEY = Object.keys(Remplissage.networks)[0];
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          Remplissage.networks[depKEY].address,
+          Remplissage.abi,
+          signer
+        );
+        this.OpTankRemplissageUsineTabs = await contract.getOperationTanksUsine();
+        this.connected = true;
+      } catch (error) {
+        this.connected = false;
+      }
+    }
+  }
+
+
 
   newEmployee(): void {
     this.submitted = false;
@@ -117,7 +145,7 @@ export class CreateOperationComponent implements OnInit {
           this.myForm.get('centreCollecte')?.value != null &&
           this.myForm.get('code')?.value != null &&
           this.myForm.get('poidsLait')?.value >= 1 &&
-          this.myForm.get('cgu')?.value==true &&
+          this.myForm.get('cgu')?.value == true &&
           t == 0 &&
           this.myForm.get('code')?.value.toString().length >= 5 &&
           this.msg == ''
@@ -133,9 +161,9 @@ export class CreateOperationComponent implements OnInit {
             .subscribe(
               (o) => {
                 this.tab = Object.values(o);
-                this.operationService.getOpTank(this.tab[0]).subscribe( async(i)  => {
+                this.operationService.getOpTank(this.tab[0]).subscribe(async (i) => {
                   this.tabTankId = Object.values(i);
-                await  this.saveInBc(this.tabTankId, this.tabTankId.length);
+                  await this.saveInBc(this.tabTankId, this.tabTankId.length);
                   if (this.confirmation == 'confirmed') {
                     localStorage.setItem(
                       'Toast',
@@ -151,13 +179,13 @@ export class CreateOperationComponent implements OnInit {
                 console.log('Failed');
               }
             );
-            this.tankService.getTanksQteLibre().subscribe((o) => {
-              if (this.myForm.get('poidsLait')?.value <= o) this.msgErreur = 0;
-              else {
-                this.msgErreur = 1;
-                this.qteRsetLait = o;
-              }
-            });
+          this.tankService.getTanksQteLibre().subscribe((o) => {
+            if (this.myForm.get('poidsLait')?.value <= o) this.msgErreur = 0;
+            else {
+              this.msgErreur = 1;
+              this.qteRsetLait = o;
+            }
+          });
         }
       });
   }
@@ -202,71 +230,83 @@ export class CreateOperationComponent implements OnInit {
   }
 
   onSubmit() {
-       //this.submitted = true;
-       if (this.myForm.get('poidsLait')?.value == null) {
-        this.msg = 'vous devez remplir le formulaire !!';
-      } else {
-        this.msg = '';
-      }
-
-      if (this.myForm.get('centreCollecte')?.value == null) {
-        this.msg = 'vous devez remplir le formulaire !!';
-      } else {
-        this.msg = '';
-      }
-
-      if (this.myForm.get('code')?.value == null) {
-        this.msg = 'vous devez remplir le formulaire !!';
-      } else {
-        this.msg = '';
-      }
-      if(this.myForm.get('cgu')?.value==true){
-        this.msg4=0;
-      }
-      else{
-        this.msg4=1;
-      }
-
-      this.tankService.getTanksQteLibre().subscribe((o) => {
-        if (this.myForm.get('poidsLait')?.value <= o) {
-          this.msgErreur = 0;
+    try {
+      for (let index = 0; index <= this.pp; index++) {
+        if (this.myForm.get('code')?.value == this.OpTankRemplissageUsineTabs[index].operation.code) {
+          this.msg2 = 'code deja exist';
+        } else {
+          this.msg2 = 'ok';
         }
-          else{
-            this.msgErreur = 1;
-            this.qteRsetLait = o;
-          }
-        });
+      }
+    } catch (error) {
+      this.msg2 = 'ok';
+    }
+    //this.submitted = true;
+    if (this.myForm.get('poidsLait')?.value == null) {
+      this.msg = 'vous devez remplir le formulaire !!';
+    } else {
+      this.msg = '';
+    }
 
+    if (this.myForm.get('centreCollecte')?.value == null) {
+      this.msg = 'vous devez remplir le formulaire !!';
+    } else {
+      this.msg = '';
+    }
 
-        this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe((t) => {
-          console.log(t);
-          if (t == 1) {
-            this.msg1 = 1;
-          } else {
-            this.msg1 = 0;
-          }
-
+    if (this.myForm.get('code')?.value == null) {
+      this.msg = 'vous devez remplir le formulaire !!';
+    } else {
+      this.msg = '';
+    }
+    if (this.myForm.get('cgu')?.value == true) {
+      this.msg4 = 0;
+    }
+    else {
+      this.msg4 = 1;
+    }
 
     this.tankService.getTanksQteLibre().subscribe((o) => {
-      console.log(o);
-      if (
-        this.myForm.get('poidsLait')?.value != null &&
-        this.myForm.get('centreCollecte')?.value != null &&
-        this.myForm.get('poidsLait')?.value > 0 &&
-        this.myForm.get('cgu')?.value==true &&
-        this.myForm.get('code')?.value != null
-        && t==0
-      ) {
       if (this.myForm.get('poidsLait')?.value <= o) {
-        this.save();
-        this.onClose();
         this.msgErreur = 0;
-      } else {
+      }
+      else {
         this.msgErreur = 1;
         this.qteRsetLait = o;
       }
-    }
-  });
+    });
+
+
+    this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe((t) => {
+      console.log(t);
+      if (t == 1) {
+        this.msg1 = 1;
+      } else {
+        this.msg1 = 0;
+      }
+
+
+      this.tankService.getTanksQteLibre().subscribe((o) => {
+        console.log(o);
+        if (
+          this.myForm.get('poidsLait')?.value != null &&
+          this.myForm.get('centreCollecte')?.value != null &&
+          this.myForm.get('poidsLait')?.value > 0 &&
+          this.myForm.get('cgu')?.value == true &&
+          this.myForm.get('code')?.value != null &&
+          this.msg2 == 'ok' &&
+          t == 0
+        ) {
+          if (this.myForm.get('poidsLait')?.value <= o) {
+            this.save();
+            this.onClose();
+            this.msgErreur = 0;
+          } else {
+            this.msgErreur = 1;
+            this.qteRsetLait = o;
+          }
+        }
+      });
     });
   }
 

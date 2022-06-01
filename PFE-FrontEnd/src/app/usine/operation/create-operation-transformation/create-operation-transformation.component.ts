@@ -61,6 +61,7 @@ export class CreateOperationTransformationComponent implements OnInit {
   public myAngularxQrCode: string = "http://localhost:63361/detailComponent/";
   elementType= "canvas";
   parentElement : any
+  jj!: number;
 
   constructor(
     private translateService :TranslateService,
@@ -76,19 +77,35 @@ export class CreateOperationTransformationComponent implements OnInit {
       this.translateService.use(localStorage.getItem('lang') || 'en')
      }
 
-  ngOnInit() {
+ async ngOnInit() {
+   await this.reloadDataTranfer0()
     this.produits=this.produitService.getProduits();
     this.tanks=this.tankService.getTanksDispo();
 
     this.operationService.getNbOp().subscribe(o=>{
       console.log(o);
-      this.som=100000000+o+1;
+
+        this.som = 100000000 + this.jj + 1;
       });
   }
 
 
 
-
+  OperationsT!: Operation[];
+  async reloadDataTranfer0() {
+    const depKEY = Object.keys(Remplissage.networks)[0];
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        Remplissage.networks[depKEY].address,
+        Remplissage.abi,
+        signer
+      );
+      this.OperationsT = await contract.getOperationTanks();
+     this.jj = this.OperationsT.length;
+    }
+  }
 
 
 

@@ -58,13 +58,12 @@
         <div *ngIf="code?.invalid && code?.touched" class="text-danger">
           {{ "Invalid code" | translate }}!
         </div>
-        <div *ngIf="code?.valid && code?.touched  && msg1==0 " class="text-success">
+        <div *ngIf="code?.valid && code?.touched  && msg1==0 && msg2==''" class="text-success">
           {{ "valid code" | translate }}!
         </div>
-        <div *ngIf="msg1==1" class="text-danger">
+        <div *ngIf="msg1==1 || msg2=='code deja exist'" class="text-danger">
           &nbsp;{{ "Code already exists" | translate }} !
         </div>
-
       </div>
     </div>
     <br>

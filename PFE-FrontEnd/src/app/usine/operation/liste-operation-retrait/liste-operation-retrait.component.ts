@@ -27,7 +27,7 @@ export class ListeOperationRetraitComponent implements OnInit {
   @ViewChild('paginator') paginator!:MatPaginator;
   // AddForSotedData
   @ViewChild(MatSort) matSort!:MatSort;
-
+  connected !: string;
   intervalId?:any;
   idContenu?: string;
   idTitle?: string;
@@ -173,21 +173,29 @@ export class ListeOperationRetraitComponent implements OnInit {
     // }
   
     onOpenDialogCreate():void{
+      this.connected = JSON.parse(localStorage.getItem('state') || '[]') || []
+      console.log(this.connected)
       this.produitService.getQteProduitsG().subscribe(o=>{
         console.log(o);
-        if(o>0){
+        if(o>0 && this.connected == "connected"){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       this.dialog.open(CreateOperationRetraitComponent, dialogConfig);
-    }
-    else{
+    }else  if(o<=0){
         this.erreur=1;
         this.idContenu = 'TostDangerContenu';
         this.idTitle = 'TostDangerTile';
         this.Toast[0] = 'Erreur';
         this.Toast[1] ='Le stock est vide !! \n Vous ne pouvez pas effectuer l\'opération de retrait !!';
         this.showToast();
+    }else if(this.connected == "notconnected"){
+      this.idContenu = 'TostDangerContenu';
+      this.idTitle = 'TostDangerTile';
+      this.Toast[0] = 'Erreur';
+      this.Toast[1] =
+        'Vous n\'êtes pas connecté !! \n vous devez d\'abord vous connecter à metamask !!';
+      this.showToast();
     }
     });
 }
