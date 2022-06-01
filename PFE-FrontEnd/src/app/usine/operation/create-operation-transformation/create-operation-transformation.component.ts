@@ -85,7 +85,7 @@ export class CreateOperationTransformationComponent implements OnInit {
     this.operationService.getNbOp().subscribe(o=>{
       console.log(o);
 
-        this.som = 100000000 + this.jj + 1;
+        this.som = 800000000 + this.jj + 1;
       });
   }
 
