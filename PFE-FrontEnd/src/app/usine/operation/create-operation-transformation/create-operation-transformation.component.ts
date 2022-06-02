@@ -58,7 +58,7 @@ export class CreateOperationTransformationComponent implements OnInit {
   tab0!: any[];
   tab1!: any[];
 
-  public myAngularxQrCode: string = "http://localhost:63361/detailComponent/";
+  public myAngularxQrCode: string = "http://localhost:4200/detailComponent/";
   elementType= "canvas";
   parentElement : any
   jj!: number;
