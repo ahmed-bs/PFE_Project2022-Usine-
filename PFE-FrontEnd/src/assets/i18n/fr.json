@@ -339,6 +339,7 @@
      "Invalid center choice" : "Choix du centre invalid",
      "Valid center choice" : "Choix du centre valide",
      "ppp" : "Vous ne pouvez pas prendre cette quantité !! car la quantité de lait disponible est",
+     "ppp2" : "Vous ne pouvez pas prendre cette quantité !! La quantité disponible de ce produit est",
      "Choose a store" : "Choisir un magasin",
      "Choose a tank" : "Choisir un tank",
      "Processing of dairy products" : "Transformation des produits laitiers",

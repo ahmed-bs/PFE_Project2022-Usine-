@@ -79,7 +79,7 @@
             </div>
 
             <div *ngIf="msgErreur==1" class="text-danger">
-               {{'ppp' | translate}}: {{qteMax}} !
+               {{'ppp2' | translate}}: {{qteMax}} !
               <br>{{'"You must enter a quantity less than or equal to"' | translate}} {{qteMax}} .
             </div> <br>
 
@@ -89,7 +89,7 @@
                 <label class="form-check-label" for="cgu" *ngIf="msg4==1" style="color:red;">{{'p2' | translate}}</label>
                 <label class="form-check-label" for="cgu" *ngIf="msg4==0" >{{'p2' | translate}}</label>
                 <br>
-                <span style="color:red;margin-bottom:45px;font-size:1.1em"*ngIf="msg != ''">{{'Please fill in all required fields' | translate}}</span>
+                <span style="color:red;margin-bottom:45px;font-size:1.1em" *ngIf="msg != ''">{{'Please fill in all required fields' | translate}}</span>
                 <div class="invalid-feedback">{{ "p3" | translate }}</div>
               </div>
             </div>
