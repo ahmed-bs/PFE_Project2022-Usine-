@@ -766,30 +766,30 @@ public class OperationRestController {
 			operation.setCode(operation.getCode());
 			operationRepository.save(operation);
 			
-			List o=new ArrayList<>();
-			o.add(0, 10002);
-			
-			System.out.println("########## 1");
-			System.out.println(tankRepository.findAll().get(0).getCodeTank());
-			System.out.println("########## 2");
-			System.out.println(tankRepository.findAll().get(0).getCodeTank().get(0));
-			System.out.println("########## 3");
-			System.out.println(tankRepository.findAll().get(0).getCodeTank().listIterator().toString());
-			System.out.println("########## 4");
-			System.out.println(tankRepository.findAll().get(0).getCodeTank().contains(o));
-			System.out.println("########## 4");
-			System.out.println(tankRepository.findAll().get(0).getCodeTank().contains(10002));
-			
-			System.out.println("########## 5");
+//			List o=new ArrayList<>();
+//			o.add(0, 10002);
+//			
+//			System.out.println("########## 1");
+//			System.out.println(tankRepository.findAll().get(0).getCodeTank());
+//			System.out.println("########## 2");
+//			System.out.println(tankRepository.findAll().get(0).getCodeTank().get(0));
+//			System.out.println("########## 3");
+//			System.out.println(tankRepository.findAll().get(0).getCodeTank().listIterator().toString());
+//			System.out.println("########## 4");
+//			System.out.println(tankRepository.findAll().get(0).getCodeTank().contains(o));
+//			System.out.println("########## 4");
+//			System.out.println(tankRepository.findAll().get(0).getCodeTank().contains(10002));
+//			
+//			System.out.println("########## 5");
 			List lista=new ArrayList<>();
 			for(int k=0;k<tankRepository.findAll().size();k++) {
 			lista.add(tankRepository.findAll().get(k).getCodeTank());
 			}
-			
-			System.out.println(lista.toString());
-			
-			System.out.println("***********************************************************************");
-			
+//			
+//			System.out.println(lista.toString());
+//			
+//			System.out.println("***********************************************************************");
+//			
 				return operation;
 			}
 	

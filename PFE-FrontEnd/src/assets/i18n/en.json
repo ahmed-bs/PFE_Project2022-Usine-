@@ -328,6 +328,7 @@
     "Invalid center choice" :"Invalid center choice" ,
     "Valid center choice" : "Valid center choice",
     "ppp" : "You cannot take this amount!! because the quantity of milk available is",
+    "ppp2" : "You cannot take this amount!! because the available quantity of this product is",
     "Choose a store" : "Choose a store" ,
     "Choose a tank" : "Choose a tank" ,
     "Processing of dairy products" : "Processing of dairy products" ,

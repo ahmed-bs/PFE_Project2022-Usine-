@@ -160,6 +160,17 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		ch1.getRoles().add(role1);
 		userRepository.save(ch1);
 
+		
+
+		User ch2=new User();
+		ch2.setUsername("oussema");
+		ch2.setPrenom("bejaoui");
+		ch2.setPassword(encoder.encode("oussema"));
+		ch2.setNom("oussema");
+		ch2.setCin(11431134);
+		ch2.setTel(54546450);
+		ch2.getRoles().add(role1);
+		userRepository.save(ch2);
 //		Lot l1=new Lot(dateA.toString());
 //		l1.setQteLot(1755);
 //		l1.setQtePriseTank(1000);
