@@ -348,8 +348,11 @@
      "Quantity available" : "Quantité disponible",
      "Center management" : "Gestion des centres",
      "Store management" : "Gestion des magasins",
-     "Milk/product transfer" : "Transformation du lait"
- 
+     "Milk/product transfer" : "Transformation du lait",
+     "agrics" : "Ce agriculteur ne correspond pas au nom agriculteur d'expédition indiqué sur le bon de livraison.",
+     "poidsLait" : "Ce poids ne correspond pas au poidsLait d'expédition indiqué sur le bon de livraison.",
+     "codes" : "Il n'y a pas d'opérations compatibles avec ces données."
+
 
 
 

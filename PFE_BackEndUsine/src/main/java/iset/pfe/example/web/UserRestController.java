@@ -67,6 +67,7 @@ public class UserRestController {
     	ag.setUsername(user.getUsername());
     	ag.setTel(user.getTel());
     	ag.setPassword(user.getPassword());
+    	ag.setUsineNom(user.getUsineNom());
 		userRepository.save(ag);
 			
 	  	return ag;
