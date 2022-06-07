@@ -338,7 +338,10 @@
     "Quantity available" : "Quantity available" ,
     "Center management" : "Center management" ,
     "Store management" : "Store management",
-    "Milk/product transfer" : "Processing Milk/product" 
+    "Milk/product transfer" : "Processing Milk/product" ,
+    "agrics" : "This famrer does not correspond to the famrer indicated on the delivery note.",
+    "poidsLait" : "This weight does not correspond to the weight indicated on the delivery note.",
+    "codes" : "There are no operations compatible with this data."
 
      
 

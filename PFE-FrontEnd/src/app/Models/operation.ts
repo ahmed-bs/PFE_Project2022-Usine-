@@ -3,6 +3,9 @@ import { Magasin } from "./magasin";
 import { Lot } from "./lot";
 import { Tank } from "./tank";
 import { Produit } from "./produit";
+import { Usine } from "./usine";
+import { Chef } from "./chef";
+
 
 
 export class Operation{
@@ -19,5 +22,6 @@ export class Operation{
     tank!:Tank;
     produit!:Produit;
     codeRemplissage!:number[];
-    
+    usine!:Usine;
+    chef!:Chef;
   }

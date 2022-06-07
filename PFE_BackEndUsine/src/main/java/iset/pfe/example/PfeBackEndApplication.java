@@ -156,6 +156,7 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		ch1.setPassword(encoder.encode("nour"));
 		ch1.setNom("Guerfali");
 		ch1.setCin(11431134);
+		ch1.setUsineNom("VITALAIT");
 		ch1.setTel(54546450);
 		ch1.getRoles().add(role1);
 		userRepository.save(ch1);
@@ -169,6 +170,7 @@ public class PfeBackEndApplication implements CommandLineRunner {
 		ch2.setNom("oussema");
 		ch2.setCin(11431134);
 		ch2.setTel(54546450);
+		ch2.setUsineNom("VITALAIT");
 		ch2.getRoles().add(role1);
 		userRepository.save(ch2);
 //		Lot l1=new Lot(dateA.toString());

@@ -6,5 +6,6 @@ export class User{
   cin!:number;
   username!:string;
   password!:string;
+  usineNom!:string;
  
  }

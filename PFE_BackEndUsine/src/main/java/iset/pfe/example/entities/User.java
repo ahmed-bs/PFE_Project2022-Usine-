@@ -33,8 +33,11 @@ public class User implements Serializable , UserDetails{
 	private String prenom;
 	private int Cin;
 	private int tel;
+
+
 	private String username;
 	private String password;
+	private String usineNom;
 	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
@@ -69,13 +72,46 @@ public class User implements Serializable , UserDetails{
 		this.operations = operations;
 	}
 
+	public User(Integer idU, String nom, String prenom, int cin, int tel, String username, String password,
+			String usineNom, Set<Role> roles) {
+		super();
+		this.idU = idU;
+		this.nom = nom;
+		this.prenom = prenom;
+		Cin = cin;
+		this.tel = tel;
+		this.username = username;
+		this.password = password;
+		this.usineNom = usineNom;
+		this.roles = roles;
+	}
 
+	public User(Integer idU, String nom, String prenom, int cin, int tel, String username, String password,
+			String usineNom) {
+		super();
+		this.idU = idU;
+		this.nom = nom;
+		this.prenom = prenom;
+		Cin = cin;
+		this.tel = tel;
+		this.username = username;
+		this.password = password;
+		this.usineNom = usineNom;
+	}
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getUsineNom() {
+		return usineNom;
+	}
+
+	public void setUsineNom(String usineNom) {
+		this.usineNom = usineNom;
+	}
+
 	public Integer getIdRV() {
 		return idU;
 	}

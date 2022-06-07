@@ -23,8 +23,7 @@
         <div *ngIf="msgErreur==1" class="text-danger">
           {{ "pp" | translate }}: {{qteRsetLait}} !!
         </div>
-
-
+  
 
       </div>
 
@@ -64,6 +63,10 @@
         <div *ngIf="msg1==1 || msg2=='code deja exist'" class="text-danger">
           &nbsp;{{ "Code already exists" | translate }} !
         </div>
+        <div *ngIf="msg7==0 || msg6==0 || msg5==0" class="text-danger">
+          {{'codes' | translate}} !!
+        </div>
+
       </div>
     </div>
     <br>
