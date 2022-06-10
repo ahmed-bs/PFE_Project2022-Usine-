@@ -9,11 +9,10 @@ import { UpdateCentreCollecteComponent } from './update-centre-collecte/update-c
 const routes: Routes = [
   { path: '', component: CentreCollecteComponent },
   { path: 'listeCentreCollecte', component: ListeCentreCollecteComponent },
-  { path: 'addCentreCollecte', component: CreateCentreCollecteComponent  },
-  { path: 'detailsCentreCollecte/:id', component: DetailsCentreCollecteComponent   },
-  { path: 'updateCentreCollecte/:id', component: UpdateCentreCollecteComponent  },
-  { path:'',redirectTo:'/centreCollecte',pathMatch:'full'},
-  // {  path:'**', component: CentreCollecteComponent },
+  { path: 'addCentreCollecte', component: CreateCentreCollecteComponent },
+  { path: 'detailsCentreCollecte/:id', component: DetailsCentreCollecteComponent },
+  { path: 'updateCentreCollecte/:id', component: UpdateCentreCollecteComponent },
+  { path: '', redirectTo: '/centreCollecte', pathMatch: 'full' },
 ];
 
 @NgModule({

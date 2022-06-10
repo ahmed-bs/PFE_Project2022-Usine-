@@ -1,8 +1,7 @@
-export class Centre{
-    idCentre!: number;
-    nomCentre!: string
-    adresse!: string;
-    ville!:string;
-    tel!:number;
-   
-  }
+export class Centre {
+  idCentre!: number;
+  nomCentre!: string;
+  adresse!: string;
+  ville!: string;
+  tel!: number;
+}

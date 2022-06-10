@@ -12,7 +12,7 @@ import { CreateOperationTransformationComponent } from '../create-operation-tran
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 import { DetailsOperationTransformationComponent } from '../details-operation-transformation/details-operation-transformation.component';
 import { UpdateOperationComponent } from '../update-operation/update-operation.component';
-import { Location } from "@angular/common";
+import { Location } from '@angular/common';
 
 import { ethers } from 'ethers';
 import { Observable } from 'rxjs';
@@ -24,14 +24,13 @@ let Remplissage = require('../../../../../build/contracts/Transformation.json');
 @Component({
   selector: 'app-liste-operation-transformation',
   templateUrl: './liste-operation-transformation.component.html',
-  styleUrls: ['./liste-operation-transformation.component.css']
+  styleUrls: ['./liste-operation-transformation.component.css'],
 })
 export class ListeOperationTransformationComponent implements OnInit {
-
   @ViewChild('paginator') paginator!: MatPaginator;
   // AddForSotedData
   @ViewChild(MatSort) matSort!: MatSort;
-  connected !: string;
+  connected!: string;
   intervalId?: any;
   idContenu?: string;
   idTitle?: string;
@@ -44,26 +43,35 @@ export class ListeOperationTransformationComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   v = 0;
   erreur = 0;
-  err = "";
+  err = '';
   p = 0;
   q = 0;
-  displayedColumns: string[] = ['idOperation', 'poidsLait', 'tank', 'code', 'qtePrise', 'produit', 'dateOperation', 'action'];
- 
+  displayedColumns: string[] = [
+    'idOperation',
+    'poidsLait',
+    'tank',
+    'code',
+    'qtePrise',
+    'produit',
+    'dateOperation',
+    'action',
+  ];
+
   constructor(
-    private translateService :TranslateService,
+    private translateService: TranslateService,
     private operationService: OperationService,
     private tankService: TankService,
     private produitService: ProduitService,
     private location: Location,
-    private router: Router, private dialog: MatDialog) {
-      this.translateService.setDefaultLang('en');
-      this.translateService.use(localStorage.getItem('lang') || 'en')
-     }
-
+    private router: Router,
+    private dialog: MatDialog
+  ) {
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en');
+  }
 
   ngOnInit() {
     this.reloadData();
-   // this.reloadData00();
     console.log(this.tankService.getTanksQteLibre());
 
     this.idContenu = 'TostSuccessContenu';
@@ -78,15 +86,13 @@ export class ListeOperationTransformationComponent implements OnInit {
       this.idContenu = 'TostDangerContenu';
       this.idTitle = 'TostDangerTile';
       this.showToast();
-    }
-    else{
+    } else {
       console.log('Toast Vide');
     }
-
   }
 
   reloadData() {
-    this.operationService.getOperationsTransfs().subscribe(o => {
+    this.operationService.getOperationsTransfs().subscribe((o) => {
       this.ELEMENT_DATA = o;
       this.dataSource = new MatTableDataSource(o);
       this.dataSource.paginator = this.paginator;
@@ -97,16 +103,19 @@ export class ListeOperationTransformationComponent implements OnInit {
   }
 
   deleteOperation(id: number) {
-
-    let confirmation = confirm("Êtes-vous sûr de supprimer l'opération où son id est égale à : " + id + " ??")
+    let confirmation = confirm(
+      "Êtes-vous sûr de supprimer l'opération où son id est égale à : " +
+        id +
+        ' ??'
+    );
     if (confirmation)
-      this.operationService.deleteOperationT(id).subscribe(() => {
-        this.Toast[0] = 'Success';
-        this.Toast[1] = 'Une opération a été supprimée avec succès';
-        localStorage.setItem('Toast', JSON.stringify(this.Toast));
-        // window.location.reload();
-        this.onClose();
-      },
+      this.operationService.deleteOperationT(id).subscribe(
+        () => {
+          this.Toast[0] = 'Success';
+          this.Toast[1] = 'Une opération a été supprimée avec succès';
+          localStorage.setItem('Toast', JSON.stringify(this.Toast));
+          this.onClose();
+        },
         (error) => {
           this.idContenu = 'TostDangerContenu';
           this.idTitle = 'TostDangerTile';
@@ -115,57 +124,46 @@ export class ListeOperationTransformationComponent implements OnInit {
           this.showToast();
         }
       );
-
-
   }
 
   deleteOp(id: number) {
+    this.operationService.getOperation(id).subscribe((a) => {
+      console.log('***** 2 *****' + a.tank.idTank);
+      console.log('***** 3 *****' + a.produit.idProduit);
+      this.tankService.getTank(a.tank.idTank).subscribe((b) => {
+        this.produitService.getProduit(a.produit.idProduit).subscribe((c) => {
+          console.log('***** produit *****' + c.qte);
+          console.log('***** operation *****' + a.qtePrise);
 
-    // this.tankService.getTanksQteGenerale().subscribe(o=>{
-    //   console.log(o);
-    //   this.q=o;
-    this.operationService.getOperation(id).subscribe(a => {
-  
-      console.log("***** 2 *****"+a.tank.idTank);
-      console.log("***** 3 *****"+a.produit.idProduit);
-      this.tankService.getTank(a.tank.idTank).subscribe(b => {
-     
+          this.p = a.poidsLait + b.poidActuel;
 
-        this.produitService.getProduit(a.produit.idProduit).subscribe(c => {
+          console.log('*****  operation *****' + a.poidsLait);
+          console.log('***** Tank *****' + (b.poidVide - b.poidActuel));
 
-          console.log("***** produit *****"+c.qte);
-          console.log("***** operation *****"+a.qtePrise);
-
-        this.p = a.poidsLait + b.poidActuel;
-
-        console.log("*****  operation *****"+a.poidsLait);
-        console.log("***** Tank *****"+(b.poidVide-b.poidActuel));
-
-        if (this.p <= b.poidVide && (c.qte-a.qtePrise) >=0) {
-          this.deleteOperation(id);
-        } 
-        
-        else if(this.p > b.poidVide ) {
-          this.idContenu = 'TostDangerContenu';
-          this.idTitle = 'TostDangerTile';
-          this.Toast[0] = 'Failed';
-          this.Toast[1] = 'Vous ne pouvez pas supprimer cette opération, car la quantité disponible dans le tank concerné a été reinitialisé !! voici la nouvelle quantité :' + b.poidActuel;
-          this.showToast();
-        }
-        else if((c.qte-a.qtePrise) <0 ) {
-          this.idContenu = 'TostDangerContenu';
-          this.idTitle = 'TostDangerTile';
-          this.Toast[0] = 'Failed';
-          this.Toast[1] = 'Vous ne pouvez pas supprimer cette opération, car la quantité disponible dans le stock du produit concerné a été reinitialisé !! voici la nouvelle quantité :' + c.qte;
-          this.showToast();
-        }
+          if (this.p <= b.poidVide && c.qte - a.qtePrise >= 0) {
+            this.deleteOperation(id);
+          } else if (this.p > b.poidVide) {
+            this.idContenu = 'TostDangerContenu';
+            this.idTitle = 'TostDangerTile';
+            this.Toast[0] = 'Failed';
+            this.Toast[1] =
+              'Vous ne pouvez pas supprimer cette opération, car la quantité disponible dans le tank concerné a été reinitialisé !! voici la nouvelle quantité :' +
+              b.poidActuel;
+            this.showToast();
+          } else if (c.qte - a.qtePrise < 0) {
+            this.idContenu = 'TostDangerContenu';
+            this.idTitle = 'TostDangerTile';
+            this.Toast[0] = 'Failed';
+            this.Toast[1] =
+              'Vous ne pouvez pas supprimer cette opération, car la quantité disponible dans le stock du produit concerné a été reinitialisé !! voici la nouvelle quantité :' +
+              c.qte;
+            this.showToast();
+          }
+        });
+        //
       });
-      // 
-    });
     });
   }
-
-
 
   operations!: Observable<Operation[]>;
   reloadData00() {
@@ -180,30 +178,21 @@ export class ListeOperationTransformationComponent implements OnInit {
         signer
       );
       this.operations = contract.getOperationTanks();
-
     }
   }
 
-
-
-
-
-
-
-
-
-
   onReload() {
-    // this.router.navigate([this.router.url]);
-    this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur", { skipLocationChange: true }).then(response => {
-      this.router.navigate([decodeURI(this.location.path())]);
-    })
+    this.router
+      .navigateByUrl("/'agriculteur/bon/listeFournisseur", {
+        skipLocationChange: true,
+      })
+      .then((response) => {
+        this.router.navigate([decodeURI(this.location.path())]);
+      });
   }
-
 
   onClose() {
     this.dialog.closeAll();
-    // this.gotoList();
     this.onReload();
   }
 
@@ -213,7 +202,6 @@ export class ListeOperationTransformationComponent implements OnInit {
     dialogConfig.autoFocus = true;
     localStorage.setItem('IdOperation', JSON.stringify(operation.idOperation));
     this.dialog.open(DetailsOperationTransformationComponent, dialogConfig);
-    //this.router.navigate(['employees/admin/detailemployee', id]);
   }
 
   updateOperation(operation: Operation) {
@@ -222,44 +210,36 @@ export class ListeOperationTransformationComponent implements OnInit {
     dialogConfig.autoFocus = true;
     localStorage.setItem('IdOperation', JSON.stringify(operation.idOperation));
     this.dialog.open(UpdateOperationComponent, dialogConfig);
-    //this.router.navigate(['employees/admin/updateemployee', id]);
   }
 
   onOpenDialogCreate(): void {
-    this.connected = JSON.parse(localStorage.getItem('state') || '[]') || []
-    console.log(this.connected)
-    this.tankService.getQteG().subscribe(
-
-      o => {
-        console.log(o);
-        if (o > 0 && this.connected == "connected") {
-          const dialogConfig = new MatDialogConfig();
-          dialogConfig.disableClose = true;
-          dialogConfig.autoFocus = true;
-          this.dialog.open(CreateOperationTransformationComponent, dialogConfig);
-          this.erreur = 0;
-        } else  if(o<=0) {
-          this.erreur = 1;
-          this.idContenu = 'TostDangerContenu';
-          this.idTitle = 'TostDangerTile';
-          this.Toast[0] = 'Erreur';
-          this.Toast[1] = 'Les tanks sont vides !!';
-          this.showToast();
-        }else if(this.connected == "notconnected"){
-          this.idContenu = 'TostDangerContenu';
-          this.idTitle = 'TostDangerTile';
-          this.Toast[0] = 'Erreur';
-          this.Toast[1] =
-            'Vous n\'êtes pas connecté !! \n vous devez d\'abord vous connecter à metamask !!';
-          this.showToast();
-        }
-      });
+    this.connected = JSON.parse(localStorage.getItem('state') || '[]') || [];
+    console.log(this.connected);
+    this.tankService.getQteG().subscribe((o) => {
+      console.log(o);
+      if (o > 0 && this.connected == 'connected') {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        this.dialog.open(CreateOperationTransformationComponent, dialogConfig);
+        this.erreur = 0;
+      } else if (o <= 0) {
+        this.erreur = 1;
+        this.idContenu = 'TostDangerContenu';
+        this.idTitle = 'TostDangerTile';
+        this.Toast[0] = 'Erreur';
+        this.Toast[1] = 'Les tanks sont vides !!';
+        this.showToast();
+      } else if (this.connected == 'notconnected') {
+        this.idContenu = 'TostDangerContenu';
+        this.idTitle = 'TostDangerTile';
+        this.Toast[0] = 'Erreur';
+        this.Toast[1] =
+          "Vous n'êtes pas connecté !! \n vous devez d'abord vous connecter à metamask !!";
+        this.showToast();
+      }
+    });
   }
-
-
-
-
-
 
   onOpenDialogCreate2(): void {
     const dialogConfig = new MatDialogConfig();
@@ -267,7 +247,6 @@ export class ListeOperationTransformationComponent implements OnInit {
     dialogConfig.autoFocus = true;
     this.dialog.open(CreateOperationComponent, dialogConfig);
   }
-
 
   filterData($event: any) {
     this.dataSource.filter = $event.target.value;
@@ -287,13 +266,8 @@ export class ListeOperationTransformationComponent implements OnInit {
     }, 12100);
     this.intervalId = setInterval(() => {
       this.counter = this.counter + 1;
-      if (this.counter === 15)
-        clearInterval(this.intervalId);
+      if (this.counter === 15) clearInterval(this.intervalId);
     }, 1000);
-    this.counter = 0
-
+    this.counter = 0;
   }
-
 }
-
-

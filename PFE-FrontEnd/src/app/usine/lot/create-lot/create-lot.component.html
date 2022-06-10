@@ -1,4 +1,4 @@
-<div class="ContenuCard" >
+<div class="ContenuCard">
   <div class="modal-header">
     <h2 id="modal-title"><b> {{'Add new lot' | translate}}:</b></h2>
     <button qteLot="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
@@ -6,115 +6,92 @@
     </button>
   </div>
   <span style="color:red;margin-top:-105px;">(*) {{'Required Field' | translate}}</span><br><br>
-        <form [formGroup]="myForm"  novalidate >
-          <div class="form-row">
-         
-
-            <div class="col-md-6 mb-3">
-              <label class="mr-sm-5" for="inlineFormCustomSelect">Tank : <span style="color:red;">*</span></label>
-              <select formControlName="tank" name="tank"  class="custom-select mr-sm-2" id="tank" >
-                <option disabled selected value [ngValue]="null">{{'Choose a' | translate}} tank...</option>
-                <option *ngFor="let tank of tanks | async" [value]="tank.idTank">{{tank.matricule}}</option>
-              </select>
-              <div
-              *ngIf="tank?.invalid && tank?.touched"
-               class="text-danger">
-                  {{'invalid tank' | translate}}!
-           </div>
-             <div
-             *ngIf="tank?.valid && tank?.touched"
-             class="text-success">
-             {{'valid tank' | translate}}!
-           </div>
-            </div>
+  <form [formGroup]="myForm" novalidate>
+    <div class="form-row">
 
 
-            <div class="form-group col-md-6 mb-3">
-              <label>{{'Amount taken from tank' | translate}}: <span style="color:red;">*</span></label>
-              <input qte="text"
-               formControlName="qtePriseTank"
-               class="form-control"
-               id="qtePriseTank"
-               name="qtePriseTank">
-
-              <div *ngIf="qtePriseTank?.invalid && qtePriseTank?.touched" class="text-danger">
-                {{'Invalid quantity' | translate}}!
-              </div>
-              <div *ngIf="qtePriseTank?.valid && qtePriseTank?.touched " class="text-success">
-                {{'Valid quantity' | translate}}!
-              </div>
-
-             </div> 
-            
-            
-
-
-          </div> 
-
-
-           <div class="form-row"> 
-            <div class="form-group col-md-6 mb-3">
-              <label>{{'Quantity' | translate}}(Lots): <span style="color:red;">*</span></label>
-              <input qteLot="text"
-               formControlName="qteLot"
-               class="form-control"
-               id="qteLot"
-               name="qteLot">
-
-              <div *ngIf="qteLot?.invalid && qteLot?.touched" class="text-danger">
-                 {{'Invalid quantity' | translate}}!
-              </div>
-              <div *ngIf="qteLot?.valid && qteLot?.touched " class="text-success">
-                {{'Valid quantity' | translate}}!
-              </div>
-              <!-- <div *ngIf="msgErreur==1" class="text-danger">
-                Vous ne pouvez pas prendre cette quantité!! car la quantité disponible dans le stock est: {{qteLotAct}} !
-                <br> Vous devez introduire une quantite moins ou egale a {{qteLotAct}} .
-              </div> --> 
-
-             </div> 
-           
-
-
-            <div class="col-md-6 mb-3">
-              <label class="mr-sm-5" for="inlineFormCustomSelect"> {{'Product' | translate}}: <span style="color:red;">*</span></label>
-              <select formControlName="produit" name="produit"  class="custom-select mr-sm-2" id="produit" >
-                <option disabled selected value [ngValue]="null">{{'Choose a product' | translate}}...</option>
-                <option *ngFor="let produit of produits | async" [value]="produit.idProduit">{{produit.intitule}}</option>
-              </select>
-              <div
-              *ngIf="produit?.invalid && produit?.touched"
-               class="text-danger">
-                {{'invalid Product' | translate}}!
-           </div>
-             <div
-             *ngIf="produit?.valid && produit?.touched"
-             class="text-success">
-             {{'Valid product' | translate}}!
-           </div>
-            </div>
-
-
-          </div>
-
-          <div *ngIf="msgErreur==1" class="text-danger">
-            {{'p4' | translate}}: {{qteMax}} !
-            <br>  {{'p5' | translate}}{{qteMax}} .
-          </div>  <br>
-
-          <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" name="checkbox" value="" id="cgu" required>
-              <label class="form-check-label" for="cgu">{{ "p2" | translate }}</label>
-              <br>
-              <span style="color:red;margin-bottom:45px;"*ngIf="msg != ''">{{'Please fill in all required fields' | translate}}</span>
-              <div class="invalid-feedback">{{ "p3" | translate }}</div>
-            </div>
-          </div>
-          <button class="btn btn-primary" style="margin:11px" (click)=" onSubmit()"  qteLot="submit">{{ "Send" | translate }}</button>
-          <!-- close popup -->
-          <button (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">{{'Close' | translate}}</button>
-
-        </form>
+      <div class="col-md-6 mb-3">
+        <label class="mr-sm-5" for="inlineFormCustomSelect">Tank : <span style="color:red;">*</span></label>
+        <select formControlName="tank" name="tank" class="custom-select mr-sm-2" id="tank">
+          <option disabled selected value [ngValue]="null">{{'Choose a' | translate}} tank...</option>
+          <option *ngFor="let tank of tanks | async" [value]="tank.idTank">{{tank.matricule}}</option>
+        </select>
+        <div *ngIf="tank?.invalid && tank?.touched" class="text-danger">
+          {{'invalid tank' | translate}}!
+        </div>
+        <div *ngIf="tank?.valid && tank?.touched" class="text-success">
+          {{'valid tank' | translate}}!
+        </div>
       </div>
 
+
+      <div class="form-group col-md-6 mb-3">
+        <label>{{'Amount taken from tank' | translate}}: <span style="color:red;">*</span></label>
+        <input qte="text" formControlName="qtePriseTank" class="form-control" id="qtePriseTank" name="qtePriseTank">
+
+        <div *ngIf="qtePriseTank?.invalid && qtePriseTank?.touched" class="text-danger">
+          {{'Invalid quantity' | translate}}!
+        </div>
+        <div *ngIf="qtePriseTank?.valid && qtePriseTank?.touched " class="text-success">
+          {{'Valid quantity' | translate}}!
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-3">
+        <label>{{'Quantity' | translate}}(Lots): <span style="color:red;">*</span></label>
+        <input qteLot="text" formControlName="qteLot" class="form-control" id="qteLot" name="qteLot">
+
+        <div *ngIf="qteLot?.invalid && qteLot?.touched" class="text-danger">
+          {{'Invalid quantity' | translate}}!
+        </div>
+        <div *ngIf="qteLot?.valid && qteLot?.touched " class="text-success">
+          {{'Valid quantity' | translate}}!
+        </div>
+
+
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="mr-sm-5" for="inlineFormCustomSelect"> {{'Product' | translate}}: <span
+            style="color:red;">*</span></label>
+        <select formControlName="produit" name="produit" class="custom-select mr-sm-2" id="produit">
+          <option disabled selected value [ngValue]="null">{{'Choose a product' | translate}}...</option>
+          <option *ngFor="let produit of produits | async" [value]="produit.idProduit">{{produit.intitule}}</option>
+        </select>
+        <div *ngIf="produit?.invalid && produit?.touched" class="text-danger">
+          {{'invalid Product' | translate}}!
+        </div>
+        <div *ngIf="produit?.valid && produit?.touched" class="text-success">
+          {{'Valid product' | translate}}!
+        </div>
+      </div>
+
+
+    </div>
+
+    <div *ngIf="msgErreur==1" class="text-danger">
+      {{'p4' | translate}}: {{qteMax}} !
+      <br> {{'p5' | translate}}{{qteMax}} .
+    </div> <br>
+
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" name="checkbox" value="" id="cgu" required>
+        <label class="form-check-label" for="cgu">{{ "p2" | translate }}</label>
+        <br>
+        <span style="color:red;margin-bottom:45px;" *ngIf="msg != ''">{{'Please fill in all required fields' |
+          translate}}</span>
+        <div class="invalid-feedback">{{ "p3" | translate }}</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="margin:11px" (click)=" onSubmit()" qteLot="submit">{{ "Send" | translate
+      }}</button>
+    <!-- close popup -->
+    <button (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">{{'Close' | translate}}</button>
+
+  </form>
+</div>

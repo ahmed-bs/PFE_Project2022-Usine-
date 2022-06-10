@@ -12,13 +12,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ScaleLinear, ScalePoint, ScaleTime,ScaleBand } from 'd3-scale';
 import { UsineComponent } from './usine.component';
 import { ProduitComponent } from './produit/produit.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -37,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardComponent,
     NavbarComponent,
     SidebarComponent,
-    ProduitComponent
+    ProduitComponent,
   ],
   imports: [
     QRCodeModule,
@@ -49,11 +48,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
     }),
-  ]
+  ],
 })
-export class UsineModule { }
+export class UsineModule {}

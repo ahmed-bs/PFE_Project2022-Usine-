@@ -30,8 +30,8 @@ export class CreateOperationComponent implements OnInit {
   submitted = false;
   msg = '';
   msg5 = 4;
-  msg7= 4;
-  msg6= 4;
+  msg7 = 4;
+  msg6 = 4;
   t: Tank = new Tank();
   connected!: boolean;
   msgErreur = 0;
@@ -79,15 +79,15 @@ export class CreateOperationComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.reloadDataUinseRemplissage01()
-    //this.ValidatedForm();
+    this.reloadDataUinseRemplissage01();
     this.tanks = this.tankService.getTanks();
     this.centres = this.centreCollecteService.getCentres();
     this.authService.loadToken();
-    if (this.authService.getToken() == null ||
-      this.authService.isTokenExpired()) {
+    if (
+      this.authService.getToken() == null ||
+      this.authService.isTokenExpired()
+    ) {
       this.router.navigate(['/login']);
-
     }
     this.tankService.getTanksQteLibre().subscribe((o) => {
       console.log(o);
@@ -99,7 +99,6 @@ export class CreateOperationComponent implements OnInit {
       this.onReload();
     });
   }
-
 
   OpTankRemplissageUsineTabs!: OperationTank[];
   async reloadDataUinseRemplissage01() {
@@ -114,7 +113,8 @@ export class CreateOperationComponent implements OnInit {
           Remplissage.abi,
           signer
         );
-        this.OpTankRemplissageUsineTabs = await contract.getOperationTanksUsine();
+        this.OpTankRemplissageUsineTabs =
+          await contract.getOperationTanksUsine();
         this.connected = true;
       } catch (error) {
         this.connected = false;
@@ -122,8 +122,8 @@ export class CreateOperationComponent implements OnInit {
     }
   }
 
-  operationsCentreResult !: OperationTank;
-  codeCompar !: number
+  operationsCentreResult!: OperationTank;
+  codeCompar!: number;
   async FindByCodeCentre(codeCompar: any) {
     const depKEY = Object.keys(RetraitCentreAdress.networks)[0];
     if (typeof window.ethereum !== 'undefined') {
@@ -135,9 +135,8 @@ export class CreateOperationComponent implements OnInit {
         RetraitCentreAdress.abi,
         signer
       );
-      return this.operationsCentreResult = await contract.getOperationFromAgrsbycode(
-        this.codeCompar
-      );
+      return (this.operationsCentreResult =
+        await contract.getOperationFromAgrsbycode(this.codeCompar));
     }
   }
 
@@ -190,19 +189,21 @@ export class CreateOperationComponent implements OnInit {
             .subscribe(
               (o) => {
                 this.tab = Object.values(o);
-                this.operationService.getOpTank(this.tab[0]).subscribe(async (i) => {
-                  this.tabTankId = Object.values(i);
-                  await this.saveInBc(this.tabTankId, this.tabTankId.length);
-                  if (this.confirmation == 'confirmed') {
-                    localStorage.setItem(
-                      'Toast',
-                      JSON.stringify([
-                        'Success',
-                        'Une opération a été ajoutée avec succès',
-                      ])
-                    );
-                  }
-                });
+                this.operationService
+                  .getOpTank(this.tab[0])
+                  .subscribe(async (i) => {
+                    this.tabTankId = Object.values(i);
+                    await this.saveInBc(this.tabTankId, this.tabTankId.length);
+                    if (this.confirmation == 'confirmed') {
+                      localStorage.setItem(
+                        'Toast',
+                        JSON.stringify([
+                          'Success',
+                          'Une opération a été ajoutée avec succès',
+                        ])
+                      );
+                    }
+                  });
               },
               (error) => {
                 console.log('Failed');
@@ -260,49 +261,59 @@ export class CreateOperationComponent implements OnInit {
 
   async onSubmit() {
     try {
-      await this.FindByCodeCentre(this.myForm.get('code')?.value)
+      await this.FindByCodeCentre(this.myForm.get('code')?.value);
       this.userService.getUser(25).subscribe((t) => {
-        console.log(this.operationsCentreResult.toString())
-        console.log(this.myForm.get('poidsLait')?.value)
-        console.log(Number(this.operationsCentreResult.qteInsereTank))
-        if (Math.abs(Number(this.operationsCentreResult.qteInsereTank)) == this.myForm.get('poidsLait')?.value) {
-          this.msg7 = 1
-          console.log("founded poids lait")
-        }else{
-          console.log("notfount the poids lait not the same")
-          this.msg7 = 0
+        console.log(this.operationsCentreResult.toString());
+        console.log(this.myForm.get('poidsLait')?.value);
+        console.log(Number(this.operationsCentreResult.qteInsereTank));
+        if (
+          Math.abs(Number(this.operationsCentreResult.qteInsereTank)) ==
+          this.myForm.get('poidsLait')?.value
+        ) {
+          this.msg7 = 1;
+          console.log('founded poids lait');
+        } else {
+          console.log('notfount the poids lait not the same');
+          this.msg7 = 0;
         }
 
-        this.centreCollecteService.getCentre(this.myForm.get('centreCollecte')?.value).subscribe(
-          (f) => {
-            console.log(this.operationsCentreResult.operation.chef.centreNom)
-            console.log(f.nomCentre)
-            if (this.operationsCentreResult.operation.chef.centreNom.trim() == f.nomCentre.trim()) {
-              this.msg6 = 1
-              console.log("founded agriculteur")
-            }else{
-              this.msg6 = 0
-              console.log("notfount agriculteur")
+        this.centreCollecteService
+          .getCentre(this.myForm.get('centreCollecte')?.value)
+          .subscribe((f) => {
+            console.log(this.operationsCentreResult.operation.chef.centreNom);
+            console.log(f.nomCentre);
+            if (
+              this.operationsCentreResult.operation.chef.centreNom.trim() ==
+              f.nomCentre.trim()
+            ) {
+              this.msg6 = 1;
+              console.log('founded agriculteur');
+            } else {
+              this.msg6 = 0;
+              console.log('notfount agriculteur');
             }
-          }
-        )
-        if (this.operationsCentreResult.operation.usine.nomUsine.trim()== t.usineNom.trim()) {
-          this.msg5 = 1
-          console.log("founded")
-        }else{
-          console.log("notfount the name not the same")
-          this.msg5 = 0
+          });
+        if (
+          this.operationsCentreResult.operation.usine.nomUsine.trim() ==
+          t.usineNom.trim()
+        ) {
+          this.msg5 = 1;
+          console.log('founded');
+        } else {
+          console.log('notfount the name not the same');
+          this.msg5 = 0;
         }
-
-      })
-
+      });
     } catch (error) {
-      this.msg5 = 0
-      console.log("notfount the code")
+      this.msg5 = 0;
+      console.log('notfount the code');
     }
     try {
       for (let index = 0; index <= this.pp; index++) {
-        if (this.myForm.get('code')?.value == this.OpTankRemplissageUsineTabs[index].operation.code) {
+        if (
+          this.myForm.get('code')?.value ==
+          this.OpTankRemplissageUsineTabs[index].operation.code
+        ) {
           this.msg2 = 'code deja exist';
         } else {
           this.msg2 = 'ok';
@@ -311,7 +322,6 @@ export class CreateOperationComponent implements OnInit {
     } catch (error) {
       this.msg2 = 'ok';
     }
-    //this.submitted = true;
     if (this.myForm.get('poidsLait')?.value == null) {
       this.msg = 'vous devez remplir le formulaire !!';
     } else {
@@ -331,56 +341,54 @@ export class CreateOperationComponent implements OnInit {
     }
     if (this.myForm.get('cgu')?.value == true) {
       this.msg4 = 0;
-    }
-    else {
+    } else {
       this.msg4 = 1;
     }
 
     this.tankService.getTanksQteLibre().subscribe((o) => {
       if (this.myForm.get('poidsLait')?.value <= o) {
         this.msgErreur = 0;
-      }
-      else {
+      } else {
         this.msgErreur = 1;
         this.qteRsetLait = o;
       }
     });
 
-
-    this.operationService.getOpCodeUtilise(this.myForm.get('code')?.value).subscribe((t) => {
-      console.log(t);
-      if (t == 1) {
-        this.msg1 = 1;
-      } else {
-        this.msg1 = 0;
-      }
-
-
-      this.tankService.getTanksQteLibre().subscribe((o) => {
-        console.log(o);
-        if (
-          this.msg6 == 1 &&
-          this.msg5 == 1 &&
-          this.msg7 == 1 &&
-          this.myForm.get('poidsLait')?.value != null &&
-          this.myForm.get('centreCollecte')?.value != null &&
-          this.myForm.get('poidsLait')?.value > 0 &&
-          this.myForm.get('cgu')?.value == true &&
-          this.myForm.get('code')?.value != null &&
-          this.msg2 == 'ok' &&
-          t == 0
-        ) {
-          if (this.myForm.get('poidsLait')?.value <= o) {
-            this.save();
-            this.onClose();
-            this.msgErreur = 0;
-          } else {
-            this.msgErreur = 1;
-            this.qteRsetLait = o;
-          }
+    this.operationService
+      .getOpCodeUtilise(this.myForm.get('code')?.value)
+      .subscribe((t) => {
+        console.log(t);
+        if (t == 1) {
+          this.msg1 = 1;
+        } else {
+          this.msg1 = 0;
         }
+
+        this.tankService.getTanksQteLibre().subscribe((o) => {
+          console.log(o);
+          if (
+            this.msg6 == 1 &&
+            this.msg5 == 1 &&
+            this.msg7 == 1 &&
+            this.myForm.get('poidsLait')?.value != null &&
+            this.myForm.get('centreCollecte')?.value != null &&
+            this.myForm.get('poidsLait')?.value > 0 &&
+            this.myForm.get('cgu')?.value == true &&
+            this.myForm.get('code')?.value != null &&
+            this.msg2 == 'ok' &&
+            t == 0
+          ) {
+            if (this.myForm.get('poidsLait')?.value <= o) {
+              this.save();
+              this.onClose();
+              this.msgErreur = 0;
+            } else {
+              this.msgErreur = 1;
+              this.qteRsetLait = o;
+            }
+          }
+        });
       });
-    });
   }
 
   gotoList() {
@@ -388,7 +396,6 @@ export class CreateOperationComponent implements OnInit {
   }
 
   onReload() {
-    // this.router.navigate([this.router.url]);
     this.router
       .navigateByUrl("/'agriculteur/bon/listeFournisseur", {
         skipLocationChange: true,
@@ -400,7 +407,6 @@ export class CreateOperationComponent implements OnInit {
 
   onClose() {
     this.dialogClose.closeAll();
-    // this.gotoList();
     this.onReload();
   }
 
@@ -419,4 +425,3 @@ export class CreateOperationComponent implements OnInit {
 function trim() {
   throw new Error('Function not implemented.');
 }
-

@@ -1,4 +1,4 @@
-<div class="ContenuCard" >
+<div class="ContenuCard">
   <div class="modal-header">
     <h2 id="modal-title"><b>{{'Modify lot number' | translate}}: {{lot.idL}}</b></h2>
     <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
@@ -9,50 +9,36 @@
 
     <div class="form-group">
       <div class="col-md-12 mb-3">
-      <label>*{{'Lot Type' | translate}}:</label>
-      <input type="text"
-             class="form-control"
-             formControlName="type"
-             name="type"
-             [(ngModel)]="lot.type"
-             placeholder="Post Name here ..">
-        <div
-             *ngIf="type?.invalid && type?.touched"
-              class="text-danger">
-               {{'invalid type' | translate}}!
-       </div>
-       <div
-            *ngIf="type?.valid && type?.touched"
-            class="text-success">
-              {{'valid type' | translate}}!
-       </div>
+        <label>*{{'Lot Type' | translate}}:</label>
+        <input type="text" class="form-control" formControlName="type" name="type" [(ngModel)]="lot.type"
+          placeholder="Post Name here ..">
+        <div *ngIf="type?.invalid && type?.touched" class="text-danger">
+          {{'invalid type' | translate}}!
+        </div>
+        <div *ngIf="type?.valid && type?.touched" class="text-success">
+          {{'valid type' | translate}}!
+        </div>
       </div>
 
       <div class="col-md-12 mb-3">
         <label>description :</label>
-        <input type="text"
-               class="form-control"
-               formControlName="description"
-               name="description"
-               [(ngModel)]="lot.description"
-               placeholder="Post Name here ..">
-          <div
-               *ngIf="description?.invalid && description?.touched"
-                class="text-danger">
-                 {{'invalid description' | translate}}!
-         </div>
-         <div
-              *ngIf="description?.valid && description?.touched"
-              class="text-success">
-                {{'valid description' | translate}}!
-         </div>
+        <input type="text" class="form-control" formControlName="description" name="description"
+          [(ngModel)]="lot.description" placeholder="Post Name here ..">
+        <div *ngIf="description?.invalid && description?.touched" class="text-danger">
+          {{'invalid description' | translate}}!
         </div>
+        <div *ngIf="description?.valid && description?.touched" class="text-success">
+          {{'valid description' | translate}}!
+        </div>
+      </div>
 
-  </div>
+    </div>
 
     <div class="modal-footer">
-      <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">{{'Close' | translate}}</button>
-      <button type="submit" (click)="updateLot()" [disabled]="myForm.invalid" class="btn btn-primary">{{'Save' | translate}} </button>
+      <button type="button" (click)="onClose()" class="btn btn-secondary" data-dismiss="modal">{{'Close' |
+        translate}}</button>
+      <button type="submit" (click)="updateLot()" [disabled]="myForm.invalid" class="btn btn-primary">{{'Save' |
+        translate}} </button>
     </div>
   </form>
 

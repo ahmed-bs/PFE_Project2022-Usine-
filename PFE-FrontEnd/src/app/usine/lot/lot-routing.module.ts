@@ -9,15 +9,14 @@ import { UpdateLotComponent } from './update-lot/update-lot.component';
 const routes: Routes = [
   { path: '', component: LotComponent },
   { path: 'listeLot', component: ListeLotComponent },
-  { path: 'addLot', component: CreateLotComponent  },
-  { path: 'detailsLot/:id', component: DetailsLotComponent   },
-  { path: 'updateLot/:id', component: UpdateLotComponent  },
-  { path:'',redirectTo:'/lot',pathMatch:'full'},
-  // {  path:'**', component: LotComponent },
+  { path: 'addLot', component: CreateLotComponent },
+  { path: 'detailsLot/:id', component: DetailsLotComponent },
+  { path: 'updateLot/:id', component: UpdateLotComponent },
+  { path: '', redirectTo: '/lot', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class LotRoutingModule { }
+export class LotRoutingModule {}

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ProduitComponent } from './produit.component';
 import { ListeProduitComponent } from './liste-produit/liste-produit.component';
