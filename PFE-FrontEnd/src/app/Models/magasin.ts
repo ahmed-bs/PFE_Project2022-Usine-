@@ -1,8 +1,7 @@
-export class Magasin{
-    idMag!: number;
-    nomMag!: string
-    adresse!: string;
-    ville!:string;
-    tel!:number;
-   
-  }
+export class Magasin {
+  idMag!: number;
+  nomMag!: string;
+  adresse!: string;
+  ville!: string;
+  tel!: number;
+}

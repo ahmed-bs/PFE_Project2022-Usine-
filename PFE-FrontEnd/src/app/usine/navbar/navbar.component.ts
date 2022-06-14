@@ -12,14 +12,13 @@ let RemplissageUsineAdress = require('/build/contracts/RemplissageUsine.json');
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   isLoggedin?: boolean;
   user?: User;
-  connected !: boolean;
-  con?:String;
+  connected!: boolean;
+  con?: String;
   cin?: number;
   tel?: number;
   prenom?: String;
@@ -30,50 +29,51 @@ export class NavbarComponent implements OnInit {
     private translateService: TranslateService,
     public authService: AuthService,
     private userService: UserService,
-    private router: Router) {
-
+    private router: Router
+  ) {
     this.translateService.setDefaultLang('en');
-    this.translateService.use(localStorage.getItem('lang') || 'en')
+    this.translateService.use(localStorage.getItem('lang') || 'en');
   }
 
   ngOnInit(): void {
-    this.reloadDataUinseRemplissage01()
+    this.reloadDataUinseRemplissage01();
     this.lang = localStorage.getItem('lang') || 'en';
-    this.userService.getUser(JSON.parse(localStorage.getItem('IdUser') || '[]') || []).subscribe(o => {
-      this.cin = o.cin;
-      this.tel = o.tel;
-      this.nom = o.nom;
-      this.prenom = o.prenom;
-      console.log("#################################################");
-      console.log(o);
-      console.log(o.idU);
-      console.log("#################################################");
-    });
+    this.userService
+      .getUser(JSON.parse(localStorage.getItem('IdUser') || '[]') || [])
+      .subscribe((o) => {
+        this.cin = o.cin;
+        this.tel = o.tel;
+        this.nom = o.nom;
+        this.prenom = o.prenom;
+        console.log('#################################################');
+        console.log(o);
+        console.log(o.idU);
+        console.log('#################################################');
+      });
   }
-
 
   OpTankRemplissageUsineTabs!: OperationTank[];
   async reloadDataUinseRemplissage01() {
     if (typeof window.ethereum !== 'undefined') {
-      try {  
-      const depKEY = Object.keys(RemplissageUsineAdress.networks)[0];
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        RemplissageUsineAdress.networks[depKEY].address,
-        RemplissageUsineAdress.abi,
-        signer
-      );
-      this.OpTankRemplissageUsineTabs = await contract.getOperationTanksUsine();
-      this.connected =true 
-      this.con = "connected"
-      localStorage.setItem("state",JSON.stringify(this.con));
-    } catch (error) {
-      this.connected = false
-      this.con = "notconnected"
-      localStorage.setItem("state",JSON.stringify(this.con));
-    }
-
+      try {
+        const depKEY = Object.keys(RemplissageUsineAdress.networks)[0];
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          RemplissageUsineAdress.networks[depKEY].address,
+          RemplissageUsineAdress.abi,
+          signer
+        );
+        this.OpTankRemplissageUsineTabs =
+          await contract.getOperationTanksUsine();
+        this.connected = true;
+        this.con = 'connected';
+        localStorage.setItem('state', JSON.stringify(this.con));
+      } catch (error) {
+        this.connected = false;
+        this.con = 'notconnected';
+        localStorage.setItem('state', JSON.stringify(this.con));
+      }
     }
   }
 
@@ -82,33 +82,21 @@ export class NavbarComponent implements OnInit {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       location.reload();
     }
-    console.log("it does work ")
+    console.log('it does work ');
   }
-
-
-
-
-
-
-
-
 
   changeLang() {
-    if (this.lang == "en") {
-      localStorage.setItem("lang", "fr");
+    if (this.lang == 'en') {
+      localStorage.setItem('lang', 'fr');
       location.reload();
     }
-    if (this.lang == "fr") {
-      localStorage.setItem("lang", "en");
+    if (this.lang == 'fr') {
+      localStorage.setItem('lang', 'en');
       location.reload();
     }
   }
-
 
   onLogout() {
     this.authService.logout();
-
   }
-
 }
-

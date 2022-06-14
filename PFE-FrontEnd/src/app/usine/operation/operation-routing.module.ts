@@ -17,18 +17,16 @@ const routes: Routes = [
   { path: '', component: OperationComponent },
   { path: 'listeOperation', component: ListeOperationComponent },
   { path: 'listeOperationT', component: ListeOperationTransformationComponent },
-  { path: 'addOperation', component: CreateOperationComponent  },
-  { path: 'addOperationR', component: CreateOperationComponent  },
-  { path: 'addOperationT', component: CreateOperationTransformationComponent  },
-  { path: 'detailsOperation/:id', component: DetailsOperationComponent   },
-  { path: 'detailsOperationRetrait/:id', component: DetailsOperationRetraitComponent   },
-  { path: 'detailsOperationTransfomation/:id', component: DetailsOperationTransformationComponent   },
-  { path: 'updateOperation/:id', component: UpdateOperationComponent  },
-  { path: 'listeOperationRetrait', component:     ListeOperationRetraitComponent  },
+  { path: 'addOperation', component: CreateOperationComponent },
+  { path: 'addOperationR', component: CreateOperationComponent },
+  { path: 'addOperationT', component: CreateOperationTransformationComponent },
+  { path: 'detailsOperation/:id', component: DetailsOperationComponent },
+  { path: 'detailsOperationRetrait/:id', component: DetailsOperationRetraitComponent },
+  { path: 'detailsOperationTransfomation/:id', component: DetailsOperationTransformationComponent },
+  { path: 'updateOperation/:id', component: UpdateOperationComponent },
+  { path: 'listeOperationRetrait', component: ListeOperationRetraitComponent },
   { path: 'listeOperationTank', component: ListeOperationTankComponent },
-
-  { path:'',redirectTo:'/operation',pathMatch:'full'},
-  // {  path:'**', component: OperationComponent },
+  { path: '', redirectTo: '/operation', pathMatch: 'full' },
 ];
 
 @NgModule({

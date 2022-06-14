@@ -23,12 +23,7 @@
         <div *ngIf="msgErreur==1" class="text-danger">
           {{ "pp" | translate }}: {{qteRsetLait}} !!
         </div>
-  
-
       </div>
-
-
-
 
     </div>
     <div class="form-row">
@@ -63,10 +58,6 @@
         <div *ngIf="msg1==1 || msg2=='code deja exist'" class="text-danger">
           &nbsp;{{ "Code already exists" | translate }} !
         </div>
-        <div *ngIf="msg7==0 || msg6==0 || msg5==0" class="text-danger">
-          {{'codes' | translate}} !!
-        </div>
-
       </div>
     </div>
     <br>
@@ -76,10 +67,13 @@
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="cgu" formControlName="cgu" required>
         <label class="form-check-label" for="cgu" *ngIf="msg4==1" style="color:red;">{{'p2' | translate}}</label>
-        <label class="form-check-label" for="cgu" *ngIf="msg4==0" >{{'p2' | translate}}</label>
+        <label class="form-check-label" for="cgu" *ngIf="msg4==0">{{'p2' | translate}}</label>
         <br>
         <span style="color:red;margin-bottom:45px;font-size:1.1em" *ngIf="msg != ''">{{'Please fill in all required
           fields' | translate}}</span>
+        <br>
+        <span style="color:red;margin-bottom:45px;font-size:1.1em" *ngIf="msg7==0 || msg6==0 || msg5==0">{{'codes' |
+          translate}}!!</span>
         <div class="invalid-feedback">{{ "p3" | translate }}</div>
       </div>
     </div>

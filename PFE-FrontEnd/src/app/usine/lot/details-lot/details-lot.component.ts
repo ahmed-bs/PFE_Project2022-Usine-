@@ -15,30 +15,29 @@ export class DetailsLotComponent implements OnInit {
 
   id!: number;
   idC!: any;
-  lot?:Lot = new Lot();
+  lot?: Lot = new Lot();
 
   constructor(
-    private translateService :TranslateService,
+    private translateService: TranslateService,
     private dialogClose: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private lotService: LotService) { 
-      this.translateService.setDefaultLang('en');
-      this.translateService.use(localStorage.getItem('lang') || 'en')
-    }
+    private lotService: LotService) {
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en')
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-  
-    this.lotService.getLot(JSON.parse(localStorage.getItem('IdLot') || '[]') || []).subscribe(o =>{
-      this.lot = o;
-      this.idC=this.lot?.idL;
-      //console.log(typeof this.OneOffer);
-      console.log(this.lot);
-  });
-}
 
-  closeDetails(){
+    this.lotService.getLot(JSON.parse(localStorage.getItem('IdLot') || '[]') || []).subscribe(o => {
+      this.lot = o;
+      this.idC = this.lot?.idL;
+      console.log(this.lot);
+    });
+  }
+
+  closeDetails() {
     this.dialogClose.closeAll();
   }
 

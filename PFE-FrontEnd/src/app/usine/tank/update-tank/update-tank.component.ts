@@ -4,104 +4,94 @@ import { MatDialog } from '@angular/material/dialog';
 import { Tank } from 'src/app/Models/tank';
 import { Router } from '@angular/router';
 import { TankService } from 'src/app/Services/tank.service';
-import {Location} from "@angular/common";
+import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-update-tank',
   templateUrl: './update-tank.component.html',
-  styleUrls: ['./update-tank.component.css']
+  styleUrls: ['./update-tank.component.css'],
 })
 export class UpdateTankComponent implements OnInit {
+  tank: Tank = new Tank();
+  CheckesCompetance: boolean = false;
 
-  tank:Tank=new Tank();
-  // myForm!:FormGroup;
-   CheckesCompetance:boolean=false;
+  myForm = new FormGroup({
+    matricule: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+    poidVide: new FormControl(null, [Validators.required, Validators.min(500)]),
+  });
 
-   myForm=new  FormGroup({
-    matricule : new FormControl(null,[Validators.required,Validators.minLength(8)]),
-    poidVide : new FormControl(null,[Validators.required,Validators.min(500)]),
-    //  poidActuel : new FormControl(null,[Validators.required ]),
-    //  etat : new FormControl(null,[Validators.required ]),
- })
-
-
-   constructor(
-    private translateService :TranslateService,
-    private location:Location,
-     private router:Router,
-     private dialogClose: MatDialog,
-     private tankService:TankService,
-
-   ) { 
+  constructor(
+    private translateService: TranslateService,
+    private location: Location,
+    private router: Router,
+    private dialogClose: MatDialog,
+    private tankService: TankService
+  ) {
     this.translateService.setDefaultLang('en');
-    this.translateService.use(localStorage.getItem('lang') || 'en')
-   }
+    this.translateService.use(localStorage.getItem('lang') || 'en');
+  }
 
-   ngOnInit(): void {
-     //this.ValidatedForm();
-     this.tankService.getTank(JSON.parse(localStorage.getItem('IdTank') || '[]') || []).subscribe(o =>{
-       this.tank = o;
-       console.log(this.tank);
-     });
+  ngOnInit(): void {
+    this.tankService
+      .getTank(JSON.parse(localStorage.getItem('IdTank') || '[]') || [])
+      .subscribe((o) => {
+        this.tank = o;
+        console.log(this.tank);
+      });
+  }
 
-   }
+  updateTank() {
+    if (
+      this.myForm.get('poidVide')?.value != null &&
+      this.myForm.get('matricule')?.value != null &&
+      this.myForm.get('poidVide')?.value >= 500 &&
+      this.myForm.get('matricule')?.value.length >= 8
+    ) {
+      this.tankService
+        .updateTank(this.tank.idTank, {
+          matricule: this.myForm.get('matricule')?.value,
+          poidVide: this.myForm.get('poidVide')?.value,
+        })
+        .subscribe(
+          (o) => {
+            localStorage.setItem(
+              'Toast',
+              JSON.stringify(['Success', 'Un tank a été modifié avec succès'])
+            );
+            this.onClose();
+            console.log(this.tank);
+          },
+          (error) => {
+            console.log('Failed');
+          }
+        );
+    }
+  }
 
-   updateTank(){
-    if(this.myForm.get('poidVide')?.value!=null && this.myForm.get('matricule')?.value!=null 
-    && this.myForm.get('poidVide')?.value>=500  && this.myForm.get('matricule')?.value.length>=8){
-     this.tankService
-     // .updateTank(this.Tank.idTank,this.Tank)
-         .updateTank(this.tank.idTank,{
-           "matricule":this.myForm.get('matricule')?.value,
-           "poidVide":this.myForm.get('poidVide')?.value,
-          //  "poidActuel":this.myForm.get('poidActuel')?.value,
-          //  "etat":this.myForm.get('etat')?.value,
+  get matricule() {
+    return this.myForm.get('matricule');
+  }
 
-         })
-         .subscribe(o=>{
-           localStorage.setItem('Toast', JSON.stringify(["Success","Un tank a été modifié avec succès"]));
-          //  window.location.reload();
-          this.onClose();
-           console.log(this.tank);
-         },
-         (error) => {
-           console.log("Failed")
-         }
-       );
-     }
-   }
+  get poidVide() {
+    return this.myForm.get('poidVide');
+  }
 
-  get matricule(){
-   return this.myForm.get('matricule') ;
- }
+  onReload() {
+    this.router
+      .navigateByUrl("/'agriculteur/bon/listeFournisseur", {
+        skipLocationChange: true,
+      })
+      .then((response) => {
+        this.router.navigate([decodeURI(this.location.path())]);
+      });
+  }
 
- get poidVide(){
-   return this.myForm.get('poidVide') ;
- }
-
-
-
-//  get poidActuel(){
-//    return this.myForm.get('poidActuel') ;
-//  }
-
-//  get etat(){
-//   return this.myForm.get('etat') ;
-// }
-
-onReload(){
-  // this.router.navigate([this.router.url]);
-  this.router.navigateByUrl("/'agriculteur/bon/listeFournisseur",{skipLocationChange: true}).then( response=> {
-   this.router.navigate([decodeURI(this.location.path())]);
- })
+  onClose() {
+    this.dialogClose.closeAll();
+    this.onReload();
+  }
 }
-
-onClose() {
-  this.dialogClose.closeAll();
-  // this.gotoList();
-  this.onReload();
-}
-
- }
-

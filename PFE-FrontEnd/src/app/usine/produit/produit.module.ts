@@ -9,12 +9,11 @@ import { DetailsProduitComponent } from './details-produit/details-produit.compo
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatDialogModule} from "@angular/material/dialog";
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-// import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 // AddForPaginator
@@ -27,8 +26,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 //add Snackbar
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -39,12 +38,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateProduitComponent,
     ListeProduitComponent,
     UpdateProduitComponent,
-    DetailsProduitComponent
+    DetailsProduitComponent,
   ],
   imports: [
     CommonModule,
     ProduitRoutingModule,
-    
+
     FormsModule,
     HttpClientModule,
     MatDialogModule,
@@ -54,21 +53,21 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatIconModule,
     MatMenuModule,
     ReactiveFormsModule,
-     //add For Sorted
-     MatSortModule,
-     // AddForPaginator
-     MatPaginatorModule,
-     MatFormFieldModule,
-     MatInputModule,
-     MatTableModule,
-     MatSnackBarModule,
-     TranslateModule.forRoot({
+    //add For Sorted
+    MatSortModule,
+    // AddForPaginator
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSnackBarModule,
+    TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
     }),
-  ]
+  ],
 })
-export class ProduitModule { }
+export class ProduitModule {}

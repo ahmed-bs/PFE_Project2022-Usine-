@@ -9,15 +9,14 @@ import { UpdateMagasinComponent } from './update-magasin/update-magasin.componen
 const routes: Routes = [
   { path: '', component: MagasinComponent },
   { path: 'listeMagasin', component: ListeMagasinComponent },
-  { path: 'addMagasin', component: CreateMagasinComponent  },
-  { path: 'detailsMagasin/:id', component: DetailsMagasinComponent   },
-  { path: 'updateMagasin/:id', component: UpdateMagasinComponent  },
-  { path:'',redirectTo:'/magasin',pathMatch:'full'},
-  // {  path:'**', component: MagasinComponent },
+  { path: 'addMagasin', component: CreateMagasinComponent },
+  { path: 'detailsMagasin/:id', component: DetailsMagasinComponent },
+  { path: 'updateMagasin/:id', component: UpdateMagasinComponent },
+  { path: '', redirectTo: '/magasin', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MagasinRoutingModule { }
+export class MagasinRoutingModule {}
