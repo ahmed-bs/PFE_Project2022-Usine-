@@ -58,10 +58,6 @@
         <div *ngIf="msg1==1 || msg2=='code deja exist'" class="text-danger">
           &nbsp;{{ "Code already exists" | translate }} !
         </div>
-        <div *ngIf="msg7==0 || msg6==0 || msg5==0" class="text-danger">
-          {{'codes' | translate}} !!
-        </div>
-
       </div>
     </div>
     <br>
@@ -75,6 +71,9 @@
         <br>
         <span style="color:red;margin-bottom:45px;font-size:1.1em" *ngIf="msg != ''">{{'Please fill in all required
           fields' | translate}}</span>
+        <br>
+        <span style="color:red;margin-bottom:45px;font-size:1.1em" *ngIf="msg7==0 || msg6==0 || msg5==0">{{'codes' |
+          translate}}!!</span>
         <div class="invalid-feedback">{{ "p3" | translate }}</div>
       </div>
     </div>

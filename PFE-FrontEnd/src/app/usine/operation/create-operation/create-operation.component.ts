@@ -194,12 +194,17 @@ export class CreateOperationComponent implements OnInit {
                   .subscribe(async (i) => {
                     this.tabTankId = Object.values(i);
                     await this.saveInBc(this.tabTankId, this.tabTankId.length);
-                    if (this.confirmation == 'confirmed') {
+                    if (environment.wating == 'rejected') {
+                      localStorage.setItem(
+                        'Toast',
+                        JSON.stringify(['Failed', "L'opération a été rejetée"])
+                      );
+                    } else {
                       localStorage.setItem(
                         'Toast',
                         JSON.stringify([
                           'Success',
-                          'Une opération a été ajoutée avec succès',
+                          'Une operation a été ajoutée avec succès',
                         ])
                       );
                     }

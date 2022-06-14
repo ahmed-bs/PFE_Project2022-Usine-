@@ -177,7 +177,7 @@ export class CreateOperationRetraitComponent implements OnInit {
 
                 this.produitService
                   .getProduit(this.myForm.get('produit')?.value)
-                  .subscribe((v) => {
+                  .subscribe(async (v) => {
                     this.tab1 = Object.values(v);
                     console.log(this.tab1);
 
@@ -186,13 +186,18 @@ export class CreateOperationRetraitComponent implements OnInit {
                     this.prd.libelle = this.tab1[2];
                     this.prd.qte = this.tab1[3];
                     this.opr.produit = this.prd;
-                    this.saveInBc(this.opr);
-                    if (environment.wating == 'confirmed') {
+                    await this.saveInBc(this.opr);
+                    if (environment.wating == 'rejected') {
+                      localStorage.setItem(
+                        'Toast',
+                        JSON.stringify(['Failed', "L'opération a été rejetée"])
+                      );
+                    } else {
                       localStorage.setItem(
                         'Toast',
                         JSON.stringify([
                           'Success',
-                          'Une opération a été ajoutée avec succès',
+                          'Une operation a été ajoutée avec succès',
                         ])
                       );
                     }
@@ -243,7 +248,7 @@ export class CreateOperationRetraitComponent implements OnInit {
       environment.wating = 'rejected';
       try {
         this.operationService
-          .deleteOperation(elem0.idOperation)
+          .deleteOperationR(elem0.idOperation)
           .subscribe((d) => {
             this.onReload();
           });

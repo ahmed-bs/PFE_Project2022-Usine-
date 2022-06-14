@@ -214,7 +214,7 @@ export class CreateOperationTransformationComponent implements OnInit {
                 this.opr.tank = this.tnk;
                 this.produitService
                   .getProduit(this.myForm.get('produit')?.value)
-                  .subscribe((a) => {
+                  .subscribe(async (a) => {
                     this.tab1 = Object.values(a);
                     this.prd.idProduit = this.tab1[0];
                     this.prd.intitule = this.tab1[1];
@@ -222,13 +222,18 @@ export class CreateOperationTransformationComponent implements OnInit {
                     this.prd.qte = this.tab1[3];
                     this.opr.produit = this.prd;
 
-                    this.saveInBc(this.opr, parent);
-                    if (environment.wating == 'confirmed') {
+                    await this.saveInBc(this.opr, parent);
+                    if (environment.wating == 'rejected') {
+                      localStorage.setItem(
+                        'Toast',
+                        JSON.stringify(['Failed', "L'opération a été rejetée"])
+                      );
+                    } else {
                       localStorage.setItem(
                         'Toast',
                         JSON.stringify([
                           'Success',
-                          'Une opération a été ajoutée avec succès',
+                          'Une operation a été ajoutée avec succès',
                         ])
                       );
                     }
@@ -276,13 +281,12 @@ export class CreateOperationTransformationComponent implements OnInit {
     }
     if (this.confirmation == 'rejected') {
       environment.wating = 'rejected';
-      try {
         this.operationService
-          .deleteOperation(elem0.idOperation)
+          .deleteOperationT(elem0.idOperation)
           .subscribe((d) => {
             this.onReload();
           });
-      } catch (error) {}
+  
     }
     this.onReload();
   }
